@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 3, 2011 11:28:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.Zone" table="zone">
+    <id name="idZone" type="java.lang.Integer">
+      <column name="id_zone"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Pais" fetch="select" name="pais">
+      <column name="id_pais"/>
+    </many-to-one>
+    <property name="code" type="string">
+      <column length="32" name="code"/>
+    </property>
+    <property name="nombre" type="string">
+      <column length="128" name="nombre"/>
+    </property>
+    <property name="status" type="java.lang.Integer">
+      <column name="status"/>
+    </property>
+    <set inverse="true" name="empresas">
+      <key>
+        <column name="id_zone"/>
+      </key>
+      <one-to-many class="pojo.Empresa"/>
+    </set>
+  </class>
+</hibernate-mapping>
