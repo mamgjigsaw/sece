@@ -73,9 +73,10 @@ public class interaccion_instrum {
         AvanceDaoImpl avanDao = new AvanceDaoImpl();
         Avance avance = avanDao.findByIndiAndContra(id_indicador, id_contrato);
         ac = avance.getVar();
-        avance.setVar(ac+1);        
+        ac++; 
+        avance.setVar(ac);        
         avanDao.update(avance);        
-        return (ac+1);
+        return ac;
     }
     
     public String getNameVariable(int actual,int id_indicador){
@@ -92,7 +93,7 @@ public class interaccion_instrum {
         variable2 = listVariable2.get(actual);
               
         nombre = variable2.getNombre();
-        return nombre ;                
+        return nombre;                
     }
     
     

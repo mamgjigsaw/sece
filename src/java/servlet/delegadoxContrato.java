@@ -47,7 +47,8 @@ public class delegadoxContrato extends HttpServlet {
         
         AccesoDaoImpl adi = new AccesoDaoImpl();
         Timestamp acces ;
-        PrintWriter out = response.getWriter();      
+        PrintWriter out = response.getWriter();  
+        int estado;
            
         try {
              while (it.hasNext()){
@@ -59,13 +60,19 @@ public class delegadoxContrato extends HttpServlet {
              out.println(delegado.getUsuario().getNombre());
              out.println("</td>");
              out.println("<td>");
-             out.println(acces);
+             if (acces == null)
+                 out.println("<img src='images/emptyico.jpg' title ='Usuario no ha accesado' alt='Usuario no ha accesado'/>");
+             else
+                 out.println(acces);
              out.println("</td>");
              out.println("<td>");
              out.println(delegado.getUsuario().getCorreo());
              out.println("</td>");
              out.println("<td>");
-             out.println("no");
+             if (delegado.getUsuario().getEstado() == 1)
+             out.println("<img src='images/disp.jpg' title ='Usuario Disponible' alt='Usuario disponible'/>");
+             else if (delegado.getUsuario().getEstado() == 0)
+                 out.println("<img src='images/nodisp.jpg' title ='Usuario no Disponible' alt='Usuario no disponible'/>");
              out.println("</td>");
              
              out.println("</tr>");          

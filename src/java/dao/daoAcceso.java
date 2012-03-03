@@ -14,7 +14,7 @@ import pojo.Usuario;
  * @author mamg
  */
 public interface daoAcceso extends dao<Acceso>{
- 
+    Acceso findById(int id_acceso);
     //---------------------------added by David
     //---------------------------added by David
     Timestamp fechaUltimoAcceso (Usuario usuario);

@@ -11,5 +11,5 @@ import pojo.AsignacionSugItem;
  * @author mamg
  */
 public interface daoAsignacionSugItem  extends dao<AsignacionSugItem> {
-    
+    AsignacionSugItem findById(int id); 
 }

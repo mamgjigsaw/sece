@@ -90,4 +90,24 @@ public class UsuarioDaoImpl implements daoUsuario{
         return usuariosxEmpresa; 
     }
 
+    @Override
+    public List<Usuario> findDelegadosByIdEmpresa(Empresa empresa) {
+        List<Usuario> listDelegados = new ArrayList<Usuario>();
+        Session se = sf.getCurrentSession();      
+        se.beginTransaction();
+        listDelegados = se.createCriteria(Usuario.class).add(Restrictions.eq("empresa", empresa)).add(Restrictions.eq("tipoUsuario", 4)).list();
+        se.getTransaction().commit();
+        return listDelegados; 
+    }
+    public List<Usuario> capacitadoresActivos() {
+         List<Usuario> cap;
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).add(Restrictions.eq("estado", 1));
+        cap = criterio.list();
+        se.getTransaction().commit();
+        return cap; 
+    }
+
+
 }

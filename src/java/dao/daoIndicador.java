@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.util.List;
 import pojo.Indicador;
 
 /**
@@ -14,5 +15,7 @@ import pojo.Indicador;
 public interface daoIndicador extends dao<Indicador> {
     Indicador findByName(String name);
     Indicador findById(int id);
+    int getCountIndicador();
+    List<Indicador> findAllByActive();
 
 }

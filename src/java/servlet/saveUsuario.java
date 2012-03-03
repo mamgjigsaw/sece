@@ -6,22 +6,30 @@
 package servlet;
 
 import daoImpl.AccesoDaoImpl;
+import daoImpl.AvanceDaoImpl;
 import daoImpl.ContratoDaoImpl;
+import daoImpl.DelegacionIndiUsuDaoImpl;
 import daoImpl.EmpresaDaoImpl;
+import daoImpl.IndicadorDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.ZoneDaoImpl;
 import daoImpl.encriptar;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pojo.Acceso;
+import pojo.Avance;
 import pojo.Contrato;
+import pojo.DelegacionIndiUsu;
 import pojo.Empresa;
+import pojo.Indicador;
 import pojo.Usuario;
 import pojo.Zone;
 
@@ -41,11 +49,13 @@ public class saveUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String name, cargo,telefono,correo,direccion,pass,name_empresa,descripcion,telefono_empresa,ciudad,direccion_empresa;
+        int comboZone;
         
         name_empresa= request.getParameter("txtname_empresa");
         descripcion = request.getParameter("txtdes");
         telefono_empresa = request.getParameter("txttel_empresa");
-        ciudad = request.getParameter("txtciudad");
+        ciudad = "";
+        comboZone = Integer.parseInt(request.getParameter("cState"));
         direccion_empresa = request.getParameter("txtdirec_empre");
         
         name= request.getParameter("txtname");
@@ -57,9 +67,9 @@ public class saveUsuario extends HttpServlet {
   
        String password = encriptar.md5(pass);
        
-       //Aqui se guarda la empresa
+       //Aqui se guarda la empresa, 2374 managua
         ZoneDaoImpl zoneDao = new ZoneDaoImpl();
-        Empresa empresa = new Empresa(zoneDao.findById_Zone(2374),name_empresa,descripcion,telefono_empresa,ciudad,direccion_empresa,null);
+        Empresa empresa = new Empresa(zoneDao.findById_Zone(comboZone),name_empresa,descripcion,telefono_empresa,ciudad,direccion_empresa,null);
         EmpresaDaoImpl empresaDao = new EmpresaDaoImpl();
         empresaDao.create(empresa);
           
@@ -79,11 +89,27 @@ public class saveUsuario extends HttpServlet {
        Contrato contrato = new Contrato(usuario,1,momentoTimestamp,momentoTimestamp,null,null,null);
        ContratoDaoImpl contratoDao = new ContratoDaoImpl();
        contratoDao.create(contrato);
-                    
+       
+       //Crear todas la delegaciones de los indicadores como los avances de ellos
+       List<Indicador> listIndi = new ArrayList<Indicador>();
+       IndicadorDaoImpl daoIndicador = new IndicadorDaoImpl();
+       listIndi = daoIndicador.findAllByActive();
+       
+       AvanceDaoImpl daoAvance = new AvanceDaoImpl();
+       DelegacionIndiUsuDaoImpl deledao = new DelegacionIndiUsuDaoImpl();
+       for(int i=0;i<listIndi.size();i++){
+               
+        DelegacionIndiUsu dele = new DelegacionIndiUsu(usuario,listIndi.get(i),contrato);
+        deledao.create(dele);
+           
+        Avance avance = new Avance(contrato,listIndi.get(i),0,0);   
+        daoAvance.create(avance);        
+       }            
+       
        //Crear las variables de sessiones             
        HttpSession sesion=request.getSession();
-       sesion.setAttribute("idUser", usuario.getIdUsuario());
-       response.sendRedirect("initEnterprise.jsp");       
+       sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );        
+       response.sendRedirect("controlPanel.jsp");      
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

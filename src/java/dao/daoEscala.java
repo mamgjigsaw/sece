@@ -13,5 +13,5 @@ import pojo.Escala;
  */
 public interface daoEscala extends dao<Escala>{
     Escala findByVariable(int id_variable);
-
+    Escala findById(int id);
 }

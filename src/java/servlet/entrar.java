@@ -46,29 +46,32 @@ public class entrar extends HttpServlet {
 
         UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
         Usuario usuario =usuDao.findByEmail(email);
+        usuario.setEstado(1);
+        usuDao.update(usuario);        
 
         Acceso acc = new Acceso(usuario,momentoTimestamp,momentoTimestamp,null);
         AccesoDaoImpl accDao = new AccesoDaoImpl();
         accDao.create(acc);
        
         if(password.equals(usuario.getPassword())){
-            if(usuario.getTipoUsuario()==3){
+            if(usuario.getTipoUsuario()==3){ //contacto
                 HttpSession sesion=request.getSession();
-                sesion.setAttribute("idUser", usuario.getIdUsuario().toString());        
-                response.sendRedirect("instrument.jsp");
+                sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );        
+                response.sendRedirect("controlPanel.jsp");
             } else if (usuario.getTipoUsuario()==2){
                 HttpSession sesion=request.getSession();
-                sesion.setAttribute("idUser", usuario.getIdUsuario().toString());        
+                sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );
                 response.sendRedirect("initCapacitador.jsp");
             }    
-            else if(usuario.getTipoUsuario()==4){
+            else if(usuario.getTipoUsuario()==4){//delegado
                 HttpSession sesion=request.getSession();
-                sesion.setAttribute("idUser", usuario.getIdUsuario().toString());        
-                response.sendRedirect("instrument.jsp");
+                sesion.setAttribute("idAcc", acc.getIdAcceso().toString());        
+               // response.sendRedirect("instrument.jsp");
+                response.sendRedirect("controlPanel.jsp");
             }
             else if(usuario.getTipoUsuario()==1 && usuario.getEstado() == 1){
                 HttpSession sesion=request.getSession();
-                sesion.setAttribute("idUser", usuario.getIdUsuario().toString());        
+                sesion.setAttribute("idAcc", acc.getIdAcceso().toString());        
                 response.sendRedirect("main_admin.jsp");
                 
             }
@@ -79,7 +82,7 @@ public class entrar extends HttpServlet {
             }
         }else{
             response.sendRedirect("index.jsp");
-        }        
+        }    
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

@@ -6,14 +6,18 @@
 package servlet;
 
 import daoImpl.AccesoDaoImpl;
+import daoImpl.UsuarioDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pojo.Acceso;
-
+import pojo.Usuario;
 /**
  *
  * @author mamg
@@ -29,9 +33,32 @@ public class salir extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-      Acceso acc = new Acceso();
-      AccesoDaoImpl accDao = new AccesoDaoImpl();
-      accDao.create(acc);
+      HttpSession sesion=request.getSession();
+         String acc = (String)sesion.getAttribute("idAcc");
+
+           if(acc==null){
+              response.sendRedirect("index.jsp");
+           }else{
+              
+              Date fecha = new Date();        
+              Timestamp momentoTimestamp = new Timestamp(fecha.getTime()); 
+               
+              AccesoDaoImpl daoAcceso = new AccesoDaoImpl();
+              Acceso acceso = daoAcceso.findById(Integer.parseInt(acc));
+              acceso.setFechaSalida(fecha);
+              daoAcceso.update(acceso);
+              
+              UsuarioDaoImpl usuarioDao= new UsuarioDaoImpl();
+              Usuario usuario = usuarioDao.findById(acceso.getUsuario().getIdUsuario());              
+              usuario.setEstado(2);
+              usuarioDao.update(usuario);
+               
+              sesion.setAttribute("idAcc","");
+              sesion.removeAttribute("idAcc");
+              sesion.invalidate();              
+
+              response.sendRedirect("index.jsp");
+           }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

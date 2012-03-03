@@ -48,6 +48,34 @@
         <servlet-name>GraficoResultado</servlet-name>
         <servlet-class>servlet.GraficoResultado</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BusquedaVariables</servlet-name>
+        <servlet-class>servlet.BusquedaVariables</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BusquedaItems</servlet-name>
+        <servlet-class>servlet.BusquedaItems</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GraficoHistorial</servlet-name>
+        <servlet-class>servlet.GraficoHistorial</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>settingGraficoHistorial</servlet-name>
+        <servlet-class>servlet.settingGraficoHistorial</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertarVideoChat</servlet-name>
+        <servlet-class>servlet.InsertarVideoChat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>intrumento</servlet-name>
+        <servlet-class>servlet.instrumento</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>reportUsers</servlet-name>
+        <servlet-class>servlet.reportUsers</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>saveIndicador</servlet-name>
         <url-pattern>/saveIndicador</url-pattern>
@@ -113,12 +141,46 @@
         <servlet-name>GraficoResultado</servlet-name>
         <url-pattern>/GraficoResultado</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BusquedaVariables</servlet-name>
+        <url-pattern>/BusquedaVariables</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BusquedaItems</servlet-name>
+        <url-pattern>/BusquedaItems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GraficoHistorial</servlet-name>
+        <url-pattern>/GraficoHistorial</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>settingGraficoHistorial</servlet-name>
+        <url-pattern>/settingGraficoHistorial</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertarVideoChat</servlet-name>
+        <url-pattern>/InsertarVideoChat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>intrumento</servlet-name>
+        <url-pattern>/intrumento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reportUsers</servlet-name>
+        <url-pattern>/reportUsers</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
         <cookie-config>
             <http-only>false</http-only>
         </cookie-config>
     </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ErrorPage.jsp</location>
+    </error-page> 
+    <error-page>
+        <error-code>500</error-code>
+        <location>/Error500.jsp</location>
+    </error-page>
 </web-app>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 3, 2011 11:28:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.EmpresasContratos" table="empresascontratos">
+    <id name="idEmpresa" type="java.lang.Integer">
+      <column name="idEmpresa"/>
+      <generator class="identity"/>
+    </id>    
+    <property name="empresaNombre" type="string">
+      <column length="200" name="empresaNombre"/>
+    </property>
+    <property name="descripcion" type="string">
+      <column length="500" name="descripcion"/>
+    </property>
+    <property name="telefono" type="string">
+      <column length="12" name="telefono"/>
+    </property>
+    <property name="ciudad" type="string">
+      <column length="100" name="ciudad"/>
+    </property>
+    <property name="direccion" type="string">
+      <column length="400" name="direccion"/>
+    </property>
+    <property name="contactoNombre" type="string">
+      <column length="50" name="contactoNombre"/>
+    </property>
+    <property name="contactoCargo" type="string">
+      <column length="30" name="contactoCargo"/>
+    </property>
+    <property name="contactoTelefono" type="string">
+      <column length="8" name="contactoTelefono"/>
+    </property>
+    <property name="contactoCorreo" type="string">
+      <column length="50" name="contactoCorreo"/>
+    </property>
+    <property name="contratoEstado" type="java.lang.Integer">
+      <column name="contratoEstado"/>
+    </property>
+    <property name="contratoFecha" type="timestamp">
+      <column length="19" name="contratoFecha"/>
+    </property>
+    <property name="contratoFechaFinalizo" type="timestamp">
+      <column length="19" name="contratoFechaFinalizo"/>
+    </property>
+    
+  </class>
+</hibernate-mapping>

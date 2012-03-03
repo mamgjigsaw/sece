@@ -12,6 +12,6 @@ import pojo.Sugerencia;
  * @author mamg
  */
 public interface daoSugerencia extends dao<Sugerencia> {
-    Sugerencia findByItem(int id_item);
-
+   Sugerencia findByItem(int id_item);
+   Sugerencia findById(int id);
 }

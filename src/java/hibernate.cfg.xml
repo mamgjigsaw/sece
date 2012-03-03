@@ -27,5 +27,7 @@
     <mapping resource="mapping/Acceso.hbm.xml"/>
     <mapping resource="mapping/Empresa.hbm.xml"/>
     <mapping resource="mapping/Avance.hbm.xml"/>
+    <mapping resource="mapping/HistorialResultado.hbm.xml"/>
+    <mapping resource="mapping/EmpresaContratos.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -3,6 +3,8 @@
     Created on : Aug 13, 2011, 11:40:31 PM
     Author     : Dave
 --%>
+<%@page import="pojo.Acceso"%>
+<%@page import="daoImpl.AccesoDaoImpl"%>
 <%@page import="pojo.Variable"%>
 <%@page import="pojo.Indicador"%>
 <%@page import="daoImpl.IndicadorDaoImpl"%>
@@ -22,8 +24,14 @@
 <%@page import="daoImpl.ContratoDaoImpl"%>
 <%@page import="pojo.Usuario"%>
 <%@page import="daoImpl.UsuarioDaoImpl"%>
+<%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setDateHeader("Expires", 0);
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,15 +43,31 @@
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script type="text/javascript" language="javascript" src="resources/js/advancedtable.js"></script>
-        
+        <link REL="shortcut icon" type="image/x-icon" href="images/favicon.png"/>
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         
         <script>
+            function mostrarMenu(){
+                $("#menuBtnOpciones1").toggle("slow");
+            }
+            
+            
             function hacerlo(){
                 window.location.href = "historial.jsp"; 
             }
-        $(document).ready(function() {            $("#tabs").tabs();
+        $(document).ready(function() {
+            $(".mnSalir li").hover(
+             function(){
+                $(this).css({'background':'#e8e8e8','color':'#81BEF7','cursor':'pointer'});
+            },
+            function(){
+                $(this).css({'background':'#81BEF7','color':'#0B3861'});    
+            }
+            );
+       
+            $("#btnVC").button();            
+            $("#tabs").tabs();
             $( "#datepicker" ).datepicker();
             $( "#datepicker2" ).datepicker();                       
             $("#tblContratos").advancedtable({searchField: "#search",
@@ -52,9 +76,9 @@
                                         descImage:'images/down.png',
                                         rowsPerPage: 20});
                       
-           $("#contenidoContratos tr").click(function() {
-              // alert( $(this).text());
-              window.location.href = "historial.jsp?empresa="+$(this).find('input:hidden').val();
+           $("#contenidoContratos tr").click(function() {               
+              window.location.href = "graficoHistorial.jsp?idempresa="+$(this).find('input:hidden').val();
+              
             });
             
             $("#tblEmpresaAsignada tr").click(function() { 
@@ -62,24 +86,57 @@
                 $.get("delegadoxContrato",{idc:idcontrato},function (data){
                     $("#tbodycontactoEmpresaAsignada").html(data);
                 });
-
             }); 
             
+            $("#mnuBtnSalir").click(function(){
+                location.href="salir";
+            });
+            
             $("#tblEmpresasNoAsignadas tr").click(function(){
-              $.getJSON("datosEmpresas.json", function(datos){
-                  alert(datos.empresas[1].nombre);
-              });   
+             alert("hola") ;
+            });
+            
+            $("#selectIndicador").change(function() {
+                   var nombreIndicador = $("#selectIndicador option:selected").val();
+                   $('>option', "#selectVariable").remove()
+                   $.get("BusquedaVariables?descIndicador=" +nombreIndicador, function (data) {
+                        $("#selectVariable").append(data);  
+                    });                             
+            });
+            
+            $("#selectVariable").change(function(){
+                var nombreVariable = $("#selectVariable option:selected").val();               
+                $.get("BusquedaItems?descVariable="+nombreVariable,function (data){
+                    $("#tableItem  tr").remove();
+                    $("#tableItem").prepend(data);
+                });
+            });
+            
+            $( "#btnOpciones" ).button({
+            icons: {
+               primary: "ui-icon-gear",
+                secondary: "ui-icon-triangle-1-s"
+                 },
+            text: false
             });
                    
         }); 
              
         </script>
                
-         <%         
+         <%     
            HttpSession sesion=request.getSession();
-           String val = (String) sesion.getAttribute("idUser");
+           String acc = (String) sesion.getAttribute("idAcc");            
+           //HttpSession sesion=request.getSession();
+           //String val = (String) sesion.getAttribute("idUser");
            //id Capacitador
-           int idUsuario = Integer.valueOf(val); 
+           if(acc==null){
+              response.sendRedirect("index.jsp");
+           }else{
+           
+            AccesoDaoImpl daoAcceso = new AccesoDaoImpl();
+            Acceso acceso = daoAcceso.findById(Integer.parseInt(acc));
+            int idUsuario = acceso.getUsuario().getIdUsuario(); 
            
                     
            AsignacionCapaContra acaco = new AsignacionCapaContra();        
@@ -121,7 +178,19 @@
       </div>
       <div class="clr"></div>
       <div class="logo"><img src="images/logo.gif" width="293" height="84" border="0" alt="logo" /></div>      
-      <div class="clr"></div>
+      <div class="clr" align ="right">      
+          <style>
+              .mnSalir li{
+                  padding-left: 5%;
+              }
+          </style>
+          <button id="btnOpciones" onclick="mostrarMenu()">Button with two icons and no text</button>
+          <div id="menuBtnOpciones1" style=" display: none; background: #81BEF7; width: 100px; height: 20px; color: #0B3861">
+              <ul id="opciones1" class="mnSalir" style="list-style: none;font-size: large; text-align:left;">
+                  <li id="mnuBtnSalir" style="list-style-image:url(/images/log_out.gif)"> Salir  </li>  
+              </ul>              
+          </div>
+      </div>
     </div>
   </div>
   
@@ -132,6 +201,7 @@
             <li><a href="#tab-1"><span>Espacio de Trabajo</span></a></li>
             <li><a href="#tab-2"><span>Ver Instrumento</span></a></li>
             <li><a href="#tab-3"><span>Historial</span></a></li>
+            <li><a href="#tab-4"><span>VideoChat</span></a></li>
            </ul>
 
         <div id="tab-1">
@@ -151,7 +221,7 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                  <% while (it.hasNext()) {                                       
+                                  <%while (it.hasNext()) {                                       
                                     acaco =  it.next(); 
                                     contra = cdi.findById(acaco.getContrato().getIdContrato()) ;                                   
                                     contacto = udi.findById(contra.getUsuario().getIdUsuario()); 
@@ -209,7 +279,7 @@
                              </tr>
                          </thead>
                          <tbody id="tbodycontactoEmpresaAsignada" align="center">
-                             <tr><td>Juan</td><td>19/05/2011</td><td>david@gmail.com</td><td>yes</td></tr>
+                            
                          </tbody>
                       </table>                  
                     </td>
@@ -235,34 +305,26 @@
 
         <div id="tab-2">
             <div width="100%" style="margin-bottom: 2%; margin-left: 5%; margin-top: 1%;">
-                <label>Indicador</label><select> <option>Elija Indicador</option>  <% List<Indicador> indicadores = inddi.findAll(); Iterator<Indicador> itIndicador = indicadores.iterator(); while(itIndicador.hasNext()) {%> <option><%= itIndicador.next().getNombre() %></option> <%}%></select> <label>Variable</label><select><option>Elija Variable</option> <% List<Variable> variables = vardi.findAll(); Iterator<Variable> itVariable = variables.iterator(); while (itVariable.hasNext()) { %> <option> <%= itVariable.next().getNombre() %> </option> <%}%></select>  
+                <label>Indicador</label><select id="selectIndicador"> <option selected="selected">Elija Indicador</option>  <% List<Indicador> indicadores = inddi.findAll(); Iterator<Indicador> itIndicador = indicadores.iterator(); while(itIndicador.hasNext()) {%> <option><%= itIndicador.next().getNombre() %></option> <%}%></select> <label>Variable</label><select id="selectVariable"><optgroup label="elija Variable"></optgroup> </select>  
             </div> 
             <div width="100%" style="margin-left: 5%;">
-                <label>Elija Item</label> <input type="text" id="searchItem" placeholder="Digite un Item"/>
-            </div> 
-             <!-- >  
-            <div>
-                <div style="margin-top: 1%;">
-                    <div style="float: left; padding-top: 7px; padding-right: 10px;"><img src="images/step.png"/></div> <div style="font-weight:bold;" >Se implementa mecanismos de mercadeo (correos, telemarketing) para mantener informado a los clientes sobre nuevos productos, servicios post-venta, promociones del producto/servicio y la </div>
-                </div>
-                <div style="margin-top: 1%;">
-                    <div style="float: left; padding-top: 7px;"><img src="images/step.png"/></div> <div style="font-weight:bold;" >Se implementa mecanismos de mercadeo (correos, telemarketing) para mantener informado a los clientes sobre nuevos productos, servicios post-venta, promociones del producto/servicio y la </div>
-                </div>
-                <div style="margin-top: 1%; vertical-align:sub;">
-                    <div style="float: left; vertical-align:sub;"><img src="images/step.png"/></div> <div style="font-weight:bold;" >Se implementa mecanismos de mercadeo (correos, telemarketing) para mantener informado a los clientes sobre nuevos productos, servicios post-venta, promociones del producto/servicio y la </div>
-                </div>
-            <  -->
+                <label>Elija Item</label> <input type="text" id="filterItem" placeholder="Digite un Item"/>
+            </div>    
+            <script>
+                $("#filterItem").bind("keyup", function() {
+                    var text = $(this).val().toLowerCase();
+                    var items = $(".nombre_item");     
+                    //esconder todo:
+                    items.parent().hide();
+                    //mostrar solamente los que concuerden:
+                    items.filter(function () {
+                        return $(this).text().toLowerCase().indexOf(text) == 0;
+                    }).parent().show();
+                });
+            </script>
              <div>            
-                 <table cellpadding="8px">
-                     
-                         <% List<Item> items = itemdi.findAll(); 
-                           Iterator<Item> itItem = items.iterator();
-                           while (itItem.hasNext()){  %>
-                           <tr><td><img src="images/step.png"/></td>
-                           <td><%= itItem.next().getDescripcion() %></td></tr>    
-                           <%}//fin while%>
-                         
-                     
+                 <table cellpadding="8px" id="tableItem">
+                 
                  </table>
              </div>
             </div>
@@ -291,11 +353,57 @@
            contra = cdi.findById(acaco.getContrato().getIdContrato()) ;                                                     
            //Empresa de ese contrato           
                                   %>
-          <tr><input type="hidden" value="<%=contra.getUsuario().getEmpresa().getIdEmpresa()%>"/><td><%=contra.getUsuario().getEmpresa().getNombre()%></td> <td><%=cdi.cantidadContratosxUsuarioFinalizados(acaco.getContrato().getUsuario())%></td> <td></td></tr>
+          <tr><input type="hidden" value="<%=contra.getUsuario().getEmpresa().getIdEmpresa()%>"/><td style="cursor:pointer;"><%=contra.getUsuario().getEmpresa().getNombre()%></td> <td><%=cdi.cantidadContratosxUsuarioFinalizados(acaco.getContrato().getUsuario())%></td> <td></td></tr>
         <%}//fin while %>
        </tbody>
       </table>
             </div>
+       
+       <div id="tab-4">
+           <div id="vcSelEmpresa" align="center"> <%                                    
+                                    l = a.findAllByIdUsuarioCapacitador(capacitador);    
+                                    it = l.iterator();
+                                    String idcon;        
+                                    %>                                    
+                                    <select id="selEmpresas"> <option selected="selected">Elija Empresa</option> <% while (it.hasNext()) {                                       
+                                    acaco =  it.next(); 
+                                    contra = cdi.findById(acaco.getContrato().getIdContrato()) ;                                       
+                                    contacto = udi.findById(contra.getUsuario().getIdUsuario()); 
+                                    emp = edi.findByID(contacto.getEmpresa().getIdEmpresa());                                    
+                                    //estado del contrato activo, contrato de esta empresa actualmente trabajandose                                   
+                                                                       if (acaco.getContrato().getEstado() == 1){ idcon = String.valueOf(acaco.getContrato().getIdContrato());%> <option value="<%=idcon%>"><%=emp.getNombre()%></option>  <%}}%></select>                
+           </div> 
+           <div id="videoChat">
+               
+           </div>
+           
+           <div align="center"> <input type="button" id="btnVC" value="Iniciar Video Chat"/> </div>                      
+           
+             
+           <script>
+               $("#btnVC").hide();
+               $("#vcSelEmpresa").change(function() {
+                   $("#btnVC").trigger('click');
+                   $("#btnVC").show();
+                   $(this).unbind('change');
+                   $(this).hide();
+               });               
+                $("#btnVC").click(function () {  
+                  var idcon = $("#selEmpresas option:selected").val();         
+                   $.get("InsertarVideoChat",{idc:idcon,iduser:<%=idUsuario%>},function (data){
+                            $("#videoChat").html(data);
+                        });                         
+                  $('#videoChat').toggle();
+                   if ($('#videoChat').css('display') == 'none') {                      
+                          $('#btnVC').val('Iniciar Video Chat');     
+                          $("#vcSelEmpresa").show();
+                     }
+                     else {
+                          $('#btnVC').val('Cerrar Video Chat');
+                     }
+                });                
+           </script>
+       </div>
         </div>
                           
     </div>   
@@ -305,3 +413,4 @@
 
     </body>
 </html>
+<% } %>

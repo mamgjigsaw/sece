@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SECE</title>
+        <title>Iniciar Sesion</title>
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
@@ -33,9 +33,11 @@
                 valor2 = dwr.util.getValue("txtpass");
                 
                 if (valor1==""){
-                    alert("LLene el campo de email, porfavor!!");
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo de email, porfavor!!</p></div><!-- /Notification --></section>";                                        
+                    $("#hola").html(palabra);
                 }else if(valor2==""){                                                    
-                  alert("LLene el campo del password, porfavor!!");                  
+                  var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo del password, porfavor!!</p></div><!-- /Notification --></section>";                                        
+                    $("#hola").html(palabra);
                 }else{
                    validacion.loguearse(valor1,valor2,resultado);                    
                 }
@@ -45,7 +47,7 @@
                 var resp = data;
                
                 if(resp==0){
-                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error email</strong><p class='hola'>Digite correctamente el email y si no <a href='register.jsp'><strong>registrese</strong></a>, porfavor!!</p></div><!-- /Notification --></section>";                    
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Correo</strong><p class='hola'>Digite correctamente el email y si no <a href='register.jsp'><strong>registrese</strong></a>, porfavor!!</p></div><!-- /Notification --></section>";                    
                 }else if(resp==1){                    
                     $("#hola").html("");
                     $( "#dialog-message" ).dialog( "open" );                    
@@ -54,7 +56,7 @@
                        var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta ha sido bloqueada, dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>"; 
                        validacion.bloquear(valor1);
                     }else{                       
-                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error password</strong><p class='hola'>Digite correctamente el password, porfavor!!</p></div><!-- /Notification --></section>";
+                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Contraseña</strong><p class='hola'>Digite correctamente la contraseña, porfavor!!</p></div><!-- /Notification --></section>";
                        countError= countError + 1;   
                     }                    
                 }else if(resp==3){
@@ -66,6 +68,13 @@
             $(function() {
 		$( "#btnOk" ).button();
                 $( "#create-user" ).button();
+                //captura del eventto con el teclado 'enter
+                $("#pass").bind('keypress', function(e) { 
+                     if(e.keyCode==13){
+                         $("#btnOk").click();  
+                     }                    
+                });
+
                 //$( "#link_register").click(function() { return false; });
 		$( "#dialog:ui-dialog" ).dialog( "destroy" );
 	
@@ -78,8 +87,12 @@
                                         location.href = "entrar?txtemail="+ dwr.util.getValue("txtemail") +"&&txtpass="+ dwr.util.getValue("txtpass");
 				}
 			}
-		});
+		});//fin dialog-message
 	});
+           
+           function go_register(){
+             location.href = "register.jsp";
+           }           
            
         </script>
 </head>
@@ -91,7 +104,7 @@
         
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="293" height="84" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
       <div class="clr"></div>
     </div>
   </div>
@@ -106,10 +119,10 @@
 
 	<p>
 		<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-		Your files have downloaded successfully into the My Downloads folder.
+		Sistema de Evaluacion de Competitividad Empresarial.
 	</p>
 	<p>
-		Currently using <b>36% of your storage space</b>.
+		Descubra los <b>beneficios de utilizar el sistema!!</b>.
 	</p>
       </div>
     <div class="body_resize">
@@ -127,17 +140,16 @@
         <div class="right_top">
           <div class="right_bottom">
             <h4>Iniciar Sesion</h4>
-            <img src="images/img_3.jpg" alt="picture" width="92" height="92" class="float" />
-            <p><strong>Fusce vehicula dignissim ligula. </strong><br />
-              <table>
+            <img src="images/lock.png" alt="picture" width="48" height="48" class="float" />
+            <p>Es gratis, facil y sencillo. Asi como lo lees podras evaluar la competitividad de tu empresa y posteriormente tomar desiciones con fundamento.</p>
+            <table style=" padding-left: 18px; padding-top: 5px;" >
                     <form id="form_s" method="post">                             
-                           <tr><td><label class="tlabel" for="correo">Email:</label></td><td><input id ="email" name="txtemail" type="text" value="Email" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
-                           <tr><td><label class="tlabel" for="correo">Password:</label></td><td><input id ="pass" name="txtpass" type="password" value="password" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
-                           <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Entrar" /></td><td><input type="button" id="create-user" onclick="hello();" value="Registrarse"/></td></tr>
+                           <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input id ="email" name="txtemail" type="text" value="Email" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
+                           <tr><td><label class="tlabel" for="contra">Contraseña:</label></td><td><input id ="pass" name="txtpass" type="password" value="password" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
+                           <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Entrar" /></td><td><input type="button" id="create-user" onclick="go_register();" value="Registrarse"/></td></tr>
                     </form>
-                  </table> <br />              
-            </p>
-            <p><a id="link_register" href="register.jsp"><strong>Registrarse</strong></a></p>
+                  </table> 
+            <p><a id="link_register" href="forgetPassword.jsp"><strong>Olvide mi contraseña???</strong></a></p>
             <div class="clr"></div>
           </div>
         </div>

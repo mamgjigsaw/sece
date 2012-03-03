@@ -24,7 +24,7 @@ public class AvanceDaoImpl implements daoAvance {
     public Avance avance;
 
     public AvanceDaoImpl() {
-        this.sf = HibernateUtil.getSessionFactory();;
+        this.sf = HibernateUtil.getSessionFactory();
     }    
 
     @Override
@@ -84,6 +84,15 @@ public class AvanceDaoImpl implements daoAvance {
         avance = (Avance) se.createCriteria(Avance.class).add(Restrictions.eq("indicador", indicador)).add(Restrictions.eq("contrato", contrato)).uniqueResult();
         se.getTransaction().commit();
         return avance;
+    }
+
+    @Override
+    public List<Avance> Xcontrato(Contrato contrato) {
+        List<Avance> resultados = new ArrayList<Avance>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        resultados = se.createCriteria(Avance.class).add(Restrictions.eq("contrato", contrato)).list();
+        return resultados;
     }
     
 }

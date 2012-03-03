@@ -17,10 +17,10 @@ import util.HibernateUtil;
  * @author mamg
  */
 public class SugerenciaDaoImpl implements daoSugerencia{
-    public final SessionFactory sf;
-
-    public SugerenciaDaoImpl(SessionFactory sf) {
-        this.sf= HibernateUtil.getSessionFactory();
+    public SessionFactory sf;
+    public Sugerencia sug;
+    public  SugerenciaDaoImpl() {
+        sf= util.HibernateUtil.getSessionFactory();
     }
 
     @Override
@@ -62,5 +62,13 @@ public class SugerenciaDaoImpl implements daoSugerencia{
 
         return list;
     }
-    
+
+    @Override
+    public Sugerencia findById(int id) {
+        Session se=sf.getCurrentSession();
+        se.beginTransaction();
+        sug = (Sugerencia) se.get(Sugerencia.class, id);
+        se.getTransaction().commit();
+        return sug;
+    }
 }

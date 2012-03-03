@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import pojo.Pais;
 import pojo.Zone;
 import util.HibernateUtil;
 
@@ -66,6 +68,19 @@ public class ZoneDaoImpl implements daoZone {
         zone = (Zone) se.get(Zone.class, id_zone);
         se.getTransaction().commit();
         return zone;
+    }
+
+    @Override
+    public List<Zone> findById_pais(int id_pais) {
+        List<Zone> list = new ArrayList<Zone>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        Pais pais = new Pais();
+        pais = (Pais) se.get(Pais.class, id_pais);
+        list = se.createCriteria(Zone.class).add(Restrictions.eq("pais", pais)).list();
+        se.getTransaction().commit();
+
+        return list;
     }
     
 }

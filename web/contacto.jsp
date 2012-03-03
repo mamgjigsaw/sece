@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Contactenos</title>
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
@@ -40,7 +40,7 @@
         </ul>
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="293" height="84" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logo.gif" width="290" height="80" border="0" alt="logo" /></div>      
       <div class="clr"></div>
     </div>
   </div> 

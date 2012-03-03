@@ -80,4 +80,13 @@ public class AccesoDaoImpl implements daoAcceso{
         return acc;
      }
 
+    @Override
+    public Acceso findById(int id_acceso) {
+        Session se= sf.getCurrentSession();
+        se.beginTransaction();
+        acceso = (Acceso) se.get(Acceso.class, id_acceso);
+        se.getTransaction().commit();
+        return acceso;
+    }
+
 }

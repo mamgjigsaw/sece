@@ -5,7 +5,7 @@
   <class catalog="sece" name="pojo.AsignacionSugItem" table="asignacion_sug_item">
     <id name="idAsignSug" type="int">
       <column name="id_asign_sug"/>
-      <generator class="assigned"/>
+      <generator class="identity"/>
     </id>
     <many-to-one class="pojo.Sugerencia" fetch="select" name="sugerencia">
       <column name="id_sugerencia"/>

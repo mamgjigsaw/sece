@@ -42,7 +42,11 @@ public class ContratoDaoImpl implements daoContrato {
 
     @Override
     public Contrato findByEstado(int estado) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        c = (Contrato) se.createCriteria(Contrato.class).add(Restrictions.eq("estado", estado)).uniqueResult();
+        se.getTransaction().commit();
+        return c;
     }
 
     @Override
@@ -110,6 +114,15 @@ public class ContratoDaoImpl implements daoContrato {
                      .add(Restrictions.eq("usuario", usuario)).list();   
          se.getTransaction().commit();
          return contratos;
+    }
+
+    @Override
+    public Contrato findByUsuario(Usuario usuario) {
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        c = (Contrato) se.createCriteria(Contrato.class).add(Restrictions.eq("usuario", usuario)).add(Restrictions.eq("estado", 1)).uniqueResult();   
+        se.getTransaction().commit();
+        return c;
     }
 
 }

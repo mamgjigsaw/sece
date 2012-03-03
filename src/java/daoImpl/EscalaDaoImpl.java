@@ -62,5 +62,14 @@ public class EscalaDaoImpl implements daoEscala {
 
         return list;
     }
+
+    @Override
+    public Escala findById(int id) {
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        Escala es = (Escala)se.get(Escala.class, id);
+        se.getTransaction().commit();
+        return es;
+    }
     
 }

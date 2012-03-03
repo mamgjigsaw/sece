@@ -62,6 +62,7 @@ public class EmpresaDaoImpl implements daoEmpresa {
         Session se = sf.getCurrentSession();
         se.beginTransaction();
         Empresa empresa = (Empresa) se.get(Empresa.class, id_empresa);
+        se.getTransaction().commit();
         return empresa;
     }
     
