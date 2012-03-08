@@ -11,10 +11,16 @@
       <column name="id_variable"/>
     </many-to-one>
     <property name="descripcion" type="string">
-      <column length="100" name="descripcion"/>
+      <column length="300" name="descripcion"/>
     </property>
-    <property name="valoracion" type="string">
-      <column length="50" name="valoracion"/>
+    <property name="valoracion" type="java.lang.Integer">
+      <column name="valoracion"/>
+    </property>
+    <property name="rangoMenor" type="java.lang.Integer">
+      <column name="rangoMenor"/>
+    </property>
+    <property name="rangoMayor" type="java.lang.Integer">
+      <column name="rangoMayor"/>
     </property>
   </class>
 </hibernate-mapping>

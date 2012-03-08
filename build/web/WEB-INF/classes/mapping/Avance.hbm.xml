@@ -10,7 +10,7 @@
     <many-to-one class="pojo.Contrato" fetch="select" name="contrato">
       <column name="id_contrato"/>
     </many-to-one>
-    <many-to-one class="pojo.Indicador" fetch="select" name="indicador">
+    <many-to-one class="pojo.Indicador" fetch="join" name="indicador">
       <column name="id_indicador"/>
     </many-to-one>    
     <property name="var" type="java.lang.Integer">
