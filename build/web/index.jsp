@@ -28,6 +28,12 @@
 		auto: true, 
 		continuous: true
 	});	
+         if((navigator.userAgent.match(/iPhone/i))) {
+            if (document.cookie.indexOf("iphone_redirect=false") == -1) window.location = "resources/mobil/indexmobil.html";
+         }
+         else if( (navigator.userAgent.match(/iPad/i)) ){
+              if (document.cookie.indexOf("iphone_redirect=false") == -1) window.location = "resources/mobil/tablets/welcome.jsp";
+         }
 });
 // ]]>
 </script>
@@ -61,7 +67,7 @@ p#controls { margin:0; padding:0; position:relative; }
         </ul>
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="293" height="84" border="0" /></div>
+      <div class="logo"><img src="images/logo.gif" width="290" height="80" border="0" /></div>
       <div class="search">
         <form id="form1" name="form1" method="post" action="">
           <label> <span>

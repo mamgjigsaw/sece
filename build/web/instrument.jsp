@@ -4,6 +4,10 @@
     Author     : mamg
 --%>
 
+<%@page import="daoImpl.ContratoDaoImpl"%>
+<%@page import="pojo.Contrato"%>
+<%@page import="pojo.Acceso"%>
+<%@page import="daoImpl.AccesoDaoImpl"%>
 <%@page import="pojo.Avance"%>
 <%@page import="daoImpl.AvanceDaoImpl"%>
 <%@page import="pojo.DelegacionIndiUsu"%>
@@ -30,49 +34,84 @@ response.setDateHeader("Expires", 0);
     <head>
         <%
        HttpSession sesion=request.getSession();
-       String user = (String) sesion.getAttribute("idUser");
+       sesion.setMaxInactiveInterval(3600);
+       String acc = (String) sesion.getAttribute("idAcc");
+       String IDIndicador;
+       int tipo,indi,contrato,actual,total_var;
+       String name,nombre_variable,nombre_indicador;
        
-       int id_usuario = Integer.parseInt(user);
+       if(acc==null){
+              response.sendRedirect("index.jsp");
+           }else{
+       
+       IDIndicador = request.getParameter("indi");
+
+       if(IDIndicador.equals("")){
+           response.sendRedirect("index.jsp");
+       }else{              
+        
+       AccesoDaoImpl daoAcceso = new AccesoDaoImpl();
+       Acceso acceso = daoAcceso.findById(Integer.parseInt(acc));
+       
+       int id_usuario = acceso.getUsuario().getIdUsuario();
        UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
        Usuario usuario = new Usuario();
        usuario = usuDao.findById(id_usuario);
-       
-       String name,nombre_variable,nombre_indicador;
-       int tipo,indi,contrato,actual,total_var;
-       
-       
+                    
        name = usuario.getNombre();
        tipo = usuario.getTipoUsuario();
        
-      //if(tipo==4){
+       indi = Integer.parseInt(IDIndicador);//indi el Indicador en el cual estamos
+       IndicadorDaoImpl indiDao = new IndicadorDaoImpl();
+       Indicador indicador = indiDao.findById(indi);                                
+       nombre_indicador = indicador.getNombre();
+          
+       actual=0;
+       total_var=0;
+       contrato=0;
+       nombre_variable="";
+       
+       Contrato contra = new Contrato();
+       ContratoDaoImpl daoContra = new ContratoDaoImpl();
+                      
+      if(tipo==4){
             
            //como es tipo delegado, obtengo que indicador esta trabajando y el contrato al que pertenece
            DelegacionIndiUsuDaoImpl delimpl = new DelegacionIndiUsuDaoImpl();
            DelegacionIndiUsu dele = new DelegacionIndiUsu(); 
-           dele = delimpl.findByUsuario(usuario); 
+           dele = delimpl.getDelByContCurrentlyandUsu(usuario); 
 
-           IndicadorDaoImpl indiDao = new IndicadorDaoImpl();
-           Indicador indicador = indiDao.findById(dele.getIndicador().getIdIndicador());                         
-           indi = indicador.getIdIndicador();//indi el Indicador en el cual estamos
-           nombre_indicador = indicador.getNombre();
-           contrato = dele.getContrato().getIdContrato();//id_contrato
+           //obtenemos el contrato
+           contra = dele.getContrato();
            
-           //miro donde quedo la ultima vez
-           AvanceDaoImpl avaDao = new AvanceDaoImpl();
-           Avance avance = new Avance();
-           avance = avaDao.findByIndiAndContra(indi, contrato);              
-           actual = avance.getVar();//actual representa a la Variable actual 
+       }else if(tipo==2){
+          response.sendRedirect("index.jsp");
+       }else if(tipo==1){
+          response.sendRedirect("index.jsp");
+       }else if(tipo==3){           
+           contra = daoContra.findByUsuario(usuario);           
+       }   
        
-           //buscar el nombre de la variable
-           VariableDaoImpl varDao = new VariableDaoImpl();
-           List<Variable> listVariable = new ArrayList<Variable>();
-           listVariable = varDao.findByIndicador(dele.getIndicador());
-           Variable variable = new Variable();
+       contrato = contra.getIdContrato();
+       //miro donde quedo la ultima vez
+       AvanceDaoImpl avaDao = new AvanceDaoImpl();
+       Avance avance = new Avance();
+       avance = avaDao.findByIndiAndContra(indi, contrato);              
+       actual = avance.getVar();//actual representa a la Variable actual lo que obtiene va de 0 a n 
+       
+       //buscar el nombre de la variable
+       VariableDaoImpl varDao = new VariableDaoImpl();
+       List<Variable> listVariable = new ArrayList<Variable>();
+       listVariable = varDao.findByIndicador(indicador);
+       Variable variable = new Variable();
+       total_var = listVariable.size();//numero total de variable de ese indicador, comienza de 1
+       
+       if(actual == total_var){// aqui confirmo si ya se realizo todo el cuestionario del indicador correspondiente
+           nombre_variable = "";
+       }else{
            variable = listVariable.get(actual);
            nombre_variable = variable.getNombre();
-           total_var = listVariable.size();//numero total de variable de ese indicador, comienza de 1          
-           
-       //}       
+       }       
                  
     %>
         
@@ -80,7 +119,7 @@ response.setDateHeader("Expires", 0);
         <META HTTP-EQUIV="Expires" CONTENT="-1">
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
         <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-        <title>SECE</title>
+        <title>Cuestionario</title>
         
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
@@ -92,20 +131,30 @@ response.setDateHeader("Expires", 0);
         
         <script type="text/javascript" src="/sece/dwr/interface/interaccion.js"></script>        
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
-        <script type="text/javascript" src="/sece/dwr/util.js"></script>
-        
+        <script type="text/javascript" src="/sece/dwr/util.js"></script>        
         
         <script type="text/javascript" >
             
             var num_item=0;
-            var actual_var = <%=actual%>;
-            var total_vari = <%=total_var%>;
+            var indicador_actual = <%=indi%>;
+            var actual_var = <%=actual%>;// va de 0 a n
+            var total_vari = <%=total_var%>;// va 1 a n
             
             $(function() {
 		$( "#buttonnnext" ).button();  
+                $( "#box_message" ).hide();//escondo el contenido del div para los mensajes
+                
+                $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
                    
-                    if(actual_var == (total_vari -1)){
-                        alert("Es la ultima");
+                    if(actual_var == total_vari ){
+                        $( "#link_variable").html("");
+                        $( "#link_actual").html(actual_var+"/"+total_vari);
+                        $("#box").html("");
+                        $( "#buttonnnext" ).hide();
+                     
+                        var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Completado</strong><p class='hola'>Se ha completado el cuestionario de <%=nombre_indicador%> correctamente!.</p></div><!-- /Notification --></section>";  
+                        $("#box_message").html(palabra);
+                        $( "#box_message" ).show("blind");
                     }else{
                         obtener(<%=indi%>,<%=actual%>);               
                     }
@@ -120,7 +169,7 @@ response.setDateHeader("Expires", 0);
                 
                 num_item= data.length;
                 var i;
-                var strHtml="<table><thead><tr><td>Pregunta</td><td>Si/No</td><td>Observacion</td></tr></thead><tbody>";
+                var strHtml="<table><thead><tr><td>Preguntas</td><td>Si/No</td><td>Observacion</td></tr></thead><tbody>";
            
                 for(i=0;i<data.length;i++){
                     strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='checkbox' id='checkbox"+ (i+1) +"' name='resp' /></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
@@ -135,33 +184,66 @@ response.setDateHeader("Expires", 0);
             function saveAndNext(){                
                 
                  if(actual_var < (total_vari -1)){
-                     
+                     //num_item son el numero de pregunta por variable que hay para guardar
                       for(i=0;i<num_item;i++){
                         if(jQuery("#checkbox"+(i+1)).attr('checked') == true)
                           { //alert("Seleccionada");
-                             
-                          
+                            interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),1,$("#textfield"+(i+1)).val());                        
                          }else { //alert("No Seleccionada");  
-                             
+                            interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),0,$("#textfield"+(i+1)).val());
                             }
-                     }
-            
-                     interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta2);//aumenta en uno la variable var de la tabla avance                                                                                  
-                 }else{
-                     alert("NO hay mas");
-                 }                  
+                       }//fin del ciclo for para guardar las respuesta item.
+                     
+                       $("#box").html("");
+                     
+                       var palabra="<section role='principal' id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha guardado las respuestas correctamente!!!.</p></div><!-- /Notification --></section>";  
+                       $("#box_message").html(palabra);
+                       $( "#box_message" ).show("blind",callback);//en el metodo callbak mando a llamar a la funcion que aumenta en 1 var en avance
+                      
+                 }else if (actual_var == (total_vari -1)){
+                     for(i=0;i<num_item;i++){
+                        if(jQuery("#checkbox"+(i+1)).attr('checked') == true)
+                          { //alert("Seleccionada");                             
+                             interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),1,$("#textfield"+(i+1)).val());                        
+                          }else { //alert("No Seleccionada");  
+                             interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),0,$("#textfield"+(i+1)).val());
+                            }
+                     }//fin del ciclo for para guardar las respuesta item.
+                     
+                     $( "#link_variable").html("");                     
+                     $("#box").html("");
+                     $( "#buttonnnext" ).hide();
+                     
+                     var palabra="<section role='principal' id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha completado el cuestionario de <%=nombre_indicador%> satisfactoriamente!.</p></div><!-- /Notification --></section>";  
+                     $("#box_message").html(palabra);
+                     $( "#box_message" ).show("blind");
+                     interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta3);//aumenta en uno la variable var de la tabla avance                                                                                  
+                 }                 
                                   
             } 
             
-            function getName2(data2){
-                $("#link_variable").html(data2);
-                //alert("Entre name "+ actual_var);
-            }
+             function callback() {//function para esconder el div de mensaje con efecto
+			setTimeout(function() {                                 
+				$( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();
+                                interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta2);//aumenta en uno la variable var de la tabla avance                                                                                  
+			}, 1000 );
+		};
             
+                       
             function respuesta2(data){                 
                  actual_var = data;                 
-                 interaccion.getNameVariable(actual_var,<%=indi%>, getName2);//obtengo el nombre de la nueva variable
-                 obtener(<%=indi%>,data);
+                 interaccion.getNameVariable(actual_var,indicador_actual, getName2);//obtengo el nombre de la nueva variable
+                 $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
+                 obtener(<%=indi%>,data);//muestra los item de la nueva variable
+            }
+            
+            function respuesta3(data){                 
+                 actual_var = data;                                  
+                 $( "#link_actual").html(actual_var+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12                 
+            }
+            
+            function getName2(data2){
+                $("#link_variable").html(data2);                   
             }
             
             function link_indi(){                
@@ -172,13 +254,20 @@ response.setDateHeader("Expires", 0);
                                 
                 var j;
                 var strHtml2="";
-           alert(dato.length);
+                alert(dato.length);
                 //for(j=0;j<dato.length;j++){
                   //  strHtml2 += ""+(j+1) + ". " + dato[j].nombre +"<input type='hidden' id='idVariable"+ (j+1) +"' value='"+ dato[j].idVariable +"'/>";                    
                     
                 //}
                                
                 //$("#box").html(strHtml2);   
+            }
+            
+            function goout(){
+               location.href="salir";
+            }
+            function goBack(){
+               location.href="controlPanel.jsp";
             }
         </script>
     </head>    
@@ -191,7 +280,11 @@ response.setDateHeader("Expires", 0);
         </ul>
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="293" height="84" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      <div class="inGo">
+          <a href="#" onclick="goBack();" ><strong>Regresar</strong></a>          
+          <a href="#" onclick="goout();" ><strong>Salir</strong></a>
+      </div>
       <div class="clr"></div>
     </div>
   </div> 
@@ -199,27 +292,15 @@ response.setDateHeader("Expires", 0);
   <div class="body">     
     <div class="body_resize">
         
-        <h2>Welcome <%=name%>&nbsp&nbsp<a id="link_indicador" href="#" onclick="link_indi();" ><%=nombre_indicador%></a>  > <a id="link_variable" href="#" ><%=nombre_variable%></a></h2>
+        <h2>Bienvenido, <%=name%>&nbsp&nbsp<a id="link_indicador" href="#" onclick="link_indi();" ><%=nombre_indicador%></a>  > <a id="link_variable" href="#" ><%=nombre_variable%> </a>&nbsp<a id="link_actual" href="#" > </a></h2>
         
-        <div id="cuestionario" align="center">            
-            <%
-              /*IndicadorDaoImpl indDao = new IndicadorDaoImpl();
-              List<Indicador> listIndicador = new ArrayList<Indicador>();
-              listIndicador = indDao.findAll();
-              
-              Indicador indicador = new Indicador();
-              for(int i=0;i<listIndicador.size();i++){
-                  indicador = listIndicador.get(i);
-                 out.println("<button  name='"+ indicador.getIdIndicador() +"' id='"+ indicador.getIdIndicador() +"' type='button' onclick='obtener("+ indicador.getIdIndicador() +");' >"+ indicador.getNombre() +"</button>");
-              }
-               */
-            %>
+        <div id="box_message" align="center">            
                               
-        </div> 
+        </div><%-- finaliza div que muestra los mensajes --%> 
         <div id="box" >
             
         </div>
-            <input type='button' value='save' id="buttonnnext" onclick="saveAndNext();" />
+            <input type='button' style=" font-size: 14px;" value='Guardar' id="buttonnnext" onclick="saveAndNext();" />
            <%-- <div class="right2"> </div> end div right2 --%> 
        
       <div class="clr"></div>
@@ -230,3 +311,6 @@ response.setDateHeader("Expires", 0);
 </div>  
     </body>
 </html>
+<% 
+      }//fin del else de validar parametro enviado
+           }//fin del else de la variable de sesion %>
