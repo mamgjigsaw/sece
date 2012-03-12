@@ -3,10 +3,13 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Dave\\Documents\\NetBeansProjects\\david\\sece\\web\\WEB-INF\\"]]></defaultValueExpression>
+	</parameter>
 	<field name="idIndicador" class="java.lang.Integer"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="contribucion" class="java.lang.Double"/>
-	<field name="variableDS" class="java.util.List"/>
+	<field name="variableDS" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<background>
 		<band/>
 	</background>
@@ -72,10 +75,10 @@
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{contribucion}]]></textFieldExpression>
 			</textField>
-			<subreport isUsingCache="true">
-				<reportElement x="0" y="20" width="554" height="129"/>
+			<subreport>
+				<reportElement x="10" y="33" width="534" height="103"/>
 				<dataSourceExpression><![CDATA[$F{variableDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["subVariableDS.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subVariableDS.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

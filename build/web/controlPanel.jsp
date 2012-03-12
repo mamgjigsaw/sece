@@ -142,7 +142,8 @@ response.setDateHeader("Expires", 0);
                 
                 if(tipo==4){
                    $("#tabs").tabs( "remove" , 2 );
-                   $("#tabs").tabs( "remove" , 3 );
+                   $("#tabs").tabs( "remove" , 2 ); 
+                   obtenerDatosUsuario()
                 }else{
                     IdEmpresa= <%=idEmpresa%>;
                     obtenerDatosEmpresa();
@@ -152,6 +153,25 @@ response.setDateHeader("Expires", 0);
                 }
                 //llamar
                 getDelegados();
+                
+                $( "#logoutbutton" ).button({			
+			icons: {
+				primary: "ui-icon-gear",
+                                secondary: "ui-icon-triangle-1-s"
+			}
+		})
+		.click(function() {			
+                $("#menuBtnOpciones1").toggle("slow");            
+		});	
+                $(".mnSalir").hover(
+                function(){
+                $(this).css({'color':'#81BEF7','cursor':'pointer', 'font-size':'large'});
+                 },
+                function(){
+                $(this).css({'color':'#015480','font-size':'medium'});    
+                   }
+                 );
+                
                 $( "#box_message" ).hide();//escondo el contenido del div para los mensajes
                 
     $( "#dialog:ui-dialog" ).dialog( "destroy" );
@@ -262,7 +282,12 @@ response.setDateHeader("Expires", 0);
        
        function addRowIndicador(indicador, responsable,avance,idIndicador){
            var cadena="";
+           
+           if(tipo==4){
+               cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td>"+avance+"</td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td></td></tr>";
+           }else{
            cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td>"+avance+"</td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td><p><a href='#' onclick='cambiarResponsable("+idIndicador+");'><strong>Delegar</strong></a></p></td></tr>";
+           }
            $("#table_indicador").append(cadena); 
        }       
        
@@ -527,12 +552,17 @@ response.setDateHeader("Expires", 0);
                           $('#btnVCUser').val('Iniciar Video Chat');     
                      }
                      else {
-                          $('#btnVC').val('Cerrar Video Chat');
+                          $('#btnVCUser').val('Cerrar Video Chat');
                      }
                }
 	
         </script>
-                
+        <style>
+	#toolbar {
+		padding: 10px 4px;
+	}
+        </style>
+        
     </head>    
     <body>
      <div class="main">
@@ -543,17 +573,27 @@ response.setDateHeader("Expires", 0);
       </div>
       <div class="clr"></div>
       <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      
       <div class="inGo">
-          <a style=" font-size: 14px ;" href="#" onclick="goout();" ><strong>Salir</strong></a>          
-      </div>
+       <span id="toolbar" class="ui-widget-header ui-corner-all">	
+        <button id="logoutbutton" onclick="mostrarSalir();" ><%=name%></button>	
+       </span> 
+       <div>
+        <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 5px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 100px; height: 20px; color: #015480">
+              <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">
+                  <li id="mnuBtnSalir" onclick="goout();" > Salir  </li>  
+              </ul>              
+          </div>
+       </div>
+
+       </div>
+       
       <div class="clr"></div>
     </div>
   </div> 
   
   <div class="body">     
     <div class="body_resize">
-        
-        <h2>Bienvenido <%=name%></h2>
           <br>
         <div id="box_message" > 
                            

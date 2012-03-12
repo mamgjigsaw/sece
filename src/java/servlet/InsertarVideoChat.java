@@ -37,6 +37,7 @@ public class InsertarVideoChat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int idcontrato = Integer.parseInt(request.getParameter("idc")); 
         String idusuario = request.getParameter("iduser");
+        
         ContratoDaoImpl cdi = new ContratoDaoImpl();
         Contrato contra = cdi.findById(idcontrato);
         
@@ -49,7 +50,7 @@ public class InsertarVideoChat extends HttpServlet {
         List<DelegacionIndiUsu> delegados = doii.delegacionxContrato(contra);
         DelegacionIndiUsu delegado = new DelegacionIndiUsu();
         Iterator<DelegacionIndiUsu> it = delegados.iterator();
-        String[] idUsuarios = new String [4];         
+        String[] idUsuarios = new String [10];         
         int i=0;        
         PrintWriter out = response.getWriter();
         try {

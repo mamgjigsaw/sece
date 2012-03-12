@@ -48,23 +48,13 @@ response.setDateHeader("Expires", 0);
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         
         <script>
-            function mostrarMenu(){
-                $("#menuBtnOpciones1").toggle("slow");
-            }
-            
+           
             
             function hacerlo(){
                 window.location.href = "historial.jsp"; 
             }
         $(document).ready(function() {
-            $(".mnSalir li").hover(
-             function(){
-                $(this).css({'background':'#e8e8e8','color':'#81BEF7','cursor':'pointer'});
-            },
-            function(){
-                $(this).css({'background':'#81BEF7','color':'#0B3861'});    
-            }
-            );
+           
        
             $("#btnVC").button();            
             $("#tabs").tabs();
@@ -88,10 +78,7 @@ response.setDateHeader("Expires", 0);
                 });
             }); 
             
-            $("#mnuBtnSalir").click(function(){
-                location.href="salir";
-            });
-            
+                        
             $("#tblEmpresasNoAsignadas tr").click(function(){
              alert("hola") ;
             });
@@ -112,13 +99,23 @@ response.setDateHeader("Expires", 0);
                 });
             });
             
-            $( "#btnOpciones" ).button({
-            icons: {
-               primary: "ui-icon-gear",
-                secondary: "ui-icon-triangle-1-s"
+          $( "#logoutbutton" ).button({			
+			icons: {
+				primary: "ui-icon-gear",
+                                secondary: "ui-icon-triangle-1-s"
+			}
+		})
+		.click(function() {			
+                $("#menuBtnOpciones1").toggle("slow");            
+		});	
+                $(".mnSalir").hover(
+                function(){
+                $(this).css({'color':'#81BEF7','cursor':'pointer', 'font-size':'large'});
                  },
-            text: false
-            });
+                function(){
+                $(this).css({'color':'#015480','font-size':'medium'});    
+                   }
+                 );
                    
         }); 
              
@@ -181,21 +178,32 @@ response.setDateHeader("Expires", 0);
       <div class="clr" align ="right">      
           <style>
               .mnSalir li{
-                  padding-left: 5%;
+                  padding-left: 5%;                  
               }
+              #toolbar {
+                    padding: 10px 4px;
+                }
           </style>
-          <button id="btnOpciones" onclick="mostrarMenu()">Button with two icons and no text</button>
-          <div id="menuBtnOpciones1" style=" display: none; background: #81BEF7; width: 100px; height: 20px; color: #0B3861">
-              <ul id="opciones1" class="mnSalir" style="list-style: none;font-size: large; text-align:left;">
-                  <li id="mnuBtnSalir" style="list-style-image:url(/images/log_out.gif)"> Salir  </li>  
+        
+        <span id="toolbar" class="ui-widget-header ui-corner-all">	
+        <button id="logoutbutton" onclick="mostrarSalir();" >65565</button>	
+       </span> 
+       <div>
+        <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 5px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 100px; height: 20px; color: #015480">
+              <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">
+                  <li id="mnuBtnSalir" onclick="location.href='salir'" > Salir  </li>  
               </ul>              
           </div>
+       </div>
+           <div class="clr"></div>
+      
       </div>
     </div>
   </div>
   
   <div class="body">
     <div class="body_resize">
+        
      <div id="tabs">
            <ul>
             <li><a href="#tab-1"><span>Espacio de Trabajo</span></a></li>
