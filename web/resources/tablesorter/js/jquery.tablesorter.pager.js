@@ -17,7 +17,7 @@
 			
 			function fixPosition(table) {
 				var c = table.config;
-				if(!c.pagerPositionSet && c.positionFixed) {
+				if(c.pagerPositionSet && c.positionFixed) {
 					c = table.config 
                                         var o = $(table);
 					if(o.offset) {

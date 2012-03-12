@@ -46,10 +46,23 @@
          </script>
          
         <link href="resources/tablesorter/styles.css" rel="stylesheet" type="text/css" /> 
+        <div id="pagerCap">
+	                 <form>
+		                <img src="resources/tablesorter/icons/first.png" class="first"/>
+		                <img src="resources/tablesorter/icons/prev.png" class="prev"/>
+		                <input type="text" class="pagedisplay"/>
+		                <img src="resources/tablesorter/icons/next.png" class="next"/>
+		                <img src="resources/tablesorter/icons/last.png" class="last"/>
+		                        <select class="pagesize">
+			                <option selected="selected"  value="10">10</option>
+			                <option value="20">20</option>
+			                
+		                        </select>
+	                  </form>
+                       </div>
         
         
-        
-      <div style="padding-top: 20px;" align="center" >  
+      <div align="center" >  
         
         <table id="tablaCap" class="tablesorter" cellspacing="1" width="100%">
                 	<thead>
@@ -116,21 +129,7 @@
                 </table>
 
 
-                      <div id="pagerCap">
-	                 <form>
-		                <img src="resources/tablesorter/icons/first.png" class="first"/>
-		                <img src="resources/tablesorter/icons/prev.png" class="prev"/>
-		                <input type="text" class="pagedisplay"/>
-		                <img src="resources/tablesorter/icons/next.png" class="next"/>
-		                <img src="resources/tablesorter/icons/last.png" class="last"/>
-		                        <select class="pagesize">
-			                <option selected="selected"  value="10">10</option>
-			                <option value="20">20</option>
-			                <option value="30">30</option>
-			                <option  value="40">40</option>
-		                        </select>
-	                  </form>
-                       </div>
+                      
       </div>
 
 

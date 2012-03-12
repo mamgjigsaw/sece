@@ -61,8 +61,21 @@
             
         </script>        
         <link href="resources/tablesorter/styles.css" rel="stylesheet" type="text/css" />
+        <div id="pagerIndicador">
+	                 <form>
+		                <img src="resources/tablesorter/icons/first.png" class="first"/>
+		                <img src="resources/tablesorter/icons/prev.png" class="prev"/>
+		                <input type="text" class="pagedisplay"/>
+		                <img src="resources/tablesorter/icons/next.png" class="next"/>
+		                <img src="resources/tablesorter/icons/last.png" class="last"/>
+		                        <select class="pagesize">
+			                <option selected="selected" value="10">10</option>
+			                <option value="20">20</option>			                
+		                        </select>
+	                  </form>
+                       </div>
         <div align="center">
-        <div style="padding-top: 20px;" align="center" >
+        <div align="center" >
         <table id="tableIndicador" class="tablesorter" cellspacing="1"> 
                           <thead>
                     	    <tr>                             
@@ -98,19 +111,7 @@
             }    %>                                                        
                         </tbody> 
         </table> 
-                        <div id="pagerIndicador">
-	                 <form>
-		                <img src="resources/tablesorter/icons/first.png" class="first"/>
-		                <img src="resources/tablesorter/icons/prev.png" class="prev"/>
-		                <input type="text" class="pagedisplay"/>
-		                <img src="resources/tablesorter/icons/next.png" class="next"/>
-		                <img src="resources/tablesorter/icons/last.png" class="last"/>
-		                        <select class="pagesize">
-			                <option selected="selected" value="10">10</option>
-			                <option value="20">20</option>			                
-		                        </select>
-	                  </form>
-                       </div>
+                        
                      
         </div>
             <div id="updateI" class="divPanel" style=" margin-top: -40px; display: none; font-size: 13px; padding-top: 5px; width: 600px; height: 60px;" align="center" title="Cambie los datos">

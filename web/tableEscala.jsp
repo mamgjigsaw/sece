@@ -57,7 +57,20 @@
             
         </script>
         <link href="resources/tablesorter/styles.css" rel="stylesheet" type="text/css" /> 
-        <div style="padding-top: 20px;" align="center" >
+                    <div id="pagerEscala">
+	                 <form>
+		                <img src="resources/tablesorter/icons/first.png" class="first"/>
+		                <img src="resources/tablesorter/icons/prev.png" class="prev"/>
+		                <input type="text" class="pagedisplay"/>
+		                <img src="resources/tablesorter/icons/next.png" class="next"/>
+		                <img src="resources/tablesorter/icons/last.png" class="last"/>
+		                        <select class="pagesize">
+			                <option selected="selected"  value="10">10</option>
+			                <option value="20">20</option>			                
+		                        </select>
+	                  </form>
+                       </div>
+        <div style="" align="center" >
             <table id="escalas" class="tablesorter" cellspacing="1">
                                                                  <thead>
                                                                      <tr>
@@ -97,22 +110,10 @@
                                                }%>    
                                                                  </tbody>
             </table>
-                        <div id="pagerEscala">
-	                 <form>
-		                <img src="resources/tablesorter/icons/first.png" class="first"/>
-		                <img src="resources/tablesorter/icons/prev.png" class="prev"/>
-		                <input type="text" class="pagedisplay"/>
-		                <img src="resources/tablesorter/icons/next.png" class="next"/>
-		                <img src="resources/tablesorter/icons/last.png" class="last"/>
-		                        <select class="pagesize">
-			                <option selected="selected"  value="10">10</option>
-			                <option value="20">20</option>			                
-		                        </select>
-	                  </form>
-                       </div>
+                       
             
                      
-            <div id="updateE" class="divPanel" style=" margin-top: -40px; display: none; font-size: 13px; padding-top: 5px; width: 1030px; height: 70px;" align="center" title="Cambie los datos">
+            <div id="updateE" class="divPanel" style=" margin-top: -40px; display: none; font-size: 13px; padding-top: 5px; width: 99%; height: 70px;" align="center" title="Cambie los datos">
               <form>                 
                      <input type="hidden" id="idEsc"/>
                      <table>

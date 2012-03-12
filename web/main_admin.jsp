@@ -473,11 +473,7 @@ response.setDateHeader("Expires", 0);
     <body>
         
         <div class="main">
-            <%-- **************Menu*****************--%>
-        
-  
-
-       <%-- **************Menu*****************--%>   
+            
   <div class="header"> 
       
     <div class="header_resize">         
@@ -493,12 +489,14 @@ response.setDateHeader("Expires", 0);
 	<button id="home">Inicio</button>
 	<button id="instrument">Instrumento</button>
         <button id="logoutbutton" onclick="mostrarSalir();" ><%= usu.getNombre() %></button>	
-	  <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 7px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 153px; height: 20px; color: #015480">
+       </span> 
+       <div>
+        <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 7px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 153px; height: 20px; color: #015480">
               <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">
                   <li id="mnuBtnSalir" onclick="goout();" > Salir  </li>  
               </ul>              
           </div>
-        </span>
+       </div>
 
        </div>
        <div class="clr"></div>
