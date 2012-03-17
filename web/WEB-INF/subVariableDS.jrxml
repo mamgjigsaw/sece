@@ -1,59 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subVariableDS" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="179"/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="1053"/>
 	<property name="ireport.y" value="0"/>
+	<field name="idVariable" class="java.lang.Integer"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="ponderacion" class="java.lang.Integer"/>
-	<field name="idVariable" class="java.lang.Integer"/>
+	<field name="itemDS" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="23" splitType="Stretch">
-			<staticText>
-				<reportElement x="22" y="3" width="69" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Variables:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="455" y="0" width="69" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Ponderacion:]]></text>
-			</staticText>
-		</band>
-	</title>
 	<detail>
-		<band height="24" splitType="Stretch">
+		<band height="68" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="23" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
 			<textField>
-				<reportElement x="455" y="3" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="441" y="4" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ponderacion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="103" y="4" width="339" height="20"/>
-				<textElement/>
+				<reportElement x="71" y="4" width="339" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="17" y="3" width="71" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{idVariable}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<summary>
-		<band height="6" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="26" width="555" height="42"/>
+				<dataSourceExpression><![CDATA[$F{itemDS}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["C:\\kenny\\sece\\web\\WEB-INF\\subItemDS.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="2" y="4" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Variable:]]></text>
+			</staticText>
 			<line>
-				<reportElement x="0" y="3" width="555" height="1"/>
+				<reportElement x="0" y="0" width="555" height="1"/>
 				<graphicElement>
-					<pen lineWidth="3.0"/>
+					<pen lineWidth="2.25"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="367" y="4" width="75" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ponderación:]]></text>
+			</staticText>
 		</band>
-	</summary>
+	</detail>
 </jasperReport>

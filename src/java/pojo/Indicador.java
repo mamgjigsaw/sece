@@ -80,7 +80,7 @@ public class Indicador  implements java.io.Serializable {
     public JRDataSource getVariableDS(){
         List<Variable> vars = new ArrayList();
         VariableDaoImpl vdi = new VariableDaoImpl();
-        vars = vdi.findAll();
+        vars = vdi.findByIndicador(this);
          return new JRBeanCollectionDataSource(vars);
     }
 

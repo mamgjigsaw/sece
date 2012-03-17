@@ -76,6 +76,10 @@
         <servlet-name>reportUsers</servlet-name>
         <servlet-class>servlet.reportUsers</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>verFormatoInstrumento</servlet-name>
+        <servlet-class>servlet.verFormatoInstrumento</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>saveIndicador</servlet-name>
         <url-pattern>/saveIndicador</url-pattern>
@@ -169,6 +173,10 @@
         <servlet-name>reportUsers</servlet-name>
         <url-pattern>/reportUsers</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>verFormatoInstrumento</servlet-name>
+        <url-pattern>/verFormatoInstrumento</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
         <cookie-config>
@@ -178,7 +186,7 @@
     <error-page>
         <error-code>404</error-code>
         <location>/ErrorPage.jsp</location>
-    </error-page> 
+    </error-page>
     <error-page>
         <error-code>500</error-code>
         <location>/Error500.jsp</location>

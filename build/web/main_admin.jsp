@@ -482,8 +482,9 @@ response.setDateHeader("Expires", 0);
           
       </div>
       <div class="clr" ></div>
-      
-      <div style="float:right; margin-top: -12px; margin-bottom: 5px;  margin-right: -135px  ">
+      <div style="margin-top: -64px" ><img src="images/logo.gif" width="250" height="84" border="0" alt="logo" /></div>
+            
+        <div style="float:right; margin-top: -33px; margin-bottom: 5px;  margin-right: -135px  ">
 
        <span id="toolbar" class="ui-widget-header ui-corner-all">
 	<button id="home">Inicio</button>
