@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subVariableDS" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="1053"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Dave\\Documents\\NetBeansProjects\\kenny\\sece\\web\\WEB-INF\\"]]></defaultValueExpression>
+	</parameter>
 	<field name="idVariable" class="java.lang.Integer"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="ponderacion" class="java.lang.Integer"/>
@@ -11,7 +14,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="68" splitType="Stretch">
+		<band height="74" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="23" backcolor="#CCCCCC"/>
 				<graphicElement>
@@ -32,13 +35,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
-			<subreport>
-				<reportElement x="0" y="26" width="555" height="42"/>
-				<dataSourceExpression><![CDATA[$F{itemDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["C:\\kenny\\sece\\web\\WEB-INF\\subItemDS.jasper"]]></subreportExpression>
-			</subreport>
 			<staticText>
-				<reportElement x="2" y="4" width="69" height="20"/>
+				<reportElement x="3" y="4" width="69" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -63,6 +61,11 @@
 				</textElement>
 				<text><![CDATA[Ponderación:]]></text>
 			</staticText>
+			<subreport>
+				<reportElement x="0" y="27" width="555" height="40"/>
+				<dataSourceExpression><![CDATA[$F{itemDS}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subItemDS.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 </jasperReport>

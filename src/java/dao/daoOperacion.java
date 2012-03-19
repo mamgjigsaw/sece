@@ -11,5 +11,6 @@ import pojo.Operacion;
  * @author mamg
  */
 public interface daoOperacion extends dao<Operacion> {
+    Operacion findById(int id_operacion);
     
 }

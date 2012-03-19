@@ -43,13 +43,6 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="7" splitType="Stretch">
-			<line>
-				<reportElement x="0" y="4" width="555" height="1"/>
-				<graphicElement>
-					<pen lineWidth="3.25"/>
-				</graphicElement>
-			</line>
-		</band>
+		<band height="5" splitType="Stretch"/>
 	</summary>
 </jasperReport>

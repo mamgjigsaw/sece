@@ -13,6 +13,7 @@ public class Bitacora  implements java.io.Serializable {
      private Integer idBitacora;
      private Operacion operacion;
      private Acceso acceso;
+     private String descripcion;
      private Integer id_elemento;
      private String anterior;
      private String actual;     
@@ -21,9 +22,10 @@ public class Bitacora  implements java.io.Serializable {
     public Bitacora() {
     }
 
-    public Bitacora(Operacion operacion, Acceso acceso,Integer id_elemento,String anterior,String actual, Date fecha) {
+    public Bitacora(Operacion operacion, Acceso acceso,String descripcion,Integer id_elemento,String anterior,String actual, Date fecha) {
        this.operacion = operacion;
        this.acceso = acceso;
+       this.descripcion = descripcion;
        this.id_elemento = id_elemento;
        this.anterior = anterior;
        this.actual = actual;
@@ -82,6 +84,14 @@ public class Bitacora  implements java.io.Serializable {
     
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 

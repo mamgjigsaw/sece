@@ -4,8 +4,16 @@
  */
 package dwrScripts;
 
+import daoImpl.AccesoDaoImpl;
+import daoImpl.BitacoraDaoImpl;
+import daoImpl.OperacionDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.encriptar;
+import java.sql.Timestamp;
+import java.util.Date;
+import pojo.Acceso;
+import pojo.Bitacora;
+import pojo.Operacion;
 import pojo.Usuario;
 
 /**
@@ -49,5 +57,26 @@ public class validate {
         usuario.setEstado(0);
         usudao.update(usuario);
     }
+    
+    public void saveActionBitacora(int id_acceso,int id_operacion, String descripcion,int id_elemento,String anterior,String actual){
+        
+        OperacionDaoImpl opeDao = new OperacionDaoImpl();
+        Operacion operacion = new Operacion();
+        
+        operacion = opeDao.findById(id_operacion);
+        
+        AccesoDaoImpl accDao = new AccesoDaoImpl();
+        Acceso acceso = new Acceso();
+        
+        acceso = accDao.findById(id_acceso);
+        
+        Date fecha = new Date();        
+        Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+        
+        Bitacora bitacora = new Bitacora(operacion,acceso,descripcion,id_elemento,anterior,actual,momentoTimestamp);
+        BitacoraDaoImpl bitaDao = new BitacoraDaoImpl();
+        bitaDao.create(bitacora);
+           
+    }            
     
 }

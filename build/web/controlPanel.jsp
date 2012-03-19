@@ -119,6 +119,7 @@ response.setDateHeader("Expires", 0);
         <script type="text/javascript" src="resources/jquery/js/jquery.validate.js"></script>            
         
         <script type="text/javascript" src="/sece/dwr/interface/panel.js"></script>        
+        <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
         <script type="text/javascript" src="/sece/dwr/util.js"></script>
         
@@ -139,7 +140,7 @@ response.setDateHeader("Expires", 0);
                 $( "#btnupdatEmpresa" ).button();
                 $( "#btnVCUser" ).button();
                 $( "#tabs" ).tabs();  
-                
+                                
                 if(tipo==4){
                    $("#tabs").tabs( "remove" , 2 );
                    $("#tabs").tabs( "remove" , 2 ); 
@@ -148,7 +149,7 @@ response.setDateHeader("Expires", 0);
                     IdEmpresa= <%=idEmpresa%>;
                     obtenerDatosEmpresa();
                     obtenerDatosUsuario();
-                    cargarComboIndicador();                    
+                    cargarComboIndicador();                      
                     $("#new").click();
                 }
                 //llamar
@@ -312,6 +313,8 @@ response.setDateHeader("Expires", 0);
            }
            else{               
                panel.updatePass(<%=id_usuario%>,contraAnterior,contraNueva,contraNuevaConfirmacion,respUpdate);
+               
+               validacion.saveActionBitacora(<%=acc%>,24,"modifico contraseña",IdUsuario,contraAnterior,contraNuevaConfirmacion);
            }           
        }
        

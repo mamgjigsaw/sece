@@ -18,6 +18,7 @@ import util.HibernateUtil;
  */
 public class OperacionDaoImpl implements daoOperacion{
     public final SessionFactory sf;
+    public Operacion operacion;
 
     public OperacionDaoImpl() {
         this.sf = HibernateUtil.getSessionFactory();
@@ -56,6 +57,16 @@ public class OperacionDaoImpl implements daoOperacion{
         se.getTransaction().commit();
 
         return list;
+    }
+
+    @Override
+    public Operacion findById(int id_operacion) {
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        operacion = (Operacion) se.get(Operacion.class, id_operacion); 
+        se.getTransaction().commit();
+        
+        return operacion;
     }
     
 }
