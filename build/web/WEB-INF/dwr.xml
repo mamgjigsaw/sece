@@ -9,10 +9,7 @@
     </create>
      <create creator="new" javascript="interaccion">
       <param name="class" value="dwrScripts.interaccion_instrum"/>
-    </create>
-    <create creator="new" javascript="chat">
-      <param name="class" value="dwrScripts.JavascriptChat"/>
-    </create>
+    </create>    
     <create creator="new" javascript="updating">
       <param name="class" value="dwrScripts.updateAdmin"/>
     </create>
@@ -26,7 +23,10 @@
       <param name="class" value="dwrScripts.updatesAdmin"/>
     </create>
     <create creator="new" javascript="panel">
-      <param name="class" value="dwrScripts.controlPanelContacto"/>
+      <param name="class" value="dwrScripts.controlPanelContacto"/>    
+    </create>
+    <create creator="new" javascript="capacitadoresScripts">
+        <param name="class" value="dwrScripts.initCapacitadores"/>
     </create>
     <convert converter="bean" match="pojo.Item" javascript="Item" />
     <convert converter="bean" match="pojo.Variable" javascript="Variable" />

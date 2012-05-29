@@ -4,6 +4,10 @@
     Author     : Mendieta
 --%>
 
+<%@page import="daoImpl.AccesoDaoImpl"%>
+<%@page import="pojo.Acceso"%>
+<%@page import="daoImpl.UsuarioDaoImpl"%>
+<%@page import="pojo.Usuario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="daoImpl.IndicadorDaoImpl"%>
@@ -19,6 +23,7 @@
          <script type="text/javascript" src="/sece/dwr/interface/updates.js"></script>
          <script type="text/javascript" src="/sece/dwr/engine.js"></script>
          <script type="text/javascript" src="/sece/dwr/util.js"></script>
+          <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.pager.js"></script>
@@ -32,9 +37,21 @@
              } 
              );
         </script> 
+                              <% Usuario usua = new Usuario();
+                              UsuarioDaoImpl usuaDI = new UsuarioDaoImpl();
+                               usua = usuaDI.findAdministrador();
+                               Acceso ac = new Acceso();
+                                 AccesoDaoImpl acDI = new AccesoDaoImpl();
+                                ac = acDI.findUltimoAcceso(usua);
+                                     %>
         <script>           
-            function updateVar(idvar, nombre, pon, idin){            
-            
+            var variV;
+            var ponV;
+            var indiV;
+            function updateVar(idvar, nombre, pon, idin, nombreIndi){            
+              variV = nombre;          
+              ponV = pon;
+              indiV = nombreIndi;
             document.getElementById('idvari').value= idvar; 
              document.getElementById('vari').value= nombre; 
               document.getElementById('pond').value= pon;
@@ -46,21 +63,26 @@
             function deleteVar(idv, v){
                 if(confirm('¿Esta seguro que desea eliminar la Variable: '+ v +'?')){
                     updates.deleteVariable(idv);
+                    validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 33, "Elimino una Variable",idv, "Estado Activo", "Estado Inactivo");
                     location.reload();
                 }
                 
             };  
             function actualizarV(){
+                var index = document.getElementById('indvari').selectedIndex;
+                var IndicadorVarNew = document.getElementById('indvari').options[index].text;
                var id = $("#idvari").val();
                var nVar = $("#vari").val();
                var p = $("#pond").val();
                var idI = $("#indvari").val();
+               
                if(id == "" || nVar == ""|| p == ""){
                    alert("Llene los campos por favor");
                }else{
                    updates.updateVariables(id, nVar, p, idI);
+                   validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 4, "Modifico Variable",id, variV + ", " + ponV + ", " + indiV, nVar + ", " + p + ", " + IndicadorVarNew);
                    location.reload();
-               }                
+               }     
             }
             
         </script>
@@ -115,8 +137,8 @@
                                                                       <td><%= stateVar %></td>
                                                                       <td><%= indiVar %></td>
                                                                       <td>
-                                                                          <a onclick="updateVar('<%= va.getIdVariable().toString() %>', '<%= va.getNombre().toString() %>', '<%= va.getPonderacion().toString() %>', '<%= idindi %>');" title="Editar Variable"><img src="images/icon_edit.png" alt="Edit" /></a>
-                                                                          <a onclick="deleteVar('<%= va.getIdVariable().toString() %>', '<%= va.getNombre().toString() %>');" title="Inactivar Variable"><img src="images/icon_delete.png" alt="Delete" /></a>
+                                                                          <a style="cursor: pointer" onclick="updateVar('<%= va.getIdVariable().toString() %>', '<%= va.getNombre().toString() %>', '<%= va.getPonderacion().toString() %>', '<%= idindi %>', '<%= indiVar %>');" title="Editar Variable"><img src="images/icon_edit.png" alt="Edit" /></a>
+                                                                          <a style="cursor: pointer" onclick="deleteVar('<%= va.getIdVariable().toString() %>', '<%= va.getNombre().toString() %>');" title="Inactivar Variable"><img src="images/icon_delete.png" alt="Delete" /></a>
                                                                       </td>
                                                                   </tr>
 

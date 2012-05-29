@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import pojo.Item;
 import pojo.Variable;
@@ -81,16 +82,7 @@ public class ItemDaoImpl implements daoItem {
     public List<Item> findByVar(int idVariable) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    /* public List<Item> findAllByInd(int id_variable) {
-        List<Item> items = new ArrayList<Item>();
-        s = sf.getCurrentSession();
-        s.beginTransaction();
-        items = s.createSQLQuery("select * from item where id_variable = "+ id_variable).addEntity("variable", Item.class).list();
-        s.getTransaction().commit();
-        return items;
-    }
-*/
+    
     @Override
 public Item findById(int id){
     s =sf.getCurrentSession();
@@ -111,11 +103,20 @@ public Item findById(int id){
     }
 
     @Override
-    public int numItem() {
-         int items =0;
+    public List<Item> findByVariableActivo(Variable variable) {
+        List<Item> list = new ArrayList<Item>();
         Session se = sf.getCurrentSession();
         se.beginTransaction();
-        items = ( (Long) se.createQuery("select count(*) from Item").iterate().next() ).intValue();
+        list = se.createCriteria(Item.class).add(Restrictions.eq("variable", variable)).add(Restrictions.eq("estado", 1)).list();
+        return list;
+    }
+
+    @Override
+    public int numItemActivos() {
+        int items =0;
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        items = (Integer) se.createCriteria(Item.class).add(Restrictions.eq("estado", 1)).setProjection(Projections.rowCount()).uniqueResult();         
         return items;
     }
 }

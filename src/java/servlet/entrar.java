@@ -8,6 +8,7 @@ package servlet;
 import daoImpl.AccesoDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.encriptar;
+import dwrScripts.validate;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -36,10 +37,12 @@ public class entrar extends HttpServlet {
     throws ServletException, IOException {
         String email, pass;
 
-        email = request.getParameter("txtemail");
-        pass = request.getParameter("txtpass");
+        email = request.getParameter("cV5VDde7H0l");
+        pass = request.getParameter("K3JR5YpwQ8");
+        
+        validate valid = new validate();       
 
-        String password = encriptar.md5(pass);
+        String password = encriptar.md5(valid.decrypt(pass));
         
         Date fecha = new Date();        
         Timestamp momentoTimestamp = new Timestamp(fecha.getTime());

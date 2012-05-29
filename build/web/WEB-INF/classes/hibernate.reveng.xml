@@ -20,4 +20,5 @@
   <table-filter match-name="pais"/>
   <table-filter match-name="usuario"/>
   <table-filter match-name="avance"/>
+   <table-filter match-name="noticias"/>
 </hibernate-reverse-engineering>

@@ -89,4 +89,29 @@ public class AccesoDaoImpl implements daoAcceso{
         return acceso;
     }
 
+    @Override
+    public Acceso findUltimoAcceso(Usuario usuario) {
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();        
+        Criteria criterio = se.createCriteria(Acceso.class);
+        criterio.add(Restrictions.eq("usuario", usuario));
+        ProjectionList projectionList  = Projections.projectionList();
+        projectionList.add(Projections.max("fechaEntrada"));
+        criterio.setProjection(projectionList);
+        Timestamp ts = (Timestamp) criterio.uniqueResult();
+        acceso = (Acceso)se.createCriteria(Acceso.class).add(Restrictions.eq("usuario", usuario)).add(Restrictions.eq("fechaEntrada", ts)).uniqueResult();
+        return acceso;
+    }
+
+    @Override
+    public List<Acceso> findByUser(Usuario usuario) {
+        List<Acceso> list = new ArrayList<Acceso>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        list = se.createCriteria(Acceso.class).add(Restrictions.eq("usuario", usuario)).list();
+        se.getTransaction().commit();
+        
+        return list;
+    }
+
 }

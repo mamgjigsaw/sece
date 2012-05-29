@@ -19,4 +19,5 @@ public interface daoUsuario extends dao<Usuario>{
     List<Usuario> findDelegadosByIdEmpresa(Empresa empresa);//lista todos los usuarios tipos delegados de una determinada empresa
     //--------agregado por david
     List<Usuario> usuariosxEmpresa (Empresa empresa);
+    Usuario findAdministrador();
 }

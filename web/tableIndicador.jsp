@@ -4,6 +4,10 @@
     Author     : Mendieta
 --%>
 
+<%@page import="daoImpl.AccesoDaoImpl"%>
+<%@page import="pojo.Acceso"%>
+<%@page import="daoImpl.UsuarioDaoImpl"%>
+<%@page import="pojo.Usuario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="daoImpl.IndicadorDaoImpl"%>
@@ -14,6 +18,7 @@
           <script type="text/javascript" src="/sece/dwr/interface/updates.js"></script>
          <script type="text/javascript" src="/sece/dwr/engine.js"></script>
          <script type="text/javascript" src="/sece/dwr/util.js"></script>
+          <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.pager.js"></script>
@@ -28,13 +33,24 @@
              );
             
         </script>
-       
+                             <% Usuario usua = new Usuario();
+                              UsuarioDaoImpl usuaDI = new UsuarioDaoImpl();
+                               usua = usuaDI.findAdministrador();
+                               Acceso ac = new Acceso();
+                                 AccesoDaoImpl acDI = new AccesoDaoImpl();
+                                ac = acDI.findUltimoAcceso(usua);
+                                     %>   
         
         <script>           
-            function updateInd(idind, nombre, cont){            
+            var indicadorV;
+            var  contriV;
+          
+          function updateInd(idind, nombre, cont){            
+             indicadorV = nombre;
+             contriV = cont;
              document.getElementById('idIndi').value= idind;
              document.getElementById('indi').value= nombre;
-              document.getElementById('contri').value= cont;
+             document.getElementById('contri').value= cont;
                  
              document.getElementById('updateI').style.display = 'block';          
             
@@ -42,6 +58,7 @@
             function deleteInd(idind, indi){
                 if(confirm('¿Esta seguro que desea eliminar el Indicador: '+ indi +'?')){
                     updates.deleteIndicador(idind);
+                    validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 31, "Elimino un Indicador",idind, "Estado Activo", "Estado Inactivo");
                     location.reload();
                 }
                 
@@ -55,6 +72,7 @@
                    alert("Llene los campos por favor");
                }else{
                    updates.updateIndicador(id, nInd, c);
+                   validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 2, "Edito Indicador",id, indicadorV + "," + contriV , nInd + "," + c );
                    location.reload();
                }                
             }
@@ -103,8 +121,8 @@
                                      <td><%= indi.getContribucion().toString() %></td>
                                      <td><%= estateInd %></td>
                                      <td>
-                                         <a onclick="updateInd('<%= indi.getIdIndicador().toString() %>', '<%= indi.getNombre().toString() %>', '<%= indi.getContribucion().toString() %>');" title="Editar Indicador"><img src="images/icon_edit.png" alt="Edit" /></a>
-                                         <a onclick="deleteInd('<%= indi.getIdIndicador().toString() %>', '<%= indi.getNombre().toString() %>');" title="Inactivar un Indicador"><img src="images/icon_delete.png" alt="Delete" /></a>
+                                         <a style="cursor: pointer" onclick="updateInd('<%= indi.getIdIndicador().toString() %>', '<%= indi.getNombre().toString() %>', '<%= indi.getContribucion().toString() %>');" title="Editar Indicador"><img src="images/icon_edit.png" alt="Edit" /></a>
+                                         <a style="cursor: pointer" onclick="deleteInd('<%= indi.getIdIndicador().toString() %>', '<%= indi.getNombre().toString() %>');" title="Inactivar un Indicador"><img src="images/icon_delete.png" alt="Delete" /></a>
                                      </td>
                                 </tr>
             <%

@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import pojo.Contrato;
+import pojo.Item;
 import pojo.RespItem;
 import pojo.Usuario;
 
@@ -105,6 +106,25 @@ public class RespItemDaoImpl implements daoRespItem{
                .add(Restrictions.eq("contrato", contrato))
                .setProjection(Projections.rowCount()).list().get(0)).intValue();
        return items;
+    }
+
+    @Override
+    public RespItem findByContratoItem(int id_contrato, int id_item) {
+        s = sf.getCurrentSession();
+
+        //if(id_contrato <0)return null;
+        s.beginTransaction();
+        
+        Contrato contrato = new Contrato();
+        contrato = (Contrato) s.get(Contrato.class, id_contrato);
+        
+        Item item = new Item();
+        item = (Item) s.get(Item.class, id_item);
+        
+        ri = (RespItem) s.createCriteria(RespItem.class).add(Restrictions.eq("contrato", contrato)).add(Restrictions.eq("item", item)).uniqueResult();
+        s.getTransaction().commit();
+
+        return ri;
     }
 
 }

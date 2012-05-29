@@ -53,7 +53,7 @@
             function deleteSuge(id, i, s){
                 if(confirm('¿Esta seguro que desea eliminar la relación entre: '+ i + ' y ' + s +'?')){
                     updates.deleteAsignacionS(id);
-                    alert('tamos aki')
+                    
                     location.reload();
                 }
                 
@@ -112,8 +112,8 @@
                                       <td><%= itemSug %></td>
                                       <td><%= sugerencia %></td>
                                       <td>
-                                           <a onclick="updateSuge('<%= s.getIdSugerencia().toString() %>', '<%= sugerencia  %>');" title="Editar Sugerencia"><img src="images/icon_edit.png" alt="Edit" /></a>
-                                           <a onclick="deleteSuge('<%= asi.getIdAsignSug() %>', '<%= itemSug %>', '<%= sugerencia %>');" title="Eliminar Relación"><img src="images/icon_delete.png" alt="Delete" /></a>
+                                           <a style="cursor: pointer" onclick="updateSuge('<%= s.getIdSugerencia().toString() %>', '<%= sugerencia  %>');" title="Editar Sugerencia"><img src="images/icon_edit.png" alt="Edit" /></a>
+                                           <a style="cursor: pointer" onclick="deleteSuge('<%= asi.getIdAsignSug() %>', '<%= itemSug %>', '<%= sugerencia %>');" title="Eliminar Relación"><img src="images/icon_delete.png" alt="Delete" /></a>
                                       </td>
                                   </tr>       
                              <%}

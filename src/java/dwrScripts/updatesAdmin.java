@@ -8,12 +8,17 @@ import daoImpl.AsignacionSugItemDaoImpl;
 import daoImpl.EscalaDaoImpl;
 import daoImpl.IndicadorDaoImpl;
 import daoImpl.ItemDaoImpl;
+import daoImpl.NoticiasDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.VariableDaoImpl;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import pojo.AsignacionSugItem;
 import pojo.Escala;
 import pojo.Indicador;
 import pojo.Item;
+import pojo.Noticias;
 import pojo.Usuario;
 import pojo.Variable;
 
@@ -99,5 +104,24 @@ public class updatesAdmin {
           AsignacionSugItemDaoImpl asidi = new AsignacionSugItemDaoImpl();
          asi = asidi.findById(id);
          asidi.delete(asi);
+      }
+      public void deleteNota(int id){
+          Noticias noti = new Noticias();
+          NoticiasDaoImpl notDI = new NoticiasDaoImpl();
+          noti = notDI.findbyId(id);
+          notDI.delete(noti);
+                 
+      }
+      public void updateNoticias(int id, String titulo, String descripcion, String fecha) throws ParseException{
+         Noticias noti = new Noticias();
+         NoticiasDaoImpl ndi = new NoticiasDaoImpl();
+         noti = ndi.findbyId(id);
+         noti.setTitulo(titulo);
+         noti.setDescripcion(descripcion);
+         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+         Date dt = new Date();
+         dt = sdf.parse(fecha);
+         noti.setFecha_evento(dt);
+         ndi.update(noti);
       }
 }

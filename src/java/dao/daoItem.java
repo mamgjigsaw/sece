@@ -15,10 +15,11 @@ import pojo.Variable;
  */
 public interface daoItem extends dao<Item> {
     List<Item> findByVariable(Variable variable);
+    List<Item> findByVariableActivo(Variable variable);
     Item findByName(String name);
     List<Item> findByVar(int idVariable);
     //added by dave
-    int numItem(); //devuelve el numero de items en total
+    int numItemActivos(); //devuelve el numero de items en total
     Item findById(int id);
 
 }

@@ -18,7 +18,8 @@ public class capacitadores {
     public capacitadores(){
     }
     
-    public void newCapacitador(String nombre, String cargo, String tel, String dir, String email, String pass){
+    public int newCapacitador(String nombre, String cargo, String tel, String dir, String email, String pass){
+        int resp = 0;
         String contra = encriptar.md5(pass);  
         Empresa cpml = new Empresa();
         EmpresaDaoImpl edi = new EmpresaDaoImpl();
@@ -27,7 +28,8 @@ public class capacitadores {
         Usuario usu = new Usuario(cpml, nombre, cargo, tel, email, dir,2, contra, 1, null, null, null, null, null);
         UsuarioDaoImpl udi = new UsuarioDaoImpl();
         udi.create(usu);
-       
+        resp = usu.getIdUsuario();
+       return resp;
     
     }
     

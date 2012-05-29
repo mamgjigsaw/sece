@@ -4,6 +4,8 @@
     Author     : Mendieta
 --%>
 
+<%@page import="daoImpl.AccesoDaoImpl"%>
+<%@page import="pojo.Acceso"%>
 <%@page import="pojo.AsignacionCapaContra"%>
 <%@page import="daoImpl.AsignacionCapaContraDaoImpl"%>
 <%@page import="java.util.Iterator"%>
@@ -17,6 +19,7 @@
          <script type="text/javascript" src="/sece/dwr/interface/updates.js"></script>
          <script type="text/javascript" src="/sece/dwr/engine.js"></script>
          <script type="text/javascript" src="/sece/dwr/util.js"></script>
+          <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
          <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
          <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
@@ -29,11 +32,20 @@
                  .tablesorterPager({container: $("#pagerCap")}); 
                  } 
              );
-         </script> 
+                 
+         </script>
+               <% Usuario usua = new Usuario();
+                              UsuarioDaoImpl usuaDI = new UsuarioDaoImpl();
+                               usua = usuaDI.findAdministrador();
+                               Acceso ac = new Acceso();
+                                 AccesoDaoImpl acDI = new AccesoDaoImpl();
+                                ac = acDI.findUltimoAcceso(usua);
+                                     %>            
          <script>
-             function deleteCapa(idcap, nombre){
-                
-                 if(confirm('¿Esta seguro que desea eliminar a: ' + nombre + '?')){
+             function deleteCapa(idcap, nombre){                
+                 if(confirm('¿Esta seguro que desea eliminar a: ' + nombre + '?')){                    
+                     
+                     validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 18, "Anulo un Capacitador", idcap,"Estado Activo" , "Estado Inactivo");  
                      updates.deleteCapacitador(idcap);
                      location.reload();
                  }else{
@@ -112,7 +124,7 @@
                             <td><%= s %></td>
                             <td>
                                 
-                                <a onclick="deleteCapa(<%= ucap.getIdUsuario().toString() %>, '<%= ucap.getNombre().toString() %>');" title=""><img src="images/icon_delete.png" alt="Approve" /></a>
+                                <a style="cursor: pointer" onclick="deleteCapa(<%= ucap.getIdUsuario().toString() %>, '<%= ucap.getNombre().toString() %>');" title=""><img src="images/icon_delete.png" alt="Approve" /></a>
                                 
                                 
                             </td>

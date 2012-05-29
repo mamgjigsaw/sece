@@ -27,16 +27,18 @@
            var countError=0;
            var valor1;
            var valor2;
+           var passEncriptado ="";
+           var capa="";
            
             function enviar(){
                 valor1 = dwr.util.getValue("txtemail");
                 valor2 = dwr.util.getValue("txtpass");
                 
                 if (valor1==""){
-                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo de email, porfavor!!</p></div><!-- /Notification --></section>";                                        
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo de email, porfavor!!</p></div><!-- /Notification --></section>";                                        
                     $("#hola").html(palabra);
                 }else if(valor2==""){                                                    
-                  var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo del password, porfavor!!</p></div><!-- /Notification --></section>";                                        
+                  var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo del password, porfavor!!</p></div><!-- /Notification --></section>";                                        
                     $("#hola").html(palabra);
                 }else{
                    validacion.loguearse(valor1,valor2,resultado);                    
@@ -45,24 +47,31 @@
             
             function resultado(data){
                 var resp = data;
-               
-                if(resp==0){
-                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Correo</strong><p class='hola'>Digite correctamente el email y si no <a href='register.jsp'><strong>registrese</strong></a>, porfavor!!</p></div><!-- /Notification --></section>";                    
+               //alert(resp);
+                 if(resp==0){
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Correo</strong><p class='hola'>Digite correctamente el email y si no <a href='register.jsp?rodaticapacdi=mJH83fas2{}4'><strong>registrese</strong></a>, porfavor!!</p></div><!-- /Notification --></section>";                    
                 }else if(resp==1){                    
                     $("#hola").html("");
+                    validacion.encrypt(dwr.util.getValue("txtpass"),passEncript);
                     $( "#dialog-message" ).dialog( "open" );                    
                 }else if(resp==2){
                     if(countError==2){
-                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta ha sido bloqueada, dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>"; 
+                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta ha sido bloqueada, dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>"; 
                        validacion.bloquear(valor1);
                     }else{                       
-                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Contraseña</strong><p class='hola'>Digite correctamente la contraseña, porfavor!!</p></div><!-- /Notification --></section>";
+                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Contraseña</strong><p class='hola'>Digite correctamente la contraseña, porfavor!!</p></div><!-- /Notification --></section>";
                        countError= countError + 1;   
                     }                    
                 }else if(resp==3){
-                    var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta fue bloqueada, por favor dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>";  
+                    var palabra="<section role='principal' id='message_box'><div class='notification note'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Activacion de Cuenta</strong><p class='hola'>Su cuenta no ha sido activa todavia, en su correo aparece la informacion de activacion, gracias!!</p></div><!-- /Notification --></section>";  
+                }else if(resp==4){
+                    var palabra="<section role='principal' id='message_box'><div class='notification error'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta fue bloqueada, por favor dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>";  
                 }
-                $("#hola").html(palabra);
+                $("#hola").html(palabra); 
+            }
+            
+            function passEncript(data){
+                passEncriptado = data;
             }
             
             $(function() {
@@ -83,15 +92,15 @@
                         modal: true,
 			buttons: {
 				Ok: function() {
-					$( this ).dialog( "close" );
-                                        location.href = "entrar?txtemail="+ dwr.util.getValue("txtemail") +"&&txtpass="+ dwr.util.getValue("txtpass");
+					$( this ).dialog( "close" );                                        
+                                        location.href = "entrar?cV5VDde7H0l="+ dwr.util.getValue("txtemail") +"&&K3JR5YpwQ8="+ passEncriptado;
 				}
 			}
 		});//fin dialog-message
 	});
            
            function go_register(){
-             location.href = "register.jsp";
+             location.href = "register.jsp?rodaticapacdi=mJH83fas2{}4";
            }           
            
         </script>
@@ -99,12 +108,50 @@
 <body>    
 <div class="main">
   <div class="header">
-    <div class="header_resize">      
+    <div class="header_resize">  
+        <a href="index.jsp" class="buttonVolver">&LT;&LT; Atras</a>
+      <style type="text/css">
+.buttonVolver {
+	-moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+	box-shadow:inset 0px 0px 12px 0px #97c4fe;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(50, #006092), color-stop(100, #006092) );
+	background:-moz-linear-gradient( center top, #006092 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006092', endColorstr='#006092');
+	background-color:#006092;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #006092;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+       outline-style: none;
+	
+	text-shadow:1px 1px 0px #1570cd;
+        float: right; margin:0; margin-top: 35px; 
+         text-decoration:none;
+}.buttonVolver:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #016aa1), color-stop(1, #016aa1) );
+	background:-moz-linear-gradient( center top, #016aa1 5%, #016aa1 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#016aa1', endColorstr='#016aa1');
+	background-color:#1e62d0;
+         text-decoration:none;
+}.buttonVolver:active {
+	position:relative;
+	top:1px;
+}
+/* This imageless css button was generated by CSSButtonGenerator.com */
+</style>
+        
       <div class="menu">
         
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      
       <div class="clr"></div>
     </div>
   </div>
@@ -115,6 +162,8 @@
       <div class="hola" id="hola">
 	
       </div>
+      
+      
       <div id="dialog-message" title="Bienvenido a SECE">
 
 	<p>
@@ -125,6 +174,15 @@
 		Descubra los <b>beneficios de utilizar el sistema!!</b>.
 	</p>
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      
     <div class="body_resize">
        
       <div class="right">
@@ -144,12 +202,12 @@
             <p>Es gratis, facil y sencillo. Asi como lo lees podras evaluar la competitividad de tu empresa y posteriormente tomar desiciones con fundamento.</p>
             <table style=" padding-left: 18px; padding-top: 5px;" >
                     <form id="form_s" method="post">                             
-                           <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input id ="email" name="txtemail" type="text" value="Email" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
-                           <tr><td><label class="tlabel" for="contra">Contraseña:</label></td><td><input id ="pass" name="txtpass" type="password" value="password" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
+                           <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input id ="email" name="txtemail" type="text" value="" onblur="clearText(this);" onfocus="clearText(this);"  /></td></tr>
+                           <tr><td><label class="tlabel" for="contra">Contraseña:</label></td><td><input id ="pass" name="txtpass" type="password" value="" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
                            <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Entrar" /></td><td><input type="button" id="create-user" onclick="go_register();" value="Registrarse"/></td></tr>
                     </form>
                   </table> 
-            <p><a id="link_register" href="forgetPassword.jsp"><strong>Olvide mi contraseña???</strong></a></p>
+            <p><a id="link_register" href="forgetPassword.jsp?liame=odadivlo&&ogidoc=ssap"><strong>Olvide mi contraseña???</strong></a></p>
             <div class="clr"></div>
           </div>
         </div>
@@ -162,12 +220,38 @@
         </div>
         <div class="clr"></div>
       </div>
-            
+           
+      <div class="clr"></div>
+    </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br> 
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br> 
+      <br>
+      <br>
+      <br>
+      <br>
+      <br> 
+  </div>
+  <div class="clr"></div>
+  <div class="footer">
+    <div class="footer_resize">
+      
+      
+      
       <div class="clr"></div>
     </div>
   </div>
-  <div class="clr"></div>
-  
 </div>
 </body>
 </html>

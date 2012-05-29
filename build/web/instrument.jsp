@@ -129,7 +129,8 @@ response.setDateHeader("Expires", 0);
         <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
         <link REL="shortcut icon" type="image/x-icon" href="http://elixir.ematia.de/trac/export/493/elixir/branches/field_inherits_from_column/examples/videostore/videostore/static/images/favicon.ico"/>
         
-        <script type="text/javascript" src="/sece/dwr/interface/interaccion.js"></script>        
+        <script type="text/javascript" src="/sece/dwr/interface/interaccion.js"></script> 
+        <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
         <script type="text/javascript" src="/sece/dwr/util.js"></script>        
         
@@ -141,7 +142,38 @@ response.setDateHeader("Expires", 0);
             var total_vari = <%=total_var%>;// va 1 a n
             
             $(function() {
-		$( "#buttonnnext" ).button();  
+		
+                $( "#gobackbutton" ).button({			
+			icons: {
+				primary: "ui-icon-gear"
+			}
+		})
+		.click(function() {			
+                     goBack();            
+		});
+                
+                
+                $( "#logoutbutton" ).button({			
+			icons: {
+				primary: "ui-icon-gear",
+                                secondary: "ui-icon-triangle-1-s"
+			}
+		})
+		.click(function() {			
+                $("#menuBtnOpciones1").toggle("slow");            
+		});	
+                $(".mnSalir").hover(
+                function(){
+                $(this).css({'color':'#81BEF7','cursor':'pointer', 'font-size':'large'});
+                 },
+                function(){
+                $(this).css({'color':'#015480','font-size':'medium'});    
+                   }
+                 );
+                
+                
+                
+                $( "#buttonnnext" ).button();  
                 $( "#box_message" ).hide();//escondo el contenido del div para los mensajes
                 
                 $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
@@ -169,10 +201,10 @@ response.setDateHeader("Expires", 0);
                 
                 num_item= data.length;
                 var i;
-                var strHtml="<table><thead><tr><td>Preguntas</td><td>Si/No</td><td>Observacion</td></tr></thead><tbody>";
+                var strHtml="<table><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
            
                 for(i=0;i<data.length;i++){
-                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='checkbox' id='checkbox"+ (i+1) +"' name='resp' /></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
+                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' ></input></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
                     
                 }
                
@@ -185,13 +217,12 @@ response.setDateHeader("Expires", 0);
                 
                  if(actual_var < (total_vari -1)){
                      //num_item son el numero de pregunta por variable que hay para guardar
+                     $("#buttonnnext").hide();
                       for(i=0;i<num_item;i++){
-                        if(jQuery("#checkbox"+(i+1)).attr('checked') == true)
-                          { //alert("Seleccionada");
-                            interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),1,$("#textfield"+(i+1)).val());                        
-                         }else { //alert("No Seleccionada");  
-                            interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),0,$("#textfield"+(i+1)).val());
-                            }
+                        
+                        // alert($("input:radio[name=group"+ (i+1) +"]:checked").val());
+                         interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),$("input:radio[name=group"+ (i+1) +"]:checked").val(),$("#textfield"+(i+1)).val());   
+                        
                        }//fin del ciclo for para guardar las respuesta item.
                      
                        $("#box").html("");
@@ -224,7 +255,7 @@ response.setDateHeader("Expires", 0);
             
              function callback() {//function para esconder el div de mensaje con efecto
 			setTimeout(function() {                                 
-				$( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();
+				$( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();                                
                                 interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta2);//aumenta en uno la variable var de la tabla avance                                                                                  
 			}, 1000 );
 		};
@@ -235,6 +266,7 @@ response.setDateHeader("Expires", 0);
                  interaccion.getNameVariable(actual_var,indicador_actual, getName2);//obtengo el nombre de la nueva variable
                  $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
                  obtener(<%=indi%>,data);//muestra los item de la nueva variable
+                 $("#buttonnnext").show();
             }
             
             function respuesta3(data){                 
@@ -267,9 +299,15 @@ response.setDateHeader("Expires", 0);
                location.href="salir";
             }
             function goBack(){
+               validacion.saveActionBitacora(<%=acc%>,13,"",<%=id_usuario%>,"instrument.jsp","controlPanel.jsp");
                location.href="controlPanel.jsp";
             }
         </script>
+        <style>
+	#toolbar {
+		padding: 10px 4px;
+	}
+        </style>
     </head>    
     <body>
      <div class="main">
@@ -281,10 +319,20 @@ response.setDateHeader("Expires", 0);
       </div>
       <div class="clr"></div>
       <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
-      <div class="inGo">
-          <a href="#" onclick="goBack();" ><strong>Regresar</strong></a>          
-          <a href="#" onclick="goout();" ><strong>Salir</strong></a>
-      </div>
+      <div class="inGo" style=" font-size: 11px;" >
+       <span id="toolbar" class="ui-widget-header ui-corner-all">	
+        <button id="gobackbutton" >Panel De control</button>	
+        <button id="logoutbutton" ><%=name%></button>	
+       </span> 
+       <div>
+        <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 3%; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 100px; height: 20px; color: #015480">
+              <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">
+                  <li id="mnuBtnSalir" onclick="goout();" > Salir  </li>  
+              </ul>              
+          </div>           
+       </div>
+
+       </div>
       <div class="clr"></div>
     </div>
   </div> 
@@ -292,7 +340,7 @@ response.setDateHeader("Expires", 0);
   <div class="body">     
     <div class="body_resize">
         
-        <h2>Bienvenido, <%=name%>&nbsp&nbsp<a id="link_indicador" href="#" onclick="link_indi();" ><%=nombre_indicador%></a>  > <a id="link_variable" href="#" ><%=nombre_variable%> </a>&nbsp<a id="link_actual" href="#" > </a></h2>
+        <h2>Bienvenido, &nbsp&nbsp<a id="link_indicador" ><%=nombre_indicador%></a>  > <a id="link_variable" href="#" onclick="link_indi();" ><%=nombre_variable%> </a>&nbsp<a id="link_actual"  > </a></h2>
         
         <div id="box_message" align="center">            
                               

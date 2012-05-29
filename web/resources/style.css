@@ -15,7 +15,7 @@ a:hover { text-decoration:underline;}
 .logo { padding:0; margin:0; width:293px; float:left;}
 /* search */
 .search { width:260px; float:right; padding:25px 0 0 0; margin:0 20px 0 0; }
-.inGo { float:right; padding:55px 0 0 0; margin:0 0 0 0; }
+.inGo { float:right; padding:3% 0 0 0; margin:0 0 0 0; }
 .search form { display:block; float:left; padding:5px 0;}
 .search span { display:block; float:left; background:url(../images/search_bg.gif) left top no-repeat; height:35px; width:193px; padding:0 10px;}
 .search form .keywords { float:left; background:none; border:0; height:13px; width:193px; padding:11px 0; margin:0; font:normal 12px Arial, Helvetica, sans-serif; color:#a1a1a1;}
@@ -76,7 +76,7 @@ a:hover { text-decoration:underline;}
 
 /* END_bloga*/
 /********** footer **********/
-.footer { margin:10px 0 0 0; padding:0 10px; background:url(../images/footer_bg.gif) top center repeat-x; height:131px;}
+.footer { margin:10px 0 0 0; padding:0 10px; background:url(../images/footer_bg.gif) top center repeat-x; height:100px;}
 .footer_resize { width:1000px; margin:0 auto; padding:0;}
 .footer ul { margin:0; padding:40px 10px 30px 10px; list-style:none; float:left;}
 .footer img { display:inline; margin:5px 10px; padding:0;}
@@ -134,3 +134,41 @@ display:block;
 min-height:32px;
 font-size: 14px;
 }
+
+.buttonVolver {
+    -moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+    -webkit-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+    box-shadow:inset 0px 0px 12px 0px #97c4fe;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(50, #006092), color-stop(100, #006092) );
+    background:-moz-linear-gradient( center top, #006092 5%, #1e62d0 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006092', endColorstr='#006092');
+    background-color:#006092;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #006092;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    outline-style: none;
+
+    text-shadow:1px 1px 0px #1570cd;
+    float: right; margin:0; margin-top: 35px; 
+    text-decoration:none;
+}.buttonVolver:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #016aa1), color-stop(1, #016aa1) );
+    background:-moz-linear-gradient( center top, #016aa1 5%, #016aa1 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#016aa1', endColorstr='#016aa1');
+    background-color:#1e62d0;
+    text-decoration:none;
+}.buttonVolver:active {
+    position:relative;
+    top:1px;
+}
+
+/*tablas estilizadas por david*/
+table .tablaStilizada thead tr {background-color: #347488; color:#fff;}
+table .tablaStilizada tbody tr td {height: 35px;}

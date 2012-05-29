@@ -5,7 +5,11 @@
 --%>
 
 
-        <%@page import="java.util.Iterator"%>
+        <%@page import="daoImpl.UsuarioDaoImpl"%>
+<%@page import="pojo.Acceso"%>
+<%@page import="daoImpl.AccesoDaoImpl"%>
+<%@page import="pojo.Usuario"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="daoImpl.VariableDaoImpl"%>
 <%@page import="pojo.Variable"%>
@@ -15,6 +19,7 @@
          <script type="text/javascript" src="/sece/dwr/interface/updates.js"></script>
          <script type="text/javascript" src="/sece/dwr/engine.js"></script>
          <script type="text/javascript" src="/sece/dwr/util.js"></script>
+          <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
           <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
          <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
@@ -28,9 +33,21 @@
                  } 
              );
         </script> 
+        <%                    Usuario usua = new Usuario();
+                              UsuarioDaoImpl usuaDI = new UsuarioDaoImpl();
+                               usua = usuaDI.findAdministrador();
+                               Acceso ac = new Acceso();
+                               AccesoDaoImpl acDI = new AccesoDaoImpl();
+                                ac = acDI.findUltimoAcceso(usua);
+                                     %>
         <script>           
+            var escV;
+            var rmenorV;
+            var rmayorV;
             function updateEsc(idE, desc, val, variab, rm, rM){            
-            
+            escV = desc;
+            rmenorV = rm;
+            rmayorV = rM;
             document.getElementById('idEsc').value= idE; 
              document.getElementById('varia').value= variab;              
               document.getElementById('escala').value = desc; 
@@ -51,6 +68,7 @@
                    alert("Llene los campos por favor");
                }else{
                    updates.updateEscala(id,esca, rangomenor, rangomayor);
+                   validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 6, "Modifico Escala",id, escV + ", " + rmenorV + ", " + rmayorV , esca + ", " + rangomenor + ", " + rangomayor);
                    location.reload();
                }                
             }
@@ -103,7 +121,7 @@
                                                                      <td><%= ranMen %></td>
                                                                      <td><%= ranMay %></td>
                                                                      <td><%= esc.getValoracion() %></td>
-                                                                     <td><a href="#" title="Editar Escala" onclick="updateEsc('<%= esc.getIdEscala().toString() %>', '<%= esc.getDescripcion() %>', '<%= esc.getValoracion() %>','<%= varEscala %>','<%= ranMen %>','<%= ranMay %>' )">Editar</a> </td>
+                                                                     <td><a style="cursor: pointer" href="#" title="Editar Escala" onclick="updateEsc('<%= esc.getIdEscala().toString() %>', '<%= esc.getDescripcion() %>', '<%= esc.getValoracion() %>','<%= varEscala %>','<%= ranMen %>','<%= ranMay %>' )"><img src="images/icon_edit.png" alt="Edit" /></a> </td>
                                                                  </tr>
 
                                                <%

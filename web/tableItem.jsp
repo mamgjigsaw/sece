@@ -4,6 +4,10 @@
     Author     : Mendieta
 --%>
 
+<%@page import="daoImpl.AccesoDaoImpl"%>
+<%@page import="pojo.Acceso"%>
+<%@page import="daoImpl.UsuarioDaoImpl"%>
+<%@page import="pojo.Usuario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="daoImpl.VariableDaoImpl"%>
@@ -18,6 +22,7 @@
          <script type="text/javascript" src="/sece/dwr/interface/updates.js"></script>
          <script type="text/javascript" src="/sece/dwr/engine.js"></script>
          <script type="text/javascript" src="/sece/dwr/util.js"></script>
+           <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
          <script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
            <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
             <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
@@ -33,9 +38,19 @@
                  } 
              );
         </script>
+                            <% Usuario usua = new Usuario();
+                              UsuarioDaoImpl usuaDI = new UsuarioDaoImpl();
+                               usua = usuaDI.findAdministrador();
+                               Acceso ac = new Acceso();
+                               AccesoDaoImpl acDI = new AccesoDaoImpl();
+                                ac = acDI.findUltimoAcceso(usua);
+                                     %>
         <script>           
-            function updateIte(idI, nombre, idin){            
-            
+            var itemV;
+            var variaV;
+            function updateIte(idI, nombre, idin, varia){            
+            itemV = nombre;
+            variaV = varia;
             document.getElementById('idite').value= idI; 
              document.getElementById('ite').value= nombre;              
               document.getElementById('varite').value = idin; 
@@ -46,11 +61,14 @@
             function deleteItem(id, i){
                 if(confirm('¿Esta seguro que desea eliminar el Item: '+ i +'?')){
                     updates.deleteItem(id);
+                    validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 35, "Elimino un Item",id, "Estado Activo", "Estado Inactivo");
                     location.reload();
                 }
                 
             };  
             function actualizarI(){
+               var index = document.getElementById('varite').selectedIndex;
+               var varItemN = document.getElementById('varite').options[index].text;
                var id = $("#idite").val();
                var nite = $("#ite").val();
                
@@ -59,6 +77,7 @@
                    alert("Llene los campos por favor");
                }else{
                    updates.updateItem(id, nite, idva);
+                   validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 8, "Modifico Item",id, itemV + ", " + variaV , nite + ", " + varItemN);
                    location.reload();
                }                
             }
@@ -109,8 +128,8 @@
                                                                      <td><%= stateItem %></td>
                                                                      <td><%= varItem %></td>
                                                                      <td>
-                                                                          <a onclick="updateIte('<%= item.getIdItem().toString() %>', '<%= item.getDescripcion() %>', '<%= va.getIdVariable().toString() %>');" title="Editar Item"><img src="images/icon_edit.png" alt="Edit" /></a>
-                                                                          <a onclick="deleteItem('<%= item.getIdItem().toString() %>', '<%= item.getDescripcion() %>');" title="Inactivar Item"><img src="images/icon_delete.png" alt="Delete" /></a>
+                                                                          <a style="cursor: pointer" onclick="updateIte('<%= item.getIdItem().toString() %>', '<%= item.getDescripcion() %>', '<%= va.getIdVariable().toString() %>', '<%= varItem %>');" title="Editar Item"><img src="images/icon_edit.png" alt="Edit" /></a>
+                                                                          <a style="cursor: pointer" onclick="deleteItem('<%= item.getIdItem().toString() %>', '<%= item.getDescripcion() %>');" title="Inactivar Item"><img src="images/icon_delete.png" alt="Delete" /></a>
                                                                       </td>
                                                                  </tr>
 

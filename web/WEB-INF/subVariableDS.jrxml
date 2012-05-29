@@ -64,7 +64,7 @@
 			<subreport>
 				<reportElement x="0" y="27" width="555" height="40"/>
 				<dataSourceExpression><![CDATA[$F{itemDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subItemDS.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Kenny\\sece\\web\\WEB-INF\\subItemDS.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

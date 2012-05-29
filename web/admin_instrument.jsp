@@ -25,6 +25,7 @@ response.setDateHeader("Expires", 0);
 %>
 <html>
     <head>
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <META HTTP-EQUIV="Expires" CONTENT="-1">
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -46,13 +47,33 @@ response.setDateHeader("Expires", 0);
          <script type="text/javascript" src="/sece/dwr/interface/instrumentoDWR.js"></script>
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
         <script type="text/javascript" src="/sece/dwr/util.js"></script>
+        <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>        
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
          <script type="text/javascript" src="resources/jquery/js/jquery.corner.js"></script>
          <script type="text/javascript" src="resources/jquery/js/jquery.multiselect.js"></script>
           <script type="text/javascript" src="resources/jquery/js/jquery.multiselect.filter.js"></script>
        <link href="resources/tablesorter/styles.css" rel="stylesheet" type="text/css" />   
-              
+          
+        
+         <%
+           Acceso acc = new Acceso();
+           AccesoDaoImpl adi = new AccesoDaoImpl();
+           acc = adi.findById(Integer.valueOf(val));
+          
+        
+           Usuario usu = new Usuario();
+           UsuarioDaoImpl udi = new UsuarioDaoImpl();
+           usu = acc.getUsuario(); 
+           int iduser = usu.getIdUsuario();
+           usu = udi.findById(iduser);
+                   if(usu.getTipoUsuario()!= 1){
+                       response.sendRedirect("index.jsp"); 
+                   }
+            sesion.setAttribute("idAcc", val);          
+           
+                                                 
+        %>    
         
         <script> 
            $(function(){
@@ -67,6 +88,53 @@ response.setDateHeader("Expires", 0);
               $("#clearItem").button();
               
               $("#selectItem").multiselect().multiselectfilter();
+              //------------Barra-------------------------//
+              $( "#home" ).button({
+			//text: false,
+			icons: {
+				primary: "ui-icon-home"
+			}
+                    }).click(function(){
+                        validacion.saveActionBitacora(<%= val %>, 13, "El Administrador ha redireccionado a otra pagina",<%= iduser %>, "Pagina de Instrumento(admin_instrument.jsp)", "Pagina Principal(main_admin.jsp)");
+                       location.href = "main_admin.jsp";
+                    });
+		$( "#instrument" ).button({
+			//text: false,
+			icons: {
+				primary: "ui-icon-clipboard"
+			}
+		}).click(function(){
+                        location.href = "admin_instrument.jsp";
+                    });
+                    $( "#help" ).button({
+			//text: false,
+			icons: {
+				primary: "ui-icon-info"
+			}
+		}).click(function(){
+                       validacion.saveActionBitacora(<%= val %>, 13, "El Administrador ha abierto la Ayuda",<%= iduser %>, "Pagina Principal(admin_instrument.jsp)", "Pagina de Ayuda(ayudaAdmin.jsp)");
+                        window.open("ayudaAdmin.jsp", "_blank");
+                    });
+		$( "#logoutbutton" ).button({			
+			icons: {
+				primary: "ui-icon-gear",
+                                secondary: "ui-icon-triangle-1-s"
+			}
+		})
+		.click(function() {			
+                $("#menuBtnOpciones1").toggle("slow");            
+		});	
+                $(".mnSalir").hover(
+                function(){
+                $(this).css({'color':'#81BEF7','cursor':'pointer', 'font-size':'large'});
+                 },
+                function(){
+                $(this).css({'color':'#015480','font-size':'medium'});    
+                   }
+                 );
+              
+              //-----------Fin Barra---------------------//
+              
             }); 
              function callback() {//function para esconder el div de mensaje con efecto
 			setTimeout(function() {
@@ -90,10 +158,13 @@ response.setDateHeader("Expires", 0);
                         $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje 
                         }
                        else{                          
-                          instrumentoDWR.newIndicador(indicador, contrib);                         
+                          instrumentoDWR.newIndicador(indicador, contrib, res);                         
                           document.getElementById("fraIndi").src = "tableIndicador.jsp";
                           limpiarIndicador();
                        }                
+             }
+             function res(data){
+                 validacion.saveActionBitacora(<%= val %>, 1, "Se agrego un nuevo indicador al Instrumento",data, "Nuevo Indicador", "Nuevo Indicador");
              }
              
              function limpiarIndicador(){
@@ -133,12 +204,19 @@ response.setDateHeader("Expires", 0);
                         $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje 
                         }
                        else{                          
-                          instrumentoDWR.newVariable(variable, indicadorVar, ponderacion, esca4, esca3, esca2, esca1, esca0, rmenor4, rmayor4, rmenor3, rmayor3, rmenor2, rmayor2, rmenor1, rmayor1, rmenor0, rmayor0);                         
+                          instrumentoDWR.newVariable(variable, indicadorVar, ponderacion, esca4, esca3, esca2, esca1, esca0, rmenor4, rmayor4, rmenor3, rmayor3, rmenor2, rmayor2, rmenor1, rmayor1, rmenor0, rmayor0, resul);                         
                           document.getElementById("fraVar").src = "tableVariable.jsp";
                           limpiarVariable();
                        }                
              }
-             
+             function resul(data){
+                 validacion.saveActionBitacora(<%= val %>, 3, "Nueva Variable",data[0], "Nueva Variable", "Nueva Variable");
+                 validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[1], "Nueva Escala", "Nueva Escala");
+                 validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[2], "Nueva Escala", "Nueva Escala");
+                 validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[3], "Nueva Escala", "Nueva Escala");
+                 validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[4], "Nueva Escala", "Nueva Escala");
+                  validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[5], "Nueva Escala", "Nueva Escala");
+             }
              function limpiarVariable(){
                  document.getElementById("nvariable").value = "";
                  document.getElementById("nvarpon").value = "";
@@ -172,12 +250,15 @@ response.setDateHeader("Expires", 0);
                       $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje
                        }
                        else{                            
-                          instrumentoDWR.newItem(newitem, variableItem);                          
+                          instrumentoDWR.newItem(newitem, variableItem, respIG);                          
                           document.getElementById("fraItem").src = "tableItem.jsp";
                           limpiarItem();
                        }                
              }
-             
+             function respIG(data){
+                validacion.saveActionBitacora(<%= val %>, 7, "Nuevo Item",data, "Nueva Item", "Item");
+                 
+             }
              function limpiarItem(){
                  document.getElementById("newItemDesc").value = "";                 
              }
@@ -185,6 +266,9 @@ response.setDateHeader("Expires", 0);
          <script>
              //Javascript para Sugerencia
              function guardarSugerencia(){
+                 
+                 
+                 
                  var selecteds = $("#selectItem").val();
                  var suge = $("#txtsuge").val();
                  if(selecteds == null || suge == ""){
@@ -192,78 +276,31 @@ response.setDateHeader("Expires", 0);
                        $("#box_message").html(palabra);               
                       $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje 
                  }else{     
-                            instrumentoDWR.newSugerencia(suge, selecteds);
+                            instrumentoDWR.newSugerencia(suge, selecteds, resSG);
                             document.getElementById("fraSug").src = "tableSugerencias.jsp";
                             limpiarSugerencia();                            
                         }
              }
-             
+             function resSG(data){
+              validacion.saveActionBitacora(<%= val %>, 26, "Nueva Sugerencia",data[0], "Nueva Sugerencia", "Nueva Sugerencia");
+              var i;
+              for(i=1;i<data.length;i++){
+                  validacion.saveActionBitacora(<%= val %>, 38, "Asignacion de Sugerencia",data[i], "Sugerencia", "Item Relacionado");
+              }
+             }
              function limpiarSugerencia(){
                  document.getElementById("txtsuge").value = "";
                                   
              }
          </script>
  
-        
-         <%
-           Acceso acc = new Acceso();
-           AccesoDaoImpl adi = new AccesoDaoImpl();
-           acc = adi.findById(Integer.valueOf(val));
-          
-        
-           Usuario usu = new Usuario();
-           UsuarioDaoImpl udi = new UsuarioDaoImpl();
-           usu = acc.getUsuario(); 
-           int iduser = usu.getIdUsuario();
-           usu = udi.findById(iduser);
-                   if(usu.getTipoUsuario()!= 1){
-                       response.sendRedirect("index.jsp"); 
-                   }
-            sesion.setAttribute("idAcc", val);          
-           
-                                                 
-        %>
                 <style>
 	#toolbar {
 		padding: 10px 4px;
 	}
 	</style>
 	<script>
-	$(function() {
-		$( "#home" ).button({
-			//text: false,
-			icons: {
-				primary: "ui-icon-home"
-			}
-                    }).click(function(){
-                       location.href = "main_admin.jsp";
-                    });
-		$( "#instrument" ).button({
-			//text: false,
-			icons: {
-				primary: "ui-icon-clipboard"
-			}
-		}).click(function(){
-                        location.href = "admin_instrument.jsp";
-                    });
-		$( "#logoutbutton" ).button({			
-			icons: {
-				primary: "ui-icon-gear",
-                                secondary: "ui-icon-triangle-1-s"
-			}
-		})
-		.click(function() {			
-                $("#menuBtnOpciones1").toggle("slow");            
-		});	
-                $(".mnSalir").hover(
-                function(){
-                $(this).css({'color':'#81BEF7','cursor':'pointer', 'font-size':'large'});
-                 },
-                function(){
-                $(this).css({'color':'#015480','font-size':'medium'});    
-                   }
-                 );
-            });
+	
             function goout(){
             location.href="salir";
         } 
@@ -279,19 +316,22 @@ response.setDateHeader("Expires", 0);
         
       </div>
       <div class="clr"></div>
-      <div style="margin-top: -64px" ><img src="images/logo.gif" width="250" height="84" border="0" alt="logo" /></div>
+      <div style="margin-top: -64px" ><img src="images/logofull.png" width="250" height="84" border="0" alt="logo" /></div>
             
         <div style="float:right; margin-top: -36px; margin-bottom: 5px;  margin-right: -135px  ">
 
        <span id="toolbar" class="ui-widget-header ui-corner-all">
 	<button id="home">Inicio</button>
 	<button id="instrument">Instrumento</button>
+        <button id="help">Ayuda</button>
         <button id="logoutbutton" onclick="mostrarSalir();" ><%= usu.getNombre() %></button>	
         </span>
         <div>
-         <div id="menuBtnOpciones1" style="float: right; border-radius: 0 0 5px 5px;  margin-right: 7px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 153px; height: 20px; color: #015480">
-              <ul id="opciones1" class="mnSalir" style=" list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">
-                  <li id="mnuBtnSalir" onclick="goout();" > Salir  </li>  
+         <div id="menuBtnOpciones1" style="float: right; border-radius: 0 0 5px 5px;  margin-right: 7px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width:153px; height: 20px; color: #015480">
+              <ul id="opciones1" class="mnSalir" style=" margin-top: 0px; list-style:none; font-size: medium; text-align:left;">
+                  
+                   <li style="float:left" id="mnuBtnSalir" onclick="goout();" > &RightArrow;Salir  </li>  
+                  
               </ul>              
           </div>
             </div>
@@ -345,8 +385,8 @@ response.setDateHeader("Expires", 0);
                         <div align="center">
                             <div class="divPanel" style="width: 90%; height: 402px;">
                             <h2>Nueva Variable</h2>
-                            <form id="newVar">
-                                <table>
+                            <form style="width:100%" id="newVar">
+                                <table style="width:100%" >
                                        <tr>
                                            <td>Variable:</td>
                                            <td><input id="nvariable" maxlength="200" type="text" size="50em" /></td>
@@ -512,7 +552,7 @@ response.setDateHeader("Expires", 0);
                                             
   <div class="footer">
     
-      <p>Copyright © Sitename.com. <a href="http://dreamtemplate.com/">dreamtemplate.com</a>. All Rights Reserved</p>
+      
      
     
   </div>                                     

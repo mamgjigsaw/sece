@@ -21,6 +21,7 @@
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>Grafico Resultado</title>
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script language="javascript" type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>              
@@ -64,12 +65,12 @@
        <div class="main">         
     <div class="header">
         <div class="header_resize">     
-
+            <a href="javascript:history.back(1)" class="buttonVolver">&LT;&LT; Atras</a>
           <div class="menu">
 
           </div>
           <div class="clr"></div>
-          <div class="logo"><img src="images/logo.gif" width="293" height="84" border="0" alt="logo" /></div>      
+          <div class="logo"><img src="images/logofull.png" width="293" height="84" border="0" alt="logo" /></div>      
           <div class="clr"></div>
         </div>
     </div>

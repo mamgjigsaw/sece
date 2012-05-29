@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import pojo.Escala;
+import pojo.Variable;
 import util.HibernateUtil;
 
 /**
@@ -18,6 +20,7 @@ import util.HibernateUtil;
  */
 public class EscalaDaoImpl implements daoEscala {
     public final SessionFactory sf;
+    public Escala escala;
 
     public EscalaDaoImpl() {
         this.sf= HibernateUtil.getSessionFactory();
@@ -67,9 +70,30 @@ public class EscalaDaoImpl implements daoEscala {
     public Escala findById(int id) {
         Session se = sf.getCurrentSession();
         se.beginTransaction();
-        Escala es = (Escala)se.get(Escala.class, id);
+        escala = (Escala)se.get(Escala.class, id);
         se.getTransaction().commit();
-        return es;
+        return escala;
+    }
+
+    @Override
+    public List<Escala> findByVariable(Variable variable) {
+        List<Escala> list = new ArrayList<Escala>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        list = se.createCriteria(Escala.class).add(Restrictions.eq("variable", variable)).list();
+        se.getTransaction().commit();
+        return list;
+    }
+
+    @Override
+    public Escala findByVarRango(int id_variable, int rango) {
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        
+        //Escala es = (Escala) se.createCriteria(Escala.class).add(Restrictions.eq("variable", variable)).add(Restrictions.and(Restrictions.gt("rangoMayor", rango), Restrictions.lt("rangoMenor", rango))).uniqueResult();
+        escala =  (Escala) se.createQuery("from Escala as es where es.variable="+ id_variable +" and es.rangoMenor <= "+ rango +" and es.rangoMayor >= "+ rango).uniqueResult();
+        se.getTransaction().commit();
+        return escala;
     }
     
 }

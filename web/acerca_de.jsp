@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Acerca de</title>
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
@@ -47,50 +48,46 @@
   <div class="body">     
     <div class="body_resize">
         <div class="right2">
-        <h2>Contactenos</h2>
-        
-        <form action="contact.php" method="post" id="contactform">
-          <ol>
-            <li>
-              <label for="name">Nombre <span class="red">*</span></label>
-              <input id="name" name="name" class="text" />
-            </li>
-            <li>
-              <label for="email">E-mail<span class="red">*</span></label>
-              <input id="email" name="email" class="text" />
-            </li>
-            <li>
-              <label for="company">Compañia</label>
-              <input id="company" name="company" class="text" />
-            </li>
-            <li>
-              <label for="subject">Subject</label>
-              <input id="subject" name="subject" class="text" />
-            </li>
-            <li>
-              <label for="message">Mensaje <span class="red">*</span></label>
-              <textarea id="message" name="message" rows="6" cols="50"></textarea>
-            </li>
-            <li>
-                <input type="button" id="btnsend" value="Enviar Mensaje" />
-            </li>
-          </ol>
-        </form>
-        </div>   <%-- end div body rezise --%> 
-        <div class="right1">
-        <h2>Detalle</h2>
-        <p><strong>Centro de Producción más Limpia de Nicaragua</strong>
-        <p><strong>Direccion</strong>:      Universidad Nacional de Ingeniería | Recinto Universitario "Simón Bolivar"
-Avenida Universitaria. Managua, Nicaragua<br />
-          <strong>Telefono</strong>:   (505) 2278-3136 | (505) 8887-9286 <br />          
-          <strong>E-mail</strong>:            pml@pml.org.ni</p>
+            
+        <h2>SECE</h2>
+        <p>SECE(Sistema de Evaluaci&oacuten de Competitividad Empresarial) es un Sistema Web que hace uso de un Instrumento
+            de evaluaci&oacuten empresarial, dicho instrumento tiene el fin de evaluar a las empresas que lo llenen, permitiendo a su vez
+            que &eacutesta pueda superar sus debilidades (si las hubiera) y tener mayor competencia en el mercado. </p>
+        <p><strong>¿Como me registro?</strong></p>
         <div class="line"></div>
-        <p><img src="images/map.jpg" alt="picture" width="286" height="203" /></p>
-      </div>
+       <iframe width="640" height="480" src="http://www.youtube.com/embed/MjnaaMnRqgk" frameborder="0" allowfullscreen></iframe>
+       
+        </div>   <%-- end div body rezise --%>  
+        <div class="right1">
+            
+        <h2>Desarrollo</h2>
+        <p>SECE fue desarrollado como un proyecto monogr&aacutefico
+            para obtener el t&iacutetulo de Ingenier&iacutea en Sistemas ofrecido por la Univeridad Nacional de Ingenier&iacutea
+          (UNI) en Nicaragua.</p>
+        <p>Fue desarrollado por:</p>
+        <ul>
+            <li>Miguel Mart&iacutenez Gal&aacuten</li>
+          <li>David A. Almanza</li>
+          <li>Kenny Mendieta Alem&aacuten</li>
+          
+        </ul>
+       
+       
+       
+        </div> 
       <div class="clr"></div>
     </div>
   </div>
-  
+  <div class="footer">
+    <div class="footer_resize">
+      
+      
+      <div class="clr"></div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+    </div>
+  </div>
   <div class="clr"></div>
 </div>
 </body>

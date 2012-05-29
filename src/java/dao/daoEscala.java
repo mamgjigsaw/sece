@@ -5,7 +5,9 @@
 
 package dao;
 
+import java.util.List;
 import pojo.Escala;
+import pojo.Variable;
 
 /**
  *
@@ -13,5 +15,7 @@ import pojo.Escala;
  */
 public interface daoEscala extends dao<Escala>{
     Escala findByVariable(int id_variable);
+    Escala findByVarRango(int id_variable,int rango);
+    List<Escala> findByVariable(Variable variable);
     Escala findById(int id);
 }

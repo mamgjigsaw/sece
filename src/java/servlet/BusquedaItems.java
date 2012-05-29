@@ -38,18 +38,19 @@ public class BusquedaItems extends HttpServlet {
         Iterator<Item> it = items.iterator();
         PrintWriter out = response.getWriter();
         try {
-             while (it.hasNext()){            
-                out.println("<tr>");            
-                out.println("<td ><img src='images/step.png'/></td>");            
-                out.print("<td class='nombre_item'>" + it.next().getDescripcion() + "</td>");            
-                out.println("</tr>"); 
-             }
-        } finally {            
-            out.close();
-        }
-    }
+            if (!( it.hasNext() ))
+                out.print("<tr> <td colspan='3'width='500px'><div class='notification attention'><a href='JavaScript:void(0);' onclick= '$(this).parent().hide();' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Base de Datos</strong><p class='hola'>No hay registros de Item de esta Variable en la base de datos!!</p></div></td> <tr>");
+            else{
+                    while (it.hasNext()){            
+                        out.println("<tr>");            
+                        out.println("<td ><img src='images/step.png'/></td>");            
+                        out.print("<td class='nombre_item'>" + it.next().getDescripcion() + "</td>");            
+                        out.println("</tr>"); 
+                    } 
+            }
+    }finally { out.close(); }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    }// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request

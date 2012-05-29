@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import pojo.Acceso;
 import pojo.Bitacora;
 import util.HibernateUtil;
 
@@ -55,6 +57,17 @@ public class BitacoraDaoImpl implements daoBitacora {
         list = se.createCriteria(Bitacora.class).list();
         se.getTransaction().commit();
 
+        return list;
+    }
+
+    @Override
+    public List<Bitacora> findByAccess(Acceso a) {
+        List<Bitacora> list = new ArrayList<Bitacora>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        list = se.createCriteria(Bitacora.class).add(Restrictions.eq("acceso", a)).list();
+        se.getTransaction().commit();
+        
         return list;
     }
     

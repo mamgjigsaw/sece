@@ -102,7 +102,7 @@ response.setDateHeader("Expires", 0);
       }
                  
     %>
-        
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">         
         <META HTTP-EQUIV="Expires" CONTENT="-1">
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -157,7 +157,7 @@ response.setDateHeader("Expires", 0);
                 
                 $( "#logoutbutton" ).button({			
 			icons: {
-				primary: "ui-icon-gear",
+				primary: "ui-icon-circle-arrow-w",
                                 secondary: "ui-icon-triangle-1-s"
 			}
 		})
@@ -449,7 +449,7 @@ response.setDateHeader("Expires", 0);
        }
        
        function panel_showDel(){
-           $("#panel_tab4").html("<h4>Listado de Delegados</h4><br> <table id='table_delegado'  ><tr><td> Delegado </td><td> Cargo </td><td> Estado </td><td></td></tr></table>");
+           $("#panel_tab4").html("<h4>Listado de Delegados</h4><br> <table id='table_delegado'  ><tr style='background-color: #347488; color:#fff;'><td> Delegado </td><td> Cargo </td><td> Estado </td><td></td></tr></table>");
            panel.getRowDelegado(IdEmpresa, repDelegado);         
        }     
        
@@ -575,7 +575,7 @@ response.setDateHeader("Expires", 0);
                 
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      
       
       <div class="inGo">
        <span id="toolbar" class="ui-widget-header ui-corner-all">	
@@ -628,13 +628,16 @@ response.setDateHeader("Expires", 0);
                <span id="toolbar1" style="padding: 10px 4px; font-size: 14px;" class="ui-widget-header ui-corner-all">
                    <button id="grafico"  onclick="goGrafico();">Ver Grafico</button>                   
                </span>
-               
+               <style>                
+                #table_indicador td, table_delegado td {
+                    border-bottom: 1px solid #999; height: 35px;}                                                        
+               </style>
                <h4>Indicadores</h4>
                <table id="table_indicador" style=" font-size: 14px;" >
-                   <tr>
+                   <tr style="background-color: #347488;color: #fff;">
                        <td> Indicador </td>
                        <td> Responsable </td>
-                       <td> Avance </td>
+                       <td> Progreso </td>
                        <td></td>                                  
                        <td></td>
                    </tr>                              
@@ -773,7 +776,7 @@ response.setDateHeader("Expires", 0);
                                <div class="clear_reg"></div>                               
                            </div>
                            <div class="row_reg">
-                               <div class="left_reg"><label for="fandln" >Nombre:</label></div>
+                               <div class="left_reg"><label for="fandln" >Nombre y Apellido:</label></div>
                                <div ><input type="text" name="txtname" id="txtname_delegado" /></div>
                                <div class="clear_reg"></div>                               
                            </div>

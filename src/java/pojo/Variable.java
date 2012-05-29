@@ -2,6 +2,7 @@ package pojo;
 // Generated Nov 3, 2011 11:28:07 PM by Hibernate Tools 3.2.1.GA
 
 
+import daoImpl.EscalaDaoImpl;
 import daoImpl.ItemDaoImpl;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -86,14 +87,21 @@ public class Variable  implements java.io.Serializable {
         this.items = items;
     }
 
-   public JRDataSource getItemDS(){
+    public JRDataSource getItemDS(){
         List<Item> listitems = new ArrayList<Item>();
         ItemDaoImpl idi = new ItemDaoImpl();
         listitems = idi.findByVariable(this);
          return new JRBeanCollectionDataSource(listitems);
-    }
+     }
+    
+   //data escala
 
-
+    public JRDataSource getEscalaDS(){
+        List<Escala> listescalas = new ArrayList<Escala>();
+        EscalaDaoImpl escadi = new EscalaDaoImpl();
+        listescalas = escadi.findByVariable(this);
+        return new JRBeanCollectionDataSource(listescalas);
+     }
 }
 
 

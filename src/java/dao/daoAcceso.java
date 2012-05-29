@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Timestamp;
+import java.util.List;
 import pojo.Acceso;
 import pojo.Usuario;
 
@@ -18,4 +19,6 @@ public interface daoAcceso extends dao<Acceso>{
     //---------------------------added by David
     //---------------------------added by David
     Timestamp fechaUltimoAcceso (Usuario usuario);
+     Acceso findUltimoAcceso(Usuario usuario);
+     List<Acceso> findByUser(Usuario usuario);
 }

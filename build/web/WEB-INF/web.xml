@@ -41,10 +41,6 @@
         <servlet-class>servlet.saveRespItem</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>delegadoxContrato</servlet-name>
-        <servlet-class>servlet.delegadoxContrato</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>GraficoResultado</servlet-name>
         <servlet-class>servlet.GraficoResultado</servlet-class>
     </servlet>
@@ -65,10 +61,6 @@
         <servlet-class>servlet.settingGraficoHistorial</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>InsertarVideoChat</servlet-name>
-        <servlet-class>servlet.InsertarVideoChat</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>intrumento</servlet-name>
         <servlet-class>servlet.instrumento</servlet-class>
     </servlet>
@@ -79,6 +71,26 @@
     <servlet>
         <servlet-name>verFormatoInstrumento</servlet-name>
         <servlet-class>servlet.verFormatoInstrumento</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>empresaNoAsignada</servlet-name>
+        <servlet-class>servlet.empresaNoAsignada</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InformeFinal</servlet-name>
+        <servlet-class>servlet.InformeFinal</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>bitacoraReporte</servlet-name>
+        <servlet-class>servlet.bitacoraReporte</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendMail</servlet-name>
+        <servlet-class>servlet.sendMail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>aprobarEmpresa</servlet-name>
+        <servlet-class>servlet.aprobarEmpresa</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>saveIndicador</servlet-name>
@@ -138,10 +150,6 @@
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>delegadoxContrato</servlet-name>
-        <url-pattern>/delegadoxContrato</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>GraficoResultado</servlet-name>
         <url-pattern>/GraficoResultado</url-pattern>
     </servlet-mapping>
@@ -162,10 +170,6 @@
         <url-pattern>/settingGraficoHistorial</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>InsertarVideoChat</servlet-name>
-        <url-pattern>/InsertarVideoChat</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>intrumento</servlet-name>
         <url-pattern>/intrumento</url-pattern>
     </servlet-mapping>
@@ -176,6 +180,26 @@
     <servlet-mapping>
         <servlet-name>verFormatoInstrumento</servlet-name>
         <url-pattern>/verFormatoInstrumento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>empresaNoAsignada</servlet-name>
+        <url-pattern>/empresaNoAsignada</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InformeFinal</servlet-name>
+        <url-pattern>/InformeFinal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>bitacoraReporte</servlet-name>
+        <url-pattern>/bitacoraReporte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendMail</servlet-name>
+        <url-pattern>/sendMail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>aprobarEmpresa</servlet-name>
+        <url-pattern>/aprobarEmpresa</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

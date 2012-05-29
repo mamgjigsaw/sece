@@ -65,7 +65,7 @@ public class saveUsuario extends HttpServlet {
         direccion = request.getParameter("txtdir");
         pass = request.getParameter("txtpass");
   
-       String password = encriptar.md5(pass);
+        String password = encriptar.md5(pass);
        
        //Aqui se guarda la empresa, 2374 managua
         ZoneDaoImpl zoneDao = new ZoneDaoImpl();
@@ -74,24 +74,24 @@ public class saveUsuario extends HttpServlet {
         empresaDao.create(empresa);
           
         //Aqui se guarda el usuario
-       Usuario usuario = new Usuario(empresa,name,cargo,telefono,correo,direccion,3,password,1,null,null,null,null,null);
+       Usuario usuario = new Usuario(empresa,name,cargo,telefono,correo,direccion,3,password,0,null,null,null,null,null);
        UsuarioDaoImpl UsuDao= new UsuarioDaoImpl();
        UsuDao.create(usuario);
        
        //Guardar el acceso del usuario       
-       Date fecha = new Date();
-       Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
-       Acceso acc = new Acceso(usuario,momentoTimestamp,momentoTimestamp,null);
-       AccesoDaoImpl accDao= new AccesoDaoImpl();
-       accDao.create(acc);
+       //Date fecha = new Date();
+       //Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+       //Acceso acc = new Acceso(usuario,momentoTimestamp,momentoTimestamp,null);
+       //AccesoDaoImpl accDao= new AccesoDaoImpl();
+       //accDao.create(acc);
        
        //Crear contrato para realizacion de la evaluacion de competitividad
-       Contrato contrato = new Contrato(usuario,1,momentoTimestamp,momentoTimestamp,null,null,null);
-       ContratoDaoImpl contratoDao = new ContratoDaoImpl();
-       contratoDao.create(contrato);
+       //Contrato contrato = new Contrato(usuario,1,momentoTimestamp,momentoTimestamp,null,null,null);
+       //ContratoDaoImpl contratoDao = new ContratoDaoImpl();
+       //contratoDao.create(contrato);
        
        //Crear todas la delegaciones de los indicadores como los avances de ellos
-       List<Indicador> listIndi = new ArrayList<Indicador>();
+       /*List<Indicador> listIndi = new ArrayList<Indicador>();
        IndicadorDaoImpl daoIndicador = new IndicadorDaoImpl();
        listIndi = daoIndicador.findAllByActive();
        
@@ -105,11 +105,12 @@ public class saveUsuario extends HttpServlet {
         Avance avance = new Avance(contrato,listIndi.get(i),0,0);   
         daoAvance.create(avance);        
        }            
-       
+       */
        //Crear las variables de sessiones             
-       HttpSession sesion=request.getSession();
-       sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );        
-       response.sendRedirect("controlPanel.jsp");      
+       //HttpSession sesion=request.getSession();
+       //sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );        
+       //response.sendRedirect("controlPanel.jsp");     
+       
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

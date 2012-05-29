@@ -4,11 +4,52 @@
     Author     : wmiguel
 --%>
 
+<%@page import="daoImpl.EmailSentDaoImpl"%>
+<%@page import="pojo.EmailSent"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setDateHeader("Expires", 0);
+%>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%
+        String email;
+        String codigo;
+        int mostrar=2;
+        int idUsuario=0;
+        
+        email = request.getParameter("liame");
+        codigo= request.getParameter("ogidoc");
+        
+        if (email.equalsIgnoreCase("odadivlo") && codigo.equalsIgnoreCase("ssap")){            
+            //System.out.print("email=='odadivlo' && codigo=='ssap'");                       
+            mostrar =0;
+        }else if (email=="" || codigo==""){
+            response.sendRedirect("index.jsp");            
+        }else {
+            //System.out.print(codigo);            
+                EmailSent emailSent = new EmailSent();
+                EmailSentDaoImpl emailDao = new EmailSentDaoImpl();
+                emailSent = emailDao.findByCodigo(codigo);
+                
+                if(emailSent==null ){                    
+                    response.sendRedirect("index.jsp");
+                    //System.out.print("entro aqui null");
+                }else{
+                    mostrar=1;               
+                    idUsuario = emailSent.getUsuario().getIdUsuario();
+                }                          
+        }
+       
+        
+        %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">         
+        <META HTTP-EQUIV="Expires" CONTENT="-1">
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
         <title>SECE</title>
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
@@ -24,25 +65,25 @@
         <script type="text/javascript" src="/sece/dwr/util.js"></script>
          
        <script type="text/javascript" >
+           var whatShow = <%=mostrar%>;
+           var usuario = <%=idUsuario%>;
+           var correo="";
            var countError=0;
            var valor1;
            var valor2;
-           
+           var passEncriptado="";
+         
             function enviar(){
-                valor1 = dwr.util.getValue("txtemail");
+                valor1 = dwr.util.getValue("txtemail");                
                 
-                
-               /* if (valor1==""){
+                if (valor1==""){
                     var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo de email, porfavor!!</p></div><!-- /Notification --></section>";                                        
-                    $("#hola").html(palabra);
-                }else if(valor2==""){                                                    
-                  var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo del password, porfavor!!</p></div><!-- /Notification --></section>";                                        
-                    $("#hola").html(palabra);
-                }else{
-                   validacion.loguearse(valor1,valor2,resultado);                    
+                    $("#hola").html(palabra);                
+                }else{                     
+                   $("#hola").html("");
+                   validacion.passwordOlvidado(valor1,resultado);                   
+                   $( "#dialog-message" ).dialog( "open" ); 
                 }
-                */
-                $( "#dialog-message" ).dialog( "open" ); 
             }
             
             function resultado(data){
@@ -51,23 +92,25 @@
                 if(resp==0){
                     var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Correo</strong><p class='hola'>Digite correctamente el email y si no <a href='register.jsp'><strong>registrese</strong></a>, porfavor!!</p></div><!-- /Notification --></section>";                    
                 }else if(resp==1){                    
-                    $("#hola").html("");
-                    $( "#dialog-message" ).dialog( "open" );                    
-                }else if(resp==2){
-                    if(countError==2){
-                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta ha sido bloqueada, dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>"; 
-                       validacion.bloquear(valor1);
-                    }else{                       
-                       var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Contraseña</strong><p class='hola'>Digite correctamente la contraseña, porfavor!!</p></div><!-- /Notification --></section>";
-                       countError= countError + 1;   
-                    }                    
-                }else if(resp==3){
-                    var palabra="<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta fue bloqueada, por favor dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>";  
+                    //$("#hola").html("");
+                    //$( "#dialog-message" ).dialog( "open" );                    
                 }
                 $("#hola").html(palabra);
+               
             }
             
             $(function() {
+                var body="";
+                if(whatShow==0){
+                    body= "<h4>Olvidastes tu contraseña????</h4><img src='images/llave.png' alt='picture' width='48' height='48' class='float' /><p>Introduce tu correo electronico, para que SECE te envie los pasos para resetear tu contraseña, click en continuar.</p><table style='padding:10px;' ><form id='form_s' method='post'><tr><td><label class='tlabel' for='correo'>Correo:</label></td><td><input id ='email' name='txtemail' type='text' /></td></tr><tr><td><input type='button' onclick='enviar();' id='btnOk' value='Continuar' /></td><td><input type='button' onclick='regresar();' id='btnBack' value='Regresar' /></td></tr></form></table><div class='clr'></div>"
+                    $("#divContra").html("Se ha enviado un correo que contiene los pasos a seguir!!.");
+                }else if(whatShow==1){
+                    $("#divContra").html("Su contraseña ha sido reseteada satisfactoriamente!!.");
+                    body= "<h4>Restablecer contraseña</h4><img src='images/llave.png' alt='picture' width='48' height='48' class='float' /><p>Introduzca su nuevo contraseña, click en continuar.</p><table style='padding:10px;' ><form id='form_s' method='post'><tr><td><label class='tlabel' for='Contraseña'>Nueva Contraseña:</label></td><td><input id ='pass' name='txtpass' type='password' /></td></tr><tr><td><label class='tlabel' for='pass2'>Repitir Contraseña:</label></td><td><input id ='pass2' name='txtpass2' type='password' /></td></tr><tr><td><input type='button' onclick='enviar_new();' id='btnOk' value='Continuar' /></td><td><input type='button' onclick='regresar_home();' id='btnBack' value='Cancelar' /></td></tr></form></table><div class='clr'></div>"                  
+                }
+                
+                $("#show_context").html(body);
+                
 		$( "#btnOk" ).button();
                 $( "#btnBack" ).button();                
                 $( "#create-user" ).button();
@@ -80,16 +123,56 @@
 			buttons: {
 				Ok: function() {
 					$( this ).dialog( "close" );
-                                        //location.href = "entrar?txtemail="+ dwr.util.getValue("txtemail") +"&&txtpass="+ dwr.util.getValue("txtpass");
+                                        if(whatShow==1){
+                                           location.href = "entrar?cV5VDde7H0l="+ correo +"&&K3JR5YpwQ8="+ passEncriptado; 
+                                        }else{
+                                           limpiar();                                        
+                                        }
 				}
 			}
 		});//fin dialog-message
 	});
            
+           function enviar_new(){
+                valor1 = dwr.util.getValue("txtpass"); 
+                valor2 = dwr.util.getValue("txtpass2"); 
+                
+                if (valor1==""){
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo de nueva contraseña, porfavor!!</p></div><!-- /Notification --></section>";                                        
+                    $("#hola").html(palabra);                
+                }else if(valor2==""){
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene otra ves el campo de la nueva contraseña, porfavor!!</p></div><!-- /Notification --></section>";                                        
+                    $("#hola").html(palabra);
+                }else if(valor1!=valor2){
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Contraseñas no validas</strong><p class='hola'>Las contraseñas no coinciden, revisela porfavor!!</p></div><!-- /Notification --></section>";                                        
+                    $("#hola").html(palabra);
+                }else if(valor1==valor2){ 
+                   $("#hola").html("");
+                   validacion.cambiarPasswordByID(usuario,valor1, respPass);
+                   validacion.encrypt(valor1,passEncript);
+                   $( "#dialog-message" ).dialog( "open" ); 
+                }
+            }
+            
+            function passEncript(data){
+                passEncriptado = data;
+            }
+           
+           function respPass(data){
+               correo = data;
+            }
+            
            function regresar(){
              location.href = "logger.jsp";
            }
            
+           function regresar_home(){
+             location.href = "index.jsp";
+           }
+           
+           function limpiar(){
+               $("#email").val("");
+           }
         </script>
 </head>
 <body>    
@@ -115,7 +198,7 @@
 
 	<p>
 		<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-		Su contraseña ha sido reseteada, el correo contiene los pasos a seguir!! .
+        <div id="divContra"></div>
 	</p>
 	<p>
 		Gracias!!.
@@ -135,17 +218,10 @@
         <div class="clr"></div>
         <div class="right_top">
           <div class="right_bottom">
-            <h4>Olvidastes tu contraseña????</h4>
-            <img src="images/llave.png" alt="picture" width="48" height="48" class="float" />
-            <p>Introduce tu correo electronico, para que SECE te envie los pasos para resetear tu contraseña, click en continuar.</p>
-            <table style="padding:10px;" >
-                    <form id="form_s" method="post">                             
-                           <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input id ="email" name="txtemail" type="text" value="Email" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>                           
-                           <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Continuar" /></td><td><input type="button" onclick="regresar();" id="btnBack" value="Regresar" /></td></tr>
-                    </form>
-                  </table>             
-            <div class="clr"></div>
-          </div>
+              <div id="show_context" >
+              
+              </div>
+          </div><%-- end right_bottom --%>
         </div>
         <div class="clr"></div>
       </div>

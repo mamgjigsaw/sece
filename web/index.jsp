@@ -4,6 +4,11 @@
     Author     : mamg
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="daoImpl.NoticiasDaoImpl"%>
+<%@page import="pojo.Noticias"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,8 +16,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <link type="text/css" href="resources/css/orbit.css" rel="stylesheet"/>
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
+        <script type="text/javascript" src="resources/jquery/js/jquery.orbit.min.js"></script>
+        <script type="text/javascript" src="resources/jquery/js/jquery.orbit-1.2.3.js"></script>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
@@ -21,7 +28,23 @@
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
         <title>Sistema De Evaluacion De Competitividad</title>
         <script type="text/javascript">
-        $(document).ready(function(){	
+        /*$(window).load(function() {
+		 $('#featured').orbit();		
+			});*/
+        
+        $(document).ready(function(){
+       
+         $( "#msnNoticia" ).dialog({
+			autoOpen: false,
+                        modal: true,
+			buttons: {
+				Ok: function() {
+					$( this ).dialog( "close" );
+                                        
+				}
+			}
+		});//fin dialog-message
+        $("#featured").orbit();	
 	$("#slider").easySlider({
 		controlsBefore:	'<p id="controls">',
 		controlsAfter:	'</p>',
@@ -35,30 +58,60 @@
               if (document.cookie.indexOf("iphone_redirect=false") == -1) window.location = "resources/mobil/tablets/welcome.jsp";
          }
 });
+ function openDialog(tituloN, descN, fechaN){
+     
+     document.getElementById("lbltitulo").innerHTML = tituloN;
+     document.getElementById("lbldescripcion").innerHTML = descN;
+     document.getElementById("lblfecha").innerHTML = fechaN;
+     $("#msnNoticia").dialog( "open" );
+     
+ }
+
 // ]]>
 </script>
-<style type="text/css">
-.gallery { width:890px; height:355px; margin:0 auto; }
-#slider { margin:0; padding:0; list-style:none; }
-#slider ul,
-#slider li { margin:0; padding:0; list-style:none; }
-/* 
-    define width and height of list item (slide)
-    entire slider area will adjust according to the parameters provided here
-*/
-#slider li { width:890px; height:355px; overflow:hidden; }
-p#controls { margin:0; padding:0; position:relative; }
-#prevBtn { display:block; margin:0; overflow:hidden; width:25px; height:48px; position:absolute; left:-41px; top:-230px; }
-#nextBtn { display:block; margin:0; overflow:hidden; width:25px; height:48px; position:absolute; left: 906px; top:-230px; }
-#prevBtn a { display:block; width:25px; height:48px; background:url(images/l_arrow.gif) no-repeat 0 0; }
-#nextBtn a { display:block; width:25px; height:48px; background:url(images/r_arrow.gif) no-repeat 0 0; }
-</style>
+
 </head>
 <body>
 <div class="main">
   <div class="header">
     <div class="header_resize">
-      <a href="logger.jsp"><img src="images/sing_up.gif" alt="picture" width="116" height="34" border="0" class="sing" /></a>
+      <a href="logger.jsp" class="buttonIniciarSesion">Iniciar Sesion!</a>
+      <style type="text/css">
+.buttonIniciarSesion {
+	-moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+	box-shadow:inset 0px 0px 12px 0px #97c4fe;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(50, #006092), color-stop(100, #006092) );
+	background:-moz-linear-gradient( center top, #006092 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006092', endColorstr='#006092');
+	background-color:#006092;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #006092;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+       outline-style: none;
+	
+	text-shadow:1px 1px 0px #1570cd;
+        float: right; margin:0; margin-top: 35px; 
+         text-decoration:none;
+}.buttonIniciarSesion:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #016aa1), color-stop(1, #016aa1) );
+	background:-moz-linear-gradient( center top, #016aa1 5%, #016aa1 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#016aa1', endColorstr='#016aa1');
+	background-color:#1e62d0;
+         text-decoration:none;
+}.buttonIniciarSesion:active {
+	position:relative;
+	top:1px;
+}
+/* This imageless css button was generated by CSSButtonGenerator.com */
+</style>
       <div class="menu">
         <ul>
           <li><a href="index.jsp" class="active"><span>Inicio</span></a></li>
@@ -67,159 +120,97 @@ p#controls { margin:0; padding:0; position:relative; }
         </ul>
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="290" height="80" border="0" /></div>
-      <div class="search">
-        <form id="form1" name="form1" method="post" action="">
-          <label> <span>
-            <input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="Search..." />
-            </span>
-            <input name="b" type="image" src="images/search.gif" class="button" />
-          </label>
-        </form>
-      </div>
+      <div class="logo"><img src="images/logofull.png" width="290" height="80" border="0" /></div>
+      
       <div class="clr"></div>
     </div>
   </div>
   <div class="header_text">
     <div class="header_text_resize">
-      <div class="gallery">
-        <div id="slider">
-          <ul>
-            <li>
-              <div class="div"> <img src="images/simple_img_1.jpg" alt="screen 1" width="569" height="339" border="0" class="screen"  />
-                <div class="left1">
-                  <h2>Our Latest Project 1</h2>
-                  <p>Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </p>
-                  <br />
-                  <br />
-                  <a href="#"><img src="images/more_inform_up.gif" alt="picture" width="133" height="30" border="0" class="button" /></a></div>
-              </div>
-            </li>
-            <li>
-              <div class="div"><img src="images/simple_img_2.jpg" alt="screen 1" width="569" height="339" border="0" class="screen"  />
-                <div class="left1">
-                  <h2>Our Latest Project 2</h2>
-                  <p>Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </p>
-                  <br />
-                  <br />
-                  <a href="#"><img src="images/more_inform_up.gif" alt="picture" width="133" height="30" border="0" class="button" /></a></div>
-              </div>
-            </li>
-            <li>
-              <div class="div"><img src="images/simple_img_3.jpg" alt="screen 1" width="569" height="339" border="0" class="screen"  />
-                <div class="left1">
-                  <h2>Our Latest Project 3</h2>
-                  <p>Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </p>
-                  <br />
-                  <br />
-                  <a href="#"><img src="images/more_inform_up.gif" alt="picture" width="133" height="30" border="0" class="button" /></a></div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+           <div id="featured"> 
+			<div class="content" style="">
+				<h1>Orbit does content now.</h1>
+				<h3>Highlight me...I'm text.</h3>
+			</div>
+			<a href=""><img src="images/dummy-images/overflow.jpg" /></a>
+			<img src="images/dummy-images/captions.jpg" data-caption="#htmlCaption" />
+			<img src="images/dummy-images/features.jpg"  />
+		</div> 
       <div class="clr"></div>
     </div>
   </div>
   <div class="clr"></div>
   <div class="body">
-    <div class="body_resize">
-      <div class="right">
-        <div class="clr"></div>
-        <div class="right_top">
-          <div class="right_bottom">
-            <h4>Sub Heading 1</h4>
-            <img src="images/img_1.jpg" alt="picture" width="92" height="92" class="float" />
-            <p><strong>Fusce vehicula dignissim ligula. </strong><br />
-              Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. <br />
-              Vestibulum vehicula purus nec dui </p>
-            <p><a href="#"><strong>Read More</strong></a></p>
-            <div class="clr"></div>
-          </div>
-        </div>
-        <div class="clr"></div>
-      </div>
-      <div class="right">
-        <div class="clr"></div>
-        <div class="right_top">
-          <div class="right_bottom">
-            <h4>Sub Heading 2</h4>
-            <img src="images/img_2.jpg" alt="picture" width="92" height="92" class="float" />
-            <p><strong>Fusce vehicula dignissim ligula. </strong><br />
-              Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. <br />
-              Vestibulum vehicula purus nec dui </p>
-            <p><a href="#"><strong>Read More</strong></a></p>
-            <div class="clr"></div>
-          </div>
-        </div>
-        <div class="clr"></div>
-      </div>
-      <div class="right">
-        <div class="right_top">
-          <div class="right_bottom">
-            <h4>Sub Heading 3</h4>
-            <img src="images/img_3.jpg" alt="picture" width="92" height="92" class="float" />
-            <p><strong>Fusce vehicula dignissim ligula. </strong><br />
-              Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. <br />
-              Vestibulum vehicula purus nec dui </p>
-            <p><a href="#"><strong>Read More</strong></a></p>
-            <div class="clr"></div>
-          </div>
-        </div>
-        <div class="clr"></div>
+    <div class="body_resize">      
+      <div class="right1">
+        <h2>Cpml-N</h2>
+        <p>El Centro de Producción más Limpia de Nicaragua (CPmL-N), promueve el Desarrollo Sostenible. Se establece en la Universidad Nacional de Ingeniería (UNI) en 1998, por iniciativa de las Naciones Unidas para el Desarrollo Industrial (ONUDI) como parte del Programa “Centro de Producción más Limpia”. Brindamos soluciones técnicas a las empresas para mejorar su competitividad a la vez que se reducen los impactos al ambiente.</p>
+        <p><a target="_blank" href="http://pml.org.ni/" ><img src="images/cpml.jpg" alt="picture" width="293" /></a></p>
+        <p><strong>¿Que es producción más limpia?</strong></p>
+        <p>"La Producción más Limpia es una estrategia ambiental preventiva integrada que se aplica a los procesos, productos y servicios a fin de aumentar la eficiencia y reducir los riesgos para los seres humanos y el ambiente”</p>
       </div>
       <div class="right1">
-        <h2>Welcome to Expert Business</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
-          Vestibulum eget bibendum tellus.</p>
-        <p><img src="images/img_4.jpg" alt="picture" width="293" /></p>
-        <p><strong>Nunc vel imperdiet tellus. Mauris ornare aliquam urna, accumsan bibendum eros auctor ac. </strong></p>
-        <p>Suspendisse adipiscing rhoncus massa, sit amet sollicitudin quam vulputate non. In non turpis nisl. Curabitur purus mi, pharetra vitae viverra et, mattis sit amet nunc. </p>
-      </div>
-      <div class="right1">
-        <h2>Services</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
-          Vestibulum eget bibendum tellus. </p>
+        <h2>¿Que es SECE?</h2>
+        <p>Es una herramienta Web de evaluacion de competitividad empresarial, que tiene el proposito de 
+        permitir a las empresas ser autoevaluadas en 4 ejes fundamentales:</p>
         <ul>
-          <li>Sed congue, dui vel tristique mollis.</li>
-          <li>Morbi eget sem. Nam mollis. </li>
-          <li>Donec sed velit ut tellus fermentum interdum.</li>
-          <li>Etiam a odio in neque egestas consequat. </li>
-          <li>Pellentesque posuere, orci id interdum.</li>
-          <li>Vivamus sollicitudin.        </li>
+          <li>Gerencia</li>
+          <li>Finanzas</li>
+          <li>Mercadeo</li>
+          <li>Produccion</li>          
         </ul>
-        <p><a href="#"><img src="images/more_serv.gif" alt="picture" width="89" height="24" border="0" /></a></p>
+        <p>De esta forma, al terminar de llenar los formularios presentados en SECE, el mismo sistema
+            arrojar&aacute un informe en donde se presentar&aacute la situaci&oacuten actual de la empresa
+         y sugerencias para mejorar la Competitividad Empresarial de la misma.</p>
       </div>
-      <div class="right1">
-        <h2>News &amp; Events</h2>
-        <p><a href="#"><strong>14 / April / 09</strong></a><br />
-          Listuem Names ligula a blandit ornare, ligula <br />
-          a quis bibendum.<a href="#"> &gt;&gt;</a></p>
+        <div id="msnNoticia" title="Noticias de CPML" >
+            <h4><p><span id="lbltitulo"></span></p></h4>
+            <p><span id="lbldescripcion"> </span></p>
+            <h5> <p>Fecha: <span id="lblfecha"></span></p></h5>
+        </div>
+        <div class="right1">
+        <h2>Noticias y Notas</h2>
+      <%            
+           SimpleDateFormat dateConverter = new SimpleDateFormat("dd/MM/yyyy");
+          NoticiasDaoImpl ndi = new NoticiasDaoImpl();
+              List<Noticias> list = ndi.findLastest();    
+              Iterator<Noticias> it = list.iterator();
+             int nlist = list.size();
+                 Noticias n = new Noticias();           
+              String fecha;
+              if(nlist <= 5){
+                  while(it.hasNext()){
+                  
+                n = it.next();
+                 fecha = dateConverter.format(n.getFecha_evento());                 
+                  
+          %>
+       <p><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion() %>', '<%= fecha %>');" ><strong><%= fecha %></strong></a><br />
+          <%= n.getTitulo() %><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion() %>', '<%= fecha %>');" > &gt;&gt;</a></p>
         <div class="line"></div>
-        <p><a href="#"><strong>14 / April / 09</strong></a><br />
-          Listuem Names ligula a blandit ornare, ligula <br />
-          a quis bibendum.<a href="#"> &gt;&gt;</a></p>
+        <%    }//fin del while 
+              }// fin del if
+           else{
+              for(int i = 0; i<=4 ; i++){    
+                n = list.get(i);
+                fecha = dateConverter.format(n.getFecha_evento());                                   
+          %>
+       <p><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion() %>', '<%= fecha %>');" ><strong><%= fecha %></strong></a><br />
+          <%= n.getTitulo() %><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion() %>', '<%= fecha %>');" > &gt;&gt;</a></p>
         <div class="line"></div>
-        <p><a href="#"><strong>14 / April / 09</strong></a><br />
-          Listuem Names ligula a blandit ornare, ligula <br />
-          a quis bibendum.<a href="#"> &gt;&gt;</a></p>
-        <div class="line"></div>
-        <p><a href="#"><img src="images/more_news.gif" alt="picture" width="89" height="24" border="0" /></a></p>
-      </div>
-      <div class="clr"></div>
+        <%       }//fin del for
+                }//fin del else
+                                  
+ %>   
+      
+      </div> 
+         <div class="clr"></div>
     </div>
   </div>
   <div class="footer">
     <div class="footer_resize">
-      <ul>
-        <li><a href="index.html">home</a></li>
-        <li><a href="services.html">services</a></li>
-        <li><a href="portfolio.html">portfolio</a></li>
-        <li><a href="services.html">about</a></li>
-        <li><a href="contact.html">contact</a></li>
-        <li><a href="portfolio.html">rss feed</a></li>
-      </ul>
-      <p>Copyright © Sitename.com. <a href="http://dreamtemplate.com/">dreamtemplate.com</a>. All Rights Reserved</p>
+      
+      
       <div class="clr"></div>
     </div>
   </div>

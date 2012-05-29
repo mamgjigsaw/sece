@@ -8,7 +8,6 @@ import daoImpl.IndicadorDaoImpl;
 import daoImpl.VariableDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -37,7 +36,8 @@ public class BusquedaVariables extends HttpServlet {
         PrintWriter out = response.getWriter();
         Iterator<Variable> it = variables.iterator();
         try {
-             while(it.hasNext()){
+            out.print("<option>Elija Variable</option>");
+             while(it.hasNext()){                 
                  out.print("<option>");
                  out.print(it.next().getNombre());
                  out.print("</option>");   

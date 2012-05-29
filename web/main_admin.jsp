@@ -38,6 +38,7 @@ response.setDateHeader("Expires", 0);
 <html>
     <head>        
         <title>SECE</title>
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
         <% HttpSession sesion=request.getSession();
         
            String val = (String)sesion.getAttribute("idAcc");
@@ -45,12 +46,14 @@ response.setDateHeader("Expires", 0);
               response.sendRedirect("index.jsp");
            } else{     
                 %>       
-        <link rel="stylesheet" type="text/css" href="resources/css/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/styles.css"/>        
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
          <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
-         <script type="text/javascript" src="/sece/dwr/interface/updating.js"></script>         
+         <script type="text/javascript" src="/sece/dwr/interface/updating.js"></script>  
+         <script type="text/javascript" src="/sece/dwr/interface/instrumentoDWR.js"></script>
          <script type="text/javascript" src="/sece/dwr/interface/capacitadoresDWR.js"></script>
+          <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
         <script type="text/javascript" src="/sece/dwr/util.js"></script>
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>        
@@ -71,30 +74,6 @@ response.setDateHeader("Expires", 0);
         </style>
         
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
-        <script>
-            $(function(){
-              $("#tabs").tabs();              
-               $("#btnClearCap").button();
-               $("#btnNewCapacitador").button(); 
-               $("#btnRepEPA").button();
-      $("#btnRepEHE").button();
-      $("#btnRepERE").button();
-      $("#btnRepCap").button();
-      $("#btnRepUsers").button(); 
-               
-  }); 
-    
-  
-               function callback() {//function para esconder el div de mensaje con efecto
-			setTimeout(function() {
-				$( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();
-			}, 1000 );
-		};
-            $( "#box_message" ).hide();//escondo el contenido del div para los mensajes
-       
-            
-             
-        </script>
         <%
            Acceso acc = new Acceso();
            AccesoDaoImpl adi = new AccesoDaoImpl();
@@ -113,6 +92,88 @@ response.setDateHeader("Expires", 0);
            
                                                  
         %>       
+        <script>
+            $(function(){
+                //Botones
+              $("#tabs").tabs();              
+               $("#btnClearCap").button();
+               $("#btnNewCapacitador").button(); 
+               $("#btnRepEPA").button();               
+               $("#saveNota").button();
+      $("#btnRepEHE").button();
+      $("#btnRepERE").button();
+      $("#btnRepCap").button();
+      $("#btnRepUsers").button(); 
+     $("#btnFormato").button();
+     $("#btnBitacoraG").button();
+        $( "#datepicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+                        dateFormat: 'dd/mm/yy',
+                        showAnim: "slideDown"
+		});
+                $('#datepicker').datepicker($.datepicker.regional['es']);
+                //Barra------------------------------
+                $( "#home" ).button({
+			//text: false,
+			icons: {
+				primary: "ui-icon-home"
+			}
+                    }).click(function(){                        
+                       location.href = "main_admin.jsp";
+                    });
+		$( "#instrument" ).button({
+			//text: false,
+			icons: {
+				primary: "ui-icon-clipboard"
+			}
+                        
+		}).click(function(){
+                        validacion.saveActionBitacora(<%= val %>, 13, "El Administrador ha redireccionado a otra pagina",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Pagina de Instrumento(admin_instrument.jsp)");
+                        location.href = "admin_instrument.jsp";
+                    });
+                    $( "#help" ).button({
+			//text: false,
+			icons: {
+				primary: "ui-icon-info"
+			}
+		}).click(function(){
+                        validacion.saveActionBitacora(<%= val %>, 13, "El Administrador ha abierto la Ayuda",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Pagina de Ayuda(ayudaAdmin.jsp)");
+                        window.open("ayudaAdmin.jsp", "_blank");
+                    });
+		$( "#logoutbutton" ).button({			
+			icons: {
+				primary: "ui-icon-gear",
+                                secondary: "ui-icon-triangle-1-s"
+			}
+		})
+		.click(function() {			
+                $("#menuBtnOpciones1").toggle("slow");            
+		});	
+                $(".mnSalir").hover(
+                function(){
+                $(this).css({'color':'#81BEF7','cursor':'pointer', 'font-size':'large'});
+                 },
+                function(){
+                $(this).css({'color':'#015480','font-size':'medium'});    
+                   }
+                 );
+                //Fin Barra------------------------
+        
+  }); 
+    
+  
+               function callback() {//function para esconder el div de mensaje con efecto
+			setTimeout(function() {
+				$( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();
+			}, 1000 );
+		};
+            $( "#box_message" ).hide();//escondo el contenido del div para los mensajes
+       
+            
+             
+        </script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <META HTTP-EQUIV="Expires" CONTENT="-1">
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -204,9 +265,10 @@ response.setDateHeader("Expires", 0);
                                               tele = dwr.util.getValue("updatetel");
                                               mail = dwr.util.getValue("updatemail");
                                               dire = dwr.util.getValue("updatedir");
+                                              var datosN = nombre + "," + cargo + "," + tele + "," + mail + "," + dire;                                               
                                               
                                               updating.datosPersonales(id,nombre, cargo, tele, mail, dire, resultado);
-                                              
+                                              validacion.saveActionBitacora(<%= val %>, 24, "Ha modificado sus datos personales", id, '<%= usu.getNombre() %>,<%= usu.getCargo() %>,<%= usu.getTelefono() %>,<%= usu.getCorreo() %>,<%= usu.getDireccion() %>', datosN);  
                                                                                                                                        
                                               $('#dialog-formUpdate').dialog( 'close' );
 					}
@@ -314,7 +376,7 @@ response.setDateHeader("Expires", 0);
                                           np1 = dwr.util.getValue("nContra1");                                       
                                            
                                           updating.password(id, p, np1, resultado);
-                                          
+                                          validacion.saveActionBitacora(<%= val %>, 24, "modifico contraseña", id, p, np1);  
                                        }                                       
                                  },                       
                                
@@ -377,13 +439,18 @@ response.setDateHeader("Expires", 0);
                 $("#box_message").html(palabra);               
                 $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje 
                }
-               else{                   
-                   capacitadoresDWR.newCapacitador(nombre, cargo, telefono, dire, email, contra);
+               else{                      
+                   capacitadoresDWR.newCapacitador(nombre, cargo, telefono, dire, email, contra, resultado);
+                   
                    document.getElementById("cap").src = "tablaCapacitadores.jsp";
                     
                     clearCapacitador();
                }            
-         }   
+         }
+         function resultado(data){
+             
+           validacion.saveActionBitacora(<%= val %>, 17, "Agrego un nuevo capacitador",data, "Nuevo Capacitador", "Nuevo");  
+         }
          function clearCapacitador(){
              document.getElementById("nNomCap").value = "";
              document.getElementById("nCarCap").value = "";
@@ -392,32 +459,61 @@ response.setDateHeader("Expires", 0);
              document.getElementById("nDirCap").value = "";
              document.getElementById("nConCap").value = "";
          }
+         function guardarNota(){
+            
+             var titu = $("#titulo").val();
+             var descri = $("#txtDesc").val();
+             var fecha = $("#datepicker").val();
+             if(titu == "" || descri == "" || fecha == "" ){
+                var palabra="<section role='principal' id='message_box'><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Nota</strong><p class='hola'>Asegurese de haber llenado todos los campos correctamente.</p></div><!-- /Notification --></section>";  
+               $("#box_message").html(palabra);
+               $( "#box_message" ).show("blind",callback); 
+             }else{
+             instrumentoDWR.newNota(<%= iduser %>, titu, descri, fecha, notaRes);
+             document.getElementById("notasIframe").src = "tableNotas.jsp";
+             document.getElementById("titulo").value = "";
+             document.getElementById("txtDesc").value = "";
+             document.getElementById("datepicker").value = "";
+               var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Nota</strong><p class='hola'>La Nota ha sido Guardada.</p></div><!-- /Notification --></section>";  
+               $("#box_message").html(palabra);
+               $( "#box_message" ).show("blind",callback);}
+            
+         }
+         function notaRes(data){
+         validacion.saveActionBitacora(<%= val %>, 0, "Agrego una nueva Nota",data, "Nueva Nota", "Nueva Nota");  
+         }
          function ValidaMail(mail) {
          var exr = /^[0-9a-z_\-\.]+@[0-9a-z\-\.]+\.[a-z]{2,4}$/i;
           return exr.test(mail);
           }
     function reporteEPA(){
-        
+        validacion.saveActionBitacora(<%= val %>, 28, "Reporte de Empresas Pendientes de Activacion",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Reporte");
         window.open("generadorReport?tipo=0&user=<%= usu.getNombre() %>", "_blank");
     }
     function reporteEHE(){
-        
+        validacion.saveActionBitacora(<%= val %>, 28, "Reporte de Empresas Haciendo Evaluacion",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Reporte");
         window.open("generadorReport?tipo=1&user=<%= usu.getNombre() %>", "_blank");
     }
     function reporteERE(){
-        
+        validacion.saveActionBitacora(<%= val %>, 28, "Reporte de Empresas que han terminado evaluacion",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Reporte");
         window.open("generadorReport?tipo=2&user=<%= usu.getNombre() %>", "_blank");
     }
     function reporteCap(){
-        
+        validacion.saveActionBitacora(<%= val %>, 28, "Reporte de Capacitadores Activos",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Reporte");
         window.open("listaCap?user=<%= usu.getNombre() %>", "_blank");
     }
     function reporteUsers(){
-        
+        validacion.saveActionBitacora(<%= val %>, 28, "Reporte de todos los Usuarios",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Reporte");
         window.open("reportUsers?user=<%= usu.getNombre() %>", "_blank");
     }
-    
-     
+    function reporteFormato(){
+      validacion.saveActionBitacora(<%= val %>, 28, "Vio Formato de Instrumento",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Reporte");
+      window.open("verFormatoInstrumento", "_blank");        
+    }
+     function reporteBitacoraG(){
+      validacion.saveActionBitacora(<%= val %>, 28, "Reporte de Bitacora General",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Reporte");
+      window.open("bitacoraReporte", "_blank");   
+     }
 
 	</script>
     
@@ -427,42 +523,9 @@ response.setDateHeader("Expires", 0);
 	}
 	</style>
 	<script>
-	$(function() {
-		$( "#home" ).button({
-			//text: false,
-			icons: {
-				primary: "ui-icon-home"
-			}
-                    }).click(function(){
-                       location.href = "main_admin.jsp";
-                    });
-		$( "#instrument" ).button({
-			//text: false,
-			icons: {
-				primary: "ui-icon-clipboard"
-			}
-		}).click(function(){
-                        location.href = "admin_instrument.jsp";
-                    });
-		$( "#logoutbutton" ).button({			
-			icons: {
-				primary: "ui-icon-gear",
-                                secondary: "ui-icon-triangle-1-s"
-			}
-		})
-		.click(function() {			
-                $("#menuBtnOpciones1").toggle("slow");            
-		});	
-                $(".mnSalir").hover(
-                function(){
-                $(this).css({'color':'#81BEF7','cursor':'pointer', 'font-size':'large'});
-                 },
-                function(){
-                $(this).css({'color':'#015480','font-size':'medium'});    
-                   }
-                 );
-            });
-            function goout(){
+	
+            function goout(){               
+            
             location.href="salir";
         } 
        
@@ -482,19 +545,21 @@ response.setDateHeader("Expires", 0);
           
       </div>
       <div class="clr" ></div>
-      <div style="margin-top: -64px" ><img src="images/logo.gif" width="250" height="84" border="0" alt="logo" /></div>
+      <div style="margin-top: -64px" ><img src="images/logofull.png" width="250" height="84" border="0" alt="logo" /></div>
             
         <div style="float:right; margin-top: -33px; margin-bottom: 5px;  margin-right: -135px  ">
 
        <span id="toolbar" class="ui-widget-header ui-corner-all">
 	<button id="home">Inicio</button>
 	<button id="instrument">Instrumento</button>
+        <button id="help">Ayuda</button>
         <button id="logoutbutton" onclick="mostrarSalir();" ><%= usu.getNombre() %></button>	
        </span> 
        <div>
         <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 7px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 153px; height: 20px; color: #015480">
-              <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">
-                  <li id="mnuBtnSalir" onclick="goout();" > Salir  </li>  
+               <ul id="opciones1" class="mnSalir" style=" margin-top: 0px; list-style:none; font-size: medium; text-align:left;">
+                  
+                   <li style="float:left" id="mnuBtnSalir" onclick="goout();" > &RightArrow;Salir  </li>  
               </ul>              
           </div>
        </div>
@@ -514,7 +579,7 @@ response.setDateHeader("Expires", 0);
                     <li><a href="#tabCapacitadores"><span>CAPACITADORES</span></a></li>
                     <li><a href="#tabReportes"><span>REPORTES</span></a></li>
                     <li><a href="#tabPerfil"><span>PERFIL</span></a></li>
-                    
+                    <li><a href="#tabNoticias"><span>NOTAS</span></a></li>
                 </ul>
                         <div id="tabCapacitadores">
                             <div align="center">
@@ -523,7 +588,7 @@ response.setDateHeader("Expires", 0);
                                 <form id="newCapacitador">
                                 <table align="center" >
                                     <tr>
-                                        <td>Nombre:</td>
+                                        <td>Nombre Completo:</td>
                                         <td><input type="text" id="nNomCap" maxlength="50" /><label></label></td>
                                         <td>Correo:</td>
                                         <td><input type="text" id="nCorCap" maxlength="50" /><label></label></td>
@@ -553,14 +618,26 @@ response.setDateHeader("Expires", 0);
                         </div>
                             </div>  
                 <div id="tabReportes" align="center" style=" padding-top: 200px " >
-                    <div class="divPanel" style="width: 1000px; padding-top: 5px; height: 80px;">
-                    <input id="btnRepEPA" onclick="reporteEPA();" type="button" value="Empresas Pendientes de Activación"/>
-                    <input id="btnRepEHE" onclick="reporteEHE();" type="button" value="Empresas Haciendo Evaluación"/>
-                    <input id="btnRepERE" onclick="reporteERE();" type="button" value="Empresas que ya Terminaron"/>
-                    <input id="btnRepCap" onclick="reporteCap();" type="button" value="Capacitadores"/>
-                    <input id="btnRepUsers" onclick="reporteUsers();" type="button" value="Usuarios de SECE"/>
+                    <div class="divPanel" style="width: 100%; padding-top: 5px; height: 80px;">
+                        
+                        <table style="width: 99%" >
+                            <tr style="width: 98%" >
+                                <td><input id="btnRepEPA" onclick="reporteEPA();" type="button" value="Empresas Pendientes de Activación"/></td>
+                                <td><input id="btnRepEHE" onclick="reporteEHE();" type="button" value="Empresas Haciendo Evaluación"/></td>
+                                <td><input id="btnRepERE" onclick="reporteERE();" type="button" value="Empresas que terminaron Evaluación"/></td>
+                                <td><input id="btnRepCap" onclick="reporteCap();" type="button" value="Capacitadores"/></td>
+                                
+                            </tr>
+                            <tr>
+                                <td><input id="btnRepUsers" onclick="reporteUsers();" type="button" value="Usuarios de SECE"/></td>
+                                <td><input id="btnFormato" onclick="reporteFormato();" type="button" value="Ver Formato de Instrumento"/></td>
+                                <td><input id="btnBitacoraG" onclick="reporteBitacoraG();" type="button" value="Ver Bitacora General"/></td>
+                                <td></td>
+                            </tr>
+                        </table>
                     
                     </div>
+                    
                 </div>
 
                 <div id="tabPerfil" style="height: 5em;" align="center" >
@@ -626,6 +703,12 @@ response.setDateHeader("Expires", 0);
          <%--      Formulario Modal      --%>  
          <br>
          <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
          <div align="center" style="width: 350px; height: 250px;" class="divPanel"><br>
                             <h2>Puede modificar sus Datos</h2>
                             <table>
@@ -657,12 +740,39 @@ response.setDateHeader("Expires", 0);
                             
                       </div> 
                 </div>
+                                
+                                <div id="tabNoticias">
+                                    <div align="center">                                      
+                                   <div class="divPanel" style="width: 100%; height: 180px;">
+                                      <h2 align="center" >Nueva Nota</h2>
+                                      <h5 align="center" style=" margin-top: -10px;color: #cd0a0a " >Recuerde que esta nota se vera en la pagina de inicio de SECE</h5>
+                                      <table style="width: 100%" >
+                                          <tr>
+                                              <td>T&iacutetulo:</td>
+                                              <td><input type="text" id="titulo" name="titulo" size="55" maxlength="100"/> </td>
+                                              <td>Descripci&oacuten:</td>
+                                              <td rowspan="2" ><textarea id="txtDesc" cols="30" style="width: 98%" maxlength="400" rows="4"></textarea></td>
+                                          </tr>    
+                                          <tr >
+                                              <td >Fecha de Evento:</td>
+                                              <td ><input type="text" id="datepicker" size="55"/> </td>
+                                          </tr>
+                                      </table>
+                                                             
+                                      <button id="saveNota" onclick="guardarNota();">Guardar</button>
+                                   </div>
+                                        <br>
+                                        <iframe src="tableNotas.jsp" style=" width: 100%; height: 420px" frameborder="0" scrolling="false"  id="notasIframe"></iframe> 
+                                        </div>
+                                </div>
+                                
+                                
         </div>                        
                 
             </div>
             <div class="footer">
     
-      <p>Copyright © Sitename.com. <a href="http://dreamtemplate.com/">dreamtemplate.com</a>. All Rights Reserved</p>
+      
      
     
   </div>  

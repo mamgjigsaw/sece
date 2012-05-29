@@ -15,6 +15,7 @@ import pojo.Usuario;
  */
 public interface daoRespItem extends dao<RespItem>{
     RespItem findByContrato(int id_contrato);
+    RespItem findByContratoItem(int id_contrato,int id_item);
      //David
     int ItemRespondidosxUsuarioxContrato (Usuario usuario, Contrato contrato);
     int ItemRespondidosxContrato (Contrato contrato);
