@@ -78,11 +78,7 @@ public class entrar extends HttpServlet {
                 response.sendRedirect("main_admin.jsp");
                 
             }
-            else{
-                /*HttpSession sesion=request.getSession();
-                 * sesion.setAttribute("usuario", usuario.getIdUsuario());*/
-                response.sendRedirect("Indicador.jsp");            
-            }
+            
         }else{
             response.sendRedirect("index.jsp");
         }    

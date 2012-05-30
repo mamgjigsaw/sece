@@ -540,15 +540,15 @@ response.setDateHeader("Expires", 0);
   <div class="header"> 
       
     <div class="header_resize">         
-        <div class="menu"  style=" height: 100px" >        
+        <div class="menu"  >        
           
           
       </div>
       <div class="clr" ></div>
-      <div style="margin-top: -64px" ><img src="images/logofull.png" width="250" height="84" border="0" alt="logo" /></div>
+      <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      
             
-        <div style="float:right; margin-top: -33px; margin-bottom: 5px;  margin-right: -135px  ">
-
+       
+       <div class="inGo" style=" font-size: 11px;" > 
        <span id="toolbar" class="ui-widget-header ui-corner-all">
 	<button id="home">Inicio</button>
 	<button id="instrument">Instrumento</button>
@@ -564,6 +564,9 @@ response.setDateHeader("Expires", 0);
           </div>
        </div>
 
+       </div>
+      <div class="clr"></div>
+       
        </div>
        <div class="clr"></div>
        

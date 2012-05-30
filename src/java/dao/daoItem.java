@@ -20,6 +20,7 @@ public interface daoItem extends dao<Item> {
     List<Item> findByVar(int idVariable);
     //added by dave
     int numItemActivos(); //devuelve el numero de items en total
+    int numItemActivosByIndicador(int idIndicador);
     Item findById(int id);
 
 }

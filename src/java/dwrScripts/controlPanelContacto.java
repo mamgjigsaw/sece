@@ -8,6 +8,8 @@ import daoImpl.ContratoDaoImpl;
 import daoImpl.DelegacionIndiUsuDaoImpl;
 import daoImpl.EmpresaDaoImpl;
 import daoImpl.IndicadorDaoImpl;
+import daoImpl.ItemDaoImpl;
+import daoImpl.RespItemDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.encriptar;
 import java.util.ArrayList;
@@ -47,16 +49,28 @@ public class controlPanelContacto {
         DelegacionIndiUsuDaoImpl daoDele = new DelegacionIndiUsuDaoImpl();
         dele = daoDele.findByContratoIndicador(indicador, contrato);
         dele.setUsuario(usuario);
-        daoDele.update(dele);
+        daoDele.update(dele);        
     }
       
+    public int AvanceIndicador(int idContrato, int idIndicador){
+        //Numero de Items activos                              
+        ItemDaoImpl idi = new ItemDaoImpl();
+        int numItems = idi.numItemActivosByIndicador(idIndicador);
+                
+        //numero de item respondidos
+        RespItemDaoImpl ridi = new RespItemDaoImpl();        
+        int respxContrato = ridi.ItemRespondidosxContratoByIndicador(idContrato, idIndicador);        
+       
+        return ((respxContrato * 100) / numItems);
+    }
+    
     public String[][] getRowIndicador (int id_contrato){
         
         Indicador indicador = new Indicador();
         IndicadorDaoImpl daoIndi = new IndicadorDaoImpl();
         int can = daoIndi.getCountIndicador();
         
-        String array[][] = new String[can][3];
+        String array[][] = new String[can][4];
         
         ContratoDaoImpl daoContrato = new ContratoDaoImpl();
         Contrato contrato = daoContrato.findById(id_contrato);
@@ -74,8 +88,9 @@ public class controlPanelContacto {
             usuario = daoUsu.findById(delegado.getUsuario().getIdUsuario());
             
             array[i][0] = indicador.getNombre();
-            array[i][1] = usuario.getNombre();            
-            array[i][2] = indicador.getIdIndicador().toString();            
+            array[i][1] = usuario.getNombre();                        
+            array[i][2] = String.valueOf(AvanceIndicador(id_contrato,indicador.getIdIndicador()));
+            array[i][3] = indicador.getIdIndicador().toString();
             
         }       
         

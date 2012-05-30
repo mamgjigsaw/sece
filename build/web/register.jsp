@@ -161,7 +161,7 @@
 <div class="main">
   <div class="header">
     <div class="header_resize"> 
-        <a href="logger.jsp" class="buttonIniciarSesion">&LT;&LT; Atras</a>
+        
       <style type="text/css">
 .buttonIniciarSesion {
 	-moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;

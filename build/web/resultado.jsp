@@ -236,7 +236,7 @@ response.setDateHeader("Expires", 0);
         <div class="main">         
     <div class="header">
     <div class="header_resize">     
-        <a href="javascript:history.back(1)" class="buttonVolver">&LT;&LT; Atras</a>
+        
       <div class="menu">
      
       </div>

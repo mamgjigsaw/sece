@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Oopss!</title>
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
@@ -105,7 +106,7 @@
         
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      
       <div class="clr"></div>
     </div>
   </div>

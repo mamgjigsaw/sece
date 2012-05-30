@@ -28,7 +28,7 @@
         
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      
       <div class="clr"></div>
     </div>
   </div>
@@ -46,13 +46,17 @@
       <br>
       <br>
       
-      <div><table>
+      <div align="center" ><table>
               <tr>
-                  <td><h3 align="Center" >1er Parte de Inducci&oacuten al Administrador</h3></td>
-                  <td><h3 align="Center" >2da Parte de Inducci&oacuten al Administrador</h3></td>
+                  <td><h3 align="Center" >1er Parte de Inducci&oacuten al Administrador</h3></td>                  
               </tr>
+               <tr>
+                  <td><iframe width="640" height="480" src="http://www.youtube.com/embed/bmX6G-1NVmw" frameborder="0" allowfullscreen></iframe></td>                  
+              </tr>
+              <tr>                 
+                  <td><h3 align="Center" >2da Parte de Inducci&oacuten al Administrador</h3></td>
+              </tr>             
               <tr>
-                  <td><iframe width="640" height="480" src="http://www.youtube.com/embed/bmX6G-1NVmw" frameborder="0" allowfullscreen></iframe></td>
                   <td><iframe width="640" height="480" src="http://www.youtube.com/embed/V5Z82tU5Wvg" frameborder="0" allowfullscreen></iframe></td>
               </tr>
           </table>

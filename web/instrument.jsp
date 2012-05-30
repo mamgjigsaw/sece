@@ -120,14 +120,13 @@ response.setDateHeader("Expires", 0);
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
         <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
         <title>Cuestionario</title>
-        
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>        
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
         
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
         <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
-        <link REL="shortcut icon" type="image/x-icon" href="http://elixir.ematia.de/trac/export/493/elixir/branches/field_inherits_from_column/examples/videostore/videostore/static/images/favicon.ico"/>
         
         <script type="text/javascript" src="/sece/dwr/interface/interaccion.js"></script> 
         <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
@@ -318,7 +317,7 @@ response.setDateHeader("Expires", 0);
         </ul>
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      
       <div class="inGo" style=" font-size: 11px;" >
        <span id="toolbar" class="ui-widget-header ui-corner-all">	
         <button id="gobackbutton" >Panel De control</button>	

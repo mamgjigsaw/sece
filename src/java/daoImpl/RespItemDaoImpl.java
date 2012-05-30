@@ -7,15 +7,18 @@ package daoImpl;
 
 import dao.daoRespItem;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import pojo.Contrato;
+import pojo.Indicador;
 import pojo.Item;
 import pojo.RespItem;
 import pojo.Usuario;
+import pojo.Variable;
 
 /**
  *
@@ -125,6 +128,50 @@ public class RespItemDaoImpl implements daoRespItem{
         s.getTransaction().commit();
 
         return ri;
+    }
+
+    @Override
+    public int ItemRespondidosxContratoByIndicador(int idContrato, int idIndicador) {
+        int items = 0;
+        s = sf.getCurrentSession();
+        s.beginTransaction();
+        
+        Contrato contrato = new Contrato();        
+        contrato = (Contrato) s.get(Contrato.class, idContrato);
+                
+        Indicador indicador = new Indicador();        
+        indicador = (Indicador) s.get(Indicador.class, idIndicador);
+        
+        List<Variable> listVar = new ArrayList<Variable>();
+        listVar = s.createCriteria(Variable.class).add(Restrictions.eq("indicador", indicador)).add(Restrictions.eq("estado", true)).list();
+        
+        Variable variable = new Variable();
+        Iterator<Variable> iteVar =listVar.iterator();        
+        
+        List<Item> listItem = new ArrayList<Item>();
+        ItemDaoImpl daoItem = new ItemDaoImpl();        
+        
+        Item item = new Item();       
+        
+        while(iteVar.hasNext()){
+            variable = iteVar.next();
+            
+            listItem = daoItem.findByVariable(variable);
+            Iterator<Item> iteItem = listItem.iterator();        
+            
+            while(iteItem.hasNext()){
+                item = iteItem.next();
+                
+                items += ((Integer)s.createCriteria(RespItem.class)               
+               .add(Restrictions.eq("contrato", contrato))
+               .add(Restrictions.eq("item", item))
+               .setProjection(Projections.rowCount()).list().get(0)).intValue();
+                
+            }            
+        }       
+        
+        
+       return items;        
     }
 
 }

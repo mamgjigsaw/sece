@@ -248,7 +248,7 @@ response.setDateHeader("Expires", 0);
            var i=0;
            
          for(i;i<data.length;i++){
-             addRowIndicador(data[i][0],data[i][1],'100',data[i][2]);             
+             addRowIndicador(data[i][0],data[i][1],data[i][2],data[i][3]);             
          }
        }     
        
@@ -285,9 +285,9 @@ response.setDateHeader("Expires", 0);
            var cadena="";
            
            if(tipo==4){
-               cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td>"+avance+"</td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td></td></tr>";
+               cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td><div class='progress-bar blue small' style='width:90%; float: left;'><div style='width:"+ avance +"%;'><span style='top:16%;'>"+ avance +"%</span></div> </div></td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td></td></tr>";
            }else{
-           cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td>"+avance+"</td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td><p><a href='#' onclick='cambiarResponsable("+idIndicador+");'><strong>Delegar</strong></a></p></td></tr>";
+               cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td><div class='progress-bar blue small' style='width:90%; float: left;'><div style='width:"+ avance +"%;'><span style='top:16%;'>"+ avance +"%</span></div> </div></td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td><p><a href='#' onclick='cambiarResponsable("+idIndicador+");'><strong>Delegar</strong></a></p></td></tr>";
            }
            $("#table_indicador").append(cadena); 
        }       
@@ -428,7 +428,8 @@ response.setDateHeader("Expires", 0);
        /*errorElement: 'div',*/
        //errorContainer: $('#errores'),
        submitHandler: function(form){                      
-           panel.addDelegado(IdEmpresa,$("#cIndi").val(),IdContrato,$("#txtname").val(),$("#txttel").val(),$("#txtcargo").val(),$("#txtdir").val(),$("#txtcorreo").val(),$("#txtpass_delegado").val());
+           panel.addDelegado(IdEmpresa,$("#cIndi").val(),IdContrato,$("#txtname").val(),$("#txttel").val(),$("#txtcargo").val(),$("#txtdir").val(),$("#txtcorreo").val(),$("#txtpass").val());
+           
            $("#resp"+$("#cIndi").val()).html($("#txtname").val());//cambio el nombre del responsable en la tabla
            
            $("#all").click();
@@ -519,7 +520,15 @@ response.setDateHeader("Expires", 0);
        }
        
        function goGrafico(){
-           location.href="resultado.jsp";           
+           //location.href="resultado.jsp";   
+           window.open("resultado.jsp", "_blank");
+           
+       }
+       
+        function goGrafico1(){
+           //location.href="resultado.jsp";   
+           window.open("InformeFinal?idContrato="+IdContrato, "_blank");
+           
        }
        
        ////toolsbar
@@ -537,6 +546,12 @@ response.setDateHeader("Expires", 0);
 			}
 		});						
                 $( "#grafico" ).button({
+			text: false,
+			icons: {
+				primary: "ui-icon ui-icon-print"
+			}
+		});
+                 $( "#grafico1" ).button({
 			text: false,
 			icons: {
 				primary: "ui-icon ui-icon-print"
@@ -626,7 +641,8 @@ response.setDateHeader("Expires", 0);
            <div id="tabs-1">
                
                <span id="toolbar1" style="padding: 10px 4px; font-size: 14px;" class="ui-widget-header ui-corner-all">
-                   <button id="grafico"  onclick="goGrafico();">Ver Grafico</button>                   
+                   <button id="grafico"  onclick="goGrafico();">Ver Grafico de araña</button>                   
+                   <button id="grafico1"  onclick="goGrafico1();">Valoracion de Competitividad Empresarial</button>                   
                </span>
                <style>                
                 #table_indicador td, table_delegado td {

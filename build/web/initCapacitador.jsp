@@ -158,7 +158,7 @@ response.setDateHeader("Expires", 0);
                         modal: true                                              
 	    });
             $("#btnVC").button();            
-            $("#tabs").tabs({selected:3});
+            $("#tabs").tabs({selected:0});
             $( "#datepicker" ).datepicker();
             $( "#datepicker2" ).datepicker();                       
             $("#tblContratos").advancedtable({searchField: "#search",
@@ -285,14 +285,12 @@ response.setDateHeader("Expires", 0);
                     </div>
                     <div class="clr"> </div>
                     <div class="logo"><img src="images/logofull.png" width="293" height="84" border="0" alt="logo" /></div>      
-                    <div class="clr" align ="right">      
-                            
-                               
-                        <div>
+                       
+                        <div class="inGo" style=" font-size: 11px;" >
                              <span id="toolbar" class="ui-widget-header ui-corner-all">	
                             <button id="logoutbutton"><%= acceso.getUsuario().getNombre()%></button>	
                         </span>
-                            <div id="menuBtnOpciones1" style="border-radius: 0 0 5px 5px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 9.6%; height: 20px; color: #015480">
+                            <div id="menuBtnOpciones1" style="border-radius: 0 0 5px 5px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 70%; height: 20px; color: #015480">
                                 <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">                                    
                                     <li id="mnuBtnSalir" onclick="location.href='salir'" > Salir  </li>                                        
                                 </ul>              

@@ -7,11 +7,13 @@ package daoImpl;
 
 import dao.daoItem;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import pojo.Indicador;
 import pojo.Item;
 import pojo.Variable;
 
@@ -117,6 +119,32 @@ public Item findById(int id){
         Session se = sf.getCurrentSession();
         se.beginTransaction();
         items = (Integer) se.createCriteria(Item.class).add(Restrictions.eq("estado", 1)).setProjection(Projections.rowCount()).uniqueResult();         
+        return items;
+    }
+
+    @Override
+    public int numItemActivosByIndicador(int idIndicador) {
+        int items =0;
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        
+        Indicador indicador = new Indicador();        
+        indicador = (Indicador) se.get(Indicador.class, idIndicador);
+        
+        List<Variable> listVar = new ArrayList<Variable>();
+        listVar = se.createCriteria(Variable.class).add(Restrictions.eq("indicador", indicador)).add(Restrictions.eq("estado", true)).list();
+        
+        Variable variable = new Variable();
+        Iterator<Variable> iteVar =listVar.iterator();
+        while(iteVar.hasNext()){
+            variable = iteVar.next();
+            items += (Integer) se.createCriteria(Item.class)
+                .add(Restrictions.eq("estado", 1))
+                .add(Restrictions.eq("variable", variable))
+                .setProjection(Projections.rowCount())
+                .uniqueResult();         
+        }       
+        
         return items;
     }
 }

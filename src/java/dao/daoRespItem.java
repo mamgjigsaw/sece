@@ -19,5 +19,7 @@ public interface daoRespItem extends dao<RespItem>{
      //David
     int ItemRespondidosxUsuarioxContrato (Usuario usuario, Contrato contrato);
     int ItemRespondidosxContrato (Contrato contrato);
+    int ItemRespondidosxContratoByIndicador (int idContrato, int idIndicador);
+    
 
 }

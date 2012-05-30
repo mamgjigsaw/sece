@@ -4,13 +4,17 @@
  */
 package servlet;
 
+import com.mysql.jdbc.Connection;
 import daoImpl.ContratoDaoImpl;
 import daoImpl.EmpresaDaoImpl;
 import daoImpl.IndicadorDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.DriverManager;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -46,13 +50,17 @@ public class InformeFinal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        int idContrato = Integer.parseInt(request.getParameter("idContrato"));
+        String nombreEmpresa ="";
+        
         response.setContentType("application/pdf");
         ServletOutputStream out = response.getOutputStream();
         
         //id_contrato 25
         Contrato contrato = new Contrato();
         ContratoDaoImpl contraDao = new ContratoDaoImpl();
-        contrato = contraDao.findById(25);
+        contrato = contraDao.findById(idContrato);
         
         Usuario usuario = new Usuario();
         UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
@@ -62,24 +70,32 @@ public class InformeFinal extends HttpServlet {
         EmpresaDaoImpl empresaDao = new EmpresaDaoImpl();
         empresa = empresaDao.findByID(usuario.getEmpresa().getIdEmpresa());
         
-        vce valoracion = new vce();
+        nombreEmpresa = empresa.getNombre();
+       /* vce valoracion = new vce();
         valoracion.setNombre_empresa(empresa.getNombre());
         valoracion.setId_contrato(25);
+        */
         
-        IndicadorDaoImpl idi = new IndicadorDaoImpl();
-        List<Indicador> list = idi.findAllByActive();
+        //IndicadorDaoImpl idi = new IndicadorDaoImpl();
+        //List<Indicador> list = idi.findAllByActive();
        
          try
        {
-      JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("WEB-INF/reporteFinal.jasper"));
+           
+          Class.forName("com.mysql.jdbc.Driver");
+          Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/sece", "root", "s3c3/*01*/");
+          
+          JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("WEB-INF/finalReport.jasper"));
+            Map<String, Object> param = new HashMap<String, Object>();
+            param.put("idContrato", idContrato);
+            param.put("empresa",nombreEmpresa);
+            
+         JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, param, conexion); 
 
-     /* JRDataSource datasource = new JRBeanCollectionDataSource(valoracion, true);
-      JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null , datasource);
-
-      JRExporter exporter = new JRPdfExporter();
-      exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-      exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
-      exporter.exportReport();*/
+         JRExporter exporter = new JRPdfExporter();
+         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+         exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+         exporter.exportReport();
        }
       catch (Exception e){
       e.printStackTrace();
