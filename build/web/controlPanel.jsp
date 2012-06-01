@@ -247,6 +247,12 @@ response.setDateHeader("Expires", 0);
        function repIndicador(data){ 
            var i=0;
            
+           var cadenaTable="";
+           
+           cadenaTable = "<table id='table_indicador' style=' font-size: 14px;'><tr style='background-color: #347488;color: #fff;'><td> Indicador </td><td> Responsable </td><td> Progreso </td><td></td><td></td></tr></table>" ;
+           
+           $("#contenidoIndicadores").html(cadenaTable);
+           
          for(i;i<data.length;i++){
              addRowIndicador(data[i][0],data[i][1],data[i][2],data[i][3]);             
          }
@@ -289,6 +295,7 @@ response.setDateHeader("Expires", 0);
            }else{
                cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td><div class='progress-bar blue small' style='width:90%; float: left;'><div style='width:"+ avance +"%;'><span style='top:16%;'>"+ avance +"%</span></div> </div></td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td><p><a href='#' onclick='cambiarResponsable("+idIndicador+");'><strong>Delegar</strong></a></p></td></tr>";
            }
+           
            $("#table_indicador").append(cadena); 
        }       
        
@@ -649,15 +656,10 @@ response.setDateHeader("Expires", 0);
                     border-bottom: 1px solid #999; height: 35px;}                                                        
                </style>
                <h4>Indicadores</h4>
-               <table id="table_indicador" style=" font-size: 14px;" >
-                   <tr style="background-color: #347488;color: #fff;">
-                       <td> Indicador </td>
-                       <td> Responsable </td>
-                       <td> Progreso </td>
-                       <td></td>                                  
-                       <td></td>
-                   </tr>                              
-               </table>
+               
+               <div id="contenidoIndicadores" style=" padding-top:2%; " >
+                  <img src="images/bi.gif" width="32" height="32" border="0" style=" margin-left: 20%; margin-top: 5%;" />
+              </div>
                
            </div><%-- End div tabs 1 --%>
            <div id="tabs-2">

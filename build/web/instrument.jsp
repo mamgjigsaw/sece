@@ -203,7 +203,7 @@ response.setDateHeader("Expires", 0);
                 var strHtml="<table><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
            
                 for(i=0;i<data.length;i++){
-                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' ></input></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
+                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='radio' name='group"+ (i+1) +"' value='1' checked ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' ></input></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
                     
                 }
                
