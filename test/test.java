@@ -1,23 +1,15 @@
 
-import dwrScripts.initCapacitadores;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
-
-
-
+import dwrScripts.validate;
+import pojo.Usuario;
 
 public class test {
 
-  
-
     public static void main(String[] args) {
-       initCapacitadores ini = new initCapacitadores();
-       System.out.print(ini.getEmpreContratoFin(2));
-        
-                
+            validate valid = new validate();                
+            Usuario usuario = new Usuario();
+            usuario = valid.balanceoCargaCapacitador();
             
+            System.out.print("El usuario asignado es: "+ usuario.getIdUsuario());
         }
        
     }

@@ -139,6 +139,7 @@ response.setDateHeader("Expires", 0);
             var indicador_actual = <%=indi%>;
             var actual_var = <%=actual%>;// va de 0 a n
             var total_vari = <%=total_var%>;// va 1 a n
+            var contra = <%=contrato%>;
             
             $(function() {
 		
@@ -170,9 +171,8 @@ response.setDateHeader("Expires", 0);
                    }
                  );
                 
-                
-                
-                $( "#buttonnnext" ).button();  
+                                
+                //$( "#buttonnnext" ).button();  
                 $( "#box_message" ).hide();//escondo el contenido del div para los mensajes
                 
                 $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
@@ -183,11 +183,11 @@ response.setDateHeader("Expires", 0);
                         $("#box").html("");
                         $( "#buttonnnext" ).hide();
                      
-                        var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Completado</strong><p class='hola'>Se ha completado el cuestionario de <%=nombre_indicador%> correctamente!.</p></div><!-- /Notification --></section>";  
+                        var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Finalizado</strong><p class='hola'>Se ha finalizado el cuestionario de <%=nombre_indicador%> correctamente!.</p></div><!-- /Notification --></section>";  
                         $("#box_message").html(palabra);
                         $( "#box_message" ).show("blind");
                     }else{
-                        obtener(<%=indi%>,<%=actual%>);               
+                        obtener(indicador_actual,actual_var);
                     }
                 
             });            
@@ -199,16 +199,19 @@ response.setDateHeader("Expires", 0);
             function respuesta(data){                 
                 
                 num_item= data.length;
+                
                 var i;
                 var strHtml="<table><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
            
                 for(i=0;i<data.length;i++){
-                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='radio' name='group"+ (i+1) +"' value='1' checked ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' ></input></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
+                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' checked ></input></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
+                    
                     
                 }
                
-                strHtml += "</tbody></table>";
-                $("#box").html(strHtml);                
+                strHtml += "</tbody></table><input type='button' style=' font-size: 14px; margin-left: 4%;margin-bottom: 2%; ' value='Guardar' id='buttonnnext' onclick='saveAndNext();' />";
+                $("#box").html(strHtml);
+                $( "#buttonnnext" ).button();
             }
             
             
@@ -277,21 +280,39 @@ response.setDateHeader("Expires", 0);
                 $("#link_variable").html(data2);                   
             }
             
-            function link_indi(){                
-                interaccion.getListVariable(4, respListVar);
+            function ver_contestadas(){
+                $("#box").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
+                interaccion.getListVariable(indicador_actual, contra, respListVar);
             }
-            
+           
+           function mostrarActual(){
+               obtener(indicador_actual,actual_var);
+           }
+           
             function respListVar(dato){
                                 
                 var j;
-                var strHtml2="";
-                alert(dato.length);
-                //for(j=0;j<dato.length;j++){
-                  //  strHtml2 += ""+(j+1) + ". " + dato[j].nombre +"<input type='hidden' id='idVariable"+ (j+1) +"' value='"+ dato[j].idVariable +"'/>";                    
+                var stringBody="<table id='variableList' style=' font-size: 16px;'><thead><tr style='background-color: #347488;color: #fff;'><td>No.</td><td> Variable</td><td> Estado</td></tr></thead><tbody>";
+                //alert(dato[10][1]);
+                
+                 for(j=0;j<dato.length;j++){
+                    //stringBody += "<tr><td>"+(j+1) + ".</td><td><a id='link_go_variable' href='#' onclick='ver_esta_variable("+ dato[j][0] +");' >" + dato[j][1] + "</a></td><td>  " + dato[j][2] + "</td></tr>";
+                    stringBody += "<tr><td>"+(j+1) + ".</td><td><a id='link_go_variable' href='#' onclick='ver_esta_variable("+ j +");' >" + dato[j][1] + "</a></td><td>  " + dato[j][2] + "</td></tr>";
                     
-                //}
+                }
+                stringBody += "</tbody></table>";
                                
-                //$("#box").html(strHtml2);   
+                $("#box").html(stringBody); 
+                
+            }
+            
+            function ver_esta_variable(parametro){
+                var cadena="";
+                 //alert(parametro);                
+               $("#box").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
+               
+               
+                
             }
             
             function goout(){
@@ -306,6 +327,8 @@ response.setDateHeader("Expires", 0);
 	#toolbar {
 		padding: 10px 4px;
 	}
+        #variableList td{
+                    border-bottom: 1px solid #999; height: 35px;}
         </style>
     </head>    
     <body>
@@ -339,15 +362,15 @@ response.setDateHeader("Expires", 0);
   <div class="body">     
     <div class="body_resize">
         
-        <h2>Bienvenido, &nbsp&nbsp<a id="link_indicador" ><%=nombre_indicador%></a>  > <a id="link_variable" href="#" onclick="link_indi();" ><%=nombre_variable%> </a>&nbsp<a id="link_actual"  > </a></h2>
+        <h2>Bienvenido, &nbsp&nbsp<a id="link_indicador" href="#" onclick="ver_contestadas();" ><%=nombre_indicador%></a>  > <a id="link_variable" href="#" onclick="mostrarActual();" ><%=nombre_variable%> </a>&nbsp<a id="link_actual"  > </a></h2>
         
         <div id="box_message" align="center">            
                               
         </div><%-- finaliza div que muestra los mensajes --%> 
-        <div id="box" >
+        <div  id="box" style=" margin-bottom: 5%; padding-top:2%; padding-left: 2%; "  >
             
         </div>
-            <input type='button' style=" font-size: 14px;" value='Guardar' id="buttonnnext" onclick="saveAndNext();" />
+            
            <%-- <div class="right2"> </div> end div right2 --%> 
        
       <div class="clr"></div>

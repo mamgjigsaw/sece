@@ -154,6 +154,8 @@
         $("#txtcorreo").val("");
         $("#txtdir").val("");
         $("#txtpass").val("");                      
+        $("#txtpass2").val("");
+        //$("#comboPais").val("");
     }
         </script>    
 </head>
@@ -300,7 +302,7 @@
                     </div>                                               
                     <div class="row_reg">
                         <div class="left_reg">Direccion:</div>
-                        <div ><input type="text" name="txtdir" id="txtdir" /></div>
+                        <div ><textarea name="txtdir" id="txtdir" cols="30" rows="3"></textarea></div>
                         <div class="clear_reg"></div>
                     </div>                                               
                     <div class="row_reg">

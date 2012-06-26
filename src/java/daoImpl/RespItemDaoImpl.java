@@ -156,7 +156,7 @@ public class RespItemDaoImpl implements daoRespItem{
         while(iteVar.hasNext()){
             variable = iteVar.next();
             
-            listItem = daoItem.findByVariable(variable);
+            listItem = daoItem.findByVariableActivo(variable);
             Iterator<Item> iteItem = listItem.iterator();        
             
             while(iteItem.hasNext()){

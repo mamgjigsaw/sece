@@ -12,6 +12,7 @@ import daoImpl.RespItemDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.VariableDaoImpl;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import pojo.Avance;
 import pojo.Contrato;
@@ -26,7 +27,7 @@ import pojo.Variable;
  * @author mamg
  */
 public class interaccion_instrum {
-
+    
     public interaccion_instrum() {
     }
    
@@ -47,7 +48,7 @@ public class interaccion_instrum {
         
         ItemDaoImpl itemDao = new ItemDaoImpl();
         List<Item> listItem = new ArrayList<Item>();
-        listItem = itemDao.findByVariable(variable);
+        listItem = itemDao.findByVariableActivo(variable);
         
         return listItem;
     }
@@ -96,18 +97,85 @@ public class interaccion_instrum {
         return nombre;                
     }
     
+    public String[][] getItemAnswered(){
+        String array[][] = new String[1][2];
+        
+        
+        return array;
+    }
     
-    public List<Variable> getListVariable(int id_indicador){
-                       
+    public String[][] getListVariable(int id_indicador, int id_contrato){
+       
+       // try{           
+        
+        int finalizado = 0;
+        int fila = 0;
+        
         IndicadorDaoImpl indDao = new IndicadorDaoImpl();
         Indicador indicador = new Indicador();
         indicador = indDao.findById(id_indicador);
         
         VariableDaoImpl varDao = new VariableDaoImpl();
         List<Variable> listVariable = new ArrayList<Variable>();
-        listVariable = varDao.findByIndicador(indicador);        
+        listVariable = varDao.findByIndicador(indicador);   
         
-        return listVariable;
+        String array[][] = new String[listVariable.size()][3];
+        
+        Variable variable = new Variable();
+        Iterator<Variable> iteratorVar = listVariable.iterator(); 
+        
+        ItemDaoImpl daoItem = new ItemDaoImpl();
+        List<Item> listItem = new ArrayList<Item>();
+        Item item = new Item();
+        
+        
+        RespItemDaoImpl daoResp = new RespItemDaoImpl();
+        RespItem resp = new RespItem();
+        
+        while(iteratorVar.hasNext()){
+            variable = iteratorVar.next();
+            listItem = daoItem.findByVariableActivo(variable); //revisar que el item no importa su estado si esta activo o inactivo
+            
+            Iterator<Item> iteratorItem = listItem.iterator();
+            
+            while(iteratorItem.hasNext()){
+                item = iteratorItem.next();
+                
+                resp = daoResp.findByContratoItem(id_contrato, item.getIdItem());
+                
+                if(resp != null ){
+                    finalizado = finalizado + 1;
+                }
+            }
+            
+            if(finalizado ==0){                 
+                 array[fila][0] = String.valueOf(variable.getIdVariable()); 
+                 array[fila][1] = variable.getNombre();
+                 array[fila][2] = "No esta Finalizado";
+                 fila = fila + 1;
+                 finalizado = 0;
+            }else{
+                 array[fila][0] = String.valueOf(variable.getIdVariable()); 
+                 array[fila][1] = variable.getNombre();
+                 array[fila][2] = "Finalizado";
+                 fila = fila + 1;
+                 finalizado = 0;
+            }
+            
+            
+        }
+        //}catch(Exception e){System.out.println(e.getMessage());}
+        
+        return array;
+    }
+    
+    public String[][] getVariableFinished(int id_variable, int id_contrato){
+         String array[][] = new String[2][3];
+         
+         VariableDaoImpl daoVar = new VariableDaoImpl();
+         
+         
+         return array;
     }
        
     

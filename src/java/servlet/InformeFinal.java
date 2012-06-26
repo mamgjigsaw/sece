@@ -9,12 +9,14 @@ import daoImpl.ContratoDaoImpl;
 import daoImpl.EmpresaDaoImpl;
 import daoImpl.IndicadorDaoImpl;
 import daoImpl.UsuarioDaoImpl;
+import dwrScripts.initCapacitadores;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -53,9 +55,12 @@ public class InformeFinal extends HttpServlet {
         
         int idContrato = Integer.parseInt(request.getParameter("idContrato"));
         String nombreEmpresa ="";
+        String direccion ="";
         
         response.setContentType("application/pdf");
         ServletOutputStream out = response.getOutputStream();
+        
+        initCapacitadores init = new initCapacitadores();
         
         //id_contrato 25
         Contrato contrato = new Contrato();
@@ -71,35 +76,60 @@ public class InformeFinal extends HttpServlet {
         empresa = empresaDao.findByID(usuario.getEmpresa().getIdEmpresa());
         
         nombreEmpresa = empresa.getNombre();
-       /* vce valoracion = new vce();
-        valoracion.setNombre_empresa(empresa.getNombre());
-        valoracion.setId_contrato(25);
-        */
         
-        //IndicadorDaoImpl idi = new IndicadorDaoImpl();
-        //List<Indicador> list = idi.findAllByActive();
+        // 
+        String passBD, ipPublica,userDB;
+        Properties archivoConf = new Properties();
+        archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
+        userDB = (String) archivoConf.getProperty("userDB");
+        passBD = (String) archivoConf.getProperty("passwordDB");
+        ipPublica = (String) archivoConf.getProperty("ipPublica");
+        
+         int av = init.AvancePorcXcontrato(contrato); 
+         
+         if(av==100){        
        
          try
-       {
-           
-          Class.forName("com.mysql.jdbc.Driver");
-          Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/sece", "root", "s3c3/*01*/");
-          
-          JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("WEB-INF/finalReport.jasper"));
-            Map<String, Object> param = new HashMap<String, Object>();
-            param.put("idContrato", idContrato);
-            param.put("empresa",nombreEmpresa);
+         {
+             Class.forName("com.mysql.jdbc.Driver");
+             Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://"+ ipPublica +":3306/sece", userDB, passBD);
+             
+             JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("WEB-INF/finalReport.jasper"));
+             
+             Map<String, Object> param = new HashMap<String, Object>();
+             param.put("idContrato", idContrato);
+             param.put("empresa",nombreEmpresa);
             
-         JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, param, conexion); 
+             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, param, conexion); 
 
-         JRExporter exporter = new JRPdfExporter();
-         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-         exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
-         exporter.exportReport();
-       }
-      catch (Exception e){
-      e.printStackTrace();
-       }
+            JRExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+            exporter.exportReport();
+        }
+           catch (Exception e){
+                e.printStackTrace();
+               }        
+         }else{
+          //Aqui imprimir que no ha terminado el instrumento
+            try
+            {
+                 Class.forName("com.mysql.jdbc.Driver");
+                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://"+ ipPublica +":3306/sece", userDB, passBD);
+
+                 JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("WEB-INF/valoracionNoTerminada.jasper"));
+
+                 JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conexion); 
+
+                JRExporter exporter = new JRPdfExporter();
+                exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                exporter.exportReport();
+           }
+              catch (Exception e){
+                  e.printStackTrace();
+                  }
+         }//End the else of validate av==100   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

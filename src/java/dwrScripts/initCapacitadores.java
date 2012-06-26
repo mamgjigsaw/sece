@@ -43,7 +43,7 @@ public class initCapacitadores {
     return url;
     }
     
-    public String insertarVideoChat(int idcontrato,int idusuario){
+   public String insertarVideoChat(int idcontrato,int idusuario){
         ContratoDaoImpl cdi = new ContratoDaoImpl();
         Contrato contra = cdi.findById(idcontrato);
         
@@ -58,13 +58,19 @@ public class initCapacitadores {
         String[] idUsuarios = new String [10];         
         int i=0;        
             while(it.hasNext()){
-                delegado = it.next();                
-                idUsuarios[i] = String.valueOf(delegado.getUsuario().getIdUsuario());
+                delegado = it.next();  
+                //if para que usuario delegado unico no se repita
+                if (String.valueOf(delegado.getUsuario().getIdUsuario()).equals(String.valueOf(idusuario)))
+                    idUsuarios[i] = null;
+                else
+                    idUsuarios[i] = String.valueOf(delegado.getUsuario().getIdUsuario());
+                
+                
                 i++;
             }//fin while
         
         String obj = "<object id='Video_Chat' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0' "
-                + "width='1000' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser2="+ idUsuarios[0]+"&iduser3="+ idUsuarios[1]+"&iduser4="+ idUsuarios[2]+"&nomUser="+ nombreUsuario+"'/>"
+                + "width='990' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser2="+ idUsuarios[0]+"&iduser3="+ idUsuarios[1]+"&iduser4="+ idUsuarios[2]+"&nomUser="+ nombreUsuario+"'/>"
                 + " <param name='quality' value='high'/> <embed src='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser2="+ idUsuarios[0]+"&iduser3="+ idUsuarios[1]+"&iduser4="+ idUsuarios[2]+"&nomUser="+ nombreUsuario+"' "
                 + "quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='1000' height='625'></embed> </object>";
         return obj;
@@ -175,7 +181,7 @@ public class initCapacitadores {
            return it;
     }
     
-    private int AvancePorcXcontrato( Contrato contra ){       
+    public int AvancePorcXcontrato( Contrato contra ){       
         ItemDaoImpl idi = new ItemDaoImpl();
         RespItemDaoImpl ridi = new RespItemDaoImpl();        
         int respxContrato = ridi.ItemRespondidosxContrato(contra);

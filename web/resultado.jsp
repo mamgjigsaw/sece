@@ -4,6 +4,8 @@
     Author     : Dave
 --%>
 
+<%@page import="dwrScripts.initCapacitadores"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="pojo.Avance"%>
 <%@page import="daoImpl.AvanceDaoImpl"%>
@@ -39,6 +41,7 @@ response.setDateHeader("Expires", 0);
         sesion.setMaxInactiveInterval(3600);
         String acc = (String) sesion.getAttribute("idAcc");
         String name;
+        int sh = 0; //variable para mostrar el mensaje de que no ha terminado el instrumento cuando vale 1
         
         int idContrato =0;
         if(acc==null){
@@ -58,84 +61,94 @@ response.setDateHeader("Expires", 0);
          ContratoDaoImpl daoContra = new ContratoDaoImpl();
          Contrato contrato = (Contrato) daoContra.findByUsuario(usuario);//donde el estado sea igual 1
          idContrato = contrato.getIdContrato();
-            
-         //calculo para guardar en avence en el campo resultado
          
-         int respPositiva=0;
-         int valoracion=0;
-         double promedio = 0.0;
-         double eva;            
-             
+         //revisar si ya termino de llenar cada indicador, si no falta que termine el instrumento por lo tant no puede ver el grafico de araña.
          
-         IndicadorDaoImpl daoIndi = new IndicadorDaoImpl();
-         List<Indicador> listIndi = new ArrayList<Indicador>();
-         listIndi = daoIndi.findAllByActive();
+         initCapacitadores init = new initCapacitadores();
          
-         Indicador indicador = new Indicador();
-         Variable variable = new Variable();
-         Item item = new Item();
+         int av = init.AvancePorcXcontrato(contrato); 
          
-         RespItemDaoImpl daoRespItem = new RespItemDaoImpl();
-         RespItem resp = new RespItem();
-         
-         EscalaDaoImpl daoEsc = new EscalaDaoImpl();
-         Escala escala = new Escala();
-       
-         AvanceDaoImpl daoAvance = new AvanceDaoImpl();
-         Avance avance = new Avance();
-             
-         DecimalFormat formateador = new DecimalFormat("##.##");
-         
-         for (int i=0;listIndi.size() > i;i++){//4 indicadores
-             indicador = listIndi.get(i);
-             //System.out.println(">><><><><> indicador " + indicador.getNombre());
-             
-             VariableDaoImpl daoVariable = new VariableDaoImpl();
-             List<Variable> listVariable = new ArrayList<Variable>();
-             listVariable = daoVariable.findByIndicador(indicador);
-          
-             for(int j=0;listVariable.size() > j ;j++){ 
-                 
-                 variable = listVariable.get(j);
-                 //System.out.println("<><> variable " + variable.getNombre());
-                 
-                 ItemDaoImpl daoItem = new ItemDaoImpl();
-                 List<Item> listItem = new ArrayList<Item>();
-                 listItem = daoItem.findByVariableActivo(variable);
-                 
-                 for (int m=0;listItem.size() > m; m++){
-                     item = listItem.get(m);
-                         
-                     resp = daoRespItem.findByContratoItem(idContrato, item.getIdItem());
-                     
-                     if(resp.getResBoolean()==1){
-                         respPositiva = respPositiva + 1;
+         if(av==100){
+              //calculo para guardar en avence en el campo resultado
+                               
+             int respPositiva=0;
+             int valoracion=0;
+             double promedio = 0.0;
+             double eva;            
+
+             IndicadorDaoImpl daoIndi = new IndicadorDaoImpl();
+             List<Indicador> listIndi = new ArrayList<Indicador>();
+             listIndi = daoIndi.findAllByActive();
+
+             Indicador indicador = new Indicador();
+             Variable variable = new Variable();
+             Item item = new Item();
+
+             RespItemDaoImpl daoRespItem = new RespItemDaoImpl();
+             RespItem resp = new RespItem();
+
+             EscalaDaoImpl daoEsc = new EscalaDaoImpl();
+             Escala escala = new Escala();
+
+             AvanceDaoImpl daoAvance = new AvanceDaoImpl();
+             Avance avance = new Avance();
+
+             DecimalFormat formateador = new DecimalFormat("##.##");
+
+             for (int i=0;listIndi.size() > i;i++){//4 indicadores
+                 indicador = listIndi.get(i);
+                 //System.out.println(">><><><><> indicador " + indicador.getNombre());
+
+                 VariableDaoImpl daoVariable = new VariableDaoImpl();
+                 List<Variable> listVariable = new ArrayList<Variable>();
+                 listVariable = daoVariable.findByIndicador(indicador);
+
+                 for(int j=0;listVariable.size() > j ;j++){ 
+
+                     variable = listVariable.get(j);
+                     //System.out.println("<><> variable " + variable.getNombre());
+
+                     ItemDaoImpl daoItem = new ItemDaoImpl();
+                     List<Item> listItem = new ArrayList<Item>();
+                     listItem = daoItem.findByVariableActivo(variable);
+
+                     for (int m=0;listItem.size() > m; m++){
+                         item = listItem.get(m);
+
+                         resp = daoRespItem.findByContratoItem(idContrato, item.getIdItem());
+
+                         if(resp.getResBoolean()==1){
+                             respPositiva = respPositiva + 1;
+                         }
                      }
-                 }
-                 
-                     escala = daoEsc.findByVarRango(variable.getIdVariable(),respPositiva);
-                     //System.out.println("La variable " + variable.getIdVariable() + " el rango "+ respPositiva +" la escala " + escala.getValoracion() );
-                 
-                 respPositiva = 0;
-                 valoracion = valoracion + escala.getValoracion();
-                 //ponderacionTotal = ponderacionTotal + variable.getPonderacion();
-             }//fin ciclo variable
-             
-             promedio = (double) valoracion / listVariable.size();
-            
-             //System.out.println("><<<<?????????? promedio por indicador " + Double.valueOf(formateador.format(promedio)) +" valoracion "+ valoracion + " con num variable " + listVariable.size());
-             
-             //System.out.println(Double.valueOf(formateador.format(promedio*0.25*100)));
-             
-             eva = Double.valueOf(formateador.format(promedio*0.25*100));
-             
-             avance = daoAvance.findByIndiAndContra(indicador.getIdIndicador(), idContrato);             
-             avance.setResultado((float) eva);
-             daoAvance.update(avance);
-             
-             promedio = 0.0;
-             valoracion = 0;            
-         }        
+
+                         escala = daoEsc.findByVarRango(variable.getIdVariable(),respPositiva);
+                         //System.out.println("La variable " + variable.getIdVariable() + " el rango "+ respPositiva +" la escala " + escala.getValoracion() );
+
+                     respPositiva = 0;
+                     valoracion = valoracion + escala.getValoracion();
+                     //ponderacionTotal = ponderacionTotal + variable.getPonderacion();
+                 }//fin ciclo variable
+
+                 promedio = (double) valoracion / listVariable.size();
+
+                 //System.out.println("><<<<?????????? promedio por indicador " + Double.valueOf(formateador.format(promedio)) +" valoracion "+ valoracion + " con num variable " + listVariable.size());
+
+                 //System.out.println(Double.valueOf(formateador.format(promedio*0.25*100)));
+
+                 eva = Double.valueOf(formateador.format(promedio*0.25*100));
+
+                 avance = daoAvance.findByIndiAndContra(indicador.getIdIndicador(), idContrato);             
+                 avance.setResultado((float) eva);
+                 daoAvance.update(avance);
+
+                 promedio = 0.0;
+                 valoracion = 0;            
+             }        
+         }else{
+             sh = 1;
+         }
+           
                           
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">         
@@ -154,12 +167,14 @@ response.setDateHeader("Expires", 0);
         <script src="resources/amcharts/javascript/raphael.js" type="text/javascript"></script>
         <script type="text/javascript" src="resources/amcharts/flash/swfobject.js"></script>
         
-        <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
+        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>        
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
         <script type="text/javascript" src="/sece/dwr/util.js"></script>
         
         <script type="text/javascript">
                  var id_contrato=<%=idContrato%>;  
+                 var mostrar = <%=sh%>;
                    
            var flashVars = {
                 settings_file: "resources/settings.xml",
@@ -167,6 +182,12 @@ response.setDateHeader("Expires", 0);
            };
            
            $(document).ready(function(){ 
+               
+               if(mostrar==1){
+                   var palabra= "<section role='principal' id='message_box'><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Completar Instrumento</strong><p class='hola'>El instrumento no ha sido llenado todavia, despues de finalizado podra ver el Grafico de Araña!!</p></div><!-- /Notification --></section>";  
+                   $("#messageBox").html(palabra);
+               }else{
+               
                  // change 8 to 80 to test javascript version
             if (swfobject.hasFlashPlayerVersion("90")){
                 swfobject.embedSWF("resources/amcharts/flash/amradar.swf", "chartdiv", "700", "600", "8.0.0", "resources/amcharts/flash/expressInstall.swf", flashVars);
@@ -178,7 +199,7 @@ response.setDateHeader("Expires", 0);
                 amFallback.type = "radar";
                 amFallback.write("chartdiv");
             }
-                
+                }
               
               //para los botones
 		
@@ -262,7 +283,8 @@ response.setDateHeader("Expires", 0);
   
   <div class="body">
       <div class="body_resize" align="center">
-          <div id="chartdiv" style="width:700px; height:600px; background-color:#FFFFFF"></div>
+          <div id="messageBox"></div>
+          <div id="chartdiv" style="width:700px; height:600px; background-color:#FFFFFF"></div>          
       </div>
       
   </div>

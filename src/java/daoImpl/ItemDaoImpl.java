@@ -100,7 +100,7 @@ public Item findById(int id){
         List<Item> list = new ArrayList<Item>();
         Session se = sf.getCurrentSession();
         se.beginTransaction();
-        list = se.createCriteria(Item.class).add(Restrictions.eq("variable", variable)).add(Restrictions.eq("estado", 1)).list();
+        list = se.createCriteria(Item.class).add(Restrictions.eq("variable", variable)).add(Restrictions.eq("estado", 0)).list();
         return list;
     }
 

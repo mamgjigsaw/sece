@@ -120,6 +120,7 @@ response.setDateHeader("Expires", 0);
         
         <script type="text/javascript" src="/sece/dwr/interface/panel.js"></script>        
         <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
+        <script type="text/javascript" src="/sece/dwr/interface/capacitadoresScripts.js"></script>
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
         <script type="text/javascript" src="/sece/dwr/util.js"></script>
         
@@ -569,9 +570,12 @@ response.setDateHeader("Expires", 0);
         
                 
                function test(){
-                   $.get("InsertarVideoChat",{idc:<%=idContrato%>,iduser:<%=id_usuario%>},function (data){
-                            $("#videoChatUser").html(data);
-                        });                         
+               capacitadoresScripts.insertarVideoChat(<%=idContrato%>,<%=id_usuario%>,{
+                                    callback:function(data){
+                                    $("#videoChatUser").html(data);                                           
+                                    }//fin callback                                    
+                            }); 
+                                      
                   $('#videoChatUser').toggle();
                    if ($('#videoChatUser').css('display') == 'none') {                      
                           $('#btnVCUser').val('Iniciar Video Chat');     
@@ -658,7 +662,7 @@ response.setDateHeader("Expires", 0);
                <h4>Indicadores</h4>
                
                <div id="contenidoIndicadores" style=" padding-top:2%; " >
-                  <img src="images/bi.gif" width="32" height="32" border="0" style=" margin-left: 20%; margin-top: 5%;" />
+                  <img src="resources/icons/ajax_loading_blue.gif" width="24" height="24" border="0" style=" margin-left: 20%; margin-top: 5%;" />
               </div>
                
            </div><%-- End div tabs 1 --%>
@@ -834,7 +838,7 @@ response.setDateHeader("Expires", 0);
                    </form>
                </div><%-- End div tabs 4 --%>
            </div><%-- End div tabs 4 --%>
-           <div id="tabs-5">
+           <div id="tabs-5"  style=" padding:0 0;">
                
                <div id="videoChatUser">
                    
