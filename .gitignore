@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 /build/
 /dist/
 java/test.java
 /nbproject/private/
+=======
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+>>>>>>> aa1402cdf4ea67a8c55960ef1fd1da81f24c1a19
