@@ -121,7 +121,7 @@ public class instrumentoAdministrador {
         }           
         return ids;
     }
-   public void newAsigSug(int ids, int idI){
+   /*public void newAsigSug(int ids, int idI){
            Sugerencia s = new Sugerencia();
            SugerenciaDaoImpl sdi = new SugerenciaDaoImpl();
            s = sdi.findById(ids);
@@ -131,5 +131,5 @@ public class instrumentoAdministrador {
            AsignacionSugItem asi = new AsignacionSugItem(s, i);
            AsignacionSugItemDaoImpl asidi = new AsignacionSugItemDaoImpl();
            asidi.create(asi);
-    }
+    }*/
 }

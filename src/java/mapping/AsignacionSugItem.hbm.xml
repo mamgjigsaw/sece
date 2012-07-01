@@ -3,7 +3,7 @@
 <!-- Generated Nov 3, 2011 11:28:10 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
   <class catalog="sece" name="pojo.AsignacionSugItem" table="asignacion_sug_item">
-    <id name="idAsignSug" type="int">
+    <id name="idAsignSug" type="java.lang.Integer">
       <column name="id_asign_sug"/>
       <generator class="identity"/>
     </id>

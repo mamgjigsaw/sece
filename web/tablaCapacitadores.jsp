@@ -46,17 +46,21 @@
                  if(confirm('¿Esta seguro que desea eliminar a: ' + nombre + '?')){                    
                      
                      validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 18, "Anulo un Capacitador", idcap,"Estado Activo" , "Estado Inactivo");  
-                     updates.deleteCapacitador(idcap);
-                     location.reload();
+                     updates.deleteCapacitador(idcap, eliminarFila);
+                     //location.reload();
                  }else{
                      
-                 }
-                
-                 
+                 }      
              } 
-             
+             function eliminarFila(data){
+                  if(data[0] == 1){
+                      document.getElementById(data[1]).style.display = "none";
+                  }  
+                  else{
+                      alert("Ha habido un error");
+                  }
+                }
          </script>
-         
         <link href="resources/tablesorter/styles.css" rel="stylesheet" type="text/css" /> 
         <div id="pagerCap">
 	                 <form>
@@ -98,7 +102,7 @@
                   while(itc.hasNext()){
                     ucap = itc.next();
                     
-                    if(ucap.getTipoUsuario() == 2 && ucap.getEstado() == 1){
+                    if(ucap.getTipoUsuario() == 2 &&  ucap.getEstado() == 1 || ucap.getEstado() == 2 ){
                     AsignacionCapaContraDaoImpl accdi = new AsignacionCapaContraDaoImpl();
                     List<AsignacionCapaContra> numEmp = accdi.findAllByIdUsuarioCapacitador(ucap);
                     int numero = 0;
@@ -115,7 +119,7 @@
 %>
                 
             	
-                        <tr>                           
+                        <tr id="<%= ucap.getIdUsuario().toString() %>" >                           
                             <td><%= ucap.getNombre() %></td>
                             <td><%= ucap.getTelefono() %></td>
                             <td><%= ucap.getCorreo() %></td>

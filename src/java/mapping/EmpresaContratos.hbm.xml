@@ -6,7 +6,10 @@
     <id name="idEmpresa" type="java.lang.Integer">
       <column name="idEmpresa"/>
       <generator class="identity"/>
-    </id>    
+    </id> 
+    <property name="idContrato" type="java.lang.Integer">
+      <column name="idContrato"/>
+    </property>
     <property name="empresaNombre" type="string">
       <column length="200" name="empresaNombre"/>
     </property>

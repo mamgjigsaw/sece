@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import pojo.AsignacionCapaContra;
+import pojo.Contrato;
 import pojo.Usuario;
 import util.HibernateUtil;
 
@@ -69,6 +70,25 @@ public class AsignacionCapaContraDaoImpl implements daoAsignacionCapaContra {
         list = se.createCriteria(AsignacionCapaContra.class).add(Restrictions.eq("usuario", us)).list();
         se.getTransaction().commit();
         return list;
+    }
+
+    @Override
+    public AsignacionCapaContra findbyIdContrato(Contrato c) {
+        
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        asignacion = (AsignacionCapaContra) se.createCriteria(AsignacionCapaContra.class).add(Restrictions.eq("contrato", c)).uniqueResult();
+        se.getTransaction().commit();
+        return asignacion;
+    }
+
+    @Override
+    public AsignacionCapaContra findbyId(int id) {
+        Session se=sf.getCurrentSession();
+        se.beginTransaction();
+        asignacion = (AsignacionCapaContra) se.get(AsignacionCapaContra.class, id);
+        se.getTransaction().commit();
+        return asignacion;
     }
     
 }

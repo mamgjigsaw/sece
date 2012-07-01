@@ -103,7 +103,7 @@ public class UsuarioDaoImpl implements daoUsuario{
          List<Usuario> cap;
         Session se = sf.getCurrentSession();
         se.beginTransaction();
-        Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).add(Restrictions.eq("estado", 1));
+        Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).add(Restrictions.or(Restrictions.eq("estado", 1 ), Restrictions.eq("estado", 2 )));
         cap = criterio.list();
         se.getTransaction().commit();
         return cap; 

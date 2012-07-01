@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class EmpresasContratos implements java.io.Serializable{
     private Integer idEmpresa;
+    private Integer idContrato;
     private String empresaNombre;
     private String descripcion;
     private String telefono;
@@ -28,8 +29,17 @@ public class EmpresasContratos implements java.io.Serializable{
     public EmpresasContratos() {
     }
 
-    public EmpresasContratos(Integer idEmpresa, String empresaNombre, String descripcion, String telefono, String ciudad, String direccion, String contactoNombre, String contactoCargo, String contactoTelefono, String contactoCorreo, Integer contratoEstado, Date contratoFecha, Date contratoFechaFinalizo) {
+    public Integer getIdContrato() {
+        return idContrato;
+    }
+
+    public void setIdContrato(Integer idContrato) {
+        this.idContrato = idContrato;
+    }
+
+    public EmpresasContratos(Integer idEmpresa, Integer idContrato, String empresaNombre, String descripcion, String telefono, String ciudad, String direccion, String contactoNombre, String contactoCargo, String contactoTelefono, String contactoCorreo, Integer contratoEstado, Date contratoFecha, Date contratoFechaFinalizo) {
         this.idEmpresa = idEmpresa;
+        this.idContrato = idContrato;
         this.empresaNombre = empresaNombre;
         this.descripcion = descripcion;
         this.telefono = telefono;

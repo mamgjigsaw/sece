@@ -289,8 +289,18 @@ response.setDateHeader("Expires", 0);
                 
                 function resultado(data){
                           var resp = data
-                          if(resp == 0){
-                             location.reload();
+                          if(resp != null){//recarga el panel con los datos actualizado atraves de dwr
+                              document.getElementById("lblnombre").innerHTML = resp[0];
+                              document.getElementById("lblcargo").innerHTML = resp[1];
+                              document.getElementById("lbltel").innerHTML = resp[2];
+                              document.getElementById("lblmail").innerHTML = resp[3];
+                              document.getElementById("lbldir").innerHTML = resp[4];
+                              document.getElementById("updatenombre").innerHTML = resp[0];
+                              document.getElementById("updatecargo").innerHTML = resp[1];
+                              document.getElementById("updatetel").innerHTML = resp[2];
+                              document.getElementById("updatemail").innerHTML = resp[3];
+                              document.getElementById("updatedir").innerHTML = resp[4];
+                              document.getElementById("logoutbutton").innerText = resp[0];
                           }
                                     
                                 }
@@ -442,14 +452,31 @@ response.setDateHeader("Expires", 0);
                else{                      
                    capacitadoresDWR.newCapacitador(nombre, cargo, telefono, dire, email, contra, resultado);
                    
-                   document.getElementById("cap").src = "tablaCapacitadores.jsp";
+                  // document.getElementById("cap").src = "tablaCapacitadores.jsp";
                     
                     clearCapacitador();
                }            
          }
          function resultado(data){
-             
-           validacion.saveActionBitacora(<%= val %>, 17, "Agrego un nuevo capacitador",data, "Nuevo Capacitador", "Nuevo");  
+             if(data != null){
+                 validacion.saveActionBitacora(<%= val %>, 17, "Agrego un nuevo capacitador",data[0], "Nuevo Capacitador", "Nuevo");  
+         
+                
+             }
+           
+         }
+         function prueba(){
+                var tabla = frames.cap.document.getElementById("tablaCap");
+               // var nRow = tabla.insertRow(-1);
+               // nRow.insertCell(0).innerText = "Hola";
+                //nRow.insertCell(1).innerText = "Hola";
+               // nRow.insertCell(2).innerText = "Hola";
+               // nRow.insertCell(3).innerText = "Hola";
+               // nRow.insertCell(4).innerText = "Hola";
+               // nRow.insertCell(5).innerText = "Hola";
+               var nRow = "<tr><td>Hola</td><td>Hola</td><td>Hola</td><td>Hola</td><td>Hola</td><td>Hola</td></tr>";
+               $(tabla).append(nRow);
+                
          }
          function clearCapacitador(){
              document.getElementById("nNomCap").value = "";
@@ -579,11 +606,28 @@ response.setDateHeader("Expires", 0);
            
             <div id="tabs" style="padding-top: 5px; margin-left: 1%; margin-right: 1%; height: 55em" >
                 <ul>
+                    <li><a href="#tabEmpresas"><span>EMPRESAS</span></a></li>
                     <li><a href="#tabCapacitadores"><span>CAPACITADORES</span></a></li>
+                    <li><a href="#tabNoticias"><span>NOTAS</span></a></li>
                     <li><a href="#tabReportes"><span>REPORTES</span></a></li>
                     <li><a href="#tabPerfil"><span>PERFIL</span></a></li>
-                    <li><a href="#tabNoticias"><span>NOTAS</span></a></li>
+                    
+                    
                 </ul>
+                <div id="tabEmpresas" style=" width: 98%;">
+       
+                    <div style=" width: 50%; float: left;" >
+                  <iframe src="tableEmpresasNuevas.jsp" style="width: 100%; height: 45%" frameborder="0" scrolling="false"  id="eNueva"></iframe>   
+                    </div> 
+                    <div style="width: 50%; float: right " >
+                   <iframe src="tableEmpresasActivas.jsp" style="width: 100%; height: 45%" frameborder="0" scrolling="false"  id="eActiva"></iframe>     
+                    </div>
+                    <div style=" width: 98%;">
+                        <iframe src="tableEmpresasFinal.jsp" style="width: 100%; height: 45%" frameborder="0" scrolling="false"  id="eFinal"></iframe>     
+                    
+        </div>
+                </div>          
+                <%-- Fin Empresas, Inicio capacitadores --%>                
                         <div id="tabCapacitadores">
                             <div align="center">
                                 <div class="divPanel" style="width: 500px; height: 180px;">
@@ -610,8 +654,10 @@ response.setDateHeader("Expires", 0);
                                     </tr>                          
                                 </table>
                                     <div align="center" ><input id="btnNewCapacitador" onclick="newCapacitador();" type="button" value="Guardar"/>
-                                     <input id="btnClearCap" onclick="clearCapacitador();" type="button" value="Limpiar"/></div>
-                                    
+                                     <input id="btnClearCap" onclick="clearCapacitador();" type="button" value="Limpiar"/>
+                                     <input id="m" onclick="prueba();" type="button" value="Hola"/>
+                                    </div>
+                                     
                                  </form>
                                       
                                   </div><br>
@@ -717,23 +763,23 @@ response.setDateHeader("Expires", 0);
                             <table>
                                 <tr>
                                     <td>Nombre:</td>
-                                    <td><% out.print(usu.getNombre()); %></td>
+                                    <td><label id="lblnombre"><% out.print(usu.getNombre()); %></label></td>
                                 </tr>
                                 <tr>
                                     <td>Cargo:</td>
-                                    <td><% out.print(usu.getCargo()); %></td>
+                                    <td><label id="lblcargo"><% out.print(usu.getCargo()); %></label></td>
                                 </tr>
                                 <tr>
                                     <td>Telefono:</td>
-                                    <td><% out.print(usu.getTelefono()); %></td>
+                                    <td><label id="lbltel"><% out.print(usu.getTelefono()); %></label></td>
                                 </tr>
                                 <tr>
                                     <td>Correo:</td>
-                                    <td><% out.print(usu.getCorreo()); %></td>
+                                    <td><label id="lblmail"><% out.print(usu.getCorreo()); %></label></td>
                                 </tr>
                                 <tr>
                                     <td>Direccion:</td>
-                                    <td><% out.print(usu.getDireccion()); %></td>
+                                    <td><label id="lbldir"><% out.print(usu.getDireccion()); %></label></td>
                                 </tr>
                            </table> <br>
                                     <button id="updateButton">Editar Información</button>
@@ -768,7 +814,6 @@ response.setDateHeader("Expires", 0);
                                         <iframe src="tableNotas.jsp" style=" width: 100%; height: 420px" frameborder="0" scrolling="false"  id="notasIframe"></iframe> 
                                         </div>
                                 </div>
-                                
                                 
         </div>                        
                 
