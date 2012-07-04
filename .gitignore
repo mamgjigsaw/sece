@@ -1,13 +1,28 @@
-<<<<<<< HEAD
-/build/
-/dist/
-java/test.java
-/nbproject/private/
-=======
+#java specific
 *.class
+ 
+#netbeans ignore personal stuff
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+
 
 # Package Files #
+
 *.jar
+
 *.war
+
 *.ear
->>>>>>> aa1402cdf4ea67a8c55960ef1fd1da81f24c1a19

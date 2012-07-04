@@ -111,5 +111,18 @@ public class DelegacionIndiUsuDaoImpl implements daoDelegacionIndiUsu{
         se.getTransaction().commit();
         return deleg;
     }
+
+    @Override
+    public List<Usuario> usuariosSNRepetirdelegacionxContrato(Contrato contrato, Usuario user) {
+       List<Usuario> usuarios = new ArrayList<Usuario>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        String hql = "select distinct d.usuario from DelegacionIndiUsu d where d.contrato = :contrato and d.usuario <> :usuario";
+        usuarios = se.createQuery(hql)                
+                .setParameter("contrato", contrato)
+                .setParameter("usuario", user)
+                .list();        
+        return usuarios;
+    }
     
 }

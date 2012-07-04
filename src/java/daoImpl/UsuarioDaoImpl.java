@@ -84,6 +84,7 @@ public class UsuarioDaoImpl implements daoUsuario{
     public List<Usuario> usuariosxEmpresa(Empresa empresa) {
          List<Usuario> usuariosxEmpresa;
         Session se = sf.getCurrentSession();
+        se.beginTransaction();
         Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("empresa", empresa));
         usuariosxEmpresa = criterio.list();
         se.getTransaction().commit();

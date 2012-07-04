@@ -20,4 +20,5 @@ public interface daoDelegacionIndiUsu extends dao<DelegacionIndiUsu> {
     DelegacionIndiUsu findByContratoIndicador(Indicador indicador, Contrato contrato);
     //agregado por David
     List<DelegacionIndiUsu> delegacionxContrato(Contrato contrato);
+    List<Usuario> usuariosSNRepetirdelegacionxContrato (Contrato contrato,Usuario user);
 }
