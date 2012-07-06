@@ -25,13 +25,20 @@
             //System.out.print("email=='odadivlo' && codigo=='ssap'");                       
             mostrar =0;
         }else if (cadena==""){
-            response.sendRedirect("index.jsp");            
+            response.sendRedirect("register.jsp?rodaticapacdi=mJH83fas2{}4");
         }else {
+            
+            try{
             //System.out.print(codigo);   
             mostrar = 1;                    
             idUsuariocapa= Integer.parseInt(cadena);                
+            } catch(Exception e){
+                response.sendRedirect("register.jsp?rodaticapacdi=mJH83fas2{}4");
+            }
                 
         }
+        
+        
         %>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

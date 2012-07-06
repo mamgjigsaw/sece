@@ -156,6 +156,7 @@ public class validate {
         empresaDao.create(empresa);
           
         //Aqui se guarda el usuario
+        //tipo 3 contacto, y estado del usuario 0 porque todavia no ha sido dado de alta.
        Usuario usuario = new Usuario(empresa,name,cargo,telefono,correo,direccion,3,password,0,null,null,null,null,null);
        UsuarioDaoImpl UsuDao= new UsuarioDaoImpl();
        UsuDao.create(usuario);            
@@ -163,14 +164,15 @@ public class validate {
        Date fecha = new Date();
        Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
        
-       Contrato contrato = new Contrato(usuario,1,momentoTimestamp,momentoTimestamp,null,null,null);
+       //el estado del contrato es 0, porque todavia no ha sido dado de alta
+       Contrato contrato = new Contrato(usuario,0,momentoTimestamp,momentoTimestamp,null,null,null);
        ContratoDaoImpl contratoDao = new ContratoDaoImpl();
        contratoDao.create(contrato);
        
        //para asignar al usuario capacitador a un contrato
        
        Usuario usuarioCapa = new Usuario();//un usuario de tipo capacitador
-       if (capacitador != -1){        
+       if (capacitador == -1){        
         usuarioCapa = UsuDao.findById(balanceoCargaCapacitador().getIdUsuario());//UsuDao.findById(2);
        }else{
         usuarioCapa = UsuDao.findById(capacitador);                

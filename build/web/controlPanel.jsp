@@ -39,7 +39,7 @@ response.setDateHeader("Expires", 0);
        sesion.setMaxInactiveInterval(3600);
        String acc = (String) sesion.getAttribute("idAcc");
        
-       String name,nombre_variable,nombre_indicador,nombre_usuario,cargo,telefono,correo,direccion;
+       String name,nombre_variable,nombre_indicador,cargo,telefono,correo,direccion;
        int tipo,indi,actual,total_var;
        int idEmpresa =0;       
        int idContrato =0;
@@ -62,7 +62,7 @@ response.setDateHeader("Expires", 0);
        Usuario usuario = new Usuario();
        usuario = usuDao.findById(id_usuario);
                      
-       nombre_usuario = usuario.getNombre();
+       //nombre_usuario = usuario.getNombre();
        cargo = usuario.getCargo();
        telefono = usuario.getTelefono();
        correo = usuario.getCorreo();
@@ -80,10 +80,11 @@ response.setDateHeader("Expires", 0);
           //obtenemos el contrato          
           idContrato = dele.getContrato().getIdContrato();
            
-       }else if(tipo==3){
+       }else if(tipo==3){// si es tipo contacto
            
            ContratoDaoImpl daoContra = new ContratoDaoImpl();
            Contrato contrato = (Contrato) daoContra.findByUsuario(usuario);//donde el estado sea igual 1
+           
            idContrato = contrato.getIdContrato();          
            
            EmpresaDaoImpl daoEmpresa = new EmpresaDaoImpl();
