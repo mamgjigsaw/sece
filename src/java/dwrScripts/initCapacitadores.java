@@ -35,6 +35,10 @@ public class initCapacitadores {
     public initCapacitadores() {
     }
     
+    public String htennws(){
+        return "test exitoso";
+    }
+    
     public String obtenerURLSist() throws IOException{
     String url;
     Properties archivoConf = new Properties();
@@ -43,35 +47,59 @@ public class initCapacitadores {
     return url;
     }
     
-   public String insertarVideoChat(int idcontrato,int idusuario){
-        ContratoDaoImpl cdi = new ContratoDaoImpl();
-        Contrato contra = cdi.findById(idcontrato);
+   public String insertarVideoChatCapac(int idcontrato,int idusuario){
+           ContratoDaoImpl cdi = new ContratoDaoImpl();
+           Contrato contrato = cdi.findById(idcontrato);
+           String idusuario1 = null, idusuario2 = null, idusuario3 = null, idusuario4 = null;
+           
+           
+           DelegacionIndiUsuDaoImpl diud = new DelegacionIndiUsuDaoImpl();
+           UsuarioDaoImpl udi = new UsuarioDaoImpl();
+           Usuario user = udi.findById(idusuario);
+           String nombreUsuario =  user.getNombre();
+           List<Usuario> usuarios = diud.usuariosSNRepetirdelegacionxContrato(contrato,user);           
+           System.out.println(usuarios.size());
+           try{ 
+               idusuario1 = String.valueOf(usuarios.get(0).getIdUsuario()) ;
+               idusuario2 = String.valueOf(usuarios.get(1).getIdUsuario()) ;
+               idusuario3 = String.valueOf(usuarios.get(2).getIdUsuario()) ;
+               idusuario4 = String.valueOf(usuarios.get(3).getIdUsuario()) ;
+           }catch (IndexOutOfBoundsException ie) { System.out.println(ie.getMessage());}
         
-        //para obtener el nombre del usuario publicador        
-        UsuarioDaoImpl udi = new UsuarioDaoImpl();
-        Usuario user = udi.findById(idusuario);
-        String nombreUsuario = user.getNombre();
-        DelegacionIndiUsuDaoImpl doii = new DelegacionIndiUsuDaoImpl();
-        List<DelegacionIndiUsu> delegados = doii.delegacionxContrato(contra);
-        DelegacionIndiUsu delegado = new DelegacionIndiUsu();
-        Iterator<DelegacionIndiUsu> it = delegados.iterator();
-        String[] idUsuarios = new String [10];         
-        int i=0;        
-            while(it.hasNext()){
-                delegado = it.next();  
-                //if para que usuario delegado unico no se repita
-                if (String.valueOf(delegado.getUsuario().getIdUsuario()).equals(String.valueOf(idusuario)))
-                    idUsuarios[i] = null;
-                else
-                    idUsuarios[i] = String.valueOf(delegado.getUsuario().getIdUsuario());
-                
-                
-                i++;
-            }//fin while
         
         String obj = "<object id='Video_Chat' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0' "
-                + "width='990' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser2="+ idUsuarios[0]+"&iduser3="+ idUsuarios[1]+"&iduser4="+ idUsuarios[2]+"&nomUser="+ nombreUsuario+"'/>"
-                + " <param name='quality' value='high'/> <embed src='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser2="+ idUsuarios[0]+"&iduser3="+ idUsuarios[1]+"&iduser4="+ idUsuarios[2]+"&nomUser="+ nombreUsuario+"' "
+                + "width='990' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idusuario1+"&iduser2="+ idusuario2+"&iduser3="+ idusuario3+"&iduser4="+ idusuario4+"&nomUser="+ nombreUsuario+"'/>"
+                + " <param name='quality' value='high'/> <embed src='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idusuario1+"&iduser2="+ idusuario2+"&iduser3="+ idusuario3+"&iduser4="+ idusuario4+"&nomUser="+ nombreUsuario+"' "
+                + "quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='1000' height='625'></embed> </object>";
+        return obj;
+    }
+   
+   public String insertarVideoChat(int idcontrato,int idusuario){
+           ContratoDaoImpl cdi = new ContratoDaoImpl();
+           Contrato contrato = cdi.findById(idcontrato);
+           String idusuario1 = null, idusuario2 = null, idusuario3 = null; 
+           String idcapacitador = null;
+                      
+           AsignacionCapaContraDaoImpl accdi = new AsignacionCapaContraDaoImpl();
+           Usuario capacitador = accdi.findUsByContra(contrato);
+           idcapacitador = String.valueOf(capacitador.getIdUsuario());
+           
+           DelegacionIndiUsuDaoImpl diud = new DelegacionIndiUsuDaoImpl();
+           UsuarioDaoImpl udi = new UsuarioDaoImpl();
+           Usuario user = udi.findById(idusuario);
+           String nombreUsuario =  user.getNombre();
+           Empresa empresa = user.getEmpresa();
+           List<Usuario>usuarios = diud.usuariosSNRepetirdelegacionxContrato(contrato,user);        
+           try{ 
+               idusuario1 = String.valueOf(usuarios.get(0).getIdUsuario()) ;
+               idusuario2 = String.valueOf(usuarios.get(1).getIdUsuario()) ;
+               idusuario3 = String.valueOf(usuarios.get(2).getIdUsuario()) ;               
+           }catch (IndexOutOfBoundsException ie) { System.out.println(ie.getMessage());}
+        
+        
+        String obj = "<object id='Video_Chat' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0' "
+                + "width='990' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idcapacitador+"&iduser2="+ idusuario1+"&iduser3="+ idusuario2+"&iduser4="+ idusuario3+"&nomUser="+ nombreUsuario+"'/>"
+                + " <param name='quality' value='high'/> <embed src='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idcapacitador+"&iduser2="+ idusuario1+"&iduser3="+ idusuario2+"&iduser4="+ idusuario3+"&nomUser="+ nombreUsuario+"' "
                 + "quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='1000' height='625'></embed> </object>";
         return obj;
     }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
@@ -33,3 +34,40 @@
     <mapping resource="mapping/EmailSent.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sece</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">s3c3/*01*/</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.hbm2ddl.auto"> update </property>
+    <mapping resource="mapping/Zone.hbm.xml"/>
+    <mapping resource="mapping/Item.hbm.xml"/>
+    <mapping resource="mapping/Sugerencia.hbm.xml"/>
+    <mapping resource="mapping/AsignacionCapaContra.hbm.xml"/>
+    <mapping resource="mapping/Pais.hbm.xml"/>
+    <mapping resource="mapping/AsignacionSugItem.hbm.xml"/>
+    <mapping resource="mapping/Variable.hbm.xml"/>
+    <mapping resource="mapping/Escala.hbm.xml"/>
+    <mapping resource="mapping/DelegacionIndiUsu.hbm.xml"/>
+    <mapping resource="mapping/Usuario.hbm.xml"/>
+    <mapping resource="mapping/Operacion.hbm.xml"/>
+    <mapping resource="mapping/Indicador.hbm.xml"/>
+    <mapping resource="mapping/Bitacora.hbm.xml"/>
+    <mapping resource="mapping/Contrato.hbm.xml"/>
+    <mapping resource="mapping/RespItem.hbm.xml"/>
+    <mapping resource="mapping/Acceso.hbm.xml"/>
+    <mapping resource="mapping/Empresa.hbm.xml"/>
+    <mapping resource="mapping/Avance.hbm.xml"/>
+    <mapping resource="mapping/HistorialResultado.hbm.xml"/>
+    <mapping resource="mapping/EmpresaContratos.hbm.xml"/>
+    <mapping resource="mapping/Noticias.hbm.xml"/>
+    <mapping resource="mapping/EmailSent.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
+>>>>>>> 9942dcb8f29a2b4b7eef4092fde8f2141a91b51b

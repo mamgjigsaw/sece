@@ -216,7 +216,7 @@ response.setDateHeader("Expires", 0);
             });
             
             $("#selectVariable").change(function(){
-                var nombreVariable = $("#selectVariable option:selected").val();                    
+                var nombreVariable = $("#selectVariable option:selected").val();                     
                 $.get("BusquedaItems?descVariable="+nombreVariable,function (data){
                     $("#tableItem  tr").remove();
                     $("#tableItem").prepend(data);
@@ -538,7 +538,7 @@ response.setDateHeader("Expires", 0);
                                     
                                     $(this).hide();
                                     var idcon = $("#selEmpresas option:selected").val();                                      
-                                    capacitadoresScripts.insertarVideoChat(idcon,idCapacitador,{
+                                    capacitadoresScripts.insertarVideoChatCapac(idcon,idCapacitador,{
                                         callback:function(data){
                                          $("#videoChat").html(data);   
                                          $("#btnVC").show();

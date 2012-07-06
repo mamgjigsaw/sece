@@ -28,6 +28,9 @@
     <create creator="new" javascript="capacitadoresScripts">
         <param name="class" value="dwrScripts.initCapacitadores"/>
     </create>
+    <create creator="new" javascript="soporteSece">
+        <param name="class" value="dwrScripts.AyudaSECE"/>
+    </create>
     <convert converter="bean" match="pojo.Item" javascript="Item" />
     <convert converter="bean" match="pojo.Variable" javascript="Variable" />
   </allow>
