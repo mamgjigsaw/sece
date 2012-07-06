@@ -396,12 +396,12 @@ response.setDateHeader("Expires", 0);
                                                                         
                                                                         $("#tdeNa").html(data);
                                                                         $("#btnImgAprobar").click(function (){
-                                                                            $.get("aprobarEmpresa", {id:1,idu:idcontacto,idc:idcontrato,iduc:idCapacitador},success);
+                                                                            $.get("aprobarContrato", {id:1,idu:idcontacto,idc:idcontrato,iduc:idCapacitador},success);
                                                                             function success(){window.location.reload(true);}
                                                                         });
                                                                         //agregar funcionalidad al boton eliminar
                                                                         $("#btnImgEliminar").click(function (){
-                                                                            $.get("aprobarEmpresa", {id:2,idu:idcontacto,idc:idcontrato,iduc:idCapacitador},success);                                        
+                                                                            $.get("aprobarContrato", {id:2,idu:idcontacto,idc:idcontrato,iduc:idCapacitador},success);                                        
                                                                             function success(){window.location.reload(true);}
                                                                         });           
                                                                         

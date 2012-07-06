@@ -6,7 +6,7 @@
     <id name="idEmpresa" type="java.lang.Integer">
       <column name="idEmpresa"/>
       <generator class="identity"/>
-    </id>    
+    </id>
     <property name="empresaNombre" type="string">
       <column length="200" name="empresaNombre"/>
     </property>
@@ -43,6 +43,5 @@
     <property name="contratoFechaFinalizo" type="timestamp">
       <column length="19" name="contratoFechaFinalizo"/>
     </property>
-    
   </class>
 </hibernate-mapping>

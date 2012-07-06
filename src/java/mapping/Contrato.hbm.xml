@@ -25,7 +25,7 @@
       </key>
       <one-to-many class="pojo.DelegacionIndiUsu"/>
     </set>
-    <set inverse="true" name="asignacionCapaContras"  cascade="delete">
+    <set cascade="delete" inverse="true" name="asignacionCapaContras">
       <key>
         <column name="id_contrato"/>
       </key>
