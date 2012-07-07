@@ -89,8 +89,8 @@
         <servlet-class>servlet.sendMail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>aprobarEmpresa</servlet-name>
-        <servlet-class>servlet.aprobarEmpresa</servlet-class>
+        <servlet-name>aprobarContrato</servlet-name>
+        <servlet-class>servlet.aprobarContrato</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>saveIndicador</servlet-name>
@@ -198,8 +198,8 @@
         <url-pattern>/sendMail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>aprobarEmpresa</servlet-name>
-        <url-pattern>/aprobarEmpresa</url-pattern>
+        <servlet-name>aprobarContrato</servlet-name>
+        <url-pattern>/aprobarContrato</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

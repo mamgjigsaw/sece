@@ -12,12 +12,12 @@
     </many-to-one>
     <many-to-one class="pojo.Indicador" fetch="join" name="indicador">
       <column name="id_indicador"/>
-    </many-to-one>    
+    </many-to-one>
     <property name="var" type="java.lang.Integer">
       <column name="var"/>
-    </property>    
+    </property>
     <property name="resultado" type="float">
       <column name="resultado"/>
-    </property>    
+    </property>
   </class>
 </hibernate-mapping>
