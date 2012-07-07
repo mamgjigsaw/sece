@@ -183,7 +183,7 @@ response.setDateHeader("Expires", 0);
         
       </div>
       <div class="clr"></div>
-      <div class="logo"><img src="images/logo.gif" width="250" height="70" border="0" alt="logo" /></div>      
+      <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      
       <div class="clr"></div>
     </div>
   </div>
