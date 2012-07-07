@@ -133,15 +133,15 @@
        /*errorElement: 'div',*/
        //errorContainer: $('#errores'),
        submitHandler: function(form){           
-           validacion.guardarUsuario($("#txtname_empresa").val(),$("#txtdes").val(),$("#txttel_empresa").val(),$("#cState").val(),$("#txtdirec_empre").val(),$("#txtname").val(),$("#txtcargo").val(),$("#txttel").val(),$("#txtcorreo").val(),$("#txtdir").val(),$("#txtpass").val(),usuCapa);                      
-           validacion.EnviarCorreo("sece@pml.org.ni",$("#txtcorreo").val(),"Cuenta SECE","<strong>Estimado "+ $("#txtname").val() +",</strong> <p> <strong>Gracias por registrarse</strong>, un responsable de SECE va ponerse en contacto con usted y asi activar su cuenta.</p><p> El proceso puede tomar unos dias, se enviara un correo cuando se ha activada.</p> <p><strong>Por favor no reinvie este correo, Gracias SECE TEAM.</strong></p>");
-         $( "#dialog-message" ).dialog( "open" ); 
+         validacion.guardarUsuario($("#txtname_empresa").val(),$("#txtdes").val(),$("#txttel_empresa").val(),$("#cState").val(),$("#txtdirec_empre").val(),$("#txtname").val(),$("#txtcargo").val(),$("#txttel").val(),$("#txtcorreo").val(),$("#txtdir").val(),$("#txtpass").val(),usuCapa);                      
+         validacion.EnviarCorreo("sece@pml.org.ni",$("#txtcorreo").val(),"Cuenta SECE","<strong>Estimado "+ $("#txtname").val() +",</strong> <p> <strong>Gracias por registrarse</strong>, un responsable de SECE va ponerse en contacto con usted y asi activar su cuenta.</p><p> El proceso puede tomar unos dias, se enviara un correo cuando se ha activada.</p> <p><strong>Por favor no reinvie este correo, Gracias SECE TEAM.</strong></p>");
+         $( "#dialog-message" ).dialog( "open" );          
        }
     });
 });
 
     function go_back(){
-        location.href = "logger.jsp"; 
+        location.href = "logger.jsp";          
     } 
     
      
@@ -154,6 +154,7 @@
         $("#txtdes").val("");
         $("#txttel_empresa").val("");
         $("#cState").val("");
+        $("#comboPais").val("");
         $("#txtdirec_empre").val("");
         $("#txtname").val("");
         $("#txtcargo").val("");
@@ -162,7 +163,6 @@
         $("#txtdir").val("");
         $("#txtpass").val("");                      
         $("#txtpass2").val("");
-        //$("#comboPais").val("");
     }
         </script>    
 </head>

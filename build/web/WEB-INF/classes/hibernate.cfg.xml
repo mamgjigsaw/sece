@@ -6,11 +6,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sece</property>
     <property name="hibernate.connection.username">root</property>
-<<<<<<< HEAD
     <property name="hibernate.connection.password">fisher</property>
-=======
-    <property name="hibernate.connection.password">s3c3/*01*/</property>
->>>>>>> 9942dcb8f29a2b4b7eef4092fde8f2141a91b51b
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.hbm2ddl.auto"> update </property>
     <mapping resource="mapping/Zone.hbm.xml"/>

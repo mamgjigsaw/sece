@@ -277,7 +277,13 @@ public class validate {
             return 0;//usuario no existe.
         }else{
             
-            String url="<a href='http://localhost:8080/sece/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://localhost:8080/sece/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
+            String seceURL;
+            Properties archivoConf = new Properties();
+            archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
+            seceURL = (String) archivoConf.getProperty("seceUrl");
+        
+            //String url="<a href='http://localhost:8080/sece/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
+            String url="<a href='"+ seceURL +"forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
             
             Date fecha = new Date();
             Timestamp momentoTimestamp = new Timestamp(fecha.getTime());

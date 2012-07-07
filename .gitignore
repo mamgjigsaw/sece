@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #java specific
 *.class
  
@@ -18,41 +17,8 @@ nb-configuration.xml
 *.swp
 *.out
 
-
-
 # Package Files #
 
 *.jar
-
 *.war
-
-=======
-#java specific
-*.class
- 
-#netbeans ignore personal stuff
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-
-# generic files to ignore
-*~
-*.lock
-*.DS_Store
-*.swp
-*.out
-
-
-
-# Package Files #
-
-*.jar
-
-*.war
-
->>>>>>> 9942dcb8f29a2b4b7eef4092fde8f2141a91b51b
 *.ear
