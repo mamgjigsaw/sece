@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="pojo.HistorialResultado" table="historial">
+    <id name="idavance" type="java.lang.Integer">
+      <column name="id_avance"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Contrato" fetch="join" name="contrato">
+      <column name="id_contrato"/>
+    </many-to-one>
+    <many-to-one class="pojo.Empresa" fetch="select" name="empresa">
+      <column name="id_empresa"/>
+    </many-to-one>
+    <many-to-one class="pojo.Indicador" fetch="select" name="indicador">
+      <column name="id_indicador"/>
+    </many-to-one>
+    <property name="resultado" type="float"/>
+  </class>
+</hibernate-mapping>

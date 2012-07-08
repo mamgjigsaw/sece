@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.Noticias" table="noticias">
+    <id name="idNoticias" type="java.lang.Integer">
+      <column name="idnoticias"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Usuario" fetch="join" name="usuario">
+      <column name="id_usuario"/>
+    </many-to-one>
+    <property name="titulo" type="string">
+      <column length="100" name="titulo"/>
+    </property>
+    <property name="descripcion" type="string">
+      <column length="400" name="descripcion"/>
+    </property>
+    <property name="fecha_evento" type="timestamp">
+      <column length="19" name="fecha_evento"/>
+    </property>
+    <property name="fecha_creacion" type="timestamp">
+      <column length="19" name="fecha_creacion"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="sece"/>
+  <table-filter match-name="indicador"/>
+  <table-filter match-name="sugerencia"/>
+  <table-filter match-name="delegacion_indi_usu"/>
+  <table-filter match-name="escala"/>
+  <table-filter match-name="contrato"/>
+  <table-filter match-name="zone"/>
+  <table-filter match-name="item"/>
+  <table-filter match-name="asignacion_capa_contra"/>
+  <table-filter match-name="empresa"/>
+  <table-filter match-name="operacion"/>
+  <table-filter match-name="variable"/>
+  <table-filter match-name="resp_item"/>
+  <table-filter match-name="bitacora"/>
+  <table-filter match-name="acceso"/>
+  <table-filter match-name="asignacion_sug_item"/>
+  <table-filter match-name="pais"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="avance"/>
+   <table-filter match-name="noticias"/>
+</hibernate-reverse-engineering>
