@@ -139,7 +139,8 @@
            }else{
             validacion.EnviarCorreo("sece@pml.org.ni",$("#txtcorreo").val(),"Cuenta SECE","<strong>Estimado "+ $("#txtname").val() +",</strong> <p> <strong>Gracias por registrarse</strong>, un responsable de SECE va ponerse en contacto con usted y asi activar su cuenta.</p><p> El proceso puede tomar unos dias, se enviara un correo cuando se ha activada.</p> <p><strong>Por favor no reinvie este correo, Gracias SECE TEAM.</strong></p>");
            }
-         $( "#dialog-message" ).dialog( "open" );}
+         $( "#dialog-message" ).dialog( "open" );          
+       }
     });
 });
 
