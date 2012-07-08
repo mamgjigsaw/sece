@@ -1,4 +1,0 @@
-sece
-====
-
-Sistema de informacion
