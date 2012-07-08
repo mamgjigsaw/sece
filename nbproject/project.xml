@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><project xmlns="http://www.netbeans.org/ns/project/1">
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+>>>>>>> 48079f7656ada83e48abc76f04ed843b24206212
     <type>org.netbeans.modules.web.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
@@ -61,4 +66,7 @@
         </data>
     </configuration>
 </project>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 48079f7656ada83e48abc76f04ed843b24206212
