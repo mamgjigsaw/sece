@@ -89,7 +89,7 @@ response.setDateHeader("Expires", 0);
         var resp = $.get("GraficoResultado?idcontrato="+id_contrato, function (data){
             if (data == null || data== ""){                
                 
-                $('.body_resize').prepend("<div class='notification error'><a href='JavaScript:void(0);' onclick= '$(this).parent().hide();' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error al Graficar</strong><p class='hola'>No hay datos para generar la grafica!!</p></div>");
+                $('.body_resize').prepend("<div class='notification error'><p class='hola'><strong class='hola'>Error al Graficar</strong><p class='hola'>No hay datos para generar la grafica!!</p></div>");
             }//  fin if
             else{
                 // change 8 to 80 to test javascript version                 

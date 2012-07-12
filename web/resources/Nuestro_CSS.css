@@ -135,8 +135,8 @@
         /*Agregado por David*/        
         /* -------------------------------- Prgoress Bars  */
         .progress-bar {
-                /*background:#f2f2f2;*/
-                background:#e8e8e8;
+                background:#f2f2f2;
+                
                 border:1px solid #d9d9d9;
                 border-radius:5px;
                 display:block;
@@ -155,7 +155,7 @@
                 box-shadow:0 0 5px #a6a6a6;
         }
         .progress-bar div span {
-                color:#fff;
+                color:black;
                 font-family:'PTSansBold', Arial, sans-serif;
                 text-align:center;
                 position:relative;
