@@ -132,7 +132,7 @@ public class initCapacitadores {
                  c.add(Calendar.DATE, 3);
                  tiempoDgracia = c.getTime();
                  if (new Date().after(tiempoDgracia))
-                     resultado +="<tr style='text-align:center;background-color:#FFFFCC;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
+                     resultado +="<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
                  else
                      resultado +="<tr style='text-align:center;'><td>"+delegado.getUsuario().getNombre()+"</td>";
                  resultado +="<td class='tdFechaAcc'>";                 
@@ -286,20 +286,22 @@ public class initCapacitadores {
         return resultado;
     }//fin funcion    
     
-    public void enviarCorreoUsuarioDormido(int idcontrato,String ultimoAcceso) throws IOException{
+    public void enviarCorreoUsuarioDormido(int idcontrato,int idusuario, String ultimoAcceso) throws IOException{
         
         ContratoDaoImpl cdi = new ContratoDaoImpl();
         Contrato contra = cdi.findById(idcontrato);
         
-        Usuario user = contra.getUsuario();
-        
+        UsuarioDaoImpl udi = new UsuarioDaoImpl();
+        Usuario user = udi.findById(idusuario);
+        String nombreUsuario = user.getNombre().toUpperCase();        
         String correo = user.getCorreo();
+        validar = new validate();
         
         String asunto = "Usuario Inactivo";
-        String cuerpo =" <p> <strong>Inactividad de cuenta en  </strong> <a href='"+this.obtenerURLSist()+"'>Sece</a>,"
-        +"Estimado cliente Sece ha detectado que su ultimo acceso al sistema fue "+ ultimoAcceso +".</p>"
-        +"Le invitamos a terminar de responder el cuestionario en la brevedad de lo posible"
-        +"Por favor no reinvie a este correo.</p><p><strong>Gracias SECE TEAM.</strong></p>";
+        String cuerpo =" <p>Estimado "+nombreUsuario+ " se ha detectado <strong>inactividad</strong> en su cuenta del Sistema SECE.</br>"
+        +"Su ultimo acceso al sistema fue el "+ ultimoAcceso +".</p>"
+        +"Le invitamos a continuar de respondiendo la evaluaci&oacute;n en la brevedad de lo posible.</p>"
+        +"Por favor no reinvie a este correo.<p><strong>Gracias SECE TEAM.</strong></p>";
         
         validar.EnviarCorreo("sece@pml.org.ni", correo, asunto, cuerpo);
     }//fin idContrato

@@ -195,9 +195,11 @@ response.setDateHeader("Expires", 0);
                                           $( ".btnSentEmail" ).button({ icons: { primary: "ui-icon-mail-closed" }, text: false });  
                                           $( ".btnSentEmail" ).click( function(){ 
                                                //idcontrato del usuario 
-                                               idc = $(this).parent().parent().find('input:hidden').val()
+                                               idu = $(this).parent().parent().find('input:hidden').val()
                                                fechaAcceso = $(this).parent().parent().children('.tdFechaAcc').text();
-                                               capacitadoresScripts.enviarCorreoUsuarioDormido(idc,fechaAcceso);
+                                               //            ....(idContrato,idUsuario,ultima fecha de acceso de Usuario)      
+                                               capacitadoresScripts.enviarCorreoUsuarioDormido(idcontrato,idu,fechaAcceso);
+                                               //alert ("idc: "+idcontrato +" fecha: "+fechaAcceso + " usaurio: "+idc);
                                           });
                                         }
                                     });        
