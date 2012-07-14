@@ -106,7 +106,10 @@ response.setDateHeader("Expires", 0);
         <script>
                 //variables globales
            var idCapacitador = <%=idUsuario%>
+           // url del sistema sece
            var urlSistema;             
+           //numero de correos enviados a usauarios inactivos
+           var num_correosEnviados = 0;
             
             //funcion enviar correo de tab-Invitar usuarios
             function enviarCorreo(){               
@@ -194,11 +197,16 @@ response.setDateHeader("Expires", 0);
                                           //boton enviar correo inactividad
                                           $( ".btnSentEmail" ).button({ icons: { primary: "ui-icon-mail-closed" }, text: false });  
                                           $( ".btnSentEmail" ).click( function(){ 
+                                              var spanVal = $(this).parent().find('.cant_emailEnviados').text();
+                                              if (spanVal == null)
+                                                  num_correosEnviados = 0;
+                                               ++spanVal ;
                                                //idcontrato del usuario 
-                                               idu = $(this).parent().parent().find('input:hidden').val()
+                                               idu = $(this).parent().parent().find('input:hidden').val()                                               
                                                fechaAcceso = $(this).parent().parent().children('.tdFechaAcc').text();
                                                //            ....(idContrato,idUsuario,ultima fecha de acceso de Usuario)      
-                                               capacitadoresScripts.enviarCorreoUsuarioDormido(idcontrato,idu,fechaAcceso);
+                                               //capacitadoresScripts.enviarCorreoUsuarioDormido(idcontrato,idu,fechaAcceso);
+                                               $(this).parent().find('.cant_emailEnviados').text(spanVal);
                                                //alert ("idc: "+idcontrato +" fecha: "+fechaAcceso + " usaurio: "+idc);
                                           });
                                         }
@@ -313,9 +321,10 @@ response.setDateHeader("Expires", 0);
                              <span id="toolbar" class="ui-widget-header ui-corner-all">	
                             <button id="logoutbutton"><%= acceso.getUsuario().getNombre()%></button>	
                         </span>
-                            <div id="menuBtnOpciones1" style="border-radius: 0 0 5px 5px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 70%; height: 20px; color: #015480">
-                                <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">                                    
-                                    <li id="mnuBtnSalir" onclick="location.href='salir'" > Salir  </li>                                        
+                            <div id="menuBtnOpciones1">
+                                <ul class="opciones1">                                                                        
+                                    <li id="mnuBtnSalir" > <img src="images/question_mark.png"/> Ayuda  </li>                   
+                                    <li id="mnuBtnSalir" onclick="location.href='salir'" ><img src="images/salir.gif"/> Salir  </li>                                        
                                 </ul>              
                             </div>
                         </div>

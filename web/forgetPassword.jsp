@@ -80,9 +80,10 @@ response.setDateHeader("Expires", 0);
                     var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo de email, porfavor!!</p></div><!-- /Notification --></section>";                                        
                     $("#hola").html(palabra);                
                 }else{                     
-                   $("#hola").html("");
-                   validacion.passwordOlvidado(valor1,resultado);                   
-                   $( "#dialog-message" ).dialog( "open" ); 
+                   $("#hola").html("");                   
+                   $("#cont").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
+                   //validacion.passwordOlvidado(valor1,resultado);                   
+                   //$( "#dialog-message" ).dialog( "open" ); 
                 }
             }
             
@@ -92,11 +93,13 @@ response.setDateHeader("Expires", 0);
                 if(resp==0){
                     var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Correo</strong><p class='hola'>Digite correctamente el email y si no <a href='register.jsp'><strong>registrese</strong></a>, porfavor!!</p></div><!-- /Notification --></section>";                    
                 }else if(resp==1){                    
-                    //$("#hola").html("");
-                    //$( "#dialog-message" ).dialog( "open" );                    
+                    $("#hola").html("");
+                    $( "#dialog-message" ).dialog( "open" );                    
+                }else if (resp==2){
+                    var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Solicitud enviada</strong><p class='hola'>Ya tiene una solicitud de resetear contraseña, si todavia no ha caido el correo esto puede tomar unos minutos, si no dirijase al administrador del sistema. Gracias por todo, TEAM SECE.</p></div><!-- /Notification --></section>";                                        
+                    $("#hola").html(palabra);                
                 }
                 $("#hola").html(palabra);
-               
             }
             
             $(function() {
@@ -214,7 +217,9 @@ response.setDateHeader("Expires", 0);
         <div class="clr"></div>
       </div>
         
-      <div class="right">
+        <div id="load" align="center" ></div>  
+                
+      <div id="cont" class="right">
         <div class="clr"></div>
         <div class="right_top">
           <div class="right_bottom">
@@ -224,7 +229,7 @@ response.setDateHeader("Expires", 0);
           </div><%-- end right_bottom --%>
         </div>
         <div class="clr"></div>
-      </div>
+      </div>        
         
       <div class="right">
         <div class="right_top">

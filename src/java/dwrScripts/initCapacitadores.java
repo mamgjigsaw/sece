@@ -132,7 +132,7 @@ public class initCapacitadores {
                  c.add(Calendar.DATE, 3);
                  tiempoDgracia = c.getTime();
                  if (new Date().after(tiempoDgracia))
-                     resultado +="<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
+                     resultado +="<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button><span class='cant_emailEnviados'></span>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
                  else
                      resultado +="<tr style='text-align:center;'><td>"+delegado.getUsuario().getNombre()+"</td>";
                  resultado +="<td class='tdFechaAcc'>";                 
