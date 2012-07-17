@@ -6,10 +6,7 @@
     <id name="idEmpresa" type="java.lang.Integer">
       <column name="id_empresa"/>
       <generator class="identity"/>
-    </id>
-    <property name="idContrato" type="java.lang.Integer">
-      <column name="idContrato"/>
-    </property>
+    </id>    
     <many-to-one class="pojo.Zone" fetch="select" name="zone">
       <column name="id_zone"/>
     </many-to-one>
