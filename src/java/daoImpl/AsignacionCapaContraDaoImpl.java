@@ -74,7 +74,6 @@ public class AsignacionCapaContraDaoImpl implements daoAsignacionCapaContra {
     }
 
     @Override
-<<<<<<< HEAD
     public AsignacionCapaContra findbyIdContrato(Contrato c) {
         
         Session se = sf.getCurrentSession();
@@ -91,7 +90,9 @@ public class AsignacionCapaContraDaoImpl implements daoAsignacionCapaContra {
         asignacion = (AsignacionCapaContra) se.get(AsignacionCapaContra.class, id);
         se.getTransaction().commit();
         return asignacion;
-=======
+    }
+    
+   @Override
     public Usuario findUsByContra(Contrato contrato) {
         Usuario capacitador = new Usuario();
         Session se = sf.getCurrentSession();
@@ -101,8 +102,8 @@ public class AsignacionCapaContraDaoImpl implements daoAsignacionCapaContra {
                 .add(Restrictions.eq("contrato", contrato))
                 .uniqueResult();
          
-        return capacitador;                
->>>>>>> origin/master
+        return capacitador;               
+
     }
     
 }
