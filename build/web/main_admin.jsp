@@ -289,7 +289,6 @@ response.setDateHeader("Expires", 0);
                 
                 function resultado(data){
                           var resp = data
-<<<<<<< HEAD
                           if(resp != null){//recarga el panel con los datos actualizado atraves de dwr
                               document.getElementById("lblnombre").innerHTML = resp[0];
                               document.getElementById("lblcargo").innerHTML = resp[1];
@@ -302,12 +301,8 @@ response.setDateHeader("Expires", 0);
                               document.getElementById("updatemail").innerHTML = resp[3];
                               document.getElementById("updatedir").innerHTML = resp[4];
                               document.getElementById("logoutbutton").innerText = resp[0];
-=======
-                          if(resp == 0){
-                             location.reload();
->>>>>>> origin/master
-                          }
-                                    
+
+                          }                                   
                                 }
                 
 
@@ -457,41 +452,26 @@ response.setDateHeader("Expires", 0);
                else{                      
                    capacitadoresDWR.newCapacitador(nombre, cargo, telefono, dire, email, contra, resultado);
                    
-<<<<<<< HEAD
-                  // document.getElementById("cap").src = "tablaCapacitadores.jsp";
-=======
-                   document.getElementById("cap").src = "tablaCapacitadores.jsp";
->>>>>>> origin/master
-                    
-                    clearCapacitador();
                }            
          }
          function resultado(data){
-<<<<<<< HEAD
-             if(data != null){
-                 validacion.saveActionBitacora(<%= val %>, 17, "Agrego un nuevo capacitador",data[0], "Nuevo Capacitador", "Nuevo");  
-         
-                
+             if(data[0] != "Error, el E-mail ya esta registrado"){
+                 validacion.saveActionBitacora(<%= val %>, 17, "Agrego un nuevo capacitador",data[0], "Nuevo Capacitador", "Nuevo");
+                  var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Capacitador</strong><p class='hola'>El Capacitador Ha sido guardado</p></div><!-- /Notification --></section>";  
+                   $("#box_message").html(palabra);
+                   $( "#box_message" ).show("blind",callback);
+                 $("#cap").attr("src", "tablaCapacitadores.jsp");                 
+                 clearCapacitador();       
+             }else{
+                 $("#nCorCap").focus(); 
+                  var palabra="<section role='principal' id='message_box'><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>E-mail incorrecto</strong><p class='hola'>Ese E-Mail ya está registrado.</p></div><!-- /Notification --></section>";  
+                                  
+               $("#box_message").html(palabra);               
+                $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje
              }
            
          }
-         function prueba(){
-                var tabla = frames.cap.document.getElementById("tablaCap");
-               // var nRow = tabla.insertRow(-1);
-               // nRow.insertCell(0).innerText = "Hola";
-                //nRow.insertCell(1).innerText = "Hola";
-               // nRow.insertCell(2).innerText = "Hola";
-               // nRow.insertCell(3).innerText = "Hola";
-               // nRow.insertCell(4).innerText = "Hola";
-               // nRow.insertCell(5).innerText = "Hola";
-               var nRow = "<tr><td>Hola</td><td>Hola</td><td>Hola</td><td>Hola</td><td>Hola</td><td>Hola</td></tr>";
-               $(tabla).append(nRow);
-                
-=======
-             
-           validacion.saveActionBitacora(<%= val %>, 17, "Agrego un nuevo capacitador",data, "Nuevo Capacitador", "Nuevo");  
->>>>>>> origin/master
-         }
+         
          function clearCapacitador(){
              document.getElementById("nNomCap").value = "";
              document.getElementById("nCarCap").value = "";
@@ -511,7 +491,7 @@ response.setDateHeader("Expires", 0);
                $( "#box_message" ).show("blind",callback); 
              }else{
              instrumentoDWR.newNota(<%= iduser %>, titu, descri, fecha, notaRes);
-             document.getElementById("notasIframe").src = "tableNotas.jsp";
+            
              document.getElementById("titulo").value = "";
              document.getElementById("txtDesc").value = "";
              document.getElementById("datepicker").value = "";
@@ -520,8 +500,9 @@ response.setDateHeader("Expires", 0);
                $( "#box_message" ).show("blind",callback);}
             
          }
-         function notaRes(data){
-         validacion.saveActionBitacora(<%= val %>, 0, "Agrego una nueva Nota",data, "Nueva Nota", "Nueva Nota");  
+        function notaRes(data){
+         validacion.saveActionBitacora(<%= val %>, 0, "Agrego una nueva Nota",data, "Nueva Nota", "Nueva Nota");
+           $("#notasIframe").attr("src","tableNotas.jsp");
          }
          function ValidaMail(mail) {
          var exr = /^[0-9a-z_\-\.]+@[0-9a-z\-\.]+\.[a-z]{2,4}$/i;
@@ -620,7 +601,6 @@ response.setDateHeader("Expires", 0);
            
             <div id="tabs" style="padding-top: 5px; margin-left: 1%; margin-right: 1%; height: 55em" >
                 <ul>
-<<<<<<< HEAD
                     <li><a href="#tabEmpresas"><span>EMPRESAS</span></a></li>
                     <li><a href="#tabCapacitadores"><span>CAPACITADORES</span></a></li>
                     <li><a href="#tabNoticias"><span>NOTAS</span></a></li>
@@ -631,25 +611,19 @@ response.setDateHeader("Expires", 0);
                 </ul>
                 <div id="tabEmpresas" style=" width: 98%;">
        
-                    <div style=" width: 50%; float: left;" >
-                  <iframe src="tableEmpresasNuevas.jsp" style="width: 100%; height: 45%" frameborder="0" scrolling="false"  id="eNueva"></iframe>   
+                    <div style=" width: 48%; float: left;" ><h3>Empresas Pendientes de Activaci&oacuten</h3><div class="line"></div>
+                  <iframe src="tableEmpresasNuevas.jsp" style="width: 100%; height: 40%" frameborder="0" scrolling="false"  id="eNueva"></iframe>   
                     </div> 
-                    <div style="width: 50%; float: right " >
-                   <iframe src="tableEmpresasActivas.jsp" style="width: 100%; height: 45%" frameborder="0" scrolling="false"  id="eActiva"></iframe>     
+                    <div style="width: 48%; float: right " > <h3>Empresas Activas Actualmente</h3><div class="line"></div>
+                   <iframe src="tableEmpresasActivas.jsp" style="width: 100%; height: 40%" frameborder="0" scrolling="false"  id="eActiva"></iframe>     
                     </div>
-                    <div style=" width: 98%;">
-                        <iframe src="tableEmpresasFinal.jsp" style="width: 100%; height: 45%" frameborder="0" scrolling="false"  id="eFinal"></iframe>     
+                    <div style=" width: 98%;"> <h3>&Uacuteltimas 5 Empresas que Finalizaron Intrumento</h3><div class="line"></div>
+                        <iframe src="tableEmpresasFinal.jsp" style="width: 100%; height: 38%" frameborder="0" scrolling="false"  id="eFinal"></iframe>     
                     
         </div>
                 </div>          
                 <%-- Fin Empresas, Inicio capacitadores --%>                
-=======
-                    <li><a href="#tabCapacitadores"><span>CAPACITADORES</span></a></li>
-                    <li><a href="#tabReportes"><span>REPORTES</span></a></li>
-                    <li><a href="#tabPerfil"><span>PERFIL</span></a></li>
-                    <li><a href="#tabNoticias"><span>NOTAS</span></a></li>
-                </ul>
->>>>>>> origin/master
+
                         <div id="tabCapacitadores">
                             <div align="center">
                                 <div class="divPanel" style="width: 500px; height: 180px;">
@@ -676,15 +650,9 @@ response.setDateHeader("Expires", 0);
                                     </tr>                          
                                 </table>
                                     <div align="center" ><input id="btnNewCapacitador" onclick="newCapacitador();" type="button" value="Guardar"/>
-<<<<<<< HEAD
-                                     <input id="btnClearCap" onclick="clearCapacitador();" type="button" value="Limpiar"/>
-                                     <input id="m" onclick="prueba();" type="button" value="Hola"/>
-                                    </div>
-                                     
-=======
-                                     <input id="btnClearCap" onclick="clearCapacitador();" type="button" value="Limpiar"/></div>
-                                    
->>>>>>> origin/master
+                                     <input id="btnClearCap" onclick="clearCapacitador();" type="button" value="Limpiar"/>                                     
+                                    </div>                   
+
                                  </form>
                                       
                                   </div><br>
@@ -790,7 +758,6 @@ response.setDateHeader("Expires", 0);
                             <table>
                                 <tr>
                                     <td>Nombre:</td>
-<<<<<<< HEAD
                                     <td><label id="lblnombre"><% out.print(usu.getNombre()); %></label></td>
                                 </tr>
                                 <tr>
@@ -808,25 +775,6 @@ response.setDateHeader("Expires", 0);
                                 <tr>
                                     <td>Direccion:</td>
                                     <td><label id="lbldir"><% out.print(usu.getDireccion()); %></label></td>
-=======
-                                    <td><% out.print(usu.getNombre()); %></td>
-                                </tr>
-                                <tr>
-                                    <td>Cargo:</td>
-                                    <td><% out.print(usu.getCargo()); %></td>
-                                </tr>
-                                <tr>
-                                    <td>Telefono:</td>
-                                    <td><% out.print(usu.getTelefono()); %></td>
-                                </tr>
-                                <tr>
-                                    <td>Correo:</td>
-                                    <td><% out.print(usu.getCorreo()); %></td>
-                                </tr>
-                                <tr>
-                                    <td>Direccion:</td>
-                                    <td><% out.print(usu.getDireccion()); %></td>
->>>>>>> origin/master
                                 </tr>
                            </table> <br>
                                     <button id="updateButton">Editar Información</button>
@@ -862,13 +810,9 @@ response.setDateHeader("Expires", 0);
                                         </div>
                                 </div>
                                 
-<<<<<<< HEAD
-=======
-                                
->>>>>>> origin/master
-        </div>                        
-                
-            </div>
+
+        </div>       
+        
             <div class="footer">
     
       

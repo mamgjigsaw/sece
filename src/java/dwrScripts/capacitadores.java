@@ -28,19 +28,30 @@ public class capacitadores {
         Empresa cpml = new Empresa();
         EmpresaDaoImpl edi = new EmpresaDaoImpl();
         cpml = edi.findByID(1);
-        
-        Usuario usu = new Usuario(cpml, nombre, cargo, tel, email, dir,2, contra, 1, null, null, null, null, null);
         UsuarioDaoImpl udi = new UsuarioDaoImpl();
+        Usuario usu = new Usuario();
+        usu = udi.findByEmail(email);
+        if (usu == null){
+        usu = new Usuario(cpml, nombre, cargo, tel, email, dir,2, contra, 1, null, null, null, null, null);
         udi.create(usu);
         res[0] = usu.getIdUsuario().toString();
         res[1] = usu.getNombre();
         res[2] = usu.getCargo();
         res[3] = usu.getTelefono();
         res[4] = usu.getCorreo();
-        res[5] = usu.getDireccion();
-                
-       return res;
-    
+        res[5] = usu.getDireccion();                
+       
+        }
+        else{
+           res[0] = "Error, el E-mail ya esta registrado";
+           res[1] = "Error, el E-mail ya esta registrado";
+           res[2] = "Error, el E-mail ya esta registrado";
+           res[3] = "Error, el E-mail ya esta registrado";
+           res[4] = "Error, el E-mail ya esta registrado";
+           res[5] = "Error, el E-mail ya esta registrado";
+        }
+        
+         return res;
     }
     public String[][] cargarCapacitadores(String idCelda){
             UsuarioDaoImpl udi = new UsuarioDaoImpl();

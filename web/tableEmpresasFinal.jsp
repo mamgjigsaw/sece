@@ -36,7 +36,7 @@
              $(function() 
                  { 
                  //Empresas que estan llenando el Instrumento
-      $("#empFinal").tablesorter({widthFixed: true, widgets: ['zebra']}).tablesorterPager({container: $("#pager")});  
+      $("#empFinal").tablesorter({widthFixed: true, widgets: ['zebra']});  
              } 
              );
         </script>
@@ -46,27 +46,14 @@
                                  Acceso ac = new Acceso();
                                  AccesoDaoImpl acDI = new AccesoDaoImpl();
                                  ac = acDI.findUltimoAcceso(usua);
-                                     %>
-                                     <div id="pager">
-	                 <form>
-		                <img src="resources/tablesorter/icons/first.png" class="first"/>
-		                <img src="resources/tablesorter/icons/prev.png" class="prev"/>
-		                <input type="text" class="pagedisplay"/>
-		                <img src="resources/tablesorter/icons/next.png" class="next"/>
-		                <img src="resources/tablesorter/icons/last.png" class="last"/>
-		                        <select class="pagesize">
-			                <option selected="selected"  value="10">10</option>
-			                <option value="20">20</option>			                
-		                        </select>
-	                  </form>
-                       </div> 
+                                     %>                                     
                   <table style="width: 100%" id="empFinal" class="tablesorter" cellspacing="1" >
                                                                  <thead>
                                                                      <tr>
                                                                          <th>Empresa</th>
                                                                          <th>Capacitador</th>                                                                        
                                                                          <th>Fecha de Suscripci&oacuten</th>
-                                                                         <th>Fecha de Finalizaci&oacuten</th>
+                                                                         <th>Fecha de Finalizaci&oacuten</th>                                                                         
                                                                      </tr>
                                                                  </thead>  
                                                                  <tbody>
@@ -80,11 +67,13 @@
                                                                 daoEmpresasContratosImpl ecdi = new daoEmpresasContratosImpl(); 
                                                                 List<EmpresasContratos> epact = ecdi.findAllByEstado(2);                                                                                               
                                                                Iterator<EmpresasContratos> ite = epact.iterator();                                                               
-                                                               
-                                                               while(ite.hasNext()){
+                                                               int contador = 0;
+                                                               while(ite.hasNext() && contador < 6 ){
                                                                ec = ite.next();
+                                                               contador++;
                                                                int idc = ec.getIdContrato();
-                                                               c = cdi.findById(idc);                   
+                                                               c = cdi.findById(idc);  
+                                                                                                                                              
                                                         try{
                                                               accont = accdi.findbyIdContrato(c);                                                                                    
                                                               cap = accont.getUsuario();                              

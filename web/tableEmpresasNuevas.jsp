@@ -46,22 +46,22 @@
                      capacitadoresDWR.cargarCapacitadores(idAC, listaCap);                     
                  }
                  function listaCap(data){                    
-                     var strSelect = "<select id = 'capaSelect'>";
+                     var strSelect = "<select id = 'capaSelect"+ data[0][0] +"'>";
                      var i;
                      var tr = data[0][0];
-                     alert(tr);
+                     
                      for(i = 1; i < data.length ; i++){
                          strSelect += "<option value = '"+ data[i][0] +"'>"+ data[i][1] +"</option>"
                      }
                      strSelect += "</select>";
-                     alert(strSelect);
+                     
                      var trCell = document.getElementById(tr).getElementsByTagName("td");                     
                      $(trCell[1]).append(strSelect);                     
                      
                  }
                  function guardarCap(data){
-                     var selec = $("#capaSelect").val();
-                     alert("valor: " + selec);
+                     var selec = $("#capaSelect"+ data +"").val();
+                     //alert("valor: " + selec);
                      capacitadoresDWR.guardarCambiarCapacitador(data, selec);
                      location.reload();
                  }
@@ -92,7 +92,7 @@
                                                                  <thead>
                                                                      <tr>
                                                                          <th>Empresa</th>
-                                                                         <th>Capacitador</th>                                                                        
+                                                                         <th style="width: 250px " >Capacitador</th>                                                                        
                                                                          <th>Fecha de Suscripci&oacuten</th>                                                                         
                                                                      </tr>
                                                                  </thead>  

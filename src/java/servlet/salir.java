@@ -50,7 +50,7 @@ public class salir extends HttpServlet {
               
               UsuarioDaoImpl usuarioDao= new UsuarioDaoImpl();
               Usuario usuario = usuarioDao.findById(acceso.getUsuario().getIdUsuario());              
-              usuario.setEstado(2);
+              usuario.setEstado(1);
               usuarioDao.update(usuario);
                
               sesion.setAttribute("idAcc","");

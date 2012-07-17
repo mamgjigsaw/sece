@@ -4,6 +4,8 @@
     Author     : Mendieta
 --%>
 
+<%@page import="daoImpl.RespItemDaoImpl"%>
+<%@page import="daoImpl.ItemDaoImpl"%>
 <%@page import="daoImpl.ContratoDaoImpl"%>
 <%@page import="pojo.Contrato"%>
 <%@page import="daoImpl.AsignacionCapaContraDaoImpl"%>
@@ -27,6 +29,7 @@
          <script type="text/javascript" src="/sece/dwr/interface/updates.js"></script>
          <script type="text/javascript" src="/sece/dwr/engine.js"></script>
          <script type="text/javascript" src="/sece/dwr/util.js"></script>
+         <script type="text/javascript" src="/sece/dwr/interface/capacitadoresDWR.js"></script>
           <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
@@ -39,6 +42,35 @@
       $("#empActivas").tablesorter({widthFixed: true, widgets: ['zebra']}).tablesorterPager({container: $("#pager")});  
              } 
              );
+                 function changeCap(idAC){                   
+                     document.getElementById("lblC"+idAC).style.display = 'none';
+                     document.getElementById("btnC"+idAC).style.display = 'none';
+                     document.getElementById("btnG"+idAC).style.display = 'block';                     
+                     capacitadoresDWR.cargarCapacitadores(idAC, listaCap);                     
+                 }
+                 function listaCap(data){                    
+                     var strSelect = "<select id = 'capaSelect"+ data[0][0] +"'>";
+                     var i;
+                     var tr = data[0][0];
+                     
+                     for(i = 1; i < data.length ; i++){
+                         strSelect += "<option value = '"+ data[i][0] +"'>"+ data[i][1] +"</option>"
+                     }
+                     strSelect += "</select>";
+                     
+                     var trCell = document.getElementById(tr).getElementsByTagName("td");                     
+                     $(trCell[1]).append(strSelect);                     
+                     
+                 }
+                 function guardarCap(data){
+                     var selec = $("#capaSelect"+ data +"").val();
+                     //alert("valor: " + selec);
+                     capacitadoresDWR.guardarCambiarCapacitador(data, selec);
+                     location.reload();
+                 }
+                 
+                 
+                 
         </script>
                                  <% Usuario usua = new Usuario();
                                  UsuarioDaoImpl usuaDI = new UsuarioDaoImpl();
@@ -64,12 +96,17 @@
                                                                  <thead>
                                                                      <tr>
                                                                          <th>Empresa</th>
-                                                                         <th>Capacitador</th>                                                                        
+                                                                         <th style="width: 250px ">Capacitador</th>                                                                        
                                                                          <th>Fecha de Suscripci&oacuten</th>
+                                                                         <th>Avance</th>
                                                                      </tr>
                                                                  </thead>  
                                                                  <tbody>
                                                                <%
+                                                               ItemDaoImpl itemImpl = new ItemDaoImpl();
+                                                               int numTotalItems = itemImpl.numItemActivos();
+                                                               RespItemDaoImpl ridimpl = new RespItemDaoImpl();
+                                                               int respxcontra = 0;                                                                                                                             
                                                                Contrato c = new Contrato();
                                                                Usuario cap = new Usuario(); 
                                                                 ContratoDaoImpl cdi = new ContratoDaoImpl();
@@ -83,15 +120,23 @@
                                                                while(ite.hasNext()){
                                                                ec = ite.next();
                                                                int idc = ec.getIdContrato();
-                                                               c = cdi.findById(idc);                   
+                                                               c = cdi.findById(idc);
+                                                               respxcontra = ridimpl.ItemRespondidosxContrato(c);
+                                                              int avancexContrato = ((respxcontra * 100) / numTotalItems);                                                                                                                                               
                                                         try{
                                                               accont = accdi.findbyIdContrato(c);                                                                                    
                                                               cap = accont.getUsuario();                              
                                                            %>
-                                                           <tr>
+                                                           <tr id="<%= accont.getIdAsignacion().toString() %>">
                                                                <td><%= ec.getEmpresaNombre() %></td>
-                                                               <td><%= cap.getNombre() %></td>                                                               
-                                                               <td><%= ec.getContratoFecha().toString() %></td>                                                               
+                                                               <td><label id="lblC<%= accont.getIdAsignacion().toString() %>" ><%= cap.getNombre() %></label>
+                                                               <a id="btnC<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right" onclick="changeCap('<%= accont.getIdAsignacion().toString() %>');" title="Cambiar Capacitador"><img src="images/arrow_switch.png" alt="Edit" /></a>
+                                                               <a id="btnG<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right; display: none" onclick="guardarCap('<%= accont.getIdAsignacion().toString() %>');" title="Guardar"><img src="images/icon_approve.png" alt="Edit" /></a>
+                                                               </td>                                                               
+                                                               <td><%= ec.getContratoFecha().toString() %></td>
+                                                               <td>
+                                                                <div class="progress-bar blue small" style="width:50%; float: left;"><div style="width:<%=avancexContrato + "%"%>;"><span style="top:16%;"><%=avancexContrato + "%"%></span></div> </div>   
+                                                               </td>
                                                            </tr>
                                                                      <%                              
                                                        }catch(NullPointerException e) {

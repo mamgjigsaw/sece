@@ -159,13 +159,16 @@ response.setDateHeader("Expires", 0);
                         }
                        else{                          
                           instrumentoDWR.newIndicador(indicador, contrib, res);                         
-                          document.getElementById("fraIndi").src = "tableIndicador.jsp";
+                           var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Indicador</strong><p class='hola'>El nuevo Indicador se ha guardado correctamente.</p></div><!-- /Notification --></section>";  
+                           $("#box_message").html(palabra);
+                           $( "#box_message" ).show("blind",callback);
                           limpiarIndicador();
                        }                
              }
              function res(data){
                  validacion.saveActionBitacora(<%= val %>, 1, "Se agrego un nuevo indicador al Instrumento",data, "Nuevo Indicador", "Nuevo Indicador");
-             }
+                  $("#fraIndi").attr("src","tableIndicador.jsp");
+         }
              
              function limpiarIndicador(){
                  document.getElementById("nindicador").value = "";
@@ -174,7 +177,7 @@ response.setDateHeader("Expires", 0);
          </script>
          <script>
              //Javascript para Variable
-             function guardarVariable(){
+            function guardarVariable(){
                 var variable = $("#nvariable").val();
                 var ponderacion = $("#nvarpon").val();
                 var indicadorVar = $("#indNewVar").val();
@@ -205,7 +208,9 @@ response.setDateHeader("Expires", 0);
                         }
                        else{                          
                           instrumentoDWR.newVariable(variable, indicadorVar, ponderacion, esca4, esca3, esca2, esca1, esca0, rmenor4, rmayor4, rmenor3, rmayor3, rmenor2, rmayor2, rmenor1, rmayor1, rmenor0, rmayor0, resul);                         
-                          document.getElementById("fraVar").src = "tableVariable.jsp";
+                          var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Variable</strong><p class='hola'>La nueva Variable se ha guardado junto a su respectivas Escalas correctamente.</p></div><!-- /Notification --></section>";  
+                           $("#box_message").html(palabra);
+                           $( "#box_message" ).show("blind",callback);
                           limpiarVariable();
                        }                
              }
@@ -216,6 +221,8 @@ response.setDateHeader("Expires", 0);
                  validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[3], "Nueva Escala", "Nueva Escala");
                  validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[4], "Nueva Escala", "Nueva Escala");
                   validacion.saveActionBitacora(<%= val %>, 5, "Nueva Escala",data[5], "Nueva Escala", "Nueva Escala");
+                   $("#fraVar").attr("src","tableVariable.jsp");
+                  $("#fraEscala").attr("src","tableEscala.jsp");
              }
              function limpiarVariable(){
                  document.getElementById("nvariable").value = "";
@@ -250,14 +257,16 @@ response.setDateHeader("Expires", 0);
                       $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje
                        }
                        else{                            
-                          instrumentoDWR.newItem(newitem, variableItem, respIG);                          
-                          document.getElementById("fraItem").src = "tableItem.jsp";
+                          instrumentoDWR.newItem(newitem, variableItem, respIG); 
+                          var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Item</strong><p class='hola'>El nuevo Item se ha guardado correctamente.</p></div><!-- /Notification --></section>";  
+                           $("#box_message").html(palabra);
+                           $( "#box_message" ).show("blind",callback);                         
                           limpiarItem();
                        }                
              }
              function respIG(data){
                 validacion.saveActionBitacora(<%= val %>, 7, "Nuevo Item",data, "Nueva Item", "Item");
-                 
+                  $("#fraItem").attr("src","tableItem.jsp");
              }
              function limpiarItem(){
                  document.getElementById("newItemDesc").value = "";                 
@@ -277,7 +286,9 @@ response.setDateHeader("Expires", 0);
                       $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje 
                  }else{     
                             instrumentoDWR.newSugerencia(suge, selecteds, resSG);
-                            document.getElementById("fraSug").src = "tableSugerencias.jsp";
+                           var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sugerencia</strong><p class='hola'>La sugerencia se ha guardado correctamente.</p></div><!-- /Notification --></section>";  
+                           $("#box_message").html(palabra);
+                           $( "#box_message" ).show("blind",callback); 
                             limpiarSugerencia();                            
                         }
              }
@@ -287,9 +298,11 @@ response.setDateHeader("Expires", 0);
               for(i=1;i<data.length;i++){
                   validacion.saveActionBitacora(<%= val %>, 38, "Asignacion de Sugerencia",data[i], "Sugerencia", "Item Relacionado");
               }
+              $("#fraSug").attr("src","tableSugerencias.jsp");
              }
              function limpiarSugerencia(){
                  document.getElementById("txtsuge").value = "";
+                 $("#selectItem").multiselect("uncheckAll");
                                   
              }
          </script>
