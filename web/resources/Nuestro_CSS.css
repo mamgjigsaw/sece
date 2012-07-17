@@ -10,9 +10,6 @@
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
-    .mnSalir li{
-        padding-left: 5%;                  
-    }
     #toolbar {
         padding: 10px 4px;
     }
@@ -135,8 +132,8 @@
         /*Agregado por David*/        
         /* -------------------------------- Prgoress Bars  */
         .progress-bar {
-                /*background:#f2f2f2;*/
-                background:#e8e8e8;
+                background:#f2f2f2;
+                
                 border:1px solid #d9d9d9;
                 border-radius:5px;
                 display:block;
@@ -155,7 +152,7 @@
                 box-shadow:0 0 5px #a6a6a6;
         }
         .progress-bar div span {
-                color:#fff;
+                color:black;
                 font-family:'PTSansBold', Arial, sans-serif;
                 text-align:center;
                 position:relative;
@@ -262,4 +259,35 @@
 	position:relative;
 	top:1px;
 }
+.cant_emailEnviados{
+    font-size: x-small;
+    color:#0321FF;
+    vertical-align: top;
+}
+#menuBtnOpciones1{
+    border-radius: 0 0 5px 5px; 
+    border-color: #69a8d4;
+    border-style: solid;  border-width: 1px;
+    display: none;
+    background: #e7f1fa; 
+    width: 98%; 
+    height: 40px;
+    color: #015480;
+}
 
+
+.opciones1{    
+    list-style-image:none; 
+    margin-top: 0px; 
+    list-style: none;
+    font-size: medium; 
+    text-align:left;    
+}
+.opciones1 li:hover {
+    color:white;
+    cursor:pointer;
+    background-color: #1A2B5F;
+}
+.opciones1 img {
+    padding-left: 6%;
+}

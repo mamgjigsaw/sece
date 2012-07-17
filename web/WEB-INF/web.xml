@@ -89,8 +89,13 @@
         <servlet-class>servlet.sendMail</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>aprobarEmpresa</servlet-name>
         <servlet-class>servlet.aprobarEmpresa</servlet-class>
+=======
+        <servlet-name>aprobarContrato</servlet-name>
+        <servlet-class>servlet.aprobarContrato</servlet-class>
+>>>>>>> origin/master
     </servlet>
     <servlet-mapping>
         <servlet-name>saveIndicador</servlet-name>
@@ -198,8 +203,13 @@
         <url-pattern>/sendMail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>aprobarEmpresa</servlet-name>
         <url-pattern>/aprobarEmpresa</url-pattern>
+=======
+        <servlet-name>aprobarContrato</servlet-name>
+        <url-pattern>/aprobarContrato</url-pattern>
+>>>>>>> origin/master
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
@@ -214,5 +224,9 @@
     <error-page>
         <error-code>500</error-code>
         <location>/Error500.jsp</location>
+<<<<<<< HEAD
     </error-page>    
+=======
+    </error-page>
+>>>>>>> origin/master
 </web-app>

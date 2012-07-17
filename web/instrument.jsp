@@ -235,12 +235,10 @@ response.setDateHeader("Expires", 0);
                       
                  }else if (actual_var == (total_vari -1)){
                      for(i=0;i<num_item;i++){
-                        if(jQuery("#checkbox"+(i+1)).attr('checked') == true)
-                          { //alert("Seleccionada");                             
-                             interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),1,$("#textfield"+(i+1)).val());                        
-                          }else { //alert("No Seleccionada");  
-                             interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),0,$("#textfield"+(i+1)).val());
-                            }
+                        //if(jQuery("#checkbox"+(i+1)).attr('checked') == true)
+                          //{ //alert("Seleccionada");                             
+                             interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),$("input:radio[name=group"+ (i+1) +"]:checked").val(),$("#textfield"+(i+1)).val());                        
+                         
                      }//fin del ciclo for para guardar las respuesta item.
                      
                      $( "#link_variable").html("");                     
@@ -273,7 +271,8 @@ response.setDateHeader("Expires", 0);
             
             function respuesta3(data){                 
                  actual_var = data;                                  
-                 $( "#link_actual").html(actual_var+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12                 
+                 $( "#link_actual").html(actual_var+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12  
+                 interaccion.getCompletedInstrument(<%=contrato%>);
             }
             
             function getName2(data2){

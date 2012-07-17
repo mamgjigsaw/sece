@@ -5,16 +5,7 @@
 package dwrScripts;
 
 import dao.SMTPAuthentication;
-import daoImpl.AccesoDaoImpl;
-import daoImpl.AsignacionCapaContraDaoImpl;
-import daoImpl.BitacoraDaoImpl;
-import daoImpl.ContratoDaoImpl;
-import daoImpl.EmailSentDaoImpl;
-import daoImpl.EmpresaDaoImpl;
-import daoImpl.OperacionDaoImpl;
-import daoImpl.UsuarioDaoImpl;
-import daoImpl.ZoneDaoImpl;
-import daoImpl.encriptar;
+import daoImpl.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Properties;
@@ -58,6 +49,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import pojo.*;
 /**
  *
  * @author mamg
@@ -99,11 +91,41 @@ public class validate {
     }
     
     public void  bloquear(String email){
-        UsuarioDaoImpl usudao = new UsuarioDaoImpl();
-        Usuario usuario = new Usuario();
-        usuario = usudao.findByEmail(email);
-        usuario.setEstado(4);
-        usudao.update(usuario);
+        try{
+            UsuarioDaoImpl usudao = new UsuarioDaoImpl();
+            Usuario usuario = new Usuario();
+            usuario = usudao.findByEmail(email);
+            
+            //validar que tipo de usuario es?
+            if(usuario.getTipoUsuario()==1){// tipo administrador
+                usuario.setEstado(4);
+                usudao.update(usuario);   
+                
+                //obtener el string aleratorio y guardar la solicitud en la tabla email_sent
+                String stringRandom = getStringRandom();
+                Date fecha = new Date();
+                Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+            
+                EmailSent emailSent = new EmailSent(usuario,momentoTimestamp,stringRandom);
+                EmailSentDaoImpl emailDao = new EmailSentDaoImpl(); 
+                emailDao.create(emailSent);
+                
+                String urlLost;                
+                Properties archivoConf = new Properties();
+                archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
+                urlLost = (String) archivoConf.getProperty("seceUrl");
+                urlLost = urlLost +"/forgetPassword.jsp?liame=" + usuario.getCorreo() +"&&ogidoc="+ stringRandom;
+                
+                //enviarle un correo de que su cuenta ha sido bloqueada.
+                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contrseña incorrecta. En este link de acontinuacion podra resetear su contraseña <br>"+ urlLost +".</p> <p> Gracias, SECE TEAM.</strong></p>");
+                //(String remitente,String destinatario,String asunto,String mensaje_cuerpo)
+            }else{//tipo capacitador o usuario
+                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. Dirijase al administrador del sistema que le brindara unos pasos para su posterior activacion.</p> <p> Gracias, SECE TEAM.</strong></p>");
+            }
+        }catch(Exception e){
+            System.out.println("El error es --- " + e.getMessage());
+        }
+        
     }
     
     public void saveActionBitacora(int id_acceso,int id_operacion, String descripcion,int id_elemento,String anterior,String actual){
@@ -156,6 +178,7 @@ public class validate {
         empresaDao.create(empresa);
           
         //Aqui se guarda el usuario
+        //tipo 3 contacto, y estado del usuario 0 porque todavia no ha sido dado de alta.
        Usuario usuario = new Usuario(empresa,name,cargo,telefono,correo,direccion,3,password,0,null,null,null,null,null);
        UsuarioDaoImpl UsuDao= new UsuarioDaoImpl();
        UsuDao.create(usuario);            
@@ -163,17 +186,41 @@ public class validate {
        Date fecha = new Date();
        Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
        
-       Contrato contrato = new Contrato(usuario,1,momentoTimestamp,momentoTimestamp,null,null,null);
+       //el estado del contrato es 0, porque todavia no ha sido dado de alta
+       Contrato contrato = new Contrato(usuario,0,momentoTimestamp,momentoTimestamp,null,null,null);
        ContratoDaoImpl contratoDao = new ContratoDaoImpl();
        contratoDao.create(contrato);
        
        //para asignar al usuario capacitador a un contrato
        
        Usuario usuarioCapa = new Usuario();//un usuario de tipo capacitador
-       if (capacitador != -1){        
+       if (capacitador == -1){        
         usuarioCapa = UsuDao.findById(balanceoCargaCapacitador().getIdUsuario());//UsuDao.findById(2);
        }else{
-        usuarioCapa = UsuDao.findById(capacitador);                
+        usuarioCapa = UsuDao.findById(capacitador);
+        
+        //cambio el estado a 1 porque su cuenta esta activada
+        usuario.setEstado(1);
+        UsuDao.update(usuario);
+        //igual con el contrato, estaactivado
+        contrato.setEstado(1);
+        contratoDao.update(contrato);
+        
+        //guardar asignacion de indicadores delegado como el avance
+        List<Indicador> listIndi = new ArrayList<Indicador>();
+        IndicadorDaoImpl daoIndicador = new IndicadorDaoImpl();
+        listIndi = daoIndicador.findAllByActive();
+       
+        AvanceDaoImpl daoAvance = new AvanceDaoImpl();
+        DelegacionIndiUsuDaoImpl deledao = new DelegacionIndiUsuDaoImpl();
+         for(int i=0;i<listIndi.size();i++){
+               
+           DelegacionIndiUsu dele = new DelegacionIndiUsu(usuario,listIndi.get(i),contrato);
+           deledao.create(dele);
+           
+           Avance avance = new Avance(contrato,listIndi.get(i),0,0);   
+           daoAvance.create(avance);        
+          }            
        }
        
        AsignacionCapaContra as = new AsignacionCapaContra(usuarioCapa,contrato);
@@ -252,10 +299,7 @@ public class validate {
         usuario = daoUsuario.findById(Integer.parseInt(array[0][0]));
         return usuario;
     }
-    
-    public int passwordOlvidado(String destinatario){
-        try{
-        
+    public String getStringRandom(){
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 	int string_length = 9;
 	String randomstring = "";
@@ -266,6 +310,13 @@ public class validate {
 		randomstring += chars.substring( (int) rnum, (int) rnum+1);                
                 //chars.substring(i, i)
 	}
+        return randomstring;
+    }
+            
+    public int passwordOlvidado(String destinatario){
+        try{
+        
+        String stringRandom = getStringRandom();
         
         Usuario usuario = new Usuario();
         UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
@@ -275,23 +326,41 @@ public class validate {
             return 0;//usuario no existe.
         }else{
             
-            String url="<a href='http://localhost:8080/sece/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://localhost:8080/sece/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
+            EmailSentDaoImpl emailDao = new EmailSentDaoImpl();
+            EmailSent emailSent = new EmailSent();
             
-            Date fecha = new Date();
-            Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+            emailSent = emailDao.findByUsuario(usuario);
             
-            EmailSent emailSent = new EmailSent(usuario,momentoTimestamp,randomstring);
-            EmailSentDaoImpl emailDao = new EmailSentDaoImpl(); 
-            emailDao.create(emailSent);
+            if(emailSent == null){
+                String seceURL;
+                Properties archivoConf = new Properties();
+                archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
+                seceURL = (String) archivoConf.getProperty("seceUrl");
+        
+                //String url="<a href='http://localhost:8080/sece/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
+                String url="<a href='"+ seceURL +"/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ stringRandom +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+ stringRandom +"</span></a>";
+            
+                Date fecha = new Date();
+                Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+            
+                emailSent = new EmailSent(usuario,momentoTimestamp,stringRandom);
+             
+                emailDao.create(emailSent);
                     
-            int m = EnviarCorreo("sece@pml.org.ni",destinatario,"Restablecer Contraseña","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> click en el link de abajo para resetear tu contraseña en SECE y eliga una nueva<br>"+ url +"</p> <p> Gracias, SECE TEAM.</strong></p>");
-            return 1;
+                int m = EnviarCorreo("sece@pml.org.ni",destinatario,"Restablecer Contraseña","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> click en el link de abajo para resetear tu contraseña en SECE y eliga una nueva<br>"+ url +"</p> <p> Gracias, SECE TEAM.</strong></p>");
+                return 1; // se guardo correctamente todo.                                
+            }else{                
+                return 2;// el usuario posee una solicitud de cambio de contraseña
+            }
+            
+            
         }
         
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage());            
         }
         return 4;
+        
     }
     
     public String cambiarPasswordByID(int idUsuario,String newContra){

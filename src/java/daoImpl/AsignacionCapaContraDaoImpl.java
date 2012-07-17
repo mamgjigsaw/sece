@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import pojo.AsignacionCapaContra;
 import pojo.Contrato;
@@ -73,6 +74,7 @@ public class AsignacionCapaContraDaoImpl implements daoAsignacionCapaContra {
     }
 
     @Override
+<<<<<<< HEAD
     public AsignacionCapaContra findbyIdContrato(Contrato c) {
         
         Session se = sf.getCurrentSession();
@@ -89,6 +91,18 @@ public class AsignacionCapaContraDaoImpl implements daoAsignacionCapaContra {
         asignacion = (AsignacionCapaContra) se.get(AsignacionCapaContra.class, id);
         se.getTransaction().commit();
         return asignacion;
+=======
+    public Usuario findUsByContra(Contrato contrato) {
+        Usuario capacitador = new Usuario();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        capacitador = (Usuario) se.createCriteria(AsignacionCapaContra.class)
+                .setProjection(Projections.projectionList().add(Projections.property("usuario")))
+                .add(Restrictions.eq("contrato", contrato))
+                .uniqueResult();
+         
+        return capacitador;                
+>>>>>>> origin/master
     }
     
 }

@@ -14,7 +14,6 @@ import daoImpl.RespItemDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -32,7 +31,13 @@ import pojo.Usuario;
  */
 public class initCapacitadores {
 
+    validate validar;
+    
     public initCapacitadores() {
+    }
+    
+    public String htennws(){
+        return "test exitoso";
     }
     
     public String obtenerURLSist() throws IOException{
@@ -43,35 +48,59 @@ public class initCapacitadores {
     return url;
     }
     
-   public String insertarVideoChat(int idcontrato,int idusuario){
-        ContratoDaoImpl cdi = new ContratoDaoImpl();
-        Contrato contra = cdi.findById(idcontrato);
+   public String insertarVideoChatCapac(int idcontrato,int idusuario){
+           ContratoDaoImpl cdi = new ContratoDaoImpl();
+           Contrato contrato = cdi.findById(idcontrato);
+           String idusuario1 = null, idusuario2 = null, idusuario3 = null, idusuario4 = null;
+           
+           
+           DelegacionIndiUsuDaoImpl diud = new DelegacionIndiUsuDaoImpl();
+           UsuarioDaoImpl udi = new UsuarioDaoImpl();
+           Usuario user = udi.findById(idusuario);
+           String nombreUsuario =  user.getNombre();
+           List<Usuario> usuarios = diud.usuariosSNRepetirdelegacionxContrato(contrato,user);           
+           System.out.println(usuarios.size());
+           try{ 
+               idusuario1 = String.valueOf(usuarios.get(0).getIdUsuario()) ;
+               idusuario2 = String.valueOf(usuarios.get(1).getIdUsuario()) ;
+               idusuario3 = String.valueOf(usuarios.get(2).getIdUsuario()) ;
+               idusuario4 = String.valueOf(usuarios.get(3).getIdUsuario()) ;
+           }catch (IndexOutOfBoundsException ie) { System.out.println(ie.getMessage());}
         
-        //para obtener el nombre del usuario publicador        
-        UsuarioDaoImpl udi = new UsuarioDaoImpl();
-        Usuario user = udi.findById(idusuario);
-        String nombreUsuario = user.getNombre();
-        DelegacionIndiUsuDaoImpl doii = new DelegacionIndiUsuDaoImpl();
-        List<DelegacionIndiUsu> delegados = doii.delegacionxContrato(contra);
-        DelegacionIndiUsu delegado = new DelegacionIndiUsu();
-        Iterator<DelegacionIndiUsu> it = delegados.iterator();
-        String[] idUsuarios = new String [10];         
-        int i=0;        
-            while(it.hasNext()){
-                delegado = it.next();  
-                //if para que usuario delegado unico no se repita
-                if (String.valueOf(delegado.getUsuario().getIdUsuario()).equals(String.valueOf(idusuario)))
-                    idUsuarios[i] = null;
-                else
-                    idUsuarios[i] = String.valueOf(delegado.getUsuario().getIdUsuario());
-                
-                
-                i++;
-            }//fin while
         
         String obj = "<object id='Video_Chat' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0' "
-                + "width='990' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser2="+ idUsuarios[0]+"&iduser3="+ idUsuarios[1]+"&iduser4="+ idUsuarios[2]+"&nomUser="+ nombreUsuario+"'/>"
-                + " <param name='quality' value='high'/> <embed src='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser2="+ idUsuarios[0]+"&iduser3="+ idUsuarios[1]+"&iduser4="+ idUsuarios[2]+"&nomUser="+ nombreUsuario+"' "
+                + "width='990' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idusuario1+"&iduser2="+ idusuario2+"&iduser3="+ idusuario3+"&iduser4="+ idusuario4+"&nomUser="+ nombreUsuario+"'/>"
+                + " <param name='quality' value='high'/> <embed src='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idusuario1+"&iduser2="+ idusuario2+"&iduser3="+ idusuario3+"&iduser4="+ idusuario4+"&nomUser="+ nombreUsuario+"' "
+                + "quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='1000' height='625'></embed> </object>";
+        return obj;
+    }
+   
+   public String insertarVideoChat(int idcontrato,int idusuario){
+           ContratoDaoImpl cdi = new ContratoDaoImpl();
+           Contrato contrato = cdi.findById(idcontrato);
+           String idusuario1 = null, idusuario2 = null, idusuario3 = null; 
+           String idcapacitador = null;
+                      
+           AsignacionCapaContraDaoImpl accdi = new AsignacionCapaContraDaoImpl();
+           Usuario capacitador = accdi.findUsByContra(contrato);
+           idcapacitador = String.valueOf(capacitador.getIdUsuario());
+           
+           DelegacionIndiUsuDaoImpl diud = new DelegacionIndiUsuDaoImpl();
+           UsuarioDaoImpl udi = new UsuarioDaoImpl();
+           Usuario user = udi.findById(idusuario);
+           String nombreUsuario =  user.getNombre();
+           Empresa empresa = user.getEmpresa();
+           List<Usuario>usuarios = diud.usuariosSNRepetirdelegacionxContrato(contrato,user);        
+           try{ 
+               idusuario1 = String.valueOf(usuarios.get(0).getIdUsuario()) ;
+               idusuario2 = String.valueOf(usuarios.get(1).getIdUsuario()) ;
+               idusuario3 = String.valueOf(usuarios.get(2).getIdUsuario()) ;               
+           }catch (IndexOutOfBoundsException ie) { System.out.println(ie.getMessage());}
+        
+        
+        String obj = "<object id='Video_Chat' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0' "
+                + "width='990' height='625'> <param name='movie' value='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idcapacitador+"&iduser2="+ idusuario1+"&iduser3="+ idusuario2+"&iduser4="+ idusuario3+"&nomUser="+ nombreUsuario+"'/>"
+                + " <param name='quality' value='high'/> <embed src='resources/swf/publicador.swf?idcontrato="+ idcontrato +"&iduser="+idusuario+"&iduser1="+ idcapacitador+"&iduser2="+ idusuario1+"&iduser3="+ idusuario2+"&iduser4="+ idusuario3+"&nomUser="+ nombreUsuario+"' "
                 + "quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='1000' height='625'></embed> </object>";
         return obj;
     }
@@ -84,23 +113,39 @@ public class initCapacitadores {
         List<DelegacionIndiUsu> delegados = doii.delegacionxContrato(contra);
         DelegacionIndiUsu delegado;
         Iterator<DelegacionIndiUsu> it = delegados.iterator();
+        Calendar c = Calendar.getInstance();
+        Date tiempoDgracia;
         
         AccesoDaoImpl adi = new AccesoDaoImpl();
-        Timestamp acces;
+        //var para ultimo acceso del usaurio
+        Date acces;
+        
         if (it.hasNext()){
-            resultado = "<table border='0' id='resultTable' width ='100%'><tr> <th>Delegado</th> <th>Ultimo Acceso</th> <th>Correo</th> <th>On-Line</th> </tr>";
+            resultado = "<table border='0' id='resultTable' width ='100%'><tr> <th>Delegado</th>  <th>Ultimo Acceso</th> <th>Indicador</th> <th>Correo</th> <th>On-Line</th> </tr>";
             
              while (it.hasNext()){                 
-                 delegado = it.next();            
-                 acces = adi.fechaUltimoAcceso(delegado.getUsuario());    
-                 resultado +="<tr style='text-align:center;'><td>"+delegado.getUsuario().getNombre()+"</td>";
-                 resultado +="<td>";
+                 delegado = it.next();   
+                 //metodo que devuelve ultim acceso del usuario tal
+                 acces = adi.fechaUltimoAcceso(delegado.getUsuario());                    
+                 //determinar tiempo de inactividad
+                 c.setTime(acces);
+                 c.add(Calendar.DATE, 3);
+                 tiempoDgracia = c.getTime();
+                 if (new Date().after(tiempoDgracia))
+                     resultado +="<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button><span class='cant_emailEnviados'></span>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
+                 else
+                     resultado +="<tr style='text-align:center;'><td>"+delegado.getUsuario().getNombre()+"</td>";
+                 resultado +="<td class='tdFechaAcc'>";                 
              if (acces == null)
                  resultado +="(No hay registros de accesos)";
              else
                  resultado +=acces;
              resultado +="</td>";
+             
+             resultado +="<td>" +delegado.getIndicador().getNombre()+ "</td>";
+             
              resultado +="<td>"+delegado.getUsuario().getCorreo()+"</td>";
+            
              resultado +="<td>";
              if (delegado.getUsuario().getEstado() == 1)
                 resultado +="<img src='images/offline-user-icon.png' title ='Usuario no Conectado' alt='Usuario no Conectado'/>";
@@ -156,8 +201,9 @@ public class initCapacitadores {
                 emp = edi.findByID(contacto.getEmpresa().getIdEmpresa());
                  resultado += "<tr height = '35px'>"
                          + " <td id ='tdEmpresa' style='display:none;'>"+ emp.getIdEmpresa()+"</td>"
-                         + " <td> "+ emp.getNombre() +" </td>"
+                         + " <td> "+ emp.getNombre() +" </td>"                         
                          + " <td> "+ contacto.getNombre() +" </td>"
+                         + " <td> "+ contra.getUsuario().getCorreo() +" </td>"
                          + "<td>";  
                 if (contra.getFechaInicio() == null) 
                     resultado += "(No hay Registros)";
@@ -191,7 +237,9 @@ public class initCapacitadores {
         return ((respxContrato * 100) / numItems);
     }
     
-    public void quitarConFin(int idCapacitador, int diasGracia){        
+    public void quitarConFin(int idCapacitador, int diasGracia){  
+        //funcion que revisa la fecha de finalizacion del contrato, despues de los "dias de gracia" ejecuta el cambio de estado
+        //---ojo--- inecesario si el estado es cambiajo automaticamente despues de respondida el ultimo item
        Iterator<AsignacionCapaContra> it =  listaConxCapac(idCapacitador);
        AsignacionCapaContra aco ;
        ContratoDaoImpl cdi = new ContratoDaoImpl();
@@ -208,9 +256,10 @@ public class initCapacitadores {
            c.setTime(finContrato);
            c.add(Calendar.DATE, diasGracia);
            tiempoDgracia = c.getTime();
-           if (new Date().after(tiempoDgracia))
-           contrato.setEstado(2);//actualiza el estado del contrato a actualizado
-           cdi.update(contrato);
+           if (new Date().after(tiempoDgracia)){
+            contrato.setEstado(2);//actualiza el estado del contrato a actualizado            
+            cdi.update(contrato);
+           }//fin if new Date
        }//fin if 
        }//fin while
        
@@ -235,6 +284,26 @@ public class initCapacitadores {
             }//fin if estado
         }//fin while
         return resultado;
-    }//fin funcion
+    }//fin funcion    
     
+    public void enviarCorreoUsuarioDormido(int idcontrato,int idusuario, String ultimoAcceso) throws IOException{
+        
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
+        Contrato contra = cdi.findById(idcontrato);
+        
+        UsuarioDaoImpl udi = new UsuarioDaoImpl();
+        Usuario user = udi.findById(idusuario);
+        String nombreUsuario = user.getNombre().toUpperCase();        
+        String correo = user.getCorreo();
+        validar = new validate();
+        
+        String asunto = "Usuario Inactivo";
+        String cuerpo =" <p>Estimado "+nombreUsuario+ " se ha detectado <strong>inactividad</strong> en su cuenta del Sistema SECE.</br>"
+        +"Su ultimo acceso al sistema fue el "+ ultimoAcceso +".</p>"
+        +"Le invitamos a continuar de respondiendo la evaluaci&oacute;n en la brevedad de lo posible.</p>"
+        +"Por favor no reinvie a este correo.<p><strong>Gracias SECE TEAM.</strong></p>";
+        
+        validar.EnviarCorreo("sece@pml.org.ni", correo, asunto, cuerpo);
+    }//fin idContrato
+
 }

@@ -6,7 +6,7 @@
     <id name="idEmpresa" type="java.lang.Integer">
       <column name="id_empresa"/>
       <generator class="identity"/>
-    </id>
+    </id>    
     <many-to-one class="pojo.Zone" fetch="select" name="zone">
       <column name="id_zone"/>
     </many-to-one>
@@ -25,7 +25,7 @@
     <property name="direccion" type="string">
       <column length="400" name="direccion"/>
     </property>
-    <set inverse="true" name="usuarios" >
+    <set inverse="true" name="usuarios">
       <key>
         <column name="id_empresa"/>
       </key>

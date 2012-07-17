@@ -177,6 +177,21 @@ public class interaccion_instrum {
          
          return array;
     }
+    
+    public void getCompletedInstrument(int  id_contrato){
+        //con este metodo miro si el contrato ya llego a 100, si es asi cambio su estado a completado
+         Contrato contrato = new Contrato();
+         ContratoDaoImpl daoContra = new ContratoDaoImpl();
+         contrato = daoContra.findById(id_contrato);
+        
+         initCapacitadores init = new initCapacitadores();
+         int av = init.AvancePorcXcontrato(contrato); 
+         
+         if (av==100){
+             contrato.setEstado(2);
+             daoContra.update(contrato);
+         }
+    }
        
     
 }
