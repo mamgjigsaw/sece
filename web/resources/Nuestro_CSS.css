@@ -279,6 +279,7 @@
 .opciones1{    
     list-style-image:none; 
     margin-top: 0px; 
+    padding-left: 0px;
     list-style: none;
     font-size: medium; 
     text-align:left;    
@@ -290,4 +291,8 @@
 }
 .opciones1 img {
     padding-left: 6%;
+}
+
+.btnAprobar{
+    height: 19px;
 }

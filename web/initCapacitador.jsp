@@ -181,9 +181,7 @@ response.setDateHeader("Expires", 0);
                                         ascImage: 'images/up.png',
                                         descImage:'images/down.png',
                                         rowsPerPage: 20});    
-           $("#contenidoContratos tr").click(function() {               
-              window.location.href = "graficoHistorial.jsp?idempresa="+$(this).find('input:hidden').val();              
-            });
+           
             
             $("#tblEmpresaAsignada tbody tr").click(function() {                 
                 var idcontrato = $(this).find('input:hidden').val();
@@ -205,9 +203,8 @@ response.setDateHeader("Expires", 0);
                                                idu = $(this).parent().parent().find('input:hidden').val()                                               
                                                fechaAcceso = $(this).parent().parent().children('.tdFechaAcc').text();
                                                //            ....(idContrato,idUsuario,ultima fecha de acceso de Usuario)      
-                                               //capacitadoresScripts.enviarCorreoUsuarioDormido(idcontrato,idu,fechaAcceso);
+                                               capacitadoresScripts.enviarCorreoUsuarioDormido(idcontrato,idu,fechaAcceso);
                                                $(this).parent().find('.cant_emailEnviados').text(spanVal);
-                                               //alert ("idc: "+idcontrato +" fecha: "+fechaAcceso + " usaurio: "+idc);
                                           });
                                         }
                                     });        
@@ -323,15 +320,15 @@ response.setDateHeader("Expires", 0);
                         </span>
                             <div id="menuBtnOpciones1">
                                 <ul class="opciones1">                                                                        
-                                    <li id="mnuBtnSalir" > <img src="images/question_mark.png"/> Ayuda  </li>                   
+                                    <li id="mnuBtnSalir" onclick="location.href='ayuda/ayudaCapacitador.jsp'" > <img src="images/question_mark.png"/> Ayuda  </li>                   
                                     <li id="mnuBtnSalir" onclick="location.href='salir'" ><img src="images/salir.gif"/> Salir  </li>                                        
                                 </ul>              
                             </div>
                         </div>
                         <div class="clr"></div>      
                     </div>
-                </div>
-            </div><!-- fin div header!-->
+                </div><!-- fin div header!-->
+           
                 
             <div class="body">      
                 <div class="body_resize">
@@ -430,8 +427,12 @@ response.setDateHeader("Expires", 0);
                                                                 
                                                                 capacitadoresScripts.empresaNoAsignada(idempresa,{
                                                                     callback:function(data){
-                                                                        
+                                                                       
                                                                         $("#tdeNa").html(data);
+                                                                         //dar apariencia a los botones
+                                                                        $( "#btnImgAprobar" ).button({ icons: { primary: "ui-icon-check" }, text: false });
+                                                                        $( "#btnImgEliminar" ).button({ icons: { primary: "ui-icon-cancel" }, text: false });
+                                                                        
                                                                         $("#btnImgAprobar").click(function (){
                                                                             $.get("aprobarContrato", {id:1,idu:idcontacto,idc:idcontrato,iduc:idCapacitador},success);
                                                                             function success(){window.location.reload(true);}
@@ -495,7 +496,7 @@ response.setDateHeader("Expires", 0);
                                 <h1>Historial de Contratos</h1>
                                 <!-- <label>Desde: </label><input id="datepicker" type="text"/>    <label>Hasta: </label><input id="datepicker2" type="text"/> !-->
                             </div>
-                            <div style=>
+                            <div>
                                 <input type="text" id="search" placeholder="Escriba Empresa...." size="35"/> <span id="loader" style="vertical-align: middle"><img src="images/loader.gif" alt="Laoder" /></span>
                             </div>                
                             <table width="100%" id="tblContratos" border="0">
@@ -507,15 +508,15 @@ response.setDateHeader("Expires", 0);
                                     </tr>
                                 </thead>
                                 <tbody id="contenidoContratos">
-                                    <%  l = a.findAllByIdUsuarioCapacitador(capacitador);
-                                        it = l.iterator();
-                                        while (it.hasNext()) {
-                                            acaco = it.next();
-                                            contra = cdi.findById(acaco.getContrato().getIdContrato());
-                                            //Empresa de ese contrato           
-%>
-                                    <tr><input type="hidden" value="<%=contra.getUsuario().getEmpresa().getIdEmpresa()%>"/><td height="35px" style="cursor:pointer;"><%=contra.getUsuario().getEmpresa().getNombre()%></td> <td><%=cdi.cantidadContratosxUsuarioFinalizados(acaco.getContrato().getUsuario())%></td> </tr>
-                                    <%}//fin while %>
+                                   <script>
+                                            capacitadoresScripts.getHistorialContratosFinalizados(idCapacitador,{callback:function(data){
+                                                    $("#contenidoContratos").html(data);
+                                                    $("#contenidoContratos tr").hover(function(){$(this).addClass("hover")}, function(){$(this).removeClass("hover")});
+                                                    $("#contenidoContratos tr").click(function() {               
+                                                      window.location.href = "graficoHistorial.jsp?idempresa="+$(this).find('input:hidden').val();              
+                                                    });
+                                            }});
+                                   </script>                     
                                 </tbody>
                             </table>
                         </div>
@@ -523,7 +524,7 @@ response.setDateHeader("Expires", 0);
                             <div align="center" >
                                 <h1>Contratos Finalizados</h1>
                             </div>
-                            <div style=>
+                            <div>
                                 <input type="text" id="searchCFin" placeholder="Escriba Empresa...." size="35"/> <span id="loader" style="vertical-align: middle"><!--img src="images/loader.gif" alt="Laoder" /!--></span>
                             </div>                
                             <table width="100%" id="tblContratosFin" border="0">
@@ -598,18 +599,20 @@ response.setDateHeader("Expires", 0);
                         
                 </div>   
             </div><!-- fin div body!-->
+            
+            <div class="footer">
+                <div class="footer_resize">
+                    
+                    
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+            </div>
                 
         </div><!-- fin div main!-->
             
             
-        <div class="footer">
-            <div class="footer_resize">
-                
-                
-                <div class="clr"></div>
-            </div>
-            <div class="clr"></div>
-        </div>
+       
             
     </body>
 </html>

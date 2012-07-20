@@ -578,9 +578,9 @@ response.setDateHeader("Expires", 0);
         <button id="logoutbutton" onclick="mostrarSalir();" ><%= usu.getNombre() %></button>	
        </span> 
        <div>
-        <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 7px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 153px; height: 20px; color: #015480">
-               <ul id="opciones1" class="mnSalir" style=" margin-top: 0px; list-style:none; font-size: medium; text-align:left;">
-                  
+        <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 7px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 153px;  color: #015480">
+               <ul id="opciones1" class="mnSalir" style=" margin-top: 0px; height: 100%; list-style:none; font-size: medium; text-align:left;">
+                   <li id="mnuBtnSalir" onclick="location.href='ayuda/espa-trab.html'" > <img src="images/question_mark.png"/> Ayuda  </li>                   
                    <li style="float:left" id="mnuBtnSalir" onclick="goout();" > &RightArrow;Salir  </li>  
               </ul>              
           </div>

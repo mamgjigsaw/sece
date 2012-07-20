@@ -13,9 +13,6 @@
 a{
     font-size: 13px;
 }
-.right1 a:hover {
-    background-color: #dfeffc;
-}
 
 .body_resize{
     width:100%; 
@@ -51,5 +48,30 @@ a{
 .right1 .conBasisaBack:hover{
      background-color: #881C1C;
      color: #F5F2F2;    
+}
+
+.body .body_resize .right2 p{
+    font-size: 14px;
+    text-align: justify;
+}
+
+.caja_Basisa {
+    margin-top: 5%;
+    border-radius: 0 0 5px 5px; 
+    border-color: #69a8d4;
+    border-style: solid;  border-width: 2px;
+    background: #e7f1fa; 
+    width: 90%;
+    height: 100%;     
+    color: #015480;
+}
+
+.caja_Basisa p a{
+    background:url(../../images/arrow.gif) left no-repeat;
+    background-color: #fff;
+    padding-left: 3%;
+}
+.caja_Basisa p a:hover{    
+    padding-left: 6%;
 }
 

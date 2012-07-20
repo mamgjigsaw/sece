@@ -22,10 +22,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>Grafico Resultado</title>
         <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
+        <link href="resources/style.css" rel="stylesheet" type="text/css" />
+        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />    
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
-        <script language="javascript" type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>              
-        <link href="resources/style.css" rel="stylesheet" type="text/css" />
+        <script language="javascript" type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>             
         <script src="resources/amcharts/javascript/amcharts.js" type="text/javascript"></script>
         <script type="text/javascript" src="resources/amcharts/javascript/amfallback.js"></script>
         <script src="resources/amcharts/javascript/raphael.js" type="text/javascript"></script>
@@ -44,9 +45,15 @@
                         $(".ui-selected",this).click(function() {
                             var idIndicador = $(this).find('input:hidden').val();
                             var nomIndicador = $(this).text();
-				swfobject.embedSWF("resources/amcharts/flash/amline.swf", "chartdiv", "650", "500", "8.0.0", "resources/amcharts/flash/expressInstall.swf",{path:"resources/amcharts/flash/",settings_file: "settingGraficoHistorial?indicador="+nomIndicador,data_file: encodeURIComponent("GraficoHistorial?idempresa="+idEmpresa+"&&idindicador="+idIndicador)});
+                        $.get("GraficoHistorial?idempresa="+idEmpresa+"&&idindicador="+idIndicador, function (data){
+                            if (data == null || data== ""){                
+                                $('.principal').html("<div class='notification error'><p class='hola'><strong class='hola'>Error al Graficar</strong><p class='hola'>No hay datos para generar la grafica!!</p></div>");
+                            }//  fin if
+                            else  
+                                swfobject.embedSWF("resources/amcharts/flash/amline.swf", "chartdiv", "650", "500", "8.0.0", "resources/amcharts/flash/expressInstall.swf",{path:"resources/amcharts/flash/",settings_file: "settingGraficoHistorial?indicador="+nomIndicador,data_file: encodeURIComponent("GraficoHistorial?idempresa="+idEmpresa+"&&idindicador="+idIndicador)});
                         });                
-                    }
+                     });
+                    }//fin selectable function
                 });
 	});
            
@@ -88,7 +95,7 @@
                     <%}%>
             </ul>
          </div>   
-         <div class="" align="center">
+         <div class="principal" align="center">
              <!-- chart is placed in this div. if you have more than one chart on a page, give unique id for each div -->
              <div id="chartdiv" style="width:650px; height:500px; background-color:#FFFFFF;"></div>            
           </div>

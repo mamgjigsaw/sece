@@ -44,16 +44,14 @@ public class GraficoHistorial extends HttpServlet {
         Iterator<HistorialResultado> it = resultados.iterator();
         HistorialResultado hr;         
         PrintWriter out = response.getWriter();        
-            try {    
+        if (!(resultados.isEmpty())){
+            try {                  
                 while(it.hasNext()){
                 hr = it.next();
                 out.println(hr.getContrato().getFechaTermino()+";"+hr.getResultado());
-                }
-                
-            } finally {            
-                out.close();
-            }
-        
+                }//fin while                
+            } finally {out.close();}
+        }//fin if
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

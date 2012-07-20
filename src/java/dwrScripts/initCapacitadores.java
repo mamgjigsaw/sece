@@ -173,7 +173,7 @@ public class initCapacitadores {
                 + "<tr style='text-align:center;'>"
                 + "<td>" + emp.getDireccion() + "</td>"
                 + "<td>" + emp.getTelefono() + "</td>"
-                + "<td> <img id='btnImgAprobar' src='images/icon_approve.png' alt='Aprobar' style='cursor:pointer;'/> <img id='btnImgEliminar' src='images/icon_delete.png' alt='Eliminar' style='cursor:pointer;'/>  </td>"
+                + "<td> <button id='btnImgAprobar' class='btnAprobar'>Aprobar</button>  <button id='btnImgEliminar' class='btnAprobar'>Rechazar</button> </td>"
                 + "</tr></table>";
         return resultado;
     }
@@ -305,5 +305,29 @@ public class initCapacitadores {
         
         validar.EnviarCorreo("sece@pml.org.ni", correo, asunto, cuerpo);
     }//fin idContrato
+    
+    public String getHistorialContratosFinalizados(int idCapacitador){
+        String resultado = "";
+        int numeroContratosFinalizados = 0 , idEmpresa = 0;
+        AsignacionCapaContra acaco;
+        Iterator<AsignacionCapaContra> it =  listaConxCapac(idCapacitador);
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
+        Contrato contra = new Contrato();
+        
+        while (it.hasNext()) {
+            acaco = it.next();
+            numeroContratosFinalizados = cdi.cantidadContratosxUsuarioFinalizados(acaco.getContrato().getUsuario());            
+            if (numeroContratosFinalizados != 0){                
+                contra = cdi.findById(acaco.getContrato().getIdContrato());
+                idEmpresa = contra.getUsuario().getEmpresa().getIdEmpresa();
+                resultado += "<tr> <input type='hidden' value='"+idEmpresa+"'/>";
+                resultado += "<td height='35px' style='cursor:pointer;'>"+contra.getUsuario().getEmpresa().getNombre()+"</td>";
+                resultado += "<td style='text-align: center;'>"+numeroContratosFinalizados+"</td>";
+                resultado += "</tr>";
+            }//fin if
+        }//fin while
+        return resultado;
+    }//fin funcion getHistorialContratosFinalizados
+    
 
 }
