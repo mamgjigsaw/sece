@@ -15,5 +15,6 @@ public interface daoEmailSent extends dao<EmailSent> {
     EmailSent findById(int idEmailSent);
     EmailSent findByUsuario(Usuario usuario);
     EmailSent findByCodigo(String codigo);
+    EmailSent findByCorreo(String correo);
     
 }
