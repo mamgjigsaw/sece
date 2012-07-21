@@ -139,7 +139,7 @@ response.setDateHeader("Expires", 0);
 			}
 		}).click(function(){
                         validacion.saveActionBitacora(<%= val %>, 13, "El Administrador ha abierto la Ayuda",<%= iduser %>, "Pagina Principal(main_admin.jsp)", "Pagina de Ayuda(ayudaAdmin.jsp)");
-                        window.open("ayudaAdmin.jsp", "_blank");
+                        window.open("ayuda/ayudaAdministrador.jsp", "_blank");
                     });
 		$( "#logoutbutton" ).button({			
 			icons: {
