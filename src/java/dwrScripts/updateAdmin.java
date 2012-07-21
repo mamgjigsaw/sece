@@ -17,9 +17,9 @@ public class updateAdmin {
     public updateAdmin(){       
     }
     
-    public int datosPersonales(String idU, String nombre, String cargo, String tel, String mail, String dir){
+    public String[] datosPersonales(String idU, String nombre, String cargo, String tel, String mail, String dir){
      
-        int resp = 0;
+        String resp[] = new String[5];
     
        UsuarioDaoImpl udi = new UsuarioDaoImpl();
        Usuario usu = new Usuario();
@@ -33,7 +33,12 @@ public class updateAdmin {
        usu.setDireccion(dir); 
        
        udi.update(usu);
-        
+       
+       resp[0] = usu.getNombre();
+       resp[1] = usu.getCargo();
+       resp[2] = usu.getTelefono();
+       resp[3] = usu.getCorreo();
+       resp[4] = usu.getDireccion();
        return resp;
        
     }

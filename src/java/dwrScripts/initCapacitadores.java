@@ -14,7 +14,6 @@ import daoImpl.RespItemDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -32,6 +31,8 @@ import pojo.Usuario;
  */
 public class initCapacitadores {
 
+    validate validar;
+    
     public initCapacitadores() {
     }
     
@@ -112,23 +113,39 @@ public class initCapacitadores {
         List<DelegacionIndiUsu> delegados = doii.delegacionxContrato(contra);
         DelegacionIndiUsu delegado;
         Iterator<DelegacionIndiUsu> it = delegados.iterator();
+        Calendar c = Calendar.getInstance();
+        Date tiempoDgracia;
         
         AccesoDaoImpl adi = new AccesoDaoImpl();
-        Timestamp acces;
+        //var para ultimo acceso del usaurio
+        Date acces;
+        
         if (it.hasNext()){
-            resultado = "<table border='0' id='resultTable' width ='100%'><tr> <th>Delegado</th> <th>Ultimo Acceso</th> <th>Correo</th> <th>On-Line</th> </tr>";
+            resultado = "<table border='0' id='resultTable' width ='100%'><tr> <th>Delegado</th>  <th>Ultimo Acceso</th> <th>Indicador</th> <th>Correo</th> <th>On-Line</th> </tr>";
             
              while (it.hasNext()){                 
-                 delegado = it.next();            
-                 acces = adi.fechaUltimoAcceso(delegado.getUsuario());    
-                 resultado +="<tr style='text-align:center;'><td>"+delegado.getUsuario().getNombre()+"</td>";
-                 resultado +="<td>";
+                 delegado = it.next();   
+                 //metodo que devuelve ultim acceso del usuario tal
+                 acces = adi.fechaUltimoAcceso(delegado.getUsuario());                    
+                 //determinar tiempo de inactividad
+                 c.setTime(acces);
+                 c.add(Calendar.DATE, 3);
+                 tiempoDgracia = c.getTime();
+                 if (new Date().after(tiempoDgracia))
+                     resultado +="<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button><span class='cant_emailEnviados'></span>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
+                 else
+                     resultado +="<tr style='text-align:center;'><td>"+delegado.getUsuario().getNombre()+"</td>";
+                 resultado +="<td class='tdFechaAcc'>";                 
              if (acces == null)
                  resultado +="(No hay registros de accesos)";
              else
                  resultado +=acces;
              resultado +="</td>";
+             
+             resultado +="<td>" +delegado.getIndicador().getNombre()+ "</td>";
+             
              resultado +="<td>"+delegado.getUsuario().getCorreo()+"</td>";
+            
              resultado +="<td>";
              if (delegado.getUsuario().getEstado() == 1)
                 resultado +="<img src='images/offline-user-icon.png' title ='Usuario no Conectado' alt='Usuario no Conectado'/>";
@@ -156,7 +173,7 @@ public class initCapacitadores {
                 + "<tr style='text-align:center;'>"
                 + "<td>" + emp.getDireccion() + "</td>"
                 + "<td>" + emp.getTelefono() + "</td>"
-                + "<td> <img id='btnImgAprobar' src='images/icon_approve.png' alt='Aprobar' style='cursor:pointer;'/> <img id='btnImgEliminar' src='images/icon_delete.png' alt='Eliminar' style='cursor:pointer;'/>  </td>"
+                + "<td> <button id='btnImgAprobar' class='btnAprobar'>Aprobar</button>  <button id='btnImgEliminar' class='btnAprobar'>Rechazar</button> </td>"
                 + "</tr></table>";
         return resultado;
     }
@@ -184,8 +201,9 @@ public class initCapacitadores {
                 emp = edi.findByID(contacto.getEmpresa().getIdEmpresa());
                  resultado += "<tr height = '35px'>"
                          + " <td id ='tdEmpresa' style='display:none;'>"+ emp.getIdEmpresa()+"</td>"
-                         + " <td> "+ emp.getNombre() +" </td>"
+                         + " <td> "+ emp.getNombre() +" </td>"                         
                          + " <td> "+ contacto.getNombre() +" </td>"
+                         + " <td> "+ contra.getUsuario().getCorreo() +" </td>"
                          + "<td>";  
                 if (contra.getFechaInicio() == null) 
                     resultado += "(No hay Registros)";
@@ -219,7 +237,9 @@ public class initCapacitadores {
         return ((respxContrato * 100) / numItems);
     }
     
-    public void quitarConFin(int idCapacitador, int diasGracia){        
+    public void quitarConFin(int idCapacitador, int diasGracia){  
+        //funcion que revisa la fecha de finalizacion del contrato, despues de los "dias de gracia" ejecuta el cambio de estado
+        //---ojo--- inecesario si el estado es cambiajo automaticamente despues de respondida el ultimo item
        Iterator<AsignacionCapaContra> it =  listaConxCapac(idCapacitador);
        AsignacionCapaContra aco ;
        ContratoDaoImpl cdi = new ContratoDaoImpl();
@@ -236,9 +256,10 @@ public class initCapacitadores {
            c.setTime(finContrato);
            c.add(Calendar.DATE, diasGracia);
            tiempoDgracia = c.getTime();
-           if (new Date().after(tiempoDgracia))
-           contrato.setEstado(2);//actualiza el estado del contrato a actualizado
-           cdi.update(contrato);
+           if (new Date().after(tiempoDgracia)){
+            contrato.setEstado(2);//actualiza el estado del contrato a actualizado            
+            cdi.update(contrato);
+           }//fin if new Date
        }//fin if 
        }//fin while
        
@@ -263,6 +284,50 @@ public class initCapacitadores {
             }//fin if estado
         }//fin while
         return resultado;
-    }//fin funcion
+    }//fin funcion    
     
+    public void enviarCorreoUsuarioDormido(int idcontrato,int idusuario, String ultimoAcceso) throws IOException{
+        
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
+        Contrato contra = cdi.findById(idcontrato);
+        
+        UsuarioDaoImpl udi = new UsuarioDaoImpl();
+        Usuario user = udi.findById(idusuario);
+        String nombreUsuario = user.getNombre().toUpperCase();        
+        String correo = user.getCorreo();
+        validar = new validate();
+        
+        String asunto = "Usuario Inactivo";
+        String cuerpo =" <p>Estimado "+nombreUsuario+ " se ha detectado <strong>inactividad</strong> en su cuenta del Sistema SECE.</br>"
+        +"Su ultimo acceso al sistema fue el "+ ultimoAcceso +".</p>"
+        +"Le invitamos a continuar de respondiendo la evaluaci&oacute;n en la brevedad de lo posible.</p>"
+        +"Por favor no reinvie a este correo.<p><strong>Gracias SECE TEAM.</strong></p>";
+        
+        validar.EnviarCorreo("sece@pml.org.ni", correo, asunto, cuerpo);
+    }//fin idContrato
+    
+    public String getHistorialContratosFinalizados(int idCapacitador){
+        String resultado = "";
+        int numeroContratosFinalizados = 0 , idEmpresa = 0;
+        AsignacionCapaContra acaco;
+        Iterator<AsignacionCapaContra> it =  listaConxCapac(idCapacitador);
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
+        Contrato contra = new Contrato();
+        
+        while (it.hasNext()) {
+            acaco = it.next();
+            numeroContratosFinalizados = cdi.cantidadContratosxUsuarioFinalizados(acaco.getContrato().getUsuario());            
+            if (numeroContratosFinalizados != 0){                
+                contra = cdi.findById(acaco.getContrato().getIdContrato());
+                idEmpresa = contra.getUsuario().getEmpresa().getIdEmpresa();
+                resultado += "<tr> <input type='hidden' value='"+idEmpresa+"'/>";
+                resultado += "<td height='35px' style='cursor:pointer;'>"+contra.getUsuario().getEmpresa().getNombre()+"</td>";
+                resultado += "<td style='text-align: center;'>"+numeroContratosFinalizados+"</td>";
+                resultado += "</tr>";
+            }//fin if
+        }//fin while
+        return resultado;
+    }//fin funcion getHistorialContratosFinalizados
+    
+
 }

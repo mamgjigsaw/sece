@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import pojo.EmpresasContratos;
 import util.HibernateUtil;
@@ -49,7 +50,7 @@ public class daoEmpresasContratosImpl implements daoEmpresasContratos {
         List<EmpresasContratos> usu= new ArrayList<EmpresasContratos>();
         Session se= sf.getCurrentSession();
         se.beginTransaction();
-        usu= se.createCriteria(EmpresasContratos.class).add(Restrictions.eq("contratoEstado", contratoEstado)).list();
+        usu= se.createCriteria(EmpresasContratos.class).add(Restrictions.eq("contratoEstado", contratoEstado)).addOrder(Order.desc("contratoFechaFinalizo")).list();
         se.getTransaction().commit();
         return usu;
     }

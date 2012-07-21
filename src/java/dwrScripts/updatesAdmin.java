@@ -30,12 +30,16 @@ public class updatesAdmin {
   
      public updatesAdmin(){
 }
-      public void deleteCapacitador(String idc){
+      public int[] deleteCapacitador(String idc){
+                int r[] = new int[2];
                 Usuario usu = new Usuario();
                 UsuarioDaoImpl udim = new UsuarioDaoImpl();
                 usu = udim.findById(Integer.parseInt(idc));
                 usu.setEstado(0);
                 udim.update(usu);
+                r[0] = 1;
+                r[1] = usu.getIdUsuario();
+                return r;
     }
       public void deleteIndicador(String idi){
            Indicador indi = new Indicador();

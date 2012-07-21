@@ -225,7 +225,7 @@
 					table.find('thead th').each(function() { 
 						$(this).html('<a href="javascript:void();" id="sorthandle' + sorthandle + '">' + $(this).html() + '</a><span id="sortaschandle' + sorthandle + '" class="sortshowhandle"><img src="' + settings.ascImage + '" alt="Arrow up icon"/></span><span id="sortdeschandle' + sorthandle + '" class="sortshowhandle"><img src="' + settings.descImage + '" alt="Arrow down icon"/></span><span id="sorttypehandle" class="allsorttypehandle" style="display:none"></span>');
 ////////////////////////////////////codigo comentado por David
-                                                //par evitar q los theads sean sortiables y asi no estropear el evento click de los tr del tbody
+                                                //para evitar q los theads sean sortiables y asi no estropear el evento click de los tr del tbody
 						//$(this).bind('click', sortTable);
 						sorthandle++;
 					});

@@ -610,13 +610,14 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        <span id="toolbar" class="ui-widget-header ui-corner-all">	
         <button id="logoutbutton" onclick="mostrarSalir();" ><%=name%></button>	
        </span> 
-       <div>
-        <div id="menuBtnOpciones1" style=" float: right;  border-radius: 0 0 5px 5px;  margin-right: 5px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 100px; height: 20px; color: #015480">
-              <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">
-                  <li id="mnuBtnSalir" onclick="goout();" > Salir  </li>  
+       
+        <div id="menuBtnOpciones1" >
+              <ul class="opciones1">
+                  <li id="mnuBtnSalir" onclick="location.href='ayuda/ayudaContacto.jsp'" > <img src="images/question_mark.png"/> Ayuda  </li>                   
+                  <li id="mnuBtnSalir" onclick="goout();" ><img src="images/salir.gif"/> Salir  </li>  
               </ul>              
           </div>
-       </div>
+       
 
        </div>
        

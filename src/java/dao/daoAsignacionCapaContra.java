@@ -17,5 +17,7 @@ public interface daoAsignacionCapaContra extends dao<AsignacionCapaContra>{
      //---------------------------added by David
     //---------------------------added by David
     List<AsignacionCapaContra> findAllByIdUsuarioCapacitador(Usuario us);
+    AsignacionCapaContra findbyIdContrato(Contrato c);
+    AsignacionCapaContra findbyId(int id);
     Usuario findUsByContra (Contrato contrato);
 }

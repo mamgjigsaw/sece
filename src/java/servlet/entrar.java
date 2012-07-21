@@ -88,6 +88,8 @@ public class entrar extends HttpServlet {
                 response.sendRedirect("controlPanel.jsp");
             }
             else if(usuario.getTipoUsuario()==1 && usuario.getEstado() == 1){
+                usuario.setEstado(2);
+                usuDao.update(usuario);
                 HttpSession sesion=request.getSession();
                 sesion.setAttribute("idAcc", acc.getIdAcceso().toString());        
                 response.sendRedirect("main_admin.jsp");

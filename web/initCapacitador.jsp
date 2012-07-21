@@ -42,7 +42,7 @@ response.setDateHeader("Expires", 0);
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <link href="resources/css/advancedtable.css" rel="stylesheet" type="text/css" />
-         <link href="resources/style.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/style.css" rel="stylesheet" type="text/css"/>
         
         
         <script type="text/javascript" src="resources/jquery/js/jquery.busy.min.js"></script>
@@ -66,7 +66,13 @@ response.setDateHeader("Expires", 0);
            
            AccesoDaoImpl daoAcceso = new AccesoDaoImpl();
            Acceso acceso = daoAcceso.findById(Integer.parseInt(acc));
-           int idUsuario = acceso.getUsuario().getIdUsuario(); 
+           int idUsuario = acceso.getUsuario().getIdUsuario();
+           int tipousuario = acceso.getUsuario().getTipoUsuario();
+           
+           if (tipousuario != 2){
+               System.out.print("Intento de cruce a pagina por usuario sin permisos pero con acceso al sistema");               
+               response.sendRedirect("index.jsp");
+             } else {
                     
            AsignacionCapaContra acaco = new AsignacionCapaContra();        
            AsignacionCapaContraDaoImpl a = new AsignacionCapaContraDaoImpl();
@@ -100,8 +106,12 @@ response.setDateHeader("Expires", 0);
         <script>
                 //variables globales
            var idCapacitador = <%=idUsuario%>
+           // url del sistema sece
            var urlSistema;             
-           
+           //numero de correos enviados a usauarios inactivos
+           var num_correosEnviados = 0;
+            
+            //funcion enviar correo de tab-Invitar usuarios
             function enviarCorreo(){               
                 var correo_destinatario = dwr.util.getValue("txtCDest");                                
                 var asunto = "Peticion de Registro a Sece";
@@ -119,8 +129,7 @@ response.setDateHeader("Expires", 0);
                     $(".body").prepend("<img id='imgBi' src='images/bi.gif' style='padding-left: 50%;padding-top: 20%; padding-bottom:25%;'/>");
                 }
                 $('input[name$="txtCDest"]').val('');
-            }
-            
+            }//fin funcion enviar correo            
             function result(data){
                 if (data==1){
                     //envio satisfactorio
@@ -131,7 +140,8 @@ response.setDateHeader("Expires", 0);
                 }
                 $("#imgBi").remove();
                 $(".body_resize").show();
-            }
+            }//fin result
+            
             
         $(document).ready(iniciarJQ);
         function iniciarJQ() {  
@@ -147,9 +157,8 @@ response.setDateHeader("Expires", 0);
                 }
             });
             
-           
-            
-            $("#test").click(function(){
+                       
+            $("#imgFinalizado").click(function(){
                 var idc =  $(this).parent().parent().find('input:hidden').val();
                 location.href = "resultadoCap.jsp?id_contrato="+idc;
             });
@@ -172,19 +181,31 @@ response.setDateHeader("Expires", 0);
                                         ascImage: 'images/up.png',
                                         descImage:'images/down.png',
                                         rowsPerPage: 20});    
-           $("#contenidoContratos tr").click(function() {               
-              window.location.href = "graficoHistorial.jsp?idempresa="+$(this).find('input:hidden').val();              
-            });
+           
             
-            $("#tblEmpresaAsignada tr").click(function() {                 
+            $("#tblEmpresaAsignada tbody tr").click(function() {                 
                 var idcontrato = $(this).find('input:hidden').val();
                 capacitadoresScripts.getDelegadoxContrato(idcontrato,{
                                         callback:function(data){
                                           $("#tdcXd").html(data);
-                                          if (data == ""){                                               
+                                          if (data == ""){   
                                               $( "#dialog" ).dialog( "open" );                        
-                                        $( "#dialog" ).html("<p> <b>No hay ningun usuario asignado como delegado.</b>  <p>");
-                                    }
+                                              $( "#dialog" ).html("<p> <b>No hay ningun usuario asignado como delegado.</b>  <p>");
+                                          }
+                                          //boton enviar correo inactividad
+                                          $( ".btnSentEmail" ).button({ icons: { primary: "ui-icon-mail-closed" }, text: false });  
+                                          $( ".btnSentEmail" ).click( function(){ 
+                                              var spanVal = $(this).parent().find('.cant_emailEnviados').text();
+                                              if (spanVal == null)
+                                                  num_correosEnviados = 0;
+                                               ++spanVal ;
+                                               //idcontrato del usuario 
+                                               idu = $(this).parent().parent().find('input:hidden').val()                                               
+                                               fechaAcceso = $(this).parent().parent().children('.tdFechaAcc').text();
+                                               //            ....(idContrato,idUsuario,ultima fecha de acceso de Usuario)      
+                                               capacitadoresScripts.enviarCorreoUsuarioDormido(idcontrato,idu,fechaAcceso);
+                                               $(this).parent().find('.cant_emailEnviados').text(spanVal);
+                                          });
                                         }
                                     });        
             });
@@ -257,15 +278,21 @@ response.setDateHeader("Expires", 0);
                       
               }});              
             
+                      
         }//fin iniciar 
         
         function esconderIDContrato_Usuario(){
-            //esconde columna de tabla de empreas no Asignadas       
-              $('#tblEmpresasNoAsignadas td:nth-child(5),#tblEmpresasNoAsignadas th:nth-child(5)').hide();              
-              $('#tblEmpresasNoAsignadas td:nth-child(6),#tblEmpresasNoAsignadas th:nth-child(4)').hide();              
+            //esconde columna de tabla de empreas no Asignadas                       
+                $('#tblEmpresasNoAsignadas th:nth-child(6),#tblEmpresasNoAsignadas th:nth-child(5)').hide();
+                //$('#tblEmpresasNoAsignadas td:nth-child(6),#tblEmpresasNoAsignadas td:nth-child(5)').hide();              
+              //$('#tblEmpresasNoAsignadas td:nth-child(5),#tblEmpresasNoAsignadas th:nth-child(5)').hide();              
+              //$('#tblEmpresasNoAsignadas td:nth-child(6),#tblEmpresasNoAsignadas th:nth-child(4)').hide();              
               //$('#tblContratos th:nth-child(3),#tblContratos th:nth-child(2),#tblContratos th:nth-child(1)').hide();
               //$('#tblContratosFin th:nth-child(3),#tblContratosFin th:nth-child(2),#tblContratosFin th:nth-child(1)').hide();
         }
+         
+          
+                                            
             
         </script>
                
@@ -291,31 +318,32 @@ response.setDateHeader("Expires", 0);
                              <span id="toolbar" class="ui-widget-header ui-corner-all">	
                             <button id="logoutbutton"><%= acceso.getUsuario().getNombre()%></button>	
                         </span>
-                            <div id="menuBtnOpciones1" style="border-radius: 0 0 5px 5px; border-color: #69a8d4; border-style: solid;  border-width: 1px; display: none; background: #e7f1fa; width: 70%; height: 20px; color: #015480">
-                                <ul id="opciones1" class="mnSalir" style="list-style-image:url(/images/log_out.gif); margin-top: 0px; list-style: none;font-size: medium; text-align:left;">                                    
-                                    <li id="mnuBtnSalir" onclick="location.href='salir'" > Salir  </li>                                        
+                            <div id="menuBtnOpciones1">
+                                <ul class="opciones1">                                                                        
+                                    <li id="mnuBtnSalir" onclick="location.href='ayuda/ayudaCapacitador.jsp'" > <img src="images/question_mark.png"/> Ayuda  </li>                   
+                                    <li id="mnuBtnSalir" onclick="location.href='salir'" ><img src="images/salir.gif"/> Salir  </li>                                        
                                 </ul>              
                             </div>
                         </div>
                         <div class="clr"></div>      
                     </div>
-                </div>
-            </div><!-- fin div header!-->
+                </div><!-- fin div header!-->
+           
                 
             <div class="body">      
                 <div class="body_resize">
                     
-                    <div id="tabs" style="margin-bottom: 5%; height: 750px;">
+                    <div id="tabs" style="margin-bottom: 5%; height: 100%;">
                         <ul>
                             <li><a href="#tab-1"><span>Espacio de Trabajo</span></a></li>
                             <li><a href="#tab-2"><span>Ver Instrumento</span></a></li>
                             <li><a href="#tab-3"><span>Historial</span></a></li>
                             <li><a href="#tab-4"><span>Finalizados</span></a></li>
-                            <li><a href="#tab-5"><span>EnviarCorreo</span></a></li>
+                            <li><a href="#tab-5"><span>Invitar Empresa</span></a></li>
                             <li><a href="#tab-6"><span>VideoChat</span></a></li>
                         </ul>
                             
-                        <div id="tab-1">
+                        <div id="tab-1">                           
                             <table width="100%" border="0" >                
                                 <tr>
                                     <td>
@@ -325,7 +353,10 @@ response.setDateHeader("Expires", 0);
                                                 .hover{ background-color: #e7f1fa; cursor:pointer;}
                                                 #tblEmpresaAsignada td, #tblEmpresasNoAsignadas td, #tblContratos td, #tblContratosFin td {
                                                     border-bottom: 1px solid #999;}
-                                                
+                                                .btnSentEmail{
+                                                    width: 19px;
+                                                    height: 19px;
+                                                }
                                             </style>
                                             
                                             <table class="tablaStilizada" border="0" width ="100%" id="tblEmpresaAsignada">
@@ -336,7 +367,7 @@ response.setDateHeader("Expires", 0);
                                                         <th>Fecha de Asignaci&oacute;n</th>                  
                                                         <th>Progreso</th>     
                                                     </tr>
-                                                </thead>
+                                                </thead>                                                
                                                 <tbody id="tbodyEmpresaAsignada">
                                                     <%while (it.hasNext()) {
                                                             acaco = it.next();
@@ -353,9 +384,10 @@ response.setDateHeader("Expires", 0);
                                                 <td><%= contacto.getNombre()%></td>
                                                 <td id="contenedorContrato"><%= contra.getFechaInicio()%> </td> 
                                                 <td> <div class="progress-bar blue small" style="width:50%; float: left;"><div style="width:<%=avancexContrato + "%"%>;"><span style="top:16%;"><%=avancexContrato + "%"%></span></div> </div> <% if (avancexContrato == 100) {
-                                            out.println("<img id ='test' title='Terminastes!!' style='vertical-align: -93%;' src='images/prizeicon16.png'/>");%> <%}%> </td>
+                                            out.println("<img id ='imgFinalizado' title='Finalizo!!' style='vertical-align: -93%;' src='images/prizeicon16.png'/>");%> <%}%> </td>
                                                 </tr> <%}
                                       }//finif finwhile%>  
+                                      
                                                 </tbody>
                                             </table>
                                         </div>    
@@ -375,6 +407,7 @@ response.setDateHeader("Expires", 0);
                                                     <tr style="background-color: #347488; color:#fff;">
                                                         <th>Empresa</th>
                                                         <th>Contacto</th>
+                                                        <th>Correo</th>
                                                         <th>Fecha de Asignaci&oacute;n</th>                                                   
                                                         <th>Contrato</th> 
                                                         <th>IdContacto</th>
@@ -387,15 +420,19 @@ response.setDateHeader("Expires", 0);
                                                             $("#tbodyEmpresaNoAsignada").html(data);
                                                             $("#tbodyEmpresaNoAsignada tr").hover(function(){$(this).addClass("hover")}, function(){$(this).removeClass("hover")});
                                                             //accion disparada cuando se da click sobre la tabla de empresas no Asignadas
-                                                            $("#tblEmpresasNoAsignadas tr").click(function(){
+                                                            $("#tblEmpresasNoAsignadas tbody tr").click(function(){
                                                                 var idempresa = $(this).find("#tdEmpresa").text();
                                                                 var idcontrato = $(this).find("#tdContrato").text();
                                                                 var idcontacto = $(this).find("#tdContacto").text();
                                                                 
                                                                 capacitadoresScripts.empresaNoAsignada(idempresa,{
                                                                     callback:function(data){
-                                                                        
+                                                                       
                                                                         $("#tdeNa").html(data);
+                                                                         //dar apariencia a los botones
+                                                                        $( "#btnImgAprobar" ).button({ icons: { primary: "ui-icon-check" }, text: false });
+                                                                        $( "#btnImgEliminar" ).button({ icons: { primary: "ui-icon-cancel" }, text: false });
+                                                                        
                                                                         $("#btnImgAprobar").click(function (){
                                                                             $.get("aprobarContrato", {id:1,idu:idcontacto,idc:idcontrato,iduc:idCapacitador},success);
                                                                             function success(){window.location.reload(true);}
@@ -459,7 +496,7 @@ response.setDateHeader("Expires", 0);
                                 <h1>Historial de Contratos</h1>
                                 <!-- <label>Desde: </label><input id="datepicker" type="text"/>    <label>Hasta: </label><input id="datepicker2" type="text"/> !-->
                             </div>
-                            <div style=>
+                            <div>
                                 <input type="text" id="search" placeholder="Escriba Empresa...." size="35"/> <span id="loader" style="vertical-align: middle"><img src="images/loader.gif" alt="Laoder" /></span>
                             </div>                
                             <table width="100%" id="tblContratos" border="0">
@@ -471,15 +508,15 @@ response.setDateHeader("Expires", 0);
                                     </tr>
                                 </thead>
                                 <tbody id="contenidoContratos">
-                                    <%  l = a.findAllByIdUsuarioCapacitador(capacitador);
-                                        it = l.iterator();
-                                        while (it.hasNext()) {
-                                            acaco = it.next();
-                                            contra = cdi.findById(acaco.getContrato().getIdContrato());
-                                            //Empresa de ese contrato           
-%>
-                                    <tr><input type="hidden" value="<%=contra.getUsuario().getEmpresa().getIdEmpresa()%>"/><td height="35px" style="cursor:pointer;"><%=contra.getUsuario().getEmpresa().getNombre()%></td> <td><%=cdi.cantidadContratosxUsuarioFinalizados(acaco.getContrato().getUsuario())%></td> </tr>
-                                    <%}//fin while %>
+                                   <script>
+                                            capacitadoresScripts.getHistorialContratosFinalizados(idCapacitador,{callback:function(data){
+                                                    $("#contenidoContratos").html(data);
+                                                    $("#contenidoContratos tr").hover(function(){$(this).addClass("hover")}, function(){$(this).removeClass("hover")});
+                                                    $("#contenidoContratos tr").click(function() {               
+                                                      window.location.href = "graficoHistorial.jsp?idempresa="+$(this).find('input:hidden').val();              
+                                                    });
+                                            }});
+                                   </script>                     
                                 </tbody>
                             </table>
                         </div>
@@ -487,7 +524,7 @@ response.setDateHeader("Expires", 0);
                             <div align="center" >
                                 <h1>Contratos Finalizados</h1>
                             </div>
-                            <div style=>
+                            <div>
                                 <input type="text" id="searchCFin" placeholder="Escriba Empresa...." size="35"/> <span id="loader" style="vertical-align: middle"><!--img src="images/loader.gif" alt="Laoder" /!--></span>
                             </div>                
                             <table width="100%" id="tblContratosFin" border="0">
@@ -502,9 +539,9 @@ response.setDateHeader("Expires", 0);
                                 </tbody>
                             </table>
                         </div>
-                        <div id="tab-5" style="position:relative;">  
+                        <div id="tab-5" style="position:relative;">                               
                             <div id="notDiv"  ></div>
-                            <div align="center" style="padding:10% 35% 5%"><input style=" font-size:18px; width:300px; height: 30px; text-align:center;"  type="text" name="txtCDest" id="filterItem" placeholder="Digite el Correo del Destinatario"/></div>
+                            <div align="center" style="padding:10% 35% 5%"><p>Digite el correo del <b>contacto</b> de la empresa que desee invitar a registrarse.</p><input style=" font-size:18px; width:300px; height: 30px; text-align:center;"  type="text" name="txtCDest" id="filterItem" placeholder="Digite el Correo"/></div>
                             <div style="padding-left:40%"><a style="color:#fff;" href="JavaScript:void(0);" onclick="enviarCorreo();" class="btnEC">Enviar Correo</a></div>
                         </div>
                         <div id="tab-6">
@@ -553,26 +590,30 @@ response.setDateHeader("Expires", 0);
                                        $('#btnVC').hide();
                                     });
                                     
-                                });                
+                                }); 
+                                
+                                  
                             </script>
                         </div>
                     </div> <!-- fin div tabs!-->
                         
                 </div>   
             </div><!-- fin div body!-->
+            
+            <div class="footer">
+                <div class="footer_resize">
+                    
+                    
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+            </div>
                 
         </div><!-- fin div main!-->
             
             
-        <div class="footer">
-            <div class="footer_resize">
-                
-                
-                <div class="clr"></div>
-            </div>
-            <div class="clr"></div>
-        </div>
+       
             
     </body>
 </html>
-<% } %>
+<% }/*fin else tipo usaurio*/ } %>

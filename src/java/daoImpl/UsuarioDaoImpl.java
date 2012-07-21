@@ -104,7 +104,7 @@ public class UsuarioDaoImpl implements daoUsuario{
          List<Usuario> cap;
         Session se = sf.getCurrentSession();
         se.beginTransaction();
-        Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).add(Restrictions.eq("estado", 1));
+        Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).add(Restrictions.or(Restrictions.eq("estado", 1 ), Restrictions.eq("estado", 2 )));
         cap = criterio.list();
         se.getTransaction().commit();
         return cap; 
@@ -114,7 +114,7 @@ public class UsuarioDaoImpl implements daoUsuario{
     public Usuario findAdministrador() {
         Session se=sf.getCurrentSession();
         se.beginTransaction();
-        usuario= (Usuario) se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 1)).add(Restrictions.eq("estado", 1)).uniqueResult();
+        usuario= (Usuario) se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 1)).add(Restrictions.eq("estado", 2)).uniqueResult();
         se.getTransaction().commit();
         return usuario;
     }
