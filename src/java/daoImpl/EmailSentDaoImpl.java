@@ -84,5 +84,18 @@ public class EmailSentDaoImpl implements daoEmailSent {
     public List<EmailSent> findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public EmailSent findByCorreo(String correo) {
+        Session s = sf.getCurrentSession();
+       
+       s.beginTransaction();
+       
+       Usuario usuario = new Usuario();
+       usuario = (Usuario) s.createCriteria(Usuario.class).add(Restrictions.eq("correo", correo)).uniqueResult();
+       emailSent = (EmailSent) s.createCriteria(EmailSent.class).add(Restrictions.eq("usuario", usuario)).uniqueResult();
+       s.getTransaction().commit();
+       return emailSent;
+    }
     
 }

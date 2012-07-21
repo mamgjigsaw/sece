@@ -91,11 +91,41 @@ public class validate {
     }
     
     public void  bloquear(String email){
-        UsuarioDaoImpl usudao = new UsuarioDaoImpl();
-        Usuario usuario = new Usuario();
-        usuario = usudao.findByEmail(email);
-        usuario.setEstado(4);
-        usudao.update(usuario);
+        try{
+            UsuarioDaoImpl usudao = new UsuarioDaoImpl();
+            Usuario usuario = new Usuario();
+            usuario = usudao.findByEmail(email);
+            
+            //validar que tipo de usuario es?
+            if(usuario.getTipoUsuario()==1){// tipo administrador
+                usuario.setEstado(4);
+                usudao.update(usuario);   
+                
+                //obtener el string aleratorio y guardar la solicitud en la tabla email_sent
+                String stringRandom = getStringRandom();
+                Date fecha = new Date();
+                Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+            
+                EmailSent emailSent = new EmailSent(usuario,momentoTimestamp,stringRandom);
+                EmailSentDaoImpl emailDao = new EmailSentDaoImpl(); 
+                emailDao.create(emailSent);
+                
+                String urlLost;                
+                Properties archivoConf = new Properties();
+                archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
+                urlLost = (String) archivoConf.getProperty("seceUrl");
+                urlLost = urlLost +"/forgetPassword.jsp?liame=" + usuario.getCorreo() +"&&ogidoc="+ stringRandom;
+                
+                //enviarle un correo de que su cuenta ha sido bloqueada.
+                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contrseña incorrecta. En este link de acontinuacion podra resetear su contraseña <br>"+ urlLost +".</p> <p> Gracias, SECE TEAM.</strong></p>");
+                //(String remitente,String destinatario,String asunto,String mensaje_cuerpo)
+            }else{//tipo capacitador o usuario
+                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. Dirijase al administrador del sistema que le brindara unos pasos para su posterior activacion.</p> <p> Gracias, SECE TEAM.</strong></p>");
+            }
+        }catch(Exception e){
+            System.out.println("El error es --- " + e.getMessage());
+        }
+        
     }
     
     public void saveActionBitacora(int id_acceso,int id_operacion, String descripcion,int id_elemento,String anterior,String actual){
@@ -269,10 +299,7 @@ public class validate {
         usuario = daoUsuario.findById(Integer.parseInt(array[0][0]));
         return usuario;
     }
-    
-    public int passwordOlvidado(String destinatario){
-        try{
-        
+    public String getStringRandom(){
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 	int string_length = 9;
 	String randomstring = "";
@@ -283,6 +310,13 @@ public class validate {
 		randomstring += chars.substring( (int) rnum, (int) rnum+1);                
                 //chars.substring(i, i)
 	}
+        return randomstring;
+    }
+            
+    public int passwordOlvidado(String destinatario){
+        try{
+        
+        String stringRandom = getStringRandom();
         
         Usuario usuario = new Usuario();
         UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
@@ -292,29 +326,41 @@ public class validate {
             return 0;//usuario no existe.
         }else{
             
-            String seceURL;
-            Properties archivoConf = new Properties();
-            archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
-            seceURL = (String) archivoConf.getProperty("seceUrl");
+            EmailSentDaoImpl emailDao = new EmailSentDaoImpl();
+            EmailSent emailSent = new EmailSent();
+            
+            emailSent = emailDao.findByUsuario(usuario);
+            
+            if(emailSent == null){
+                String seceURL;
+                Properties archivoConf = new Properties();
+                archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
+                seceURL = (String) archivoConf.getProperty("seceUrl");
         
-            //String url="<a href='http://localhost:8080/sece/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
-            String url="<a href='"+ seceURL +"forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
+                //String url="<a href='http://localhost:8080/sece/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ randomstring +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+randomstring +"</span></a>";
+                String url="<a href='"+ seceURL +"/forgetPassword.jsp?liame=" + destinatario +"&&ogidoc="+ stringRandom +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" +destinatario+"&&ogidoc="+ stringRandom +"</span></a>";
             
-            Date fecha = new Date();
-            Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+                Date fecha = new Date();
+                Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
             
-            EmailSent emailSent = new EmailSent(usuario,momentoTimestamp,randomstring);
-            EmailSentDaoImpl emailDao = new EmailSentDaoImpl(); 
-            emailDao.create(emailSent);
+                emailSent = new EmailSent(usuario,momentoTimestamp,stringRandom);
+             
+                emailDao.create(emailSent);
                     
-            int m = EnviarCorreo("sece@pml.org.ni",destinatario,"Restablecer Contraseña","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> click en el link de abajo para resetear tu contraseña en SECE y eliga una nueva<br>"+ url +"</p> <p> Gracias, SECE TEAM.</strong></p>");
-            return 1;
+                int m = EnviarCorreo("sece@pml.org.ni",destinatario,"Restablecer Contraseña","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> click en el link de abajo para resetear tu contraseña en SECE y eliga una nueva<br>"+ url +"</p> <p> Gracias, SECE TEAM.</strong></p>");
+                return 1; // se guardo correctamente todo.                                
+            }else{                
+                return 2;// el usuario posee una solicitud de cambio de contraseña
+            }
+            
+            
         }
         
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage());            
         }
         return 4;
+        
     }
     
     public String cambiarPasswordByID(int idUsuario,String newContra){
