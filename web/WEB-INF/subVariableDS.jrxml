@@ -14,7 +14,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="74" splitType="Stretch">
+		<band height="66" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="23" backcolor="#CCCCCC"/>
 				<graphicElement>
@@ -62,9 +62,9 @@
 				<text><![CDATA[Ponderación:]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="0" y="27" width="555" height="40"/>
+				<reportElement x="0" y="26" width="555" height="40"/>
 				<dataSourceExpression><![CDATA[$F{itemDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["C:\\Kenny\\sece\\web\\WEB-INF\\subItemDS.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\wmiguel\\Documents\\NetBeansProjects\\mono\\sece\\web\\WEB-INF\\subItemDS.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

@@ -15,6 +15,7 @@ public class Escala  implements java.io.Serializable {
      private Integer valoracion;
      private Integer rangoMayor;
      private Integer rangoMenor;
+     private String sugerencia;
 
     public Integer getRangoMayor() {
         return rangoMayor;
@@ -22,6 +23,14 @@ public class Escala  implements java.io.Serializable {
 
     public void setRangoMayor(Integer rangoMayor) {
         this.rangoMayor = rangoMayor;
+    }
+
+    public String getSugerencia() {
+        return sugerencia;
+    }
+
+    public void setSugerencia(String sugerencia) {
+        this.sugerencia = sugerencia;
     }
 
     public Integer getRangoMenor() {
@@ -35,12 +44,13 @@ public class Escala  implements java.io.Serializable {
     public Escala() {
     }
 
-    public Escala(Variable variable, String descripcion, Integer valoracion, Integer rangoMayor, Integer rangoMenor) {
+    public Escala(Variable variable, String descripcion, Integer valoracion, Integer rangoMayor, Integer rangoMenor,String sugerencia) {
        this.variable = variable;
        this.descripcion = descripcion;
        this.valoracion = valoracion;
        this.rangoMayor = rangoMayor;
        this.rangoMenor = rangoMenor;
+       this.sugerencia = sugerencia;
     }
    
     public Integer getIdEscala() {

@@ -22,5 +22,9 @@
     <property name="rangoMayor" type="java.lang.Integer">
       <column name="rangoMayor"/>
     </property>
+    <property name="sugerencia" type="string">
+      <column length="500" name="sugerencia"/>
+    </property>
+
   </class>
 </hibernate-mapping>
