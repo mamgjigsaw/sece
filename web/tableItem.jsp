@@ -29,12 +29,14 @@
         <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.pager.js"></script>
+        <script type="text/javascript" src="resources/tablesorter/js/tablesorter_filter.js"></script>
         <script type="text/javascript">
              $(function() 
                  { 
                  $("#items")
-                 .tablesorter({widthFixed: true, widgets: ['zebra']})
-                 .tablesorterPager({container: $("#pagerItem")}); 
+                 .tablesorter({widthFixed: true, widgets: ['jfilterselect','zebra']})
+                 .tablesorterPager({container: $("#pagerItem")})
+                 ; 
                  } 
              );
         </script>
@@ -99,12 +101,13 @@
 	                  </form>
          </div>
         <div align="center" >
+            
         <table id="items" class="tablesorter" cellspacing="1">
                                                                  <thead>
                                                                      <tr>
                                                                          <th>Item</th>
                                                                          <th>Estado</th>
-                                                                         <th>Variable</th>
+                                                                         <th jFilterSelect="1">Variable</th>
                                                                          <th>Acciones</th>
                                                                      </tr>
                                                                  </thead>  

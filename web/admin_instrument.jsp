@@ -184,20 +184,25 @@ response.setDateHeader("Expires", 0);
                 var esca4 = $("#escala4").val();
                 var rmenor4 = $("#rm4").val();
                 var rmayor4 = $("#rM4").val();
+                var suger4 = $("#sug4").val();
                 var esca3 = $("#escala3").val();
                 var rmenor3 = $("#rm3").val();
                 var rmayor3 = $("#rM3").val();
+                var suger3 = $("#sug3").val();
                 var esca2 = $("#escala2").val();
                 var rmenor2 = $("#rm2").val();
                 var rmayor2 = $("#rM2").val();
+                var suger2 = $("#sug2").val();
                 var esca1 = $("#escala1").val();
                 var rmenor1 = $("#rm1").val();
                 var rmayor1 = $("#rM1").val();
+                var suger1 = $("#sug1").val();
                 var esca0 = $("#escala0").val();
                 var rmenor0 = $("#rm0").val();
                 var rmayor0 = $("#rM0").val();
+                var suger0 = $("#sug0").val();
                                 
-                       if(variable == "" || ponderacion == "" || esca4 == "" || esca3 =="" || esca2== "" || esca1=="" || esca0 =="" || rmenor4 =="" || rmayor4 =="" || rmenor3 =="" || rmayor3 =="" || rmenor2 =="" || rmayor2 =="" || rmenor1 =="" || rmayor1 =="" || rmenor0 =="" || rmayor0 ==""){
+                       if(variable == "" || ponderacion == "" || esca4 == "" || esca3 =="" || esca2== "" || esca1=="" || esca0 =="" || rmenor4 =="" || rmayor4 =="" || rmenor3 =="" || rmayor3 =="" || rmenor2 =="" || rmayor2 =="" || rmenor1 =="" || rmayor1 =="" || rmenor0 =="" || rmayor0 =="" || suger4 =="" || suger3 =="" || suger2 =="" || suger1 =="" || suger0 ==""){
                         var palabra="<section role='principal' id='message_box'><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>Todos los datos son requeridos.</p></div><!-- /Notification --></section>";  
                        $("#box_message").html(palabra);               
                       $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje
@@ -207,7 +212,7 @@ response.setDateHeader("Expires", 0);
                         $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje 
                         }
                        else{                          
-                          instrumentoDWR.newVariable(variable, indicadorVar, ponderacion, esca4, esca3, esca2, esca1, esca0, rmenor4, rmayor4, rmenor3, rmayor3, rmenor2, rmayor2, rmenor1, rmayor1, rmenor0, rmayor0, resul);                         
+                          instrumentoDWR.newVariable(variable, indicadorVar, ponderacion, esca4, esca3, esca2, esca1, esca0, rmenor4, rmayor4, rmenor3, rmayor3, rmenor2, rmayor2, rmenor1, rmayor1, rmenor0, rmayor0, suger4, suger3, suger2, suger1, suger0, resul);                         
                           var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Variable</strong><p class='hola'>La nueva Variable se ha guardado junto a su respectivas Escalas correctamente.</p></div><!-- /Notification --></section>";  
                            $("#box_message").html(palabra);
                            $( "#box_message" ).show("blind",callback);
@@ -234,14 +239,19 @@ response.setDateHeader("Expires", 0);
                  document.getElementById("escala0").value = "";
                  document.getElementById("rm4").value = "";
                  document.getElementById("rM4").value = "";
+                 document.getElementById("sug4").value = "";
                  document.getElementById("rm3").value = "";
                  document.getElementById("rM3").value = "";
+                 document.getElementById("sug3").value = "";
                  document.getElementById("rm2").value = "";
                  document.getElementById("rM2").value = "";
+                 document.getElementById("sug2").value = "";
                  document.getElementById("rm1").value = "";
                  document.getElementById("rM1").value = "";
+                 document.getElementById("sug1").value = "";
                  document.getElementById("rm0").value = "";
                  document.getElementById("rM0").value = "";
+                 document.getElementById("sug0").value = "";
              }
          </script>
          <script>
@@ -271,46 +281,15 @@ response.setDateHeader("Expires", 0);
              function limpiarItem(){
                  document.getElementById("newItemDesc").value = "";                 
              }
-         </script>
-         <script>
-             //Javascript para Sugerencia
-             function guardarSugerencia(){
-                 
-                 
-                 
-                 var selecteds = $("#selectItem").val();
-                 var suge = $("#txtsuge").val();
-                 if(selecteds == null || suge == ""){
-                    var palabra="<section role='principal' id='message_box'><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>Ingrese los datos correctamente</p></div><!-- /Notification --></section>";  
-                       $("#box_message").html(palabra);               
-                      $( "#box_message" ).show("blind",callback);//codigo que muestra el div de mensaje 
-                 }else{     
-                            instrumentoDWR.newSugerencia(suge, selecteds, resSG);
-                           var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sugerencia</strong><p class='hola'>La sugerencia se ha guardado correctamente.</p></div><!-- /Notification --></section>";  
-                           $("#box_message").html(palabra);
-                           $( "#box_message" ).show("blind",callback); 
-                            limpiarSugerencia();                            
-                        }
-             }
-             function resSG(data){
-              validacion.saveActionBitacora(<%= val %>, 26, "Nueva Sugerencia",data[0], "Nueva Sugerencia", "Nueva Sugerencia");
-              var i;
-              for(i=1;i<data.length;i++){
-                  validacion.saveActionBitacora(<%= val %>, 38, "Asignacion de Sugerencia",data[i], "Sugerencia", "Item Relacionado");
-              }
-              $("#fraSug").attr("src","tableSugerencias.jsp");
-             }
-             function limpiarSugerencia(){
-                 document.getElementById("txtsuge").value = "";
-                 $("#selectItem").multiselect("uncheckAll");
-                                  
-             }
-         </script>
+         </script>        
  
                 <style>
 	#toolbar {
 		padding: 10px 4px;
 	}
+        textarea {
+	resize: none;
+}
 	</style>
 	<script>
 	
@@ -365,8 +344,7 @@ response.setDateHeader("Expires", 0);
                     <li><a href="#tabIndicador"><span>INDICADOR</span></a></li>
                     <li><a href="#tabVariable"><span>VARIABLE</span></a></li>
                     <li><a href="#tabItem"><span>ITEM</span></a></li>
-                    <li><a href="#tabEscala"><span>ESCALA</span></a></li>
-                    <li><a href="#tabSugerencia"><span>SUGERENCIA</span></a></li>
+                    <li><a href="#tabEscala"><span>ESCALA</span></a></li>                   
                 </ul>
                 
                 <div id="tabIndicador" style="height: 55em;" >
@@ -395,10 +373,10 @@ response.setDateHeader("Expires", 0);
                       <iframe src="tableIndicador.jsp" style=" width: 100%; height: 495px;" frameborder="0" scrolling="false"  id="fraIndi"></iframe>                             
                    </div>
                 </div>
-                <div id="tabVariable" style="height: 75em;">
+                <div id="tabVariable" style="height: 90em;">
                     <div>                       
                         <div align="center">
-                            <div class="divPanel" style="width: 90%; height: 402px;">
+                            <div class="divPanel" style="width: 90%; height: 550px;">
                             <h2>Nueva Variable</h2>
                             <form style="width:100%" id="newVar">
                                 <table style="width:100%" >
@@ -435,35 +413,41 @@ response.setDateHeader("Expires", 0);
                                     <thead>                                         
                                           <tr>
                                               <th>Descripci&oacuten</th>
-                                              <th style="width: 120px" >Rango de Respuestas Positivas</th>
+                                              <th >Rango de Respuestas Positivas</th>
                                               <th>Valor</th>
+                                              <th>Sugerencia</th>
                                           </tr>                              
                                     </thead>
                                     <tbody>
                                           <tr>
-                                              <td><input id="escala4" maxlength="100" type="text" style=" width: 98%" /> </td>
-                                              <td>De: <input id="rm4" type="text" style="width: 30px"/>  a: <input id="rM4" type="text" style="width: 30px"/></td>
+                                              <td><textarea id="escala4" rows="3" cols="30" maxlength="100"></textarea></td>
+                                              <td>De: <input id="rm4" type="text" style="width: 30px"/> <br>  a:  &nbsp; <input id="rM4" type="text" style="width: 30px"/></td>
                                               <td>4</td>
+                                              <td><textarea id="sug4" rows="3" cols="70" maxlength="500"></textarea></td>
                                           </tr>
                                           <tr>
-                                              <td><input maxlength="100" id="escala3" type="text" style=" width: 98%"/></td>
-                                              <td>De:  <input id="rm3" type="text" style="width: 30px"/> a: <input id="rM3" type="text" style="width: 30px"/> </td>
+                                              <td><textarea maxlength="100" rows="3" cols="30" id="escala3"></textarea></td>
+                                              <td>De:  <input id="rm3" type="text" style="width: 30px"/> <br>  a:  &nbsp; <input id="rM3" type="text" style="width: 30px"/> </td>
                                               <td>3</td>
+                                              <td><textarea id="sug3" rows="3" cols="70" maxlength="500"></textarea></td>
                                           </tr>
                                           <tr>
-                                              <td><input id="escala2" maxlength="100" type="text" style=" width: 98%"/></td>
-                                              <td>De:  <input id="rm2" type="text" style="width: 30px"/> a: <input id="rM2" type="text" style="width: 30px"/></td>
+                                              <td><textarea id="escala2" rows="3" cols="30" maxlength="100"></textarea></td>
+                                              <td>De:  <input id="rm2" type="text" style="width: 30px"/><br>  a:  &nbsp; <input id="rM2" type="text" style="width: 30px"/></td>
                                               <td>2</td>
+                                              <td><textarea id="sug2" rows="3" cols="70" maxlength="500"></textarea></td>
                                           </tr>
                                           <tr>
-                                              <td><input id="escala1" type="text" maxlength="100" style=" width: 98%"/></td>
-                                              <td>De: <input id="rm1" type="text" style="width: 30px"/> a: <input id="rM1" type="text" style="width: 30px"/></td>
+                                              <td><textarea id="escala1" maxlength="100" rows="3" cols="30" ></textarea></td>
+                                              <td>De: <input id="rm1" type="text" style="width: 30px"/><br>  a:  &nbsp; <input id="rM1" type="text" style="width: 30px"/></td>
                                               <td>1</td>
+                                              <td><textarea id="sug1" rows="3" cols="70" maxlength="500"></textarea></td>
                                           </tr>
                                           <tr>
-                                              <td><input maxlength="100" id="escala0" type="text" style=" width: 98%"/></td>
-                                              <td>De:  <input id="rm0" type="text" style="width: 30px"/> a: <input id="rM0" type="text" style="width: 30px"/> </td>
+                                              <td><textarea maxlength="100" id="escala0" rows="3" cols="30" ></textarea></td>
+                                              <td>De:  <input id="rm0" type="text" style="width: 30px"/><br> a:  &nbsp; <input id="rM0" type="text" style="width: 30px"/> </td>
                                               <td>0</td>
+                                              <td><textarea id="sug0" rows="3" cols="70" maxlength="500"></textarea></td>
                                           </tr>                                          
                                     </tbody>                                    
                                 </table>                                                               
@@ -518,47 +502,7 @@ response.setDateHeader("Expires", 0);
                 </div>
                 <div id="tabEscala" style="height: 50em;">
                  <iframe src="tableEscala.jsp" style=" width: 100%; height: 100%;" frameborder="0" scrolling="false"  id="fraEscala"></iframe>                                                                          
-                </div>
-                <div id="tabSugerencia" style="height: 70em;">
-                    <div>
-                        <div align="center">
-                            <div class="divPanel" style="width: 99%; height: 170px;">
-                            <h2>Nueva Sugerencia</h2>
-                            <form id="sugItem">
-                                <table style="width: 100%" >
-                                    <tr>
-                                        <td style="width: 60px" >Sugerencia:</td>
-                                        <td style="width: 300px"><textarea id="txtsuge" cols="30" style="width: 300px" maxlength="200" rows="3"></textarea></td>
-                                        
-                                        <td style="width: 80px">Items Relacionados:</td>
-                                        <td style="width: 330px">
-                                            <select id="selectItem" style="width: 325px;"  multiple="multiple">
-                                                <%
-                                                 Item it = new Item();
-                                                 ItemDaoImpl idi = new ItemDaoImpl();
-                                                 
-                                                 List<Item> listIt = idi.findAll();
-                                                 Iterator<Item> itit = listIt.iterator();
-                                                 while(itit.hasNext()){
-                                                     it = itit.next();
-                                                     if(it.getEstado()==1){%>
-                                                     <option value="<%= it.getIdItem().toString() %>"><%= it.getDescripcion() %></option> 
-                                                     
-                                                     <%}                                             
- }                                                                                                                                                                                                                                                
-%>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </table><br>
-                                        <input type="button" id="guardarSuger" onclick="guardarSugerencia();" value="Guardar"/>
-                                        <input type="button" id="clearSugerencia" onclick="limpiarSugerencia();" value="Limpiar"/> 
-                            </form><br><br>
-                            </div><br>
-                      <iframe src="tableSugerencias.jsp" style=" width: 100%; height: 600px;" frameborder="0" scrolling="false"  id="fraSug"></iframe>                                
-                        </div>              
-                    </div>   
-                </div>
+                </div>                
            
             </div>
            
