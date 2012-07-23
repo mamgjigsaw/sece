@@ -218,7 +218,7 @@ public class validate {
            DelegacionIndiUsu dele = new DelegacionIndiUsu(usuario,listIndi.get(i),contrato);
            deledao.create(dele);
            
-           Avance avance = new Avance(contrato,listIndi.get(i),0,0);   
+           Avance avance = new Avance(contrato,listIndi.get(i),0,0,0,0);   
            daoAvance.create(avance);        
           }            
        }

@@ -19,5 +19,11 @@
     <property name="resultado" type="float">
       <column name="resultado"/>
     </property>
+    <property name="v" type="java.lang.Integer">
+      <column name="v"/>
+    </property>
+    <property name="vs" type="float">
+      <column name="vs"/>
+    </property>
   </class>
 </hibernate-mapping>
