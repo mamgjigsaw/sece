@@ -52,7 +52,7 @@ public class GraficoResultado extends HttpServlet {
                 case 2 :
                     while (it.hasNext()){
                         avance = it.next();
-                        out.println( avance.getIndicador().getNombre()+";100" );
+                        out.println( avance.getIndicador().getNombre()+";"+avance.getV()+";"+avance.getVar() );
                     }//fin while                
                 break;                        
                 }//fin switch
