@@ -86,7 +86,7 @@ public class aprobarContrato extends HttpServlet {
         DelegacionIndiUsu dele = new DelegacionIndiUsu(user,listIndi.get(i),con);
         deledao.create(dele);
            
-        Avance avance = new Avance(con,listIndi.get(i),0,0);   
+        Avance avance = new Avance(con,listIndi.get(i),0,0,0,0);   
         daoAvance.create(avance);        
        }            
         

@@ -141,7 +141,7 @@ Avenida Universitaria. Managua, Nicaragua<br />
           <strong>Telefono</strong>:   (505) 2278-3136 | (505) 8887-9286 <br />          
           <strong>E-mail</strong>:            sece@pml.org.ni</p>
         <div class="line"></div>
-        <p><img src="images/map.jpg" alt="picture" width="286" height="203" /></p>
+        <p><iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=d&amp;source=s_d&amp;saddr=12.130761,-86.268901&amp;daddr=&amp;hl=es-419&amp;geocode=&amp;sll=12.130949,-86.270506&amp;sspn=0.012482,0.013797&amp;dirflg=w&amp;doflg=ptk&amp;mra=mift&amp;mrsp=0&amp;sz=16&amp;ie=UTF8&amp;t=m&amp;ll=12.130949,-86.270506&amp;spn=0.012482,0.013797&amp;output=embed"></iframe><br /><small>Ver <a href="https://maps.google.com/maps?f=d&amp;source=embed&amp;saddr=12.130761,-86.268901&amp;daddr=&amp;hl=es-419&amp;geocode=&amp;sll=12.130949,-86.270506&amp;sspn=0.012482,0.013797&amp;dirflg=w&amp;doflg=ptk&amp;mra=mift&amp;mrsp=0&amp;sz=16&amp;ie=UTF8&amp;t=m&amp;ll=12.130949,-86.270506&amp;spn=0.012482,0.013797" style="color:#0000FF;text-align:left">CPML</a> en un mapa ampliado</small></p>
       </div>
       <div class="clr"></div>
       <br>

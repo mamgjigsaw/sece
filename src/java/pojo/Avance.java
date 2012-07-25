@@ -17,15 +17,19 @@ public class Avance  implements java.io.Serializable {
      private Indicador indicador;
      private Integer var;
      private float resultado;
-     
+     private Integer v;
+     private float vs;
+
     public Avance() {
     }
 
-    public Avance(Contrato contrato, Indicador indicador, Integer var, float resultado) {
+    public Avance(Contrato contrato, Indicador indicador, Integer var, float resultado, int v, float vs) {
         this.contrato = contrato;
         this.indicador = indicador;
         this.var = var;
         this.resultado = resultado;
+        this.v = v;
+        this.vs = vs;
     }
 
     public Contrato getContrato() {
@@ -69,6 +73,23 @@ public class Avance  implements java.io.Serializable {
     }
 
         
+    public Integer getV() {
+        return v;
+    }
+
+    public void setV(Integer v) {
+        this.v = v;
+    }
+
+    public float getVs() {
+        return vs;
+    }
+
+    public void setVs(float vs) {
+        this.vs = vs;
+    }
+
+     
 
 
 

@@ -57,7 +57,7 @@ public class instrumentoAdministrador {
         resp = ind.getIdIndicador();
         return resp;
     }
-    public int[] newVariable(String var, String idI, String pon, String esc4, String esc3, String esc2, String esc1, String esc0, int rMenor4, int rMayor4, int rMenor3, int rMayor3, int rMenor2, int rMayor2, int rMenor1, int rMayor1,int rMenor0, int rMayor0){
+    public int[] newVariable(String var, String idI, String pon, String esc4, String esc3, String esc2, String esc1, String esc0, int rMenor4, int rMayor4, int rMenor3, int rMayor3, int rMenor2, int rMayor2, int rMenor1, int rMayor1,int rMenor0, int rMayor0, String s4, String s3, String s2, String s1, String s0){
         int ids[] = new int[6];    
         Indicador indi = new Indicador();
             IndicadorDaoImpl idi = new IndicadorDaoImpl();
@@ -73,20 +73,20 @@ public class instrumentoAdministrador {
             VariableDaoImpl vdi = new VariableDaoImpl();
             vdi.create(v);
             ids[0] = v.getIdVariable();
-            Escala escala = new Escala(v, esc4, a, rMayor4, rMenor4);
+            Escala escala = new Escala(v, esc4, a, rMayor4, rMenor4,s4);
             EscalaDaoImpl edi = new EscalaDaoImpl();
             edi.create(escala);
             ids[1] = escala.getIdEscala();
-            escala = new Escala(v, esc3, b, rMayor3, rMenor3);
+            escala = new Escala(v, esc3, b, rMayor3, rMenor3,s3);
             edi.create(escala);
             ids[2] = escala.getIdEscala();
-            escala = new Escala(v, esc2, c, rMayor2, rMenor2);
+            escala = new Escala(v, esc2, c, rMayor2, rMenor2,s2);
             edi.create(escala);
             ids[3] = escala.getIdEscala();
-            escala = new Escala(v, esc1, d, rMayor1, rMenor1);
+            escala = new Escala(v, esc1, d, rMayor1, rMenor1,s1);
             edi.create(escala);
             ids[4] = escala.getIdEscala();
-            escala = new Escala(v, esc0, e, rMayor0, rMenor0);
+            escala = new Escala(v, esc0, e, rMayor0, rMenor0,s0);
             edi.create(escala);
             ids[5] = escala.getIdEscala();
             return ids;

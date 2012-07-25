@@ -10,6 +10,7 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+
 # generic files to ignore
 *~
 *.lock
@@ -17,8 +18,12 @@ nb-configuration.xml
 *.swp
 *.out
 
+
+
 # Package Files #
 
 *.jar
+
 *.war
+
 *.ear

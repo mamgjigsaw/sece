@@ -5,7 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="idContrato" class="java.lang.Integer"/>
 	<parameter name="id_indicador" class="java.lang.Integer"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      ( SELECT COUNT(*) FROM `resp_item` resp_item INNER JOIN `item` item ON resp_item.`id_item` = item.`id_item` WHERE resp_item.id_contrato = $P{idContrato} and resp_item.res_boolean = 1 and item.id_variable = variable.id_variable )  Resp_positivas,
      ( SELECT escala.`valoracion` FROM `escala` escala WHERE Resp_positivas BETWEEN escala.rangoMenor and rangoMayor and escala.id_variable = variable.id_variable ) valoracion_V,

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Nov 3, 2011 11:28:10 PM by Hibernate Tools 3.2.1.GA -->
@@ -21,3 +22,34 @@
     </property>
   </class>
 </hibernate-mapping>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 3, 2011 11:28:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.Avance" table="avance">
+    <id name="idAvance" type="java.lang.Integer">
+      <column name="id_avance"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Contrato" fetch="select" name="contrato">
+      <column name="id_contrato"/>
+    </many-to-one>
+    <many-to-one class="pojo.Indicador" fetch="join" name="indicador">
+      <column name="id_indicador"/>
+    </many-to-one>
+    <property name="var" type="java.lang.Integer">
+      <column name="var"/>
+    </property>
+    <property name="resultado" type="float">
+      <column name="resultado"/>
+    </property>
+    <property name="v" type="java.lang.Integer">
+      <column name="v"/>
+    </property>
+    <property name="vs" type="float">
+      <column name="vs"/>
+    </property>
+  </class>
+</hibernate-mapping>
+>>>>>>> origin

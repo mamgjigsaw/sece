@@ -63,7 +63,7 @@
 			<subreport>
 				<reportElement x="0" y="26" width="572" height="40"/>
 				<dataSourceExpression><![CDATA[$F{bitacoraDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subBitacoraDS.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\wmiguel\\Documents\\NetBeansProjects\\mono\\sece\\web\\WEB-INF\\subBitacoraDS.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

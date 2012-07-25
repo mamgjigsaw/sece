@@ -22,8 +22,7 @@
         
         <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>        
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
-        <script type="text/javascript" src="/sece/dwr/util.js"></script>
-         
+        <script type="text/javascript" src="/sece/dwr/util.js"></script>        
        <script type="text/javascript" >
            var countError=0;
            var valor1;
@@ -95,6 +94,11 @@
 				Ok: function() {
 					$( this ).dialog( "close" );                                        
                                         location.href = "entrar?cV5VDde7H0l="+ dwr.util.getValue("txtemail") +"&&K3JR5YpwQ8="+ passEncriptado;
+                                        //location.href = "entrar";
+                                        
+                                        //request.setAttribute("cV5VDde7H0l",dwr.util.getValue("txtemail"));     
+                                        //request.setAttribute("K3JR5YpwQ8",passEncriptado);     
+                                       
 				}
 			}
 		});//fin dialog-message

@@ -1,0 +1,4 @@
+La imagen logo.gif tambien debe ir en la misma carpeta q los subreportes
+finalReport---- Llama a: finalReport_subreport1     -----> tambien en estos reportes habria q cambiar la conexion a la BD
+instrumentReport------ Llama a: subVariableDS------ y, SubVariableDS llama a: subItemDS
+bitacoraReport---------Llama a: subAccesoDS-----------y, subAccesoDS llama a: subBitacoraDS
