@@ -86,6 +86,7 @@ public class AvanceDaoImpl implements daoAvance {
         return avance;
     }
 
+    //funcion q devuelve una Lista de Avance x Contrato
     @Override
     public List<Avance> Xcontrato(Contrato contrato) {
         List<Avance> resultados = new ArrayList<Avance>();

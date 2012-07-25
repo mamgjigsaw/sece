@@ -8,6 +8,7 @@ package servlet;
 import daoImpl.AccesoDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.encriptar;
+import dwrScripts.initCapacitadores;
 import dwrScripts.validate;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -36,6 +37,7 @@ public class entrar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String email, pass;
+        initCapacitadores capacitador = new initCapacitadores();
 
         email = request.getParameter("cV5VDde7H0l");
         pass = request.getParameter("K3JR5YpwQ8");
@@ -61,6 +63,8 @@ public class entrar extends HttpServlet {
                 HttpSession sesion=request.getSession();
                 sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );        
                 response.sendRedirect("controlPanel.jsp");
+                //actualizar intentos a 0
+                capacitador.reiniciarConteoEmails(usuario);
             } else if (usuario.getTipoUsuario()==2){
                 HttpSession sesion=request.getSession();
                 sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );
@@ -71,6 +75,8 @@ public class entrar extends HttpServlet {
                 sesion.setAttribute("idAcc", acc.getIdAcceso().toString());        
                // response.sendRedirect("instrument.jsp");
                 response.sendRedirect("controlPanel.jsp");
+                //actualizar intentos a 0
+                capacitador.reiniciarConteoEmails(usuario);
             }
             else if(usuario.getTipoUsuario()==1 && usuario.getEstado() == 1){
                 usuario.setEstado(2);

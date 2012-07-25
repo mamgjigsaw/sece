@@ -81,19 +81,19 @@ response.setDateHeader("Expires", 0);
                    
            var flashVars = {
                 settings_file: "resources/settings.xml",
-                data_file: "GraficoResultado?idcontrato="+id_contrato
+                data_file: "GraficoResultado?idcontrato="+id_contrato+"&a=1"
            };
            
            $(document).ready(function(){ 
                
-        var resp = $.get("GraficoResultado?idcontrato="+id_contrato, function (data){
+        var resp = $.get("GraficoResultado?idcontrato="+id_contrato+"&a=1", function (data){
             if (data == null || data== ""){                
                 
                 $('.body_resize').prepend("<div class='notification error'><p class='hola'><strong class='hola'>Error al Graficar</strong><p class='hola'>No hay datos para generar la grafica!!</p></div>");
             }//  fin if
             else{
                 // change 8 to 80 to test javascript version                 
-            if (swfobject.hasFlashPlayerVersion("9"))
+            if (swfobject.hasFlashPlayerVersion("100"))
                 swfobject.embedSWF("resources/amcharts/flash/amradar.swf", "chartdiv", "700", "600", "8.0.0", "resources/amcharts/flash/expressInstall.swf", flashVars);            
             else {
                 var amFallback = new AmCharts.AmFallback();

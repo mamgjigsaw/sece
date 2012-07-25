@@ -30,6 +30,7 @@
     <mapping resource="mapping/HistorialResultado.hbm.xml"/>
     <mapping resource="mapping/EmpresaContratos.hbm.xml"/>
     <mapping resource="mapping/Noticias.hbm.xml"/>
-    <mapping resource="mapping/EmailSent.hbm.xml"/>
+    <mapping resource="mapping/EmailSent.hbm.xml"/>    
+    <mapping resource="mapping/EmailInactividad.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

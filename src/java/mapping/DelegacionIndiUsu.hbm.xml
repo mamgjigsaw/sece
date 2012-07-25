@@ -7,10 +7,10 @@
       <column name="id_delegacion"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="pojo.Usuario" fetch="select" name="usuario">
+    <many-to-one class="pojo.Usuario" fetch="join" name="usuario">
       <column name="id_usuario"/>
     </many-to-one>
-    <many-to-one class="pojo.Indicador" fetch="select" name="indicador">
+    <many-to-one class="pojo.Indicador" fetch="join" name="indicador">
       <column name="id_indicador"/>
     </many-to-one>
     <many-to-one class="pojo.Contrato" fetch="select" name="contrato">
