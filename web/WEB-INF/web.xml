@@ -92,6 +92,14 @@
         <servlet-name>aprobarContrato</servlet-name>
         <servlet-class>servlet.aprobarContrato</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GraficoResultadoP</servlet-name>
+        <servlet-class>servlet.GraficoResultadoP</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GraficoResultadoGeneral</servlet-name>
+        <servlet-class>servlet.GraficoResultadoGeneral</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>saveIndicador</servlet-name>
         <url-pattern>/saveIndicador</url-pattern>
@@ -200,6 +208,14 @@
     <servlet-mapping>
         <servlet-name>aprobarContrato</servlet-name>
         <url-pattern>/aprobarContrato</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GraficoResultadoP</servlet-name>
+        <url-pattern>/GraficoResultadoP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GraficoResultadoGeneral</servlet-name>
+        <url-pattern>/GraficoResultadoGeneral</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <data_type>csv</data_type>
+  <background>
+    <alpha>100</alpha>
+    <border_alpha>20</border_alpha>
+  </background>
+  <values>
+    <min>10</min>
+    <max>100</max>
+  </values>
+  <balloon>
+    <show>{value}pts</show>
+  </balloon>
+  <legend>
+    <align>center</align>
+  </legend>
+  <graphs>
+    <graph gid="0">
+      <title>Resultado</title>
+      <color>000000</color>
+      <line_width>2</line_width>
+      <fill_alpha>40</fill_alpha>
+      <bullet>round</bullet>      
+    </graph>
+    <graph gid="1">
+      <title>Puntaje Deseado</title>
+      <color>0000FF</color>
+      <line_width>2</line_width>
+      <fill_alpha>0</fill_alpha>
+      <bullet>round</bullet>
+    </graph>    
+  </graphs>  
+  <labels>
+    <label lid="0">
+      <text><![CDATA[<b>Nivel de competitividad</b>]]></text>
+      <y>23</y>
+      <text_size>12</text_size>
+      <align>center</align>
+    </label>
+  </labels>
+</settings>

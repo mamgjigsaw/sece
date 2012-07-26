@@ -4,27 +4,11 @@
  */
 package dwrScripts;
 
-import daoImpl.AccesoDaoImpl;
-import daoImpl.AsignacionCapaContraDaoImpl;
-import daoImpl.ContratoDaoImpl;
-import daoImpl.DelegacionIndiUsuDaoImpl;
-import daoImpl.EmailInactividadDaoImpl;
-import daoImpl.EmpresaDaoImpl;
-import daoImpl.ItemDaoImpl;
-import daoImpl.RespItemDaoImpl;
-import daoImpl.UsuarioDaoImpl;
+import daoImpl.*;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-import pojo.AsignacionCapaContra;
-import pojo.Contrato;
-import pojo.DelegacionIndiUsu;
-import pojo.EmailInactividad;
-import pojo.Empresa;
-import pojo.Usuario;
+import java.io.PrintWriter;
+import java.util.*;
+import pojo.*;
 
 /**
  *
@@ -366,6 +350,33 @@ public class initCapacitadores {
             System.out.println(ne.getMessage());
         }
     }//fin metodo
+    
+    public String testear(int idcontrato){
+        String resultado = "";
+         double vs ,v,vce;
+        
+        AvanceDaoImpl adi = new AvanceDaoImpl();
+        Avance avance;
+        ContratoDaoImpl cdi = new ContratoDaoImpl();        
+        Contrato contra = cdi.findById(idcontrato);
+        List<Avance> resultAvance = adi.Xcontrato(contra);
+        Iterator<Avance> it = resultAvance.iterator();
+        try {           
+            while (it.hasNext()){                
+                avance = it.next();
+                v = avance.getV();
+                vs = avance.getVs();
+                vce = (vs/v)*100;
+                long vceR = Math.round(vce);
+                resultado += "<h3 style='float: left;'>"+avance.getIndicador().getNombre()+"</h3> <div align='left' class='progress-bar blue small' style='width:30%;height: 35px;'><div style='width:"+vceR+"%"+";height: 35px;'><span style='top:26%;font-size: 15px;'>"+vceR+"%"+"</span></div> </div>";
+                //System.out.println(vce);
+            }
+        }catch(Exception ex){
+                ex.getMessage();
+            }        
+        
+    return resultado;
+    }//fin funcion
     
 
 }

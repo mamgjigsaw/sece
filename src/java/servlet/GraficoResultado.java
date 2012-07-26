@@ -33,31 +33,23 @@ public class GraficoResultado extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         response.setContentType("text/plain");
-        Integer contrato,accion=0;
-        contrato = Integer.parseInt(request.getParameter("idcontrato"));
-        accion = Integer.parseInt(request.getParameter("a"));
+        Integer contrato;
+        contrato = Integer.parseInt(request.getParameter("idcontrato"));        
         Contrato contra = cdi.findById(contrato);
         resultAvance = adi.Xcontrato(contra);
         Iterator<Avance> it = resultAvance.iterator();
         PrintWriter out = response.getWriter();
-        
-            try {                
-                switch (accion){
-                    case 1 : 
-                        while (it.hasNext()){
-                        avance = it.next();
-                        out.println( avance.getIndicador().getNombre()+";"+avance.getResultado()+";100" );
-                    }//fin while                
-                break;                                        
-                case 2 :
-                    while (it.hasNext()){
-                        avance = it.next();
-                        out.println( avance.getIndicador().getNombre()+";"+avance.getV()+";"+avance.getVar() );
-                    }//fin while                
-                break;                        
-                }//fin switch
+        try {     
+            while (it.hasNext()){
+                avance = it.next();
+                out.println( avance.getIndicador().getNombre()+";"+avance.getResultado()+";100" );
+                }//fin while                
+        }//fin try
+         finally {out.close();}
+            
+            
                 
-            } finally {out.close();}
+            
         
     }
 
