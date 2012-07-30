@@ -90,7 +90,7 @@ public class aprobarContrato extends HttpServlet {
         daoAvance.create(avance);        
        }            
         
-        correo.EnviarCorreo(correo_remitente, correo_destinatario, "Bienvenido a Sece", "<p><strong>Su Cuenta ha sido activada</strong>"
+        correo.EnviarCorreo("sece@pml.org.ni", correo_destinatario, "Bienvenido a Sece", "<p><strong>Su Cuenta ha sido activada</strong>"
                 + ", de manera satisfactoria, ya puede hacer uso del sistema, ingresando <a href='"+urlSistema+"logger.jsp'>aqui</a></p>"                
                 + "<p><strong>Gracias SECE TEAM.</strong></p>");
         
