@@ -55,9 +55,15 @@ public class AyudaSECE {
                                 +"<p>La grafica muestra el resultado obtenido en cada evaluación por indicador, en el eje “<i>x</i>“ muestra la fecha de finalización de la evaluación mientras que el eje “<i>y</i>“ determina los puntos obtenidos por el usuario. Aquí se puede ver la progresión del usuario en el tiempo.</p>"
                                 +"<img width='719' src='imagenes/Imagenic32.png'/> <br/><br/>";
                     break;
-            case 4: resultado = "<p>En el tab “Finalizados” se cargan todos los contratos con este estado, mostrando el mas reciente. Con filtrado y filas seleccionables, hace mas fácil y dinámica la manera de buscar y mostrar el grafico de araña de la empresa deseada.</p>"
+            case 4: resultado = "<p>En el tab “Finalizados” se cargan todos los contratos con este estado, mostrando el mas reciente. Con filtrado y filas seleccionables, hace mas fácil y dinámica la manera de buscar y mostrar una secci&oacute;n de graficos sobre los resultados obtenidos.</p>"
                                 +"<img width='719px' src='imagenes/Imagenic41.png'/> <br/><br/>"
-                                +"<div sytle='float:left;'><img widht='719' src='imagenes/Imagenic42.png'/> <p>El grafico de araña muestra los valores obtenidos por indicador, después de haber analizado la evaluación de competitividad empresarial. Poniendo el mouse sobre cada vértice podrá ver con exactitud los puntos obtenidos. En caso de que los datos no puedan ser cargados un mensaje de error hará saber al usuario sobre dicho inconveniente</p></div>";
+                                + "<p>En la secci&oacute;n de gr&aacute;ficos se divide en 3; El nivel de competitividad Relativa muestra los valores obtenidos por indicador, después de haber analizado la evaluación de competitividad empresarial, dada de manera porcentual.Poniendo el mouse sobre cada vértice podrá ver con exactitud los puntos obtenidos</p>"
+                                +"<img widht='719px' src='imagenes/Imagenic42.png'/> "
+                                + "<p>El segundo elemento del acordion carga los datos pero de manera puntual, es decir muestra los valores correspondientes obtenidos en la evaluaci&oacute;n; siempre la grafica azul muestra el puntaje perfecto.</p>"
+                                + "<img widht='719px' src='imagenes/Imagenic45.png'/>"
+                                + "<p>El siguiente gr&aacute;fico muestra en una linea punteada negra el valor de competitividad General, el cual esta entre 3 rangos, aqui se aprecia la calificaci&oacute;n del resultado</p>"
+                                + "<img widht='719px' src='imagenes/Imagenic43.png'/>"
+                                + "<img widht='719px' src='imagenes/Imagenic44.png'/>";
                 break;
             case 5: resultado = "<p>Cuando un capacitador desee agregar a un empresa cliente en especifico, este solamente necesita digitar el correo del contacto de dicha empresa, el cual le enviara un link para ingresar a la interfaz registro del sistema sece, inmediatamente dicho contrato será asignado al capacitador en cuestión.</p>"
                                 +"<div align='center'><img src='imagenes/Imagenic51.png'/></div>";

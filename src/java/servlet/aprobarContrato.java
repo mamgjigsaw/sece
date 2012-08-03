@@ -44,7 +44,7 @@ public class aprobarContrato extends HttpServlet {
     
     validate correo = new validate();
     String correo_destinatario;
-    String correo_remitente;
+    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
@@ -64,7 +64,6 @@ public class aprobarContrato extends HttpServlet {
        
        correo_destinatario = Ucapacitador.getCorreo();
        Ucapacitador = udi.findById(idusuarioCapacitador);
-       correo_remitente = Ucapacitador.getCorreo();       
        if (idAccion == 1){
            System.out.print("Contrato: "+con.getIdContrato());
         //cambiando estado de contrato a 1
@@ -90,10 +89,9 @@ public class aprobarContrato extends HttpServlet {
         daoAvance.create(avance);        
        }            
         
-        correo.EnviarCorreo(correo_remitente, correo_destinatario, "Bienvenido a Sece", "<p><strong>Su Cuenta ha sido activada</strong>"
+        correo.EnviarCorreo("sece@pml.org.ni", correo_destinatario, "Bienvenido a Sece", "<p><strong>Su Cuenta ha sido activada</strong>"
                 + ", de manera satisfactoria, ya puede hacer uso del sistema, ingresando <a href='"+urlSistema+"logger.jsp'>aqui</a></p>"                
-                + "<p><strong>Gracias SECE TEAM.</strong></p>");
-        
+                + "<p><strong>Gracias SECE TEAM.</strong></p>");        
        }
        else if (idAccion ==2){
            cdi.delete(con);

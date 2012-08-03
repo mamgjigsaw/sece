@@ -397,7 +397,7 @@ public class validate {
             prop.put("mail.smtp.host", host);
             /*Esta línea es la que indica al API que debe autenticarse*/
             prop.put("mail.smtp.auth", "true");
-            prop.put("mail.smtp.port", "25");
+            prop.put("mail.smtp.port", "26");
         
             //*Añadir esta linea si queremos ver una salida detallada del programa*/
             //prop.put("mail.debug", "true");
