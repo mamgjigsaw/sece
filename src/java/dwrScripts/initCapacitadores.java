@@ -4,26 +4,11 @@
  */
 package dwrScripts;
 
-import daoImpl.AccesoDaoImpl;
-import daoImpl.AsignacionCapaContraDaoImpl;
-import daoImpl.ContratoDaoImpl;
-import daoImpl.DelegacionIndiUsuDaoImpl;
-import daoImpl.EmpresaDaoImpl;
-import daoImpl.ItemDaoImpl;
-import daoImpl.RespItemDaoImpl;
-import daoImpl.UsuarioDaoImpl;
+import daoImpl.*;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-import pojo.AsignacionCapaContra;
-import pojo.Contrato;
-import pojo.DelegacionIndiUsu;
-import pojo.Empresa;
-import pojo.Usuario;
+import java.io.PrintWriter;
+import java.util.*;
+import pojo.*;
 
 /**
  *
@@ -107,24 +92,37 @@ public class initCapacitadores {
     
     public String getDelegadoxContrato(int idcontrato){
         String resultado="";
-         ContratoDaoImpl cdi = new ContratoDaoImpl();
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
         Contrato contra = cdi.findById(idcontrato);
-         DelegacionIndiUsuDaoImpl doii = new DelegacionIndiUsuDaoImpl();
+        DelegacionIndiUsuDaoImpl doii = new DelegacionIndiUsuDaoImpl();
         List<DelegacionIndiUsu> delegados = doii.delegacionxContrato(contra);
-        DelegacionIndiUsu delegado;
+        DelegacionIndiUsu delegado;        
         Iterator<DelegacionIndiUsu> it = delegados.iterator();
         Calendar c = Calendar.getInstance();
-        Date tiempoDgracia;
-        
+        Date tiempoDgracia;       
+    
         AccesoDaoImpl adi = new AccesoDaoImpl();
         //var para ultimo acceso del usaurio
         Date acces;
+        EmailInactividadDaoImpl eidi = new EmailInactividadDaoImpl();
+        EmailInactividad emi;
+        int intentos = 0;
         
         if (it.hasNext()){
             resultado = "<table border='0' id='resultTable' width ='100%'><tr> <th>Delegado</th>  <th>Ultimo Acceso</th> <th>Indicador</th> <th>Correo</th> <th>On-Line</th> </tr>";
             
              while (it.hasNext()){                 
-                 delegado = it.next();   
+                 delegado = it.next();            
+                 
+                 try {                     
+                     intentos = eidi.intentosEmailInactividadxUsuario( delegado.getUsuario() );
+                 }
+                 //captura si no hay registros de este cliente en la tabla email_inactividad
+                 catch (java.lang.NullPointerException ne) {
+                 /*si no hay registro de intento de este usuario crea uno con intentos 0*/
+                     emi = new EmailInactividad( delegado.getUsuario(),0);
+                     eidi.create(emi);
+                 }
                  //metodo que devuelve ultim acceso del usuario tal
                  acces = adi.fechaUltimoAcceso(delegado.getUsuario());                    
                  //determinar tiempo de inactividad
@@ -132,7 +130,7 @@ public class initCapacitadores {
                  c.add(Calendar.DATE, 3);
                  tiempoDgracia = c.getTime();
                  if (new Date().after(tiempoDgracia))
-                     resultado +="<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button><span class='cant_emailEnviados'></span>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
+                     resultado +="<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='"+delegado.getUsuario().getIdUsuario()+"'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button><span class='cant_emailEnviados'>"+intentos+"</span>&nbsp;&nbsp;&nbsp;&nbsp;"+delegado.getUsuario().getNombre()+"</td>";
                  else
                      resultado +="<tr style='text-align:center;'><td>"+delegado.getUsuario().getNombre()+"</td>";
                  resultado +="<td class='tdFechaAcc'>";                 
@@ -294,7 +292,7 @@ public class initCapacitadores {
         UsuarioDaoImpl udi = new UsuarioDaoImpl();
         Usuario user = udi.findById(idusuario);
         String nombreUsuario = user.getNombre().toUpperCase();        
-        String correo = user.getCorreo();
+        String correo = user.getCorreo();                
         validar = new validate();
         
         String asunto = "Usuario Inactivo";
@@ -328,6 +326,57 @@ public class initCapacitadores {
         }//fin while
         return resultado;
     }//fin funcion getHistorialContratosFinalizados
+    
+    public void actualizarCantCorreosEnviados (int idUsuario, int cant_intentos){
+        EmailInactividadDaoImpl eidi = new EmailInactividadDaoImpl();
+        EmailInactividad ei = new EmailInactividad();
+        UsuarioDaoImpl udi = new UsuarioDaoImpl();
+        Usuario user = udi.findById(idUsuario);
+        //busca EmailInactividad por usuario
+        ei = eidi.findByUsuario(user);
+        //actualiza los intentos
+        ei.setIntentos(cant_intentos);
+        eidi.update(ei);        
+    }//fin metodo   
+
+    //metodo que resetea los intentos en la tabla email inactividad
+    public void reiniciarConteoEmails(Usuario usuario) {
+        EmailInactividadDaoImpl eidi = new EmailInactividadDaoImpl();        
+        try {
+        EmailInactividad emi = eidi.findByUsuario(usuario);
+        emi.setIntentos(0);
+        eidi.update(emi);
+        } catch(NullPointerException ne){
+            System.out.println(ne.getMessage());
+        }
+    }//fin metodo
+    
+    public String testear(int idcontrato){
+        String resultado = "";
+         double vs ,v,vce;
+        
+        AvanceDaoImpl adi = new AvanceDaoImpl();
+        Avance avance;
+        ContratoDaoImpl cdi = new ContratoDaoImpl();        
+        Contrato contra = cdi.findById(idcontrato);
+        List<Avance> resultAvance = adi.Xcontrato(contra);
+        Iterator<Avance> it = resultAvance.iterator();
+        try {           
+            while (it.hasNext()){                
+                avance = it.next();
+                v = avance.getV();
+                vs = avance.getVs();
+                vce = (vs/v)*100;
+                long vceR = Math.round(vce);
+                resultado += "<h3 style='float: left;'>"+avance.getIndicador().getNombre()+"</h3> <div align='left' class='progress-bar blue small' style='width:30%;height: 35px;'><div style='width:"+vceR+"%"+";height: 35px;'><span style='top:26%;font-size: 15px;'>"+vceR+"%"+"</span></div> </div>";
+                //System.out.println(vce);
+            }
+        }catch(Exception ex){
+                ex.getMessage();
+            }        
+        
+    return resultado;
+    }//fin funcion
     
 
 }

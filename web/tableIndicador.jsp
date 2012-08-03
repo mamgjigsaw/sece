@@ -22,13 +22,15 @@
         <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.pager.js"></script>
+        <script type="text/javascript" src="resources/tablesorter/js/tablesorter_filter.js"></script>
         <script type="text/javascript">
              $(function() 
                  { 
                  $("#tableIndicador")
-                 .tablesorter({widthFixed: true, widgets: ['zebra']})
-                 .tablesorterPager({container: $("#pagerIndicador")}); 
-                
+                 .tablesorter({widthFixed: true, widgets: ['jfilterselect','zebra']})
+                 .tablesorterPager({container: $("#pagerIndicador")})
+                 ; 
+                 
              }              
              );
             
@@ -94,10 +96,11 @@
                        </div>
         <div align="center">
         <div align="center" >
+            
         <table id="tableIndicador" class="tablesorter" cellspacing="1"> 
                           <thead>
                     	    <tr>                             
-                              <th>Indicador</th>
+                              <th jFilterSelect="1">Indicador</th>
                               <th>Contribuci&oacuten</th>
                               <th>Estado</th>
                               <th>Acciones</th>

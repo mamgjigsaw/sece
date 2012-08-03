@@ -183,7 +183,8 @@ response.setDateHeader("Expires", 0);
                                         rowsPerPage: 20});    
            
             
-            $("#tblEmpresaAsignada tbody tr").click(function() {                 
+            $("#tblEmpresaAsignada tbody tr").click(function() {    
+                //idcontrato de la tabla seleccionada
                 var idcontrato = $(this).find('input:hidden').val();
                 capacitadoresScripts.getDelegadoxContrato(idcontrato,{
                                         callback:function(data){
@@ -193,18 +194,23 @@ response.setDateHeader("Expires", 0);
                                               $( "#dialog" ).html("<p> <b>No hay ningun usuario asignado como delegado.</b>  <p>");
                                           }
                                           //boton enviar correo inactividad
-                                          $( ".btnSentEmail" ).button({ icons: { primary: "ui-icon-mail-closed" }, text: false });  
+                                          $( ".btnSentEmail" ).button({ icons: { primary: "ui-icon-mail-closed" }, text: false });                                            
                                           $( ".btnSentEmail" ).click( function(){ 
-                                              var spanVal = $(this).parent().find('.cant_emailEnviados').text();
+                                              var notCorreosEnviados = $(this).parent().find('.cant_emailEnviados');
+                                              var spanVal = notCorreosEnviados.text();
                                               if (spanVal == null)
                                                   num_correosEnviados = 0;
                                                ++spanVal ;
-                                               //idcontrato del usuario 
+                                               //idusuario del usuario delegado
                                                idu = $(this).parent().parent().find('input:hidden').val()                                               
                                                fechaAcceso = $(this).parent().parent().children('.tdFechaAcc').text();
-                                               //            ....(idContrato,idUsuario,ultima fecha de acceso de Usuario)      
+                                               // envia correo al usuario  ....(idContrato,idUsuario,ultima fecha de acceso de Usuario)                                                 
                                                capacitadoresScripts.enviarCorreoUsuarioDormido(idcontrato,idu,fechaAcceso);
-                                               $(this).parent().find('.cant_emailEnviados').text(spanVal);
+                                               // actualiza la cantidad de correos informacion mostrada en el span .cant_emailEnviados
+                                               capacitadoresScripts.actualizarCantCorreosEnviados(idu,spanVal,{callback:function() { $( ".btnSentEmail" ).removeAttr("disabled");  }} );
+                                               notCorreosEnviados.text(spanVal);
+                                               //desabilitar el boton para evitar multiples clicks
+                                               $(this).attr("disabled","disabled");
                                           });
                                         }
                                     });        

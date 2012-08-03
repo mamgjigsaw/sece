@@ -25,6 +25,5 @@
     <property name="sugerencia" type="string">
       <column length="500" name="sugerencia"/>
     </property>
-
   </class>
 </hibernate-mapping>

@@ -21,4 +21,6 @@
   <table-filter match-name="usuario"/>
   <table-filter match-name="avance"/>
    <table-filter match-name="noticias"/>
+   <table-filter match-name="zone"/>
+   <table-filter match-name="email_inactividad"/>
 </hibernate-reverse-engineering>
