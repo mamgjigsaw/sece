@@ -45,6 +45,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        int tipo,indi,actual,total_var;
        int idEmpresa =0;       
        int idContrato =0;
+       int contratoActivos = 0;
        
        // variable para la empresa
        String nombre_empresa="";
@@ -73,7 +74,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        name = usuario.getNombre();
        tipo = usuario.getTipoUsuario();
        
-      if(tipo==4){
+      if(tipo==4){ //si es tipo delegado
            
           DelegacionIndiUsuDaoImpl delimpl = new DelegacionIndiUsuDaoImpl();
           DelegacionIndiUsu dele = new DelegacionIndiUsu(); 
@@ -87,8 +88,14 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            ContratoDaoImpl daoContra = new ContratoDaoImpl();
            Contrato contrato = (Contrato) daoContra.findByUsuario(usuario);//donde el estado sea igual 1
            
-           idContrato = contrato.getIdContrato();          
-           
+           if(contrato == null){//significa que todos los contratos estan terminados estado 2
+               //response.sendRedirect("index.jsp");
+               contratoActivos = 0;
+               idContrato = 30;//idContrato por defecto
+           }else{
+               contratoActivos = 1;
+               idContrato = contrato.getIdContrato();          
+           }
            EmpresaDaoImpl daoEmpresa = new EmpresaDaoImpl();
            idEmpresa = usuario.getEmpresa().getIdEmpresa();
            Empresa empresa = daoEmpresa.findByID(idEmpresa);
@@ -96,7 +103,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            nombre_empresa = empresa.getNombre();
            descripcion = empresa.getDescripcion();
            tel_empresa = empresa.getTelefono();
-           dir_empresa = empresa.getDireccion();                        
+           dir_empresa = empresa.getDireccion();
 
       }else if(tipo==2){
           response.sendRedirect("index.jsp");
@@ -131,6 +138,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
             
             var num_item=0;
             var IdEmpresa=0;
+            var contraActivos = <%=contratoActivos%>;
             var IdContrato = <%=idContrato%>;
             var tipo = <%=tipo%>;
             var IdUsuario = <%=id_usuario%>;
@@ -157,7 +165,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                     $("#new").click();
                 }
                 //llamar
-                getDelegados();
+                getTablestoShow();
                 
                 $( "#logoutbutton" ).button({			
 			icons: {
@@ -211,41 +219,22 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                 
             });            
             
-            function obtener(valor1,valor2){                
-                interaccion.obtenerCuestionario(valor1,valor2,respuesta);                
-            }
-            
             function respNombre(data){
                 $("#resp"+indicadorChange).html(data[0]);
             }
-            
-            function respuesta(data){                 
-                
-                num_item= data.length;
-                var i;
-                var strHtml="<table><thead><tr><td>Pregunta</td><td>Si/No</td><td>Observacion</td></tr></thead><tbody>";
-           
-                for(i=0;i<data.length;i++){
-                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='checkbox' id='checkbox"+ (i+1) +"' name='resp' /></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
-                    
-                }
-               
-                strHtml += "</tbody></table>";
-                $("#box").html(strHtml);                
-            }
-            
-            
+                        
             function link_indi(){
                 $("#tabs-2").html("<p>Nombre</p>");
             }
+           
             
-            function actionAgregar(){
-                alert("Como vas--");
-            }
-            
-       function getDelegados(){
-         panel.getRowIndicador(IdContrato, repIndicador);
-         //panel.getRowDelegado(IdEmpresa, repDelegado);         
+       function getTablestoShow(){
+           
+           if(contraActivos == 0){
+               
+           }else if(contraActivos == 1){
+               panel.getRowIndicador(IdContrato, repIndicador);
+           }
        }
        
        function repIndicador(data){ 

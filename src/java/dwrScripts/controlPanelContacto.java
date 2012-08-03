@@ -97,6 +97,21 @@ public class controlPanelContacto {
         return array;
     }
     
+    public String[][] getContratos(int id_usuario){
+        Usuario usuario = new Usuario();
+        UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
+        usuario = usuDao.findById(id_usuario);
+        
+        List<Contrato> listContra = new ArrayList<Contrato>();
+        ContratoDaoImpl daoContra = new ContratoDaoImpl();
+        listContra = daoContra.contratosxUsuario(usuario);
+       
+        String array[][] = new String[listContra.size()][4];
+        
+        
+        return array;
+    }
+    
     public int getCountInd(int id_contrato){
         
         ContratoDaoImpl daoContrato = new ContratoDaoImpl();

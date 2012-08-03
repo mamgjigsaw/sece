@@ -80,9 +80,9 @@ response.setDateHeader("Expires", 0);
                     var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification attention'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Campo Vacio</strong><p class='hola'>LLene el campo de email, porfavor!!</p></div><!-- /Notification --></section>";                                        
                     $("#hola").html(palabra);                
                 }else{                     
-                   $("#hola").html("");                   
-                   $("#cont").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
-                   //validacion.passwordOlvidado(valor1,resultado);                   
+                   //$("#hola").html("");                   
+                   //$("#cont").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
+                   validacion.passwordOlvidado(valor1,resultado);                   
                    //$( "#dialog-message" ).dialog( "open" ); 
                 }
             }
