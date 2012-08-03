@@ -272,7 +272,7 @@ response.setDateHeader("Expires", 0);
             function respuesta3(data){                 
                  actual_var = data;                                  
                  $( "#link_actual").html(actual_var+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12  
-                 interaccion.getCompletedInstrument(<%=contrato%>);
+                 interaccion.setCompletedInstrument(<%=contrato%>);
             }
             
             function getName2(data2){

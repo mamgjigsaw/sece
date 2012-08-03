@@ -114,10 +114,10 @@ public class validate {
                 Properties archivoConf = new Properties();
                 archivoConf.load(this.getClass().getClassLoader().getResourceAsStream("/micelanea.properties"));
                 urlLost = (String) archivoConf.getProperty("seceUrl");
-                urlLost = urlLost +"/forgetPassword.jsp?liame=" + usuario.getCorreo() +"&&ogidoc="+ stringRandom;
-                
+                urlLost = "<a href='"+ urlLost +"/forgetPassword.jsp?liame=" + usuario.getCorreo() +"&&ogidoc="+ stringRandom +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" + usuario.getCorreo() +"&&ogidoc="+ stringRandom +"</span></a>";
+                             
                 //enviarle un correo de que su cuenta ha sido bloqueada.
-                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contrseña incorrecta. En este link de acontinuacion podra resetear su contraseña <br>"+ urlLost +".</p> <p> Gracias, SECE TEAM.</strong></p>");
+                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. En este link de acontinuacion podra resetear su contraseña <br>"+ urlLost +".</p> <p> Gracias, SECE TEAM.</strong></p>");
                 //(String remitente,String destinatario,String asunto,String mensaje_cuerpo)
             }else{//tipo capacitador o usuario
                 int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. Dirijase al administrador del sistema que le brindara unos pasos para su posterior activacion.</p> <p> Gracias, SECE TEAM.</strong></p>");
@@ -397,7 +397,7 @@ public class validate {
             prop.put("mail.smtp.host", host);
             /*Esta línea es la que indica al API que debe autenticarse*/
             prop.put("mail.smtp.auth", "true");
-            prop.put("mail.smtp.port", "25");
+            prop.put("mail.smtp.port", "26");
         
             //*Añadir esta linea si queremos ver una salida detallada del programa*/
             //prop.put("mail.debug", "true");
