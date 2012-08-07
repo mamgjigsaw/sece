@@ -124,36 +124,36 @@ public class AyudaSECE {
         
         switch (opcion){
             
-            case 1 : resultado = "<div align='center'><h3>P&aacute;gina de Inicio del Sistema</h3></div>"
+            case 0 : resultado = "<div align='center'><h3>P&aacute;gina de Inicio del Sistema</h3></div>"
                     +"<p>Esta es la pantalla que le aparece cuando entre a <a href='#'>http://www.sece.org.ni.com</a> es el index.jsp.<br/> Hay tres pestañas inicio, acerca de y contáctenos.<br/> <b>Inicio</b>, aquí se mostrara información de CPML, que es SECE y noticias o notas acerca de las actividades próximas que realizaran. </p>"
-                    +"<img src='imagenes/imgC01.jpg'/>"
+                    +"<img src='ayuda/imagenes/imgC01.jpg'/>"
                     +"<p>En noticias y notas, muestra las actividades que se realizaron hace una semana y las de la próxima. El ingreso de estas notas la realizara el administrador del sistema, más adelante en subsistema el modulo del administrador se explicara y se mostrara el formulario de ingreso. Así como todas las notas hechas.</p>"
-                    +"<img src='imagenes/imgC02.jpg'/>"
+                    +"<img src='ayuda/imagenes/imgC02.jpg'/>"
                     +"<p>Acerca de, muestra información sobre quienes desarrollaron el sistema, como un video explicativo de como registrarse.</p>"
-                    +"<img src='imagenes/imgC03.jpg'/>"
+                    +"<img src='ayuda/imagenes/imgC03.jpg'/>"
                     +"<p>Contáctenos, hay un formulario donde usuario puede enviar sugerencia, preguntas o consulta a CPLM sobre SECE. También muestra información de CPML como ubicación geográfica, dirección, teléfonos.</p>"
                     +"<p>También en el inicio hay una opción para iniciar sesión en el sistema. Que nos direcciona a <a href='#'>http://sece.org.ni.com/logger.jsp.</a></p>";
                 break;
             
-            case 2 : resultado = "<p>En cual se encuentra un formulario donde el usuario ingresa su correo y contraseña previamente registrado.</p>"
-                    + "<img src='imagenes/imgC05.jpg'/><br/><br/>"
+            case 1 : resultado = "<p>En cual se encuentra un formulario donde el usuario ingresa su correo y contraseña previamente registrado.</p>"
+                    + "<img src='ayuda/imagenes/imgC05.jpg'/><br/><br/>"
                     + "<p>Donde se valida si el usuario existe, si digito mal la contraseña, que no deje ning&uacute;n campo vac&iacute;o.</p>"
-                    + "<img src='imagenes/imgC06.jpg'/><img src='imagenes/imgC07.jpg'/><img src='imagenes/imgC08.jpg'/>"
+                    + "<img src='ayuda/imagenes/imgC06.jpg'/><img src='ayuda/imagenes/imgC07.jpg'/><img src='ayuda/imagenes/imgC08.jpg'/>"
                     + "<p>Importante con tres intentos de que se digite la contraseña incorrecta, automaticamente bloqueara la cuenta del usuario y tendra que abocarse al administrador del sistema o al capacitador asignado, para su posterior activacion.</p>"
-                    + "<img src='imagenes/imgC09.jpg'/>"
-                    + "<div style='float:left;'> <p>Este es el mensaje que se muestra cuando se digitan bien los datos del usuario, mostrando un mensaje de bienvenida.</p> <img src='imagenes/imgC10.jpg'/> </div>";                    
+                    + "<img src='ayuda/imagenes/imgC09.jpg'/>"
+                    + "<div style='float:left;'> <p>Este es el mensaje que se muestra cuando se digitan bien los datos del usuario, mostrando un mensaje de bienvenida.</p> <img src='ayuda/imagenes/imgC10.jpg'/> </div>";                    
                 break;
-            case 3 : resultado = "<p>Si se da click en registrarse, se mostrara el siguiente formulario:</p>"
-                    + "<img src='imagenes/imgC11.jpg'/><br/><br/>"
+            case 2 : resultado = "<p>Si se da click en registrarse, se mostrara el siguiente formulario:</p>"
+                    + "<img src='ayuda/imagenes/imgC11.jpg'/><br/><br/>"
                     + "<p>En el formulario además hay dos botones que son de registrarse en el sistema si todavía no se ha hecho y un link para recordar contraseña.</p>"                    
-                    + "<p>El formulario posee dos botones, <img src='imagenes/imgC12.jpg'/> valida que todos los campos se han los requeridos así como su formato por ejemplo en el caso del campo de correo, mostrando un mensaje en el campo que no se cumpla con la validación, para corregir. Si todos los datos han sido ingresados correctamente,"
-                    + " se mostrara un mensaje de registro satisfactorio y se enviara un correo al usuario donde se explica los pasos de activación de cuenta. Y el botón <img src='imagenes/imgC13.jpg'/>, lo dirige a la página de iniciar sesión.</p>";
+                    + "<p>El formulario posee dos botones, <img src='ayuda/imagenes/imgC12.jpg'/> valida que todos los campos se han los requeridos así como su formato por ejemplo en el caso del campo de correo, mostrando un mensaje en el campo que no se cumpla con la validación, para corregir. Si todos los datos han sido ingresados correctamente,"
+                    + " se mostrara un mensaje de registro satisfactorio y se enviara un correo al usuario donde se explica los pasos de activación de cuenta. Y el botón <img src='ayuda/imagenes/imgC13.jpg'/>, lo dirige a la página de iniciar sesión.</p>";
                 break;
-            case 4 : resultado = "<p><b>Recordar contraseña</b>, del formulario de iniciar sesión.</p>"
-                    + "<img src='imagenes/imgC14.jpg'/><br/><br/>"
+            case 3 : resultado = "<p><b>Recordar contraseña</b>, del formulario de iniciar sesión.</p>"
+                    + "<img src='ayuda/imagenes/imgC14.jpg'/><br/><br/>"
                     + "<p>Esta página posee un formulario un campo de texto donde se digita el correo y dos botones. Continuar que valida que el correo exista, es decir es un usuario del sistema.<p>"
-                    + "<p><img src='imagenes/imgC15.jpg'/>Si no es usuario muestra un mensaje que se registre en el sistema, sino envía un correo con un link para cambiar la contraseña.</p>"
-                    + "<p><img src='imagenes/imgC16.jpg'/>Regresa a la página de iniciar sesión.</p>";
+                    + "<p><img src='ayuda/imagenes/imgC15.jpg'/>Si no es usuario muestra un mensaje que se registre en el sistema, sino envía un correo con un link para cambiar la contraseña.</p>"
+                    + "<p><img src='ayuda/imagenes/imgC16.jpg'/>Regresa a la página de iniciar sesión.</p>";
             break;                
         }
                 

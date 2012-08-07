@@ -86,7 +86,7 @@
 					<subreportParameterExpression><![CDATA[$P{idContrato}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\wmiguel\\Documents\\NetBeansProjects\\mono\\sece\\web\\WEB-INF\\finalReport_subreport1.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Dave\\Documents\\NetBeansProjects\\dave\\sece\\web\\WEB-INF\\finalReport_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

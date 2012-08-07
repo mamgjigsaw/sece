@@ -79,6 +79,7 @@
           <li><a href="index.jsp" ><span>Inicio</span></a></li>
           <li><a href="acerca_de.jsp"><span>Acerca de</span></a></li>          
           <li><a href="contacto.jsp" class="active"><span>Contactenos</span></a></li>
+          <li><a href="ayuda.jsp"><span>Ayuda</span></a></li>
         </ul>
       </div>
       <div class="clr"></div>

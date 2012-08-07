@@ -79,7 +79,7 @@
 			<subreport>
 				<reportElement x="-1" y="23" width="555" height="36"/>
 				<dataSourceExpression><![CDATA[$F{accesoDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["C:\\Users\\wmiguel\\Documents\\NetBeansProjects\\mono\\sece\\web\\WEB-INF\\subAccesoDS.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Dave\\Documents\\NetBeansProjects\\dave\\sece\\web\\WEB-INF\\subAccesoDS.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
 				<reportElement x="467" y="4" width="61" height="20" forecolor="#FFFFFF"/>
