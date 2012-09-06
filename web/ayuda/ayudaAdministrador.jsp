@@ -42,7 +42,7 @@
 
             <div class="header">
                 <div class="header_resize">  
-                    <a href="javascript:history.back(1)" class="buttonVolver">&LT;&LT; Atras</a>
+                    <a href="../main_admin.jsp" class="buttonVolver">&LT;&LT; Atras</a>
                     <div class="menu">
 
                     </div>
@@ -84,7 +84,7 @@
                                     La página principal posee las funcionalidades más comunes que podrá realizar, vamos a comenzar con la Barra de Menú:
                                 </p>
                                 <div align="center"><img src="imagenes/imgA01.png"/></div>
-                                <p>Dicha barra se encuentra en la parte superior de las dos páginas principales del Módulo, ella nos permitirá navegar por 3 páginas, la principal (Inicio), la página que permitirá editar el Instrumento de Evaluacion (Instrumento), la página de ayuda para el administrador (Ayuda) y el último botón donde aparecerá el nombre del usuario administrador, en este caso “Kenny Mendieta”, presionando dicho bot&oacute;n, se desplegará otro botón para salir de sesión. </p>
+                                <p>Dicha barra se encuentra en la parte superior de las dos páginas principales del Módulo, ella nos permitirá navegar por 3 páginas, la principal (Inicio), la página que permitirá editar el Instrumento de Evaluaci&oacute;n (Instrumento), la página de ayuda para el administrador (Ayuda) y el último botón donde aparecerá el nombre del usuario administrador, en este caso “Kenny Mendieta”, presionando dicho bot&oacute;n, se desplegará otro botón para salir de sesión. </p>
                                 <p>La segunda p&aacute;gina del m&oacute;dulo administrador es referido al Instrumento, en dicha p&aacute;gina, puede agregar nuevos indicadores, nuevas variables, nuevos ítems, nuevas escalas para cada variable y puede agregar sugerencias para uno o mas ítems, las formas para agregar un elemento o modificar uno, es muy parecida a la de la pestaña capacitador de la p&aacute;gina principal, la interfaz es bastante intuitiva, por ac&aacute; est&aacute;n las im&aacute;genes.</p>
                             </div>
                              <div class="clr"></div>
