@@ -57,6 +57,7 @@ a:hover { text-decoration:underline;}
 .body p.test { width:459px; height:109px; background:url(../images/bg_p_test.gif) top no-repeat; margin:20px auto; padding:20px 30px;}
 .body img { margin:0; padding:0;}
 .body img.float { float:left; margin:0; padding:10px;}
+.body li  { font: normal 12px Arial, Helvetica, sans-serif; color:#5c5c5c; background:url(../images/ul_li.gif) left no-repeat; margin:0; padding:5px 0 5px 20px;}
 
 .body .hola{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 

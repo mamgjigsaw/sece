@@ -7,14 +7,11 @@ package servlet;
 import com.mysql.jdbc.Connection;
 import daoImpl.ContratoDaoImpl;
 import daoImpl.EmpresaDaoImpl;
-import daoImpl.IndicadorDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import dwrScripts.initCapacitadores;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.servlet.ServletException;
@@ -22,20 +19,16 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import pojo.Contrato;
 import pojo.Empresa;
-import pojo.Indicador;
 import pojo.Usuario;
-import pojo.vce;
 
 /**
  *
