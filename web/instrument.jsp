@@ -140,6 +140,7 @@ response.setDateHeader("Expires", 0);
             var actual_var = <%=actual%>;// va de 0 a n
             var total_vari = <%=total_var%>;// va 1 a n
             var contra = <%=contrato%>;
+            var tipo = <%=tipo%>;
             
             $(function() {
 		
@@ -292,10 +293,8 @@ response.setDateHeader("Expires", 0);
                                 
                 var j;
                 var stringBody="<table id='variableList' style=' font-size: 16px;'><thead><tr style='background-color: #347488;color: #fff;'><td>No.</td><td> Variable</td><td> Estado</td></tr></thead><tbody>";
-                //alert(dato[10][1]);
-                
+                               
                  for(j=0;j<dato.length;j++){
-                    //stringBody += "<tr><td>"+(j+1) + ".</td><td><a id='link_go_variable' href='#' onclick='ver_esta_variable("+ dato[j][0] +");' >" + dato[j][1] + "</a></td><td>  " + dato[j][2] + "</td></tr>";
                     stringBody += "<tr><td>"+(j+1) + ".</td><td><a id='link_go_variable' href='#' onclick='ver_esta_variable("+ j +");' >" + dato[j][1] + "</a></td><td>  " + dato[j][2] + "</td></tr>";
                     
                 }
@@ -307,11 +306,10 @@ response.setDateHeader("Expires", 0);
             
             function ver_esta_variable(parametro){
                 var cadena="";
-                 //alert(parametro);                
-               $("#box").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
-               
-               
-                
+                 
+               if (tipo == 3){
+                  $("#box").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
+                }
             }
             
             function goout(){

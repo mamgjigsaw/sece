@@ -115,7 +115,7 @@ public class InformeFinal extends HttpServlet {
             try
             {
                  Class.forName("com.mysql.jdbc.Driver");
-                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://"+ ipPublica +":3306/sece", userDB, passBD);
+                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/sece", userDB, passBD);
 
                  JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("WEB-INF/valoracionNoTerminada.jasper"));
 

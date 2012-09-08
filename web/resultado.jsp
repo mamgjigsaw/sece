@@ -41,6 +41,7 @@ response.setDateHeader("Expires", 0);
         sesion.setMaxInactiveInterval(3600);
         String acc = (String) sesion.getAttribute("idAcc");
         String name;
+        String idcontrato;
         int sh = 0; //variable para mostrar el mensaje de que no ha terminado el instrumento cuando vale 1
         
         int idContrato =0;
@@ -48,6 +49,11 @@ response.setDateHeader("Expires", 0);
               response.sendRedirect("index.jsp");
        }else{
             
+         idcontrato = request.getParameter("ota8rtn4oc");
+         if(idcontrato == null){
+             response.sendRedirect("index.jsp");
+         }
+              
          AccesoDaoImpl daoAcceso = new AccesoDaoImpl();
          Acceso acceso = daoAcceso.findById(Integer.parseInt(acc));
        
@@ -58,21 +64,22 @@ response.setDateHeader("Expires", 0);
          
          name = usuario.getNombre();
          
-         ContratoDaoImpl daoContra = new ContratoDaoImpl();
+         /*ContratoDaoImpl daoContra = new ContratoDaoImpl();
          Contrato contrato = (Contrato) daoContra.findByUsuario(usuario);//donde el estado sea igual 1
-         idContrato = contrato.getIdContrato();
+         */
+         idContrato = Integer.parseInt(idcontrato);
          
          //revisar si ya termino de llenar cada indicador, si no falta que termine el instrumento por lo tant no puede ver el grafico de araña.
          
-         initCapacitadores init = new initCapacitadores();
+         //initCapacitadores init = new initCapacitadores();
          
-         int av = init.AvancePorcXcontrato(contrato); 
+         //int av = init.AvancePorcXcontrato(contrato); 
          
-         if(av==100){
+         //if(av==100){
              sh = 0;      
-         }else{
-             sh = 1;
-         }
+         //}else{
+             //sh = 1;
+         //}
            
                           
         %>
