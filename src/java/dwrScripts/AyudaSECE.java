@@ -125,38 +125,40 @@ public class AyudaSECE {
         
         switch (opcion){
             
-            case 0 : resultado = "<div align='center'><h3>P&aacute;gina de Inicio del Sistema</h3></div>"
-                    +"<p>Esta es la pantalla que le aparece cuando entre a <a href='#'>http://www.sece.org.ni.com</a> es el index.jsp.<br/> Hay tres pestañas inicio, acerca de y contáctenos.<br/> <b>Inicio</b>, aquí se mostrara información de CPML, que es SECE y noticias o notas acerca de las actividades próximas que realizaran. </p>"
-                    +"<img src='ayuda/imagenes/imgC01.jpg'/>"
-                    +"<p>En noticias y notas, muestra las actividades que se realizaron hace una semana y las de la próxima. El ingreso de estas notas la realizara el administrador del sistema, más adelante en subsistema el modulo del administrador se explicara y se mostrara el formulario de ingreso. Así como todas las notas hechas.</p>"
-                    +"<img src='ayuda/imagenes/imgC02.jpg'/>"
-                    +"<p>Acerca de, muestra información sobre quienes desarrollaron el sistema, como un video explicativo de como registrarse.</p>"
-                    +"<img src='ayuda/imagenes/imgC03.jpg'/>"
-                    +"<p>Contáctenos, hay un formulario donde usuario puede enviar sugerencia, preguntas o consulta a CPLM sobre SECE. También muestra información de CPML como ubicación geográfica, dirección, teléfonos.</p>"
-                    +"<p>También en el inicio hay una opción para iniciar sesión en el sistema. Que nos direcciona a <a href='#'>http://sece.org.ni.com/logger.jsp.</a></p>";
+            case 1 : resultado = "<p><strong>Antes de iniciar, vamos a definir que es un usuario contacto y que un delegado.</strong></p>"
+                    +"<p>Un usuario contacto es el representante de una empresa una vez que ha registrado dicha empresa, por ejemplo cuando una determinada empresa se interesa en aplicar la herramienta de evaluaci&oacute;n de competitividad empresarial, en conocer su situaci&oacute;n actual a trav&eacute;s de SECE es decir su nivel de competitividad empresarial.</p>"
+                    +"<p>El primer usuario que se registre e ingrese a la empresa se convierte en el contacto, los demás usuarios de la misma empresa que deseen interactuar con el sistema tendr&iacute;an que abocarse al contacto, el cual los ingresara como usuarios de tipos delegados asignándoles un indicador y para su posterior llenado, m&aacute;s adelante se explicara el ingreso de un usuario tipo delegado. </p>"
+                    +"<p>En otras palabras un usuario delegado, ser&iacute;a otro empleado de la empresa que se le ha sido asignado un indicador.</p>"
+                    +"<p>Una vez que el usuario cliente se halla ingresa al sistema, lo primero que vera sea contacto o delegado ser&acute; un panel de control que tendr&acute; 5 pesta&ntilde;as para el caso del contacto.";
                 break;
             
-            case 1 : resultado = "<p>En cual se encuentra un formulario donde el usuario ingresa su correo y contraseña previamente registrado.</p>"
-                    + "<img src='ayuda/imagenes/imgC05.jpg'/><br/><br/>"
-                    + "<p>Donde se valida si el usuario existe, si digito mal la contraseña, que no deje ning&uacute;n campo vac&iacute;o.</p>"
-                    + "<img src='ayuda/imagenes/imgC06.jpg'/><img src='ayuda/imagenes/imgC07.jpg'/><img src='ayuda/imagenes/imgC08.jpg'/>"
-                    + "<p>Importante con tres intentos de que se digite la contraseña incorrecta, automaticamente bloqueara la cuenta del usuario y tendra que abocarse al administrador del sistema o al capacitador asignado, para su posterior activacion.</p>"
-                    + "<img src='ayuda/imagenes/imgC09.jpg'/>"
-                    + "<div style='float:left;'> <p>Este es el mensaje que se muestra cuando se digitan bien los datos del usuario, mostrando un mensaje de bienvenida.</p> <img src='ayuda/imagenes/imgC10.jpg'/> </div>";                    
+            case 2 : resultado = "<p>En la primera pestaña espacio de trabajo, ahí el usuario podr&aacute; mirar el avance de cada uno de los indicadores, es decir cuánto lleva del 100%, como además quien está realizando el llenado de ese indicador, también aparece una opción de delegar, </p>"
+                    + "<img src='imagenes/usucont1.png'/><br/><br/>"
+                    + "<img src='imagenes/usucont2.png'/><br/><br/>"
+                    + "<p>La segunda pestaña <strong>Datos personales</strong>, aqu&iacute; el usuario puede cambiar o actualizar datos  como tel&eacute;fono, direcci&oacute;n, o cambiar contraseña, etc.</p>"
+                    + "<img src='imagenes/usucont3.png'/><br/><br/>"
+                    + "<p><ul>La sección de cambiar contraseña posee una validación de que: <li>Los datos estén llenos, no vacíos.</li><li>Que la contraseña actual coincida con la digitada en el campo de contraseña actual.</li><li>Que los campos de nueva y confirmar tengan las misma contraseña.</li><ul></p>"
+                    + "<img src='imagenes/usucont4.png'/><br/><br/>"
+                    + "<p>En el tercer tab Datos de la empresa, aquí se comidifica la informacion de la empresa como direccion, telefono, etc.</p>"
+                    + "<img src='imagenes/usucont5.png'/><br/><br/>"
+                    + "<p>En el cuarto tab Delegado,  se ingresan los usuario delegados asignados a un indicador este formulario validad que la informaci&oacute;n se ha la adecuado, como el formato del correo, y que coincidan los campo de contraseña  y la confirmaci&oacute;n</p>"
+                    + "<img src='imagenes/usucont6.png'/><br/><br/>"
+                    + "<img src='imagenes/usucont7.png'/><br/><br/>"
+                    + "<p>Esto mostraria, si se diera click a mostrar delegados.</p>"
+                    + "<img src='imagenes/usucont8.png'/><br/><br/>"
+                    + "<p>El quinto tab es el Video chat, que es igual como se habla en el apartado de capacitador.</p>"
+                    + "<p>En caso del delegado, tiene tres tab. Espacio de trabajo, Datos personales y video chat todos iguales con las misma funcionalidad como la del panel de control del contacto.</p>"
+                    + "<img src='imagenes/usucont9.png'/><br/><br/>"
+                    + "<img src='imagenes/usucont10.png'/><br/><br/>";
                 break;
-            case 2 : resultado = "<p>Si se da click en registrarse, se mostrara el siguiente formulario:</p>"
-                    + "<img src='ayuda/imagenes/imgC11.jpg'/><br/><br/>"
-                    + "<p>En el formulario además hay dos botones que son de registrarse en el sistema si todavía no se ha hecho y un link para recordar contraseña.</p>"                    
-                    + "<p>El formulario posee dos botones, <img src='ayuda/imagenes/imgC12.jpg'/> valida que todos los campos se han los requeridos así como su formato por ejemplo en el caso del campo de correo, mostrando un mensaje en el campo que no se cumpla con la validación, para corregir. Si todos los datos han sido ingresados correctamente,"
-                    + " se mostrara un mensaje de registro satisfactorio y se enviara un correo al usuario donde se explica los pasos de activación de cuenta. Y el botón <img src='ayuda/imagenes/imgC13.jpg'/>, lo dirige a la página de iniciar sesión.</p>";
+            case 3 : resultado = "<p>Intrumento,  muestra las preguntas y un campo de observacion por cada una, en la parte de arriba dos link que nos muestra en que variable nos encontramos.</p>"
+                    + "<img src='imagenes/usucont11.png'/><br/><br/>"
+                    + "<img src='imagenes/usucont12.png'/><br/><br/>"                    
+                    + "<img src='imagenes/usucont13.png'/><br/><br/>"                    
+                    + "<img src='imagenes/usucont14.png'/><br/><br/>"                    
+                    + "<img src='imagenes/usucont15.png'/><br/><br/>";
                 break;
-            case 3 : resultado = "<p><b>Recordar contraseña</b>, del formulario de iniciar sesión.</p>"
-                    + "<img src='ayuda/imagenes/imgC14.jpg'/><br/><br/>"
-                    + "<p>Esta página posee un formulario un campo de texto donde se digita el correo y dos botones. Continuar que valida que el correo exista, es decir es un usuario del sistema.<p>"
-                    + "<p><img src='ayuda/imagenes/imgC15.jpg'/>Si no es usuario muestra un mensaje que se registre en el sistema, sino envía un correo con un link para cambiar la contraseña.</p>"
-                    + "<p><img src='ayuda/imagenes/imgC16.jpg'/>Regresa a la página de iniciar sesión.</p>";
-            break;                
-        }
+                    }
                 
         return resultado;
     }//fin finction

@@ -50,7 +50,9 @@
                 
             }
         </script> 
-        
+        <style>
+            .caja_Basisa p a:first-child {background-color:#E7F1FA; }
+        </style>
     </head>
     <body>
          <div class="main">
@@ -78,32 +80,27 @@
                                <h2><img style="padding-right: 20px;" src="imagenes/panel.png"/>Panel Contacto</h2>
                                <div class="caja_Basisa">
                                <p> 
-                                   <a class="conBasisa" href="javascript: void(0);">Pagina Inicio</a> <br> 
-                                   <a class="conBasisa" href="javascript: void(0);">Iniciar Sesi&oacute;n</a> <br> 
-                                   <a class="conBasisa" href="javascript: void(0);">Registrarse</a> <br>
-                                   <a class="conBasisa" href="javascript: void(0);">Recordar contrase&ntilde;a</a> <br>                                                                                                       
+                                   <a class="conBasisa" href="javascript: void(0);">¿Qu&eacute; es Usuario contacto y delegado?</a> <br> 
+                                   <a class="conBasisa" href="javascript: void(0);">Espacio de Trabajo</a> <br> 
+                                   <a class="conBasisa" href="javascript: void(0);">Llenado del Instrumento</a> <br/>                                   
                                </p>
                                </div>
                                <script>
                                    $("a").click( function (){
                                        var valor = $("a").index(this);
                                         soporteSece.ayudaContacto(valor,{callback:function(str){
-                                          $(".right2").html(str);
+                                          $(".right2").html(str);                                          
                                         }});          
                                        });                                                   
                                    
                                </script>
                             </div>
-                            <div class="right2" style="margin-top: 6%;">
-                                <div align="center"><h3>P&aacute;gina de Inicio del Sistema</h3></div>
-                                <p>Esta es la pantalla que le aparece cuando entre a <a href="#">http://www.sece.org.ni.com</a> es el index.jsp.<br/> Hay tres pestañas inicio, acerca de y contáctenos.<br/> <b>Inicio</b>, aquí se mostrara información de CPML, que es SECE y noticias o notas acerca de las actividades próximas que realizaran. </p>
-                                <img src="imagenes/imgC01.jpg"/>
-                                <p>En noticias y notas, muestra las actividades que se realizaron hace una semana y las de la próxima. El ingreso de estas notas la realizara el administrador del sistema, más adelante en subsistema el modulo del administrador se explicara y se mostrara el formulario de ingreso. Así como todas las notas hechas.</p> 
-                                <img src="imagenes/imgC02.jpg"/>
-                                <p>Acerca de, muestra información sobre quienes desarrollaron el sistema, como un video explicativo de como registrarse.</p>
-                                <img src="imagenes/imgC03.jpg"/>
-                                <p>Contáctenos, hay un formulario donde usuario puede enviar sugerencia, preguntas o consulta a CPLM sobre SECE. También muestra información de CPML como ubicación geográfica, dirección, teléfonos.</p>
-                                <p>También en el inicio hay una opción para iniciar sesión en el sistema. Que nos direcciona a <a href="#">http://sece.org.ni.com/logger.jsp.</a></p>
+                            <div class="right2" style="margin-top: 6%;">                                
+                                <p><strong>Antes de iniciar, vamos a definir que es un usuario contacto y que un delegado.</strong></p>
+                                <p>Un usuario contacto es el representante de una empresa una vez que ha registrado dicha empresa, por ejemplo cuando una determinada empresa se interesa en aplicar la herramienta de evaluaci&oacute;n de competitividad empresarial, en conocer su situaci&oacute;n actual a trav&eacute;s de SECE es decir su nivel de competitividad empresarial.</p> 
+                                <p>El primer usuario que se registre e ingrese a la empresa se convierte en el contacto, los demás usuarios de la misma empresa que deseen interactuar con el sistema tendr&iacute;an que abocarse al contacto, el cual los ingresara como usuarios de tipos delegados asignándoles un indicador y para su posterior llenado, m&aacute;s adelante se explicara el ingreso de un usuario tipo delegado. </p>
+                                <p>En otras palabras un usuario delegado, ser&iacute;a otro empleado de la empresa que se le ha sido asignado un indicador.</p>
+                                <p>Una vez que el usuario cliente se halla ingresa al sistema, lo primero que vera sea contacto o delegado ser&acute; un panel de control que tendr&acute; 5 pesta&ntilde;as para el caso del contacto.</p>
                             </div>
                              <div class="clr"></div>
                             
