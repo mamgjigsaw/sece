@@ -5,12 +5,17 @@
 package dwrScripts;
 
 import daoImpl.AsignacionCapaContraDaoImpl;
+import daoImpl.AvanceDaoImpl;
+import daoImpl.ContratoDaoImpl;
 import daoImpl.EmpresaDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import daoImpl.encriptar;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import pojo.AsignacionCapaContra;
+import pojo.Avance;
+import pojo.Contrato;
 import pojo.Empresa;
 import pojo.Usuario;
 
@@ -80,5 +85,6 @@ public class capacitadores {
          retorno[1] = u.getNombre();
          return retorno;
     }
+    
     
 }

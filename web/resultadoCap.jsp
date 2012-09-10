@@ -202,6 +202,9 @@
             } 
         </script>
         <style>
+            #vce{
+                background-color: #e8e8e8; 
+            }
             td{ 
                 text-align: center;
             }
@@ -254,15 +257,20 @@
                             <div>
                                 <div id="chartdiv2" style="width:700px; height:600px; background-color:#FFFFFF"></div>
                             </div>
-                            <h3><a>Rango de Nivel de Competitividad General de <%= nomb_Empresa%></a></h3>
+                            <h3><a>Rango de Nivel de Competitividad General de <%= nomb_Empresa%></a></h3>                            
                             <div>
+                                <h2>El nivel de Competitividad es:<span id="vce"></span> </h2>
                                 <div id="chartdiv3" style="width:700px; height:600px; background-color:#FFFFFF">You need to upgrade your Flash Player</div>                    
                                 <div id="progxIndicador" style="padding: 5% 0 3% 15%; margin:5% 0;  background-color: #e8e8e8;">
                                     <script>
                                         capacitadoresScripts.testear(id_contrato,{callback:function(data){
                                                 $("#progxIndicador").html(data);                                                
                                             }
-                                        });                                    
+                                        });  
+                                        capacitadoresScripts.getVce(id_contrato,{callback:function(data){
+                                                $("#vce").html(data);                                                
+                                            }
+                                        });   
                                     </script>
                                 </div>
                             </div>
