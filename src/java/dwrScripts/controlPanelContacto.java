@@ -171,10 +171,10 @@ public class controlPanelContacto {
             contrato = contraDao.findByEstado(1,usuario);
             
             if(contrato == null){
-                    System.out.print("entro aqui");
+                  //  System.out.print("entro aqui posee contrato 2");
                 return -1;// solo posee contratos terminados.
             }else{
-                System.out.print("entro aqui");
+                //System.out.print("entro aqui posee contrato 1");
                 return 2;// si posee un contrato activo, el cual tiene que llenar.
             }
         }else{

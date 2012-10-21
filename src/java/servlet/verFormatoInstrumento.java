@@ -20,6 +20,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import pojo.Indicador;
 
 /**
@@ -37,7 +38,7 @@ public class verFormatoInstrumento extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("application/pdf");
+         response.setContentType("application/msword");
         ServletOutputStream out = response.getOutputStream();
         
         IndicadorDaoImpl idi = new IndicadorDaoImpl();
@@ -49,7 +50,8 @@ public class verFormatoInstrumento extends HttpServlet {
 
       JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null , new JRBeanCollectionDataSource(list));
 
-      JRExporter exporter = new JRPdfExporter();
+      //JRExporter exporter = new JRPdfExporter();
+      JRExporter exporter = new JRDocxExporter();
       exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
       exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
       exporter.exportReport();

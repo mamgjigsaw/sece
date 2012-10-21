@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <%-- 
     Document   : instrument
     Created on : Aug 1, 2011, 5:22:02 PM
@@ -22,12 +24,15 @@
 <%@page import="daoImpl.IndicadorDaoImpl"%>
 <%@page import="pojo.Usuario"%>
 <%@page import="daoImpl.UsuarioDaoImpl"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8" %>
 <%@page session="true"%>
-<!DOCTYPE html>
+
 <%
 response.setHeader("Cache-Control","no-cache");
 response.setHeader("Cache-Control","no-store");
+response.setHeader("Content-Language", "es");
+response.setContentType("text/html; charset=UTF-8");
 response.setDateHeader("Expires", 0);
 %>
 <html>
@@ -114,12 +119,12 @@ response.setDateHeader("Expires", 0);
        }       
                  
     %>
-        
+        <?xml version="1.0" encoding="UTF-8"?>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">         
         <META HTTP-EQUIV="Expires" CONTENT="-1">
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
         <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-        <title>Cuestionario</title>
+        <title>Cuéstionario</title>
         <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>        
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
@@ -141,6 +146,7 @@ response.setDateHeader("Expires", 0);
             var total_vari = <%=total_var%>;// va 1 a n
             var contra = <%=contrato%>;
             var tipo = <%=tipo%>;
+            var nombre_var_actual;
             
             $(function() {
 		
@@ -186,7 +192,7 @@ response.setDateHeader("Expires", 0);
                      
                         var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Finalizado</strong><p class='hola'>Se ha finalizado el cuestionario de <%=nombre_indicador%> correctamente!.</p></div><!-- /Notification --></section>";  
                         $("#box_message").html(palabra);
-                        $( "#box_message" ).show("blind");
+                        $( "#box_message" ).show("blind",callback3);
                     }else{
                         obtener(indicador_actual,actual_var);
                     }
@@ -260,7 +266,27 @@ response.setDateHeader("Expires", 0);
                                 interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta2);//aumenta en uno la variable var de la tabla avance                                                                                  
 			}, 1000 );
 		};
-            
+                
+                function callback2() {//function para esconder el div de mensaje con efecto
+                      setTimeout(function() {                                 
+                              $( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();                                                             
+                              if (actual_var == total_vari){
+                                  ver_contestadas();
+                              }else{
+                                  $("#link_variable").html(nombre_var_actual);
+                                  $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
+                                  mostrarActual();
+                              }
+                      }, 1000 );
+              };
+
+            function callback3() {//function para esconder el div de mensaje con efecto
+			setTimeout(function() {                                 
+				$( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();                                
+                                ver_contestadas();
+			}, 2000 );
+		};
+                
                        
             function respuesta2(data){                 
                  actual_var = data;                 
@@ -273,7 +299,7 @@ response.setDateHeader("Expires", 0);
             function respuesta3(data){                 
                  actual_var = data;                                  
                  $( "#link_actual").html(actual_var+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12  
-                 interaccion.setCompletedInstrument(<%=contrato%>);
+                 interaccion.setCompletedInstrument(contra);
             }
             
             function getName2(data2){
@@ -295,21 +321,86 @@ response.setDateHeader("Expires", 0);
                 var stringBody="<table id='variableList' style=' font-size: 16px;'><thead><tr style='background-color: #347488;color: #fff;'><td>No.</td><td> Variable</td><td> Estado</td></tr></thead><tbody>";
                                
                  for(j=0;j<dato.length;j++){
-                    stringBody += "<tr><td>"+(j+1) + ".</td><td><a id='link_go_variable' href='#' onclick='ver_esta_variable("+ j +");' >" + dato[j][1] + "</a></td><td>  " + dato[j][2] + "</td></tr>";
+                    stringBody += "<tr><td>"+(j+1) + ".</td><td><a id='link_go_variable' href='#' onclick='ver_esta_variable("+ dato[j][0] +");' >" + dato[j][1] + "</a></td><td>  " + dato[j][2] + "<input type='hidden' id='txtvar"+ dato[j][0] +"' value='"+ dato[j][1] +"' /><input type='hidden' id='txtstatus"+ dato[j][0] +"' value='"+ dato[j][2] +"' /></td></tr>";
                     
                 }
                 stringBody += "</tbody></table>";
                                
                 $("#box").html(stringBody); 
-                
+                $( "#box_message:visible" ).removeAttr( "style" ).slideUp();//fadeOut();                                
+                           
             }
             
             function ver_esta_variable(parametro){
-                var cadena="";
-                 
+                  
+                  var m = $("#txtvar"+parametro).val();
+                  nombre_var_actual = $( "#link_variable").html();
                if (tipo == 3){
-                  $("#box").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
+                   if( $("#txtstatus"+parametro).val() == "Finalizado"){
+                       $("#box").html("<img src='resources/icons/ajax_loading_blue.gif' width='24' height='24' border='0' style=' margin-left: 50%; margin-top: 5%;margin-bottom: 4%;' />");                
+                       $("#link_variable").html("");          
+                       $("#link_actual").html("Editando "+ m);                   
+
+                       interaccion.getVariableFinished(parametro,contra, varContestada);
+                   }                  
                 }
+            }
+            
+            function varContestada(dato){               
+                
+                num_item = 0;
+                var i;
+                var strHtml="<table><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
+           
+                for(i=0;i<dato.length;i++){
+                    if(dato[i][0] != null ){
+                        strHtml += "<tr><td>"+ (i+1) + ". " + dato[i][0] +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ dato[i][3] +"'/>";                    
+
+                       if(dato[i][1] == 1){
+                           strHtml += "</td><td><input type='radio' name='group"+ (i+1) +"' value='1' checked ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0'></input></td><td><input type='text' id='textfield"+ (i+1)+"' value='"+ dato[i][2] +"' /></input></td></tr>";
+                       }else{
+                           strHtml += "</td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' checked ></input></td><td><input type='text' id='textfield"+ (i+1)+"' value='"+ dato[i][2] +"' /></input></td></tr>";
+                       }   
+                       
+                       num_item = num_item + 1;//para incrementar cuantas preguntas hay
+                    }                   
+                    
+                }
+               
+                strHtml += "</tbody></table><input type='button' style=' font-size: 14px; margin-left: 4%;margin-bottom: 2%; ' value='Modificar' id='buttonmodificar' onclick='update();' /><input type='button' style=' font-size: 14px; margin-left: 2%;margin-bottom: 2%; ' value='Cancelar' id='buttoncancel' onclick='cancel();' />";
+                $("#box").html(strHtml);
+                $("#buttonmodificar").button();
+                $("#buttoncancel").button();
+             
+            
+            }
+            
+            function cancel(){
+                if (actual_var == total_vari){
+                    ver_contestadas();
+                }else{
+                    $("#link_variable").html(nombre_var_actual);
+                    $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
+                    mostrarActual();
+                }
+                
+            }
+            
+            function update(){
+                //$("#buttonnnext").hide();
+                var i;
+                for(i=0;i<num_item;i++){
+
+                  // alert($("input:radio[name=group"+ (i+1) +"]:checked").val());
+                   interaccion.update($("#pregunta"+(i+1)).val(),contra,$("input:radio[name=group"+ (i+1) +"]:checked").val(),$("#textfield"+(i+1)).val());   
+
+                 }//fin del ciclo for para guardar las respuesta item.
+
+                 $("#box").html("");
+
+                 var palabra="<section role='principal' id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha modificado la variable correctamente!!!.</p></div><!-- /Notification --></section>";  
+                 $("#box_message").html(palabra);
+                 $( "#box_message" ).show("blind",callback2);//en el metodo callbak mando a llamar a la funcion que aumenta en 1 var en avance                
             }
             
             function goout(){

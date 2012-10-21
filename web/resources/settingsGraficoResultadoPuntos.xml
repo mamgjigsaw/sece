@@ -17,14 +17,14 @@
   </legend>
   <graphs>
     <graph gid="0">
-      <title>Resultado</title>
+      <title>Linea base de la empresa</title>
       <color>000000</color>
       <line_width>2</line_width>
       <fill_alpha>40</fill_alpha>
       <bullet>round</bullet>      
     </graph>
     <graph gid="1">
-      <title>Puntaje Deseado</title>
+      <title>Ideal</title>
       <color>0000FF</color>
       <line_width>2</line_width>
       <fill_alpha>0</fill_alpha>

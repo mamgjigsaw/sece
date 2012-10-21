@@ -41,18 +41,6 @@
   <zoom_out_button>
     <text_color_hover>FF0F00</text_color_hover>
   </zoom_out_button>
-  <help>
-    <button>
-      <color>FCD202</color>
-      <text_color>000000</text_color>
-      <text_color_hover>FF0F00</text_color_hover>
-    </button>
-    <balloon>
-      <text><![CDATA[Click on the graph to turn on/off value baloon <br/><br/>Click on legend key to show/hide graph<br/><br/>Mark the area you wish to enlarge]]></text>
-      <color>FCD202</color>
-      <text_color>000000</text_color>
-    </balloon>
-  </help>
   <graphs>
     <graph gid="0">
       <title>Alta</title>

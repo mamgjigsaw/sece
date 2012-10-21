@@ -41,75 +41,74 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        sesion.setMaxInactiveInterval(3600);
        String acc = (String) sesion.getAttribute("idAcc");
        
-       String name,nombre_variable,nombre_indicador,cargo,telefono,correo,direccion;
-       int tipo,indi,actual,total_var;
-       int idEmpresa =0;       
-       int idContrato =0;
-       int contratoActivos = 0;
-       
-       // variable para la empresa
-       String nombre_empresa="";
-       String descripcion=""; 
-       String tel_empresa="";
-       String dir_empresa=""; 
-       
        if(acc==null){
               response.sendRedirect("index.jsp");
-           }else{
+       }else{
+           
+            String name,nombre_variable,nombre_indicador,cargo,telefono,correo,direccion;
+            int tipo,indi,actual,total_var;
+            int idEmpresa =0;       
+            int idContrato =0;
+            int contratoActivos = 0;
        
-       AccesoDaoImpl daoAcceso = new AccesoDaoImpl();
-       Acceso acceso = daoAcceso.findById(Integer.parseInt(acc));
-       
-       int id_usuario = acceso.getUsuario().getIdUsuario();
-       UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
-       Usuario usuario = new Usuario();
-       usuario = usuDao.findById(id_usuario);
+            // variable para la empresa
+            String nombre_empresa="";
+            String descripcion=""; 
+            String tel_empresa="";
+            String dir_empresa=""; 
+
+            AccesoDaoImpl daoAcceso = new AccesoDaoImpl();
+            Acceso acceso = daoAcceso.findById(Integer.parseInt(acc));
+
+            int id_usuario = acceso.getUsuario().getIdUsuario();
+            UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
+            Usuario usuario = new Usuario();
+            usuario = usuDao.findById(id_usuario);
                      
-       //nombre_usuario = usuario.getNombre();
-       cargo = usuario.getCargo();
-       telefono = usuario.getTelefono();
-       correo = usuario.getCorreo();
-       direccion = usuario.getDireccion();       
+            //nombre_usuario = usuario.getNombre();
+            cargo = usuario.getCargo();
+            telefono = usuario.getTelefono();
+            correo = usuario.getCorreo();
+            direccion = usuario.getDireccion();       
+
+            name = usuario.getNombre();
+            tipo = usuario.getTipoUsuario();
        
-       name = usuario.getNombre();
-       tipo = usuario.getTipoUsuario();
-       
-      if(tipo==4){ //si es tipo delegado
-           
-          DelegacionIndiUsuDaoImpl delimpl = new DelegacionIndiUsuDaoImpl();
-          DelegacionIndiUsu dele = new DelegacionIndiUsu(); 
-          dele = delimpl.getDelByContCurrentlyandUsu(usuario); 
+            if(tipo==4){ //si es tipo delegado
 
-          //obtenemos el contrato          
-          idContrato = dele.getContrato().getIdContrato();
-           
-       }else if(tipo==3){// si es tipo contacto
-           
-           ContratoDaoImpl daoContra = new ContratoDaoImpl();
-           Contrato contrato = (Contrato) daoContra.findByUsuario(usuario);//donde el estado sea igual 1
-           
-           if(contrato == null){//significa que todos los contratos estan terminados estado 2
-               //response.sendRedirect("index.jsp");
-               contratoActivos = 0;
-               idContrato = 30;//idContrato por defecto
-           }else{
-               contratoActivos = 1;
-               idContrato = contrato.getIdContrato();          
-           }
-           EmpresaDaoImpl daoEmpresa = new EmpresaDaoImpl();
-           idEmpresa = usuario.getEmpresa().getIdEmpresa();
-           Empresa empresa = daoEmpresa.findByID(idEmpresa);
+                DelegacionIndiUsuDaoImpl delimpl = new DelegacionIndiUsuDaoImpl();
+                DelegacionIndiUsu dele = new DelegacionIndiUsu(); 
+                dele = delimpl.getDelByContCurrentlyandUsu(usuario); 
 
-           nombre_empresa = empresa.getNombre();
-           descripcion = empresa.getDescripcion();
-           tel_empresa = empresa.getTelefono();
-           dir_empresa = empresa.getDireccion();
+                //obtenemos el contrato          
+                idContrato = dele.getContrato().getIdContrato();
 
-      }else if(tipo==2){
-          response.sendRedirect("index.jsp");
-      }else if(tipo==1){
-          response.sendRedirect("index.jsp");
-      }
+             }else if(tipo==3){// si es tipo contacto
+
+                 ContratoDaoImpl daoContra = new ContratoDaoImpl();
+                 Contrato contrato = (Contrato) daoContra.findByUsuario(usuario);//donde el estado sea igual 1
+
+                 if(contrato == null){//significa que todos los contratos estan terminados estado 2
+                     contratoActivos = 0;
+                     idContrato = 30;//idContrato por defecto
+                 }else{
+                     contratoActivos = 1;
+                     idContrato = contrato.getIdContrato();          
+                 }
+                 EmpresaDaoImpl daoEmpresa = new EmpresaDaoImpl();
+                 idEmpresa = usuario.getEmpresa().getIdEmpresa();
+                 Empresa empresa = daoEmpresa.findByID(idEmpresa);
+
+                 nombre_empresa = empresa.getNombre();
+                 descripcion = empresa.getDescripcion();
+                 tel_empresa = empresa.getTelefono();
+                 dir_empresa = empresa.getDireccion();
+
+            }else if(tipo==2){
+                response.sendRedirect("index.jsp");
+            }else if(tipo==1){
+                response.sendRedirect("index.jsp");
+            }
                  
     %>
         <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
@@ -163,6 +162,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                     obtenerDatosUsuario();
                     cargarComboIndicador();                      
                     $("#new").click();
+                    //$("#grafico").hide();
                 }
                 
                 //llamar los metodos que cargan las tablas
@@ -252,23 +252,20 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            
        }
        
-       function getTablestoShow(){
-           
-           //if(contraActivos == 0){                              
-               //panel.getContratoEstaCero(IdUsuario, respContratosEstados); //validar los estado de todos los contratos que posee en el usuario contacto.                         
-           //}else if(contraActivos == 1){
+       function getTablestoShow(){           
                panel.getContratoEstaCero(IdUsuario, respContratosEstados); //validar los estado de todos los contratos que posee en el usuario contacto.                         
-          // }
        }
        
        function respContratosEstados(dato){
            var respuestaDato = dato;
            
            if(respuestaDato == -1){
-               $("#toolbar1").html("<button id='grafico'  onclick='solicitar();'>Solicitar nuevo contrato</button>");               
+               
+               $("#contenidoIndicadores").html("");
                panel.getContratos(IdUsuario, repContratos);
            }else if(respuestaDato == 1){
                $("#toolbar1").hide();
+               //toolbar1
                panel.getContratos(IdUsuario, repContratos);
            }else if(respuestaDato == 2){
                $("#toolbar1").hide();
@@ -603,7 +600,8 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        
        function goGrafico(var1){
            //location.href="resultado.jsp";   
-           window.open("resultado.jsp?ota8rtn4oc="+var1, "_blank");
+           //window.open("resultado.jsp?ota8rtn4oc="+var1, "_blank");
+           window.open("resultadoCap.jsp?id_contrato="+var1, "_self");
            
        }
        
@@ -725,16 +723,14 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                <li><a href="#tabs-5">Video Chat</a></li>
            </ul>
            <div id="tabs-1">
-               <span id="toolbar1" style="padding: 10px 4px; font-size: 14px;" class="ui-widget-header ui-corner-all">
-                  
-               </span>
                
+               <span id="toolbar1" style="padding: 10px 4px; font-size: 14px;" class="ui-widget-header ui-corner-all">
+                  <button id='grafico'  onclick='solicitar();'>Solicitar nuevo contrato</button>
+               </span>
                <style>                
                 #table_indicador td, table_delegado td,table_contratos td {
                     border-bottom: 1px solid #999; height: 35px;}                                                        
-               </style>
-               <h4>Avence de los Indicadores</h4>
-               
+               </style>               
                <div id="contenidoIndicadores" style=" padding-top:2%; " >
                   <img src="resources/icons/ajax_loading_blue.gif" width="24" height="24" border="0" style=" margin-left: 20%; margin-top: 5%;" />
               </div>

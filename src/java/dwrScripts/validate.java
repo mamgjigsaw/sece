@@ -172,13 +172,13 @@ public class validate {
         String password = encriptar.md5(pass);
        
        //Aqui se guarda la empresa, 2374 managua
-        ZoneDaoImpl zoneDao = new ZoneDaoImpl();
-        Empresa empresa = new Empresa(zoneDao.findById_Zone(comboZone),name_empresa,descripcion,telefono_empresa,ciudad,direccion_empresa,null);
-        EmpresaDaoImpl empresaDao = new EmpresaDaoImpl();
-        empresaDao.create(empresa);
+       ZoneDaoImpl zoneDao = new ZoneDaoImpl();
+       Empresa empresa = new Empresa(zoneDao.findById_Zone(comboZone),name_empresa,descripcion,telefono_empresa,ciudad,direccion_empresa,null);
+       EmpresaDaoImpl empresaDao = new EmpresaDaoImpl();
+       empresaDao.create(empresa);
           
-        //Aqui se guarda el usuario
-        //tipo 3 contacto, y estado del usuario 0 porque todavia no ha sido dado de alta.
+       //Aqui se guarda el usuario
+       //tipo 3 contacto, y estado del usuario 0 porque todavia no ha sido dado de alta.
        Usuario usuario = new Usuario(empresa,name,cargo,telefono,correo,direccion,3,password,0,null,null,null,null,null);
        UsuarioDaoImpl UsuDao= new UsuarioDaoImpl();
        UsuDao.create(usuario);            
@@ -223,6 +223,7 @@ public class validate {
           }            
        }
        
+       //asigno el nuevo contrato al capacitador
        AsignacionCapaContra as = new AsignacionCapaContra(usuarioCapa,contrato);
        AsignacionCapaContraDaoImpl asDao = new AsignacionCapaContraDaoImpl();
        asDao.create(as);   
@@ -247,7 +248,6 @@ public class validate {
         
         List<AsignacionCapaContra> listAsignacion = new ArrayList<AsignacionCapaContra>();
         AsignacionCapaContraDaoImpl daoAsignacion = new AsignacionCapaContraDaoImpl();
-        Iterator<AsignacionCapaContra> iterAsig  = listAsignacion.iterator();
         
         Contrato contrato = new Contrato();
         ContratoDaoImpl daoContra = new ContratoDaoImpl();
@@ -259,6 +259,8 @@ public class validate {
             usuario = iterUsu.next();
             listAsignacion = daoAsignacion.findAllByIdUsuarioCapacitador(usuario);
             array[m][0] = String.valueOf(usuario.getIdUsuario());
+            
+            Iterator<AsignacionCapaContra> iterAsig  = listAsignacion.iterator();
             
             if(listAsignacion.size()==0){
                 return usuario;// a este usuario le vamos asignar porque no poseia contratos asignados
@@ -273,6 +275,7 @@ public class validate {
             }
             
             array[m][1] = String.valueOf(cantidadContratos);
+            cantidadContratos = 0;//inicializo en cero para comenzar de nuevo
             m++;
         }
         
@@ -297,8 +300,11 @@ public class validate {
         
         //aqui busco el primer usuario del array que significaria el que posee mas
         usuario = daoUsuario.findById(Integer.parseInt(array[0][0]));
+        
+        
         return usuario;
     }
+    
     public String getStringRandom(){
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 	int string_length = 9;
