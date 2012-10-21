@@ -6,7 +6,7 @@ package dwrScripts;
 
 import daoImpl.*;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.*;
 import pojo.*;
 
@@ -378,5 +378,23 @@ public class initCapacitadores {
     return resultado;
     }//fin funcion
     
+public String getVce(int idcontrato){        
+        AvanceDaoImpl adi = new AvanceDaoImpl();
+        Avance avance = new Avance();
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
+        List<Avance> resultAvance = new ArrayList<Avance>();
+        double vs = 0.0, v = 0.0, vce = 0.0;
+        DecimalFormat df = new DecimalFormat("##.##");
+        Contrato contra = cdi.findById(idcontrato);
+        resultAvance = adi.Xcontrato(contra);
+        Iterator<Avance> it = resultAvance.iterator();
+        while (it.hasNext()){
+                avance = it.next();                
+                vs += avance.getVs();                
+                v += avance.getV();
+            }//fin while
+            vce = (vs/v)*100;        
+        return df.format(vce);
+    }    
 
 }
