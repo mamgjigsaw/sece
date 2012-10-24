@@ -20,7 +20,6 @@
         
         cadena = request.getParameter("rodaticapacdi");
         
-        
         if (cadena.equalsIgnoreCase("mJH83fas2{}4")){            
             //System.out.print("email=='odadivlo' && codigo=='ssap'");                       
             mostrar =0;

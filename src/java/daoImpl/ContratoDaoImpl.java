@@ -134,4 +134,27 @@ public class ContratoDaoImpl implements daoContrato {
         return c;
     }
 
+    @Override
+    public List<Contrato> contratosDifeCero(Usuario usuario) {
+        List<Contrato> contratos;
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        
+        contratos = se.createCriteria(Contrato.class)
+                     .add(Restrictions.ne("estado", 0))
+                     .add(Restrictions.ne("estado", 1))
+                     .add(Restrictions.eq("usuario", usuario)).list();   
+        se.getTransaction().commit();
+        return contratos;
+    }
+
+    @Override
+    public Contrato findByEstado(int estado,Usuario usuario) {
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        c = (Contrato) se.createCriteria(Contrato.class).add(Restrictions.eq("estado", estado)).add(Restrictions.eq("usuario",usuario)).uniqueResult();
+        se.getTransaction().commit();
+        return c;
+    }
+
 }

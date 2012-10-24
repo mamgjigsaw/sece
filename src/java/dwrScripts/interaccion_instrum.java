@@ -72,6 +72,17 @@ public class interaccion_instrum {
         
     }
     
+    public void update(int id_item, int id_contrato, int respuesta, String observacion){
+        
+        RespItemDaoImpl respDao = new RespItemDaoImpl();
+        RespItem resp = new RespItem();
+        resp = respDao.findByContratoItem(id_contrato, id_item);
+        
+        resp.setObservacion(observacion);
+        resp.setResBoolean(respuesta);
+        respDao.update(resp);        
+    }
+    
     public int aunm(int id_indicador,int id_contrato){
         int ac;
         AvanceDaoImpl avanDao = new AvanceDaoImpl();
@@ -173,11 +184,40 @@ public class interaccion_instrum {
     }
     
     public String[][] getVariableFinished(int id_variable, int id_contrato){
-         String array[][] = new String[2][3];
+        
+        System.out.print("The varible is: "+ id_variable +" and the contrato is: "+id_contrato);
+        
+         Variable variable = new Variable();
+         VariableDaoImpl varDao = new VariableDaoImpl();
+         variable = varDao.findById(id_variable);
          
-         VariableDaoImpl daoVar = new VariableDaoImpl();
+         System.out.print("name variable: " + variable.getNombre());
+         Item item = new Item();
+         ItemDaoImpl itemDao = new ItemDaoImpl();
+         List<Item> listItem = new ArrayList<Item>();
+         listItem = itemDao.findByVariable(variable);
          
+         Iterator<Item> iterItem = listItem.iterator();
          
+         RespItem resp = new RespItem(); 
+         RespItemDaoImpl respDao = new RespItemDaoImpl();
+         
+         String array[][] = new String[20][4];
+         int i=0;
+         while(iterItem.hasNext()){
+             item = iterItem.next();
+             
+             resp = respDao.findByContratoItem(id_contrato, item.getIdItem());
+             
+             if(resp != null){
+                 array[i][0] = itemDao.findById(resp.getItem().getIdItem()).getDescripcion();             
+                 array[i][1] = String.valueOf(resp.getResBoolean());
+                 array[i][2] = resp.getObservacion();
+                 array[i][3] = String.valueOf(resp.getItem().getIdItem());
+                 i++;
+             }
+             
+         }
          return array;
     }
     

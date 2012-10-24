@@ -17,14 +17,18 @@
   </legend>
   <graphs>
     <graph gid="0">
-      <title>Resultado</title>
+      <title>Linea base de la empresa</title>
       <color>000000</color>
       <line_width>2</line_width>
       <fill_alpha>40</fill_alpha>
       <bullet>round</bullet>      
     </graph>
     <graph gid="1">
+<<<<<<< HEAD
+      <title>Ideal</title>
+=======
       <title>Gestión Excelente</title>
+>>>>>>> 976392b5b03f86ad4b89746e9522b0719b7fc25a
       <color>0000FF</color>
       <line_width>2</line_width>
       <fill_alpha>0</fill_alpha>

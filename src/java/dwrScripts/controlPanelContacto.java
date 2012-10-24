@@ -4,21 +4,12 @@
  */
 package dwrScripts;
 
-import daoImpl.ContratoDaoImpl;
-import daoImpl.DelegacionIndiUsuDaoImpl;
-import daoImpl.EmpresaDaoImpl;
-import daoImpl.IndicadorDaoImpl;
-import daoImpl.ItemDaoImpl;
-import daoImpl.RespItemDaoImpl;
-import daoImpl.UsuarioDaoImpl;
-import daoImpl.encriptar;
+import daoImpl.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import pojo.Contrato;
-import pojo.DelegacionIndiUsu;
-import pojo.Empresa;
-import pojo.Indicador;
-import pojo.Usuario;
+import pojo.*;
 
 /**
  *
@@ -97,6 +88,52 @@ public class controlPanelContacto {
         return array;
     }
     
+    public int requestNewContra(int id_usuario){
+       
+       try{
+           
+       Usuario usuario = new Usuario();
+       UsuarioDaoImpl UsuDao = new UsuarioDaoImpl();
+       usuario = UsuDao.findById(id_usuario);
+       
+       Date fecha = new Date();
+       Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+       
+       //el estado del contrato es 0, porque todavia no ha sido dado de alta
+       Contrato contrato = new Contrato(usuario,0,momentoTimestamp,momentoTimestamp,null,null,null);
+       ContratoDaoImpl contratoDao = new ContratoDaoImpl();
+       contratoDao.create(contrato);
+       
+       //para asignar al usuario capacitador a un contrato
+       
+        Usuario usuarioCapa = new Usuario();//un usuario de tipo capacitador
+        validate val = new validate();
+       
+        usuarioCapa = UsuDao.findById(val.balanceoCargaCapacitador().getIdUsuario());
+        
+        //guardar asignacion de indicadores delegado como el avance
+        List<Indicador> listIndi = new ArrayList<Indicador>();
+        IndicadorDaoImpl daoIndicador = new IndicadorDaoImpl();
+        listIndi = daoIndicador.findAllByActive();
+       
+        AvanceDaoImpl daoAvance = new AvanceDaoImpl();
+        DelegacionIndiUsuDaoImpl deledao = new DelegacionIndiUsuDaoImpl();
+         for(int i=0;i<listIndi.size();i++){
+               
+           DelegacionIndiUsu dele = new DelegacionIndiUsu(usuario,listIndi.get(i),contrato);
+           deledao.create(dele);
+           
+           Avance avance = new Avance(contrato,listIndi.get(i),0,0,0,0);   
+           daoAvance.create(avance);        
+          }            
+       
+       AsignacionCapaContra as = new AsignacionCapaContra(usuarioCapa,contrato);
+       AsignacionCapaContraDaoImpl asDao = new AsignacionCapaContraDaoImpl();
+       asDao.create(as);   
+       }catch(Exception e){return 0;}
+       return 1;       
+    }
+    
     public String[][] getContratos(int id_usuario){
         Usuario usuario = new Usuario();
         UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
@@ -104,12 +141,46 @@ public class controlPanelContacto {
         
         List<Contrato> listContra = new ArrayList<Contrato>();
         ContratoDaoImpl daoContra = new ContratoDaoImpl();
-        listContra = daoContra.contratosxUsuario(usuario);
+        listContra = daoContra.contratosDifeCero(usuario);
        
         String array[][] = new String[listContra.size()][4];
-        
+        for(int i=0;i<listContra.size();i++){
+            Contrato contrato = listContra.get(i);
+            
+            if (contrato.getEstado() !=0){                
+                array[i][0] = "Contrato "+(i+1);
+                array[i][1] = String.valueOf(contrato.getFechaInicio());
+                array[i][2] = String.valueOf(contrato.getFechaTermino());
+                array[i][3] = String.valueOf(contrato.getIdContrato());
+            }
+        } 
         
         return array;
+    }
+    
+    public int getContratoEstaCero(int id_usuario){
+        Usuario usuario = new Usuario();
+        UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
+        usuario = usuDao.findById(id_usuario);
+        
+        Contrato contrato = new Contrato();
+        ContratoDaoImpl contraDao = new ContratoDaoImpl();
+        contrato = contraDao.findByEstado(0,usuario);
+        
+        if(contrato == null){
+            contrato = contraDao.findByEstado(1,usuario);
+            
+            if(contrato == null){
+                  //  System.out.print("entro aqui posee contrato 2");
+                return -1;// solo posee contratos terminados.
+            }else{
+                //System.out.print("entro aqui posee contrato 1");
+                return 2;// si posee un contrato activo, el cual tiene que llenar.
+            }
+        }else{
+            return 1;// si posee un contrato que no ha sido dado de alta por un capacitador
+        }
+        
     }
     
     public int getCountInd(int id_contrato){

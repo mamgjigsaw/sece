@@ -6,6 +6,7 @@
 package dao;
 
 import pojo.Contrato;
+import pojo.Item;
 import pojo.RespItem;
 import pojo.Usuario;
 
@@ -20,6 +21,5 @@ public interface daoRespItem extends dao<RespItem>{
     int ItemRespondidosxUsuarioxContrato (Usuario usuario, Contrato contrato);
     int ItemRespondidosxContrato (Contrato contrato);
     int ItemRespondidosxContratoByIndicador (int idContrato, int idIndicador);
-    
 
 }
