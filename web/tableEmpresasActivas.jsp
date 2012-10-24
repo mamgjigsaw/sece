@@ -46,7 +46,16 @@
                      document.getElementById("lblC"+idAC).style.display = 'none';
                      document.getElementById("btnC"+idAC).style.display = 'none';
                      document.getElementById("btnG"+idAC).style.display = 'block';                     
+                     document.getElementById("btnX"+idAC).style.display = 'block';
                      capacitadoresDWR.cargarCapacitadores(idAC, listaCap);                     
+                 }
+                 function cancelar(idAC){                   
+                     document.getElementById("lblC"+idAC).style.display = 'inline';
+                     document.getElementById("btnC"+idAC).style.display = 'inline';
+                     document.getElementById("btnX"+idAC).style.display = 'none';
+                     document.getElementById("btnG"+idAC).style.display = 'none';  
+                     $("#capaSelect"+idAC).remove();                     
+                                          
                  }
                  function listaCap(data){                    
                      var strSelect = "<select id = 'capaSelect"+ data[0][0] +"'>";
@@ -132,6 +141,7 @@
                                                                <td><label id="lblC<%= accont.getIdAsignacion().toString() %>" ><%= cap.getNombre() %></label>
                                                                <a id="btnC<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right" onclick="changeCap('<%= accont.getIdAsignacion().toString() %>');" title="Cambiar Capacitador"><img src="images/arrow_switch.png" alt="Edit" /></a>
                                                                <a id="btnG<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right; display: none" onclick="guardarCap('<%= accont.getIdAsignacion().toString() %>');" title="Guardar"><img src="images/icon_approve.png" alt="Edit" /></a>
+                                                               <a id="btnX<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right; display: none" title="Cancelar"> <img src="images/cancelar-icono-16.png" onclick="cancelar('<%= accont.getIdAsignacion().toString() %>')" alt="Cancelar"/></a>
                                                                </td>                                                               
                                                                <td><%= ec.getContratoFecha().toString() %></td>
                                                                <td>

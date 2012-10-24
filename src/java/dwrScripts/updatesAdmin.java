@@ -4,6 +4,7 @@
  */
 package dwrScripts;
 
+import daoImpl.AsignacionCapaContraDaoImpl;
 import daoImpl.AsignacionSugItemDaoImpl;
 import daoImpl.EscalaDaoImpl;
 import daoImpl.IndicadorDaoImpl;
@@ -14,6 +15,9 @@ import daoImpl.VariableDaoImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import pojo.AsignacionCapaContra;
 import pojo.AsignacionSugItem;
 import pojo.Escala;
 import pojo.Indicador;
@@ -30,6 +34,45 @@ public class updatesAdmin {
   
      public updatesAdmin(){
 }
+     public String getCapacitadores(){
+        String resultado = "";
+        UsuarioDaoImpl udi = new UsuarioDaoImpl();
+                
+       List<Usuario> capacitadores = udi.findAll();  
+       Iterator<Usuario> itc = capacitadores.iterator();
+       Usuario ucap = new Usuario();
+       while(itc.hasNext()){
+        ucap = itc.next();
+        if(ucap.getTipoUsuario() == 2 &&  ucap.getEstado() == 1  ||  ucap.getEstado() == 0 || ucap.getEstado() == 2 ){
+            AsignacionCapaContraDaoImpl accdi = new AsignacionCapaContraDaoImpl();
+            List<AsignacionCapaContra> numEmp = accdi.findAllByIdUsuarioCapacitador(ucap);
+            int numero = 0;
+           if(numEmp.isEmpty()){
+                //sigue valiendo 0
+            }
+             else {
+            numero = numEmp.size();   
+            }
+           String s = String.valueOf(numero);  
+  
+        String idc = ucap.getIdUsuario().toString();
+        resultado +="<tr id="+idc+">"
+                   + "<td>"+ucap.getNombre()+"</td>"
+                   + "<td>"+ucap.getTelefono()+"</td>"
+                   + "<td>"+ucap.getCorreo()+"</td>"
+                   + "<td>"+ucap.getDireccion()+"</td>"
+                   + "<td>"+s+"</td>"
+                   + "<td>";
+                   if (ucap.getEstado() == 1 || ucap.getEstado() == 2)
+                    resultado += "<a style='cursor: pointer'><img id='imgDesac' src='images/icon_delete.png' alt='Desactivar' /></a>";
+                   if(ucap.getEstado() == 0)
+                    resultado += "<a style='cursor: pointer' onclick='reactivarCapa("+ ucap.getIdUsuario().toString()+", "+ucap.getNombre().toString() +");'><img src='images/icon_approve.png' alt='Activar' /></a>";
+                   resultado += "</td> </tr>";
+                    }
+       }
+        return resultado;
+     }
+     
       public int[] deleteCapacitador(String idc){
                 int r[] = new int[2];
                 Usuario usu = new Usuario();
@@ -41,6 +84,14 @@ public class updatesAdmin {
                 r[1] = usu.getIdUsuario();
                 return r;
     }
+      public void activateCapacitador(String idc){
+          Usuario usu = new Usuario();
+          UsuarioDaoImpl udim = new UsuarioDaoImpl();
+          usu = udim.findById(Integer.parseInt(idc));
+          usu.setEstado(1);
+          udim.update(usu);
+      }
+      
       public void deleteIndicador(String idi){
            Indicador indi = new Indicador();
            IndicadorDaoImpl idimp = new IndicadorDaoImpl();          

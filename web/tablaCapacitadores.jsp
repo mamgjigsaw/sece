@@ -42,24 +42,26 @@
                                 ac = acDI.findUltimoAcceso(usua);
                                      %>            
          <script>
-             function deleteCapa(idcap, nombre){                
-                 if(confirm('¿Esta seguro que desea eliminar a: ' + nombre + '?')){                    
+             function deleteCapa(idcap, nombre){ 
+                  window.location.reload(true);
+                 if(confirm('¿Esta seguro que desea desactivar a: ' + nombre + '?')){                    
                      
                      validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 18, "Anulo un Capacitador", idcap,"Estado Activo" , "Estado Inactivo");  
-                     updates.deleteCapacitador(idcap, eliminarFila);
-                     //location.reload();
+                     updates.deleteCapacitador(idcap);
+                     location.reload();
                  }else{
                      
                  }      
              } 
-             function eliminarFila(data){
-                  if(data[0] == 1){
-                      document.getElementById(data[1]).style.display = "none";
-                  }  
-                  else{
-                      alert("Ha habido un error");
-                  }
-                }
+             
+             function reactivarCapa(idcap,nombre){
+                  window.location.reload(true);
+                 if(confirm('¿Esta seguro que desea activar a: ' + nombre + '?')){
+                     validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 55, "Reactivar un Capacitador", idcap,"Estado Inactivo" , "Estado Activo");  
+                     updates.activateCapacitador(idcap);
+                     location.reload();
+                 } 
+             }   
          </script>
         <link href="resources/tablesorter/styles.css" rel="stylesheet" type="text/css" /> 
         <div id="pagerCap">
@@ -102,7 +104,7 @@
                   while(itc.hasNext()){
                     ucap = itc.next();
                     
-                    if(ucap.getTipoUsuario() == 2 &&  ucap.getEstado() == 1 || ucap.getEstado() == 2 ){
+                    if(ucap.getTipoUsuario() == 2){
                     AsignacionCapaContraDaoImpl accdi = new AsignacionCapaContraDaoImpl();
                     List<AsignacionCapaContra> numEmp = accdi.findAllByIdUsuarioCapacitador(ucap);
                     int numero = 0;
@@ -127,10 +129,12 @@
                             
                             <td><%= s %></td>
                             <td>
-                                
-                                <a style="cursor: pointer" onclick="deleteCapa(<%= ucap.getIdUsuario().toString() %>, '<%= ucap.getNombre().toString() %>');" title=""><img src="images/icon_delete.png" alt="Approve" /></a>
-                                
-                                
+                                <% if (ucap.getEstado() == 1 || ucap.getEstado() == 2){%>
+                                    <a style="cursor: pointer" onclick="deleteCapa(<%= ucap.getIdUsuario().toString() %>, '<%= ucap.getNombre().toString() %>');" title=""><img src="images/icon_delete.png" alt="Desactivar" /></a>
+                                <%}%>    
+                                <% if (ucap.getEstado() == 0){ %>
+                                    <a style="cursor: pointer" onclick="reactivarCapa(<%= ucap.getIdUsuario().toString() %>, '<%= ucap.getNombre().toString() %>');" title=""><img src="images/icon_approve.png" alt="Activar" /></a>
+                                <% }%>    
                             </td>
                             
                         </tr>
