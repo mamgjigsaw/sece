@@ -35,8 +35,7 @@
                 response.sendRedirect("register.jsp?rodaticapacdi=mJH83fas2{}4");
             }
                 
-        }
-        
+        }   
         
         %>
         
@@ -80,6 +79,21 @@
                             
                             $( "#dialog:ui-dialog" ).dialog( "destroy" );
 	
+                $( "#dialog" ).dialog({
+                autoOpen: false,
+                height:120,
+                modal: true}
+               );
+               $( "#dialogVal" ).dialog({
+                autoOpen: false,                
+                modal: true,
+                buttons: {
+                            Ok: function() {
+                                    $( this ).dialog( "close" );                                       
+
+                            }}
+               });
+               
 		$( "#dialog-message" ).dialog({
 			autoOpen: false,
                         modal: true,
@@ -88,8 +102,7 @@
 					$( this ).dialog( "close" );
                                         
                                         if(capa==1){     
-                                            validacion.encrypt($("#txtpass").val(),passEncript);
-                                            location.href = "entrar?cV5VDde7H0l="+ $("#txtcorreo").val() +"&&K3JR5YpwQ8="+ passEncriptado;    
+                                            
                                         }else if(capa==0){
                                             limpiar();
                                         }                                        
@@ -131,14 +144,8 @@
        debug: true,
        /*errorElement: 'div',*/
        //errorContainer: $('#errores'),
-       submitHandler: function(form){           
-         validacion.guardarUsuario($("#txtname_empresa").val(),$("#txtdes").val(),$("#txttel_empresa").val(),$("#cState").val(),$("#txtdirec_empre").val(),$("#txtname").val(),$("#txtcargo").val(),$("#txttel").val(),$("#txtcorreo").val(),$("#txtdir").val(),$("#txtpass").val(),usuCapa);                      
-           if(capa==1){ 
-            validacion.EnviarCorreo("sece@pml.org.ni",$("#txtcorreo").val(),"Cuenta SECE","<strong>Estimado "+ $("#txtname").val() +",</strong> <p> <strong>Gracias por registrarse</strong>, puede iniciar a evaluar su empresa en los diferente niveles e interactuar con el capacitador aginado para evaluar su competitividad empresarial.</p><p> La duracion del proceso dependera del tiempo que le emplee al sistema.</p> <p><strong>Por favor no reinvie este correo, Gracias SECE TEAM.</strong></p>");  
-           }else{
-            validacion.EnviarCorreo("sece@pml.org.ni",$("#txtcorreo").val(),"Cuenta SECE","<strong>Estimado "+ $("#txtname").val() +",</strong> <p> <strong>Gracias por registrarse</strong>, un responsable de SECE va ponerse en contacto con usted y asi activar su cuenta.</p><p> El proceso puede tomar unos dias, se enviara un correo cuando se ha activada.</p> <p><strong>Por favor no reinvie este correo, Gracias SECE TEAM.</strong></p>");
-           }
-         $( "#dialog-message" ).dialog( "open" );          
+       submitHandler: function(form){ 
+           validacion.existeCorreo($("#txtcorreo").val(),resp_solicitud);          
        }
     });
 });
@@ -146,8 +153,26 @@
     function go_back(){
         location.href = "logger.jsp";          
     } 
-    
      
+     function resp_solicitud(dato){
+         
+         if(dato==0){
+            validacion.guardarUsuario($("#txtname_empresa").val(),$("#txtdes").val(),$("#txttel_empresa").val(),$("#cState").val(),$("#txtdirec_empre").val(),$("#txtname").val(),$("#txtcargo").val(),$("#txttel").val(),$("#txtcorreo").val(),$("#txtdir").val(),$("#txtpass").val(),usuCapa);                      
+              if(capa==1){ 
+               validacion.EnviarCorreo("sece@pml.org.ni",$("#txtcorreo").val(),"Cuenta SECE","<strong>Estimado "+ $("#txtname").val() +",</strong> <p> <strong>Gracias por registrarse</strong>, puede iniciar a evaluar su empresa en los diferente niveles e interactuar con el capacitador aginado para evaluar su competitividad empresarial.</p><p> La duracion del proceso dependera del tiempo que le emplee al sistema.</p> <p><strong>Por favor no reinvie este correo, Gracias SECE TEAM.</strong></p>");  
+               
+               validacion.encrypt($("#txtpass").val(),passEncript);
+               location.href = "entrar?cV5VDde7H0l="+ $("#txtcorreo").val() +"&&K3JR5YpwQ8="+ passEncriptado;    
+              }else{
+               validacion.EnviarCorreo("sece@pml.org.ni",$("#txtcorreo").val(),"Cuenta SECE","<strong>Estimado "+ $("#txtname").val() +",</strong> <p> <strong>Gracias por registrarse</strong>, un responsable de SECE va ponerse en contacto con usted y asi activar su cuenta.</p><p> El proceso puede tomar unos dias, se enviara un correo cuando se ha activada.</p> <p><strong>Por favor no reinvie este correo, Gracias SECE TEAM.</strong></p>");
+               limpiar();
+               $( "#dialogVal" ).dialog( "open");
+              }
+         }else{
+           $( "#dialog" ).dialog( "open").delay(2000).fadeIn(function(){ $(this).dialog("close") });
+         }
+     }
+                   
    function passEncript(data){
          passEncriptado = data;
    }
@@ -229,6 +254,15 @@
         </p>
 	
 	
+      </div>
+      
+      <div id="dialog" title="Adventencia">
+         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>El correo esta siendo utilizado por un usuario del sistema, ingrese otro gracias!.</p>
+      </div>
+      <div id="dialogVal" title="Proceso de validación">
+         <p>
+             <span class="ui-icon ui-icon-circle-check" style="float: left; margin:0 7px 50px 0;"></span>
+             Se le ha enviado un correo con la informacion sobre la activacion de su cuenta, y asi aplicar el instrumento a tu empresa de una manera <b>facil y sencilla</b>.</p>
       </div>
     <div class="body_resize">
       

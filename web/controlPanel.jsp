@@ -678,7 +678,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
       <div class="inGo">
        <span id="toolbar" class="ui-widget-header ui-corner-all">	
         <button id="logoutbutton" onclick="mostrarSalir();" ><%=name%></button>	
-       </span> 
+       </span>
        
         <div id="menuBtnOpciones1" >
               <ul class="opciones1">

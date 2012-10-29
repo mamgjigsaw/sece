@@ -96,6 +96,8 @@ public class validate {
             Usuario usuario = new Usuario();
             usuario = usudao.findByEmail(email);
             
+            int m=0;
+            
             //validar que tipo de usuario es?
             if(usuario.getTipoUsuario()==1){// tipo administrador
                 usuario.setEstado(4);
@@ -117,10 +119,23 @@ public class validate {
                 urlLost = "<a href='"+ urlLost +"/forgetPassword.jsp?liame=" + usuario.getCorreo() +"&&ogidoc="+ stringRandom +"'><span>http://sece.pml.org.ni/forgetPassword.jsp?liame=" + usuario.getCorreo() +"&&ogidoc="+ stringRandom +"</span></a>";
                              
                 //enviarle un correo de que su cuenta ha sido bloqueada.
-                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. En este link de acontinuacion podra resetear su contraseña <br>"+ urlLost +".</p> <p> Gracias, SECE TEAM.</strong></p>");
+                m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. En este link de acontinuacion podra resetear su contraseña <br>"+ urlLost +".</p> <p> Gracias, SECE TEAM.</strong></p>");
                 //(String remitente,String destinatario,String asunto,String mensaje_cuerpo)
-            }else{//tipo capacitador o usuario
-                int m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. Dirijase al administrador del sistema que le brindara unos pasos para su posterior activacion.</p> <p> Gracias, SECE TEAM.</strong></p>");
+            }else if(usuario.getTipoUsuario()==2){ //tipo capacitador o usuario
+                usuario.setEstado(4);
+                usudao.update(usuario);
+                
+                m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. Dirijase al administrador del sistema que le brindara unos pasos para su posterior activacion.</p> <p> Gracias, SECE TEAM.</strong></p>");
+                
+                String nameCapa = usuario.getNombre();
+                usuario = usudao.findAdministrador();
+                
+                m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado Administrador"+ usuario.getNombre() +",</strong> <p> La cuenta del capacitador "+ nameCapa+" ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. Dirijase al capacitador para confirmar que no ha sido un tercero que intenta hackear su cuenta.</p> <p> Gracias, SECE TEAM.</strong></p>");
+            }else{ //si es tipo 4 0 3
+                usuario.setEstado(4);
+                usudao.update(usuario);
+                
+                m = EnviarCorreo("sece@pml.org.ni",usuario.getCorreo(),"Bloqueo de Cuenta","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> Su cuenta ha sido bloqueada por varios intentos fallidos de entrar al sistema y haber introducido la contraseña incorrecta. Dirijase al administrador del sistema que le brindara unos pasos para su posterior activacion.</p> <p> Gracias, SECE TEAM.</strong></p>");
             }
         }catch(Exception e){
             System.out.println("El error es --- " + e.getMessage());
@@ -196,6 +211,7 @@ public class validate {
        Usuario usuarioCapa = new Usuario();//un usuario de tipo capacitador
        if (capacitador == -1){        
         usuarioCapa = UsuDao.findById(balanceoCargaCapacitador().getIdUsuario());//UsuDao.findById(2);
+        int m = EnviarCorreo("sece@pml.org.ni",usuarioCapa.getCorreo(),"Asignacion Usuario","<strong>Estimado capacitador "+ usuarioCapa.getNombre() +",</strong> <p> una nueva empresa se ha registrado "+ txtname_empresa +" y el sistema de evaluación de competitividad empresarial (SECE) te ha asignado a ella. Entra en tu panel de administración para ver detalle de esa empresa y darle de alta si crees conveniente o denegarle acceso al sistema. </p> <p> Gracias, SECE TEAM.</strong></p>");
        }else{
         usuarioCapa = UsuDao.findById(capacitador);
         
@@ -227,8 +243,7 @@ public class validate {
        AsignacionCapaContra as = new AsignacionCapaContra(usuarioCapa,contrato);
        AsignacionCapaContraDaoImpl asDao = new AsignacionCapaContraDaoImpl();
        asDao.create(as);   
-       
-       //int m = EnviarCorreo("sece@pml.org.ni",usuarioCapa.getCorreo(),"Asignacion Usuario","<strong>Estimado "+ usuario.getNombre() +",</strong> <p> click en el link de abajo para resetear tu contraseña en SECE y eliga una nueva<br>"+ url +"</p> <p> Gracias, SECE TEAM.</strong></p>");
+     
             return 1;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -367,6 +382,18 @@ public class validate {
         }
         return 4;
         
+    }
+    
+    public int existeCorreo(String email){
+        Usuario usu = new Usuario();
+        UsuarioDaoImpl usuaD = new UsuarioDaoImpl();
+        usu = usuaD.findByEmail(email);
+        
+        if(usu.getNombre()==null){
+            return 0;// que el correo no existe 
+        }else{
+            return 1;// que existe el correo
+        }
     }
     
     public String cambiarPasswordByID(int idUsuario,String newContra){
