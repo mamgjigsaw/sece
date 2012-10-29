@@ -100,6 +100,16 @@ public class UsuarioDaoImpl implements daoUsuario{
         se.getTransaction().commit();
         return listDelegados; 
     }
+    
+    public List<Usuario> uCapacitadores (){
+        List<Usuario> capacitadores;
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        capacitadores = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).list();
+        se.getTransaction().commit();
+        return capacitadores;
+    }
+    
     public List<Usuario> capacitadoresActivos() {
          List<Usuario> cap;
         Session se = sf.getCurrentSession();

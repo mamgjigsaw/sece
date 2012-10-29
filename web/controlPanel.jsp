@@ -151,6 +151,9 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                 $( "#btnupdatEmpresa" ).button();
                 $( "#btnVCUser" ).button();
                 $( "#tabs" ).tabs();  
+                
+                //remueve video chat
+                $("#tabs").tabs( "remove" , 4 );
                                 
                 if(tipo==4){
                    $("#tabs").tabs( "remove" , 2 );

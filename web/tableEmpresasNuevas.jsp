@@ -74,9 +74,13 @@
                  }
                  function guardarCap(data){
                      var selec = $("#capaSelect"+ data +"").val();
-                     //alert("valor: " + selec);
-                     capacitadoresDWR.guardarCambiarCapacitador(data, selec);
-                     location.reload();
+                     //alert("valor: " + selec +" asignacion: "+data);
+                     capacitadoresDWR.guardarCambiarCapacitador(data, selec, {callback: function(resultado){                             
+                             $("#lblC"+data+"").text(resultado[1]);
+                             $("#lblC"+data+"").show();
+                     }});       
+                     cancelar(data);
+                     
                  }
                  
         </script> 
@@ -132,9 +136,9 @@
                                                            <tr id="<%= accont.getIdAsignacion().toString() %>" >
                                                                <td><%= ec.getEmpresaNombre() %></td>
                                                                <td><label id="lblC<%= accont.getIdAsignacion().toString() %>" ><%= cap.getNombre() %></label>
-                                                               <a id="btnC<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right" onclick="changeCap('<%= accont.getIdAsignacion().toString() %>');" title="Cambiar Capacitador"><img src="images/arrow_switch.png" alt="Edit" /></a>
-                                                               <a id="btnX<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right; display: none" title="Cancelar"> <img src="images/cancelar-icono-16.png" onclick="cancelar('<%= accont.getIdAsignacion().toString() %>')" alt="Cancelar"/></a>
+                                                               <a id="btnC<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right" onclick="changeCap('<%= accont.getIdAsignacion().toString() %>');" title="Cambiar Capacitador"><img src="images/arrow_switch.png" alt="Edit" /></a>                                                               
                                                                <a id="btnG<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right; display: none" onclick="guardarCap('<%= accont.getIdAsignacion().toString() %>');" title="Guardar"><img src="images/icon_approve.png" alt="Edit" /></a>
+                                                               <a id="btnX<%= accont.getIdAsignacion().toString() %>" style="cursor: pointer; float: right; display: none" title="Cancelar"> <img src="images/cancelar-icono-16.png" onclick="cancelar('<%= accont.getIdAsignacion().toString() %>')" alt="Cancelar"/></a>
                                                                </td>                                                               
                                                                <td><%= ec.getContratoFecha().toString() %></td>                                                               
                                                            </tr>

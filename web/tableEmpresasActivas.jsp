@@ -75,7 +75,7 @@
                      var selec = $("#capaSelect"+ data +"").val();
                      //alert("valor: " + selec);
                      capacitadoresDWR.guardarCambiarCapacitador(data, selec);
-                     location.reload();
+                     location.reload().delay(1000);
                  }
                  
                  

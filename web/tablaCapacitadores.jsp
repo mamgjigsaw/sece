@@ -24,6 +24,7 @@
          <script type="text/javascript" src="resources/tablesorter/js/jquery.js"></script> 
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="resources/tablesorter/js/jquery.tablesorter.pager.js"></script>
+        <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
          <script type="text/javascript">
              $(function() 
                  { 
@@ -41,28 +42,7 @@
                                  AccesoDaoImpl acDI = new AccesoDaoImpl();
                                 ac = acDI.findUltimoAcceso(usua);
                                      %>            
-         <script>
-             function deleteCapa(idcap, nombre){ 
-                  window.location.reload(true);
-                 if(confirm('¿Esta seguro que desea desactivar a: ' + nombre + '?')){                    
-                     
-                     validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 18, "Anulo un Capacitador", idcap,"Estado Activo" , "Estado Inactivo");  
-                     updates.deleteCapacitador(idcap);
-                     location.reload();
-                 }else{
-                     
-                 }      
-             } 
-             
-             function reactivarCapa(idcap,nombre){
-                  window.location.reload(true);
-                 if(confirm('¿Esta seguro que desea activar a: ' + nombre + '?')){
-                     validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 55, "Reactivar un Capacitador", idcap,"Estado Inactivo" , "Estado Activo");  
-                     updates.activateCapacitador(idcap);
-                     location.reload();
-                 } 
-             }   
-         </script>
+                                   
         <link href="resources/tablesorter/styles.css" rel="stylesheet" type="text/css" /> 
         <div id="pagerCap">
 	                 <form>
@@ -95,56 +75,30 @@
                         </tr>
                         </thead>
                 <tbody>    
-                <%
-                 UsuarioDaoImpl udi = new UsuarioDaoImpl();
                 
-                 List<Usuario> capacitadores = udi.findAll();  
-                 Iterator<Usuario> itc = capacitadores.iterator();
-                 Usuario ucap = new Usuario();
-                  while(itc.hasNext()){
-                    ucap = itc.next();
-                    
-                    if(ucap.getTipoUsuario() == 2){
-                    AsignacionCapaContraDaoImpl accdi = new AsignacionCapaContraDaoImpl();
-                    List<AsignacionCapaContra> numEmp = accdi.findAllByIdUsuarioCapacitador(ucap);
-                    int numero = 0;
-                    
-                                                            
-                   if(numEmp.isEmpty()){
-                        //sigue valiendo 0
-                    }
-                     else {
-                    numero = numEmp.size();   
-                    }
-                String s = String.valueOf(numero);
-  
-%>
-                
-            	
-                        <tr id="<%= ucap.getIdUsuario().toString() %>" >                           
-                            <td><%= ucap.getNombre() %></td>
-                            <td><%= ucap.getTelefono() %></td>
-                            <td><%= ucap.getCorreo() %></td>
-                            <td><%= ucap.getDireccion() %></td>
-                            
-                            <td><%= s %></td>
-                            <td>
-                                <% if (ucap.getEstado() == 1 || ucap.getEstado() == 2){%>
-                                    <a style="cursor: pointer" onclick="deleteCapa(<%= ucap.getIdUsuario().toString() %>, '<%= ucap.getNombre().toString() %>');" title=""><img src="images/icon_delete.png" alt="Desactivar" /></a>
-                                <%}%>    
-                                <% if (ucap.getEstado() == 0){ %>
-                                    <a style="cursor: pointer" onclick="reactivarCapa(<%= ucap.getIdUsuario().toString() %>, '<%= ucap.getNombre().toString() %>');" title=""><img src="images/icon_approve.png" alt="Activar" /></a>
-                                <% }%>    
-                            </td>
-                            
-                        </tr>
-                        
-                        
-                    
-                  <%}
-}                  
-%>
-              
+                        <script>
+                          updates.getCapacitadores({callback:function(data){
+                             $("#tablaCap tbody").html(data);   
+                             $(".imgdel").click( function(){ 
+                                 idcap = $(this).parent().parent().attr("id");
+                                 if(confirm('¿Esta seguro que desea desactivar al usuario?')){                                         
+                                     validacion.saveActionBitacora(<%= ac.getIdAcceso().toString()%>, 18, "Anulo un Capacitador", idcap,"Estado Activo" , "Estado Inactivo");                                       
+                                     updates.deleteCapacitador(idcap,success);                                     
+                                     function success(){window.location.reload(true);}
+                                }                                                
+                             });
+                             
+                             $(".imgapp").click( function(){
+                                 idcap = $(this).parent().parent().attr("id");
+                                 if(confirm('¿Esta seguro que desea activar al usuario?')){
+                                     validacion.saveActionBitacora(<%= ac.getIdAcceso().toString() %>, 55, "Reactivar un Capacitador", idcap,"Estado Inactivo" , "Estado Activo");  
+                                     updates.activateCapacitador(idcap,success);                                     
+                                     function success(){window.location.reload(true);}
+                                 }                                                  
+                             });                             
+                          }});
+                                             
+                        </script>
                 </tbody>
                 </table>
 

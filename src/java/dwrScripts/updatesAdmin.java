@@ -38,12 +38,11 @@ public class updatesAdmin {
         String resultado = "";
         UsuarioDaoImpl udi = new UsuarioDaoImpl();
                 
-       List<Usuario> capacitadores = udi.findAll();  
+       List<Usuario> capacitadores = udi.uCapacitadores();  
        Iterator<Usuario> itc = capacitadores.iterator();
        Usuario ucap = new Usuario();
        while(itc.hasNext()){
-        ucap = itc.next();
-        if(ucap.getTipoUsuario() == 2 &&  ucap.getEstado() == 1  ||  ucap.getEstado() == 0 || ucap.getEstado() == 2 ){
+        ucap = itc.next();        
             AsignacionCapaContraDaoImpl accdi = new AsignacionCapaContraDaoImpl();
             List<AsignacionCapaContra> numEmp = accdi.findAllByIdUsuarioCapacitador(ucap);
             int numero = 0;
@@ -64,12 +63,11 @@ public class updatesAdmin {
                    + "<td>"+s+"</td>"
                    + "<td>";
                    if (ucap.getEstado() == 1 || ucap.getEstado() == 2)
-                    resultado += "<a style='cursor: pointer'><img id='imgDesac' src='images/icon_delete.png' alt='Desactivar' /></a>";
+                    resultado += "<img style='cursor: pointer' class='imgdel' src='images/icon_delete.png' alt='Desactivar' />";
                    if(ucap.getEstado() == 0)
-                    resultado += "<a style='cursor: pointer' onclick='reactivarCapa("+ ucap.getIdUsuario().toString()+", "+ucap.getNombre().toString() +");'><img src='images/icon_approve.png' alt='Activar' /></a>";
-                   resultado += "</td> </tr>";
-                    }
-       }
+                    resultado += "<img style='cursor: pointer' class='imgapp' src='images/icon_approve.png' alt='Activar' /></a>";
+                   resultado += "</td> </tr>";                    
+       }       
         return resultado;
      }
      

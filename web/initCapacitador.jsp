@@ -169,6 +169,10 @@ response.setDateHeader("Expires", 0);
 	    });
             $("#btnVC").button();            
             $("#tabs").tabs({selected:0});
+            
+             //remueve video chat
+            $("#tabs").tabs( "remove" , 5 );
+            
             $( "#datepicker" ).datepicker();
             $( "#datepicker2" ).datepicker();                       
             $("#tblContratos").advancedtable({searchField: "#search",
