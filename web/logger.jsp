@@ -53,7 +53,7 @@
                 }else if(resp==1){                    
                     $("#hola").html("");
                     validacion.encrypt(dwr.util.getValue("txtpass"),passEncript);
-                    $( "#dialog-message" ).dialog( "open" );                    
+                    //$( "#dialog-message" ).dialog( "open" );                                        
                 }else if(resp==2){
                     if(countError==2){
                        var palabra="<section role='principal' id='message_box'><div class='notification error'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta ha sido bloqueada, dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>"; 
@@ -72,6 +72,7 @@
             
             function passEncript(data){
                 passEncriptado = data;
+                location.href = "entrar?cV5VDde7H0l="+ dwr.util.getValue("txtemail") +"&&K3JR5YpwQ8="+ passEncriptado;
             }
             
             $(function() {
