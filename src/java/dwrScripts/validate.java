@@ -389,7 +389,7 @@ public class validate {
         UsuarioDaoImpl usuaD = new UsuarioDaoImpl();
         usu = usuaD.findByEmail(email);
         
-        if(usu.getNombre()==null){
+        if(usu==null){
             return 0;// que el correo no existe 
         }else{
             return 1;// que existe el correo

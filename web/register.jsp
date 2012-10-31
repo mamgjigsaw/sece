@@ -168,6 +168,7 @@
                limpiar();
                $( "#dialogVal" ).dialog( "open");
               }
+            
          }else{
            $( "#dialog" ).dialog( "open").delay(2000).fadeIn(function(){ $(this).dialog("close") });
          }
