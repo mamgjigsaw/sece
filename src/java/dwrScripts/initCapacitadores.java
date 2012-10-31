@@ -133,20 +133,24 @@ public class initCapacitadores {
                     c.setTime(acces);
                     c.add(Calendar.DATE, 3);
                     tiempoDgracia = c.getTime();
-                    if (new Date().after(tiempoDgracia)) 
-                        resultado += "<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='" + delegado.getUsuario().getIdUsuario() + "'/> <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button><span class='cant_emailEnviados'>" + intentos + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" + delegado.getUsuario().getNombre() + "</td>";
-                   
-                } else 
-                    resultado += "<tr style='text-align:center;'><td>" + delegado.getUsuario().getNombre() + "</td>";
-                
-                resultado += "<td class='tdFechaAcc'>";
-                if (acces == null) 
+                    if (new Date().after(tiempoDgracia)){ 
+                        resultado += "<tr style='text-align:center;background-color:#FFF6B3;'> <input type='hidden' value='" + delegado.getUsuario().getIdUsuario() + "'/>"                                
+                                  + " <td align='left' style='text-align:left;padding-left:3%;'><button class='btnSentEmail'>enviar correo</button><span class='cant_emailEnviados'>" + intentos + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" + delegado.getUsuario().getNombre() + "</td>";                                                     
+                        resultado += "<td class='tdFechaAcc'>";  
+                        resultado += acces;
+                        resultado += "</td>";
+                    }else{
+                        resultado += "<tr style='text-align:center;'> <td>" + delegado.getUsuario().getNombre() + "</td>";                                                     
+                        resultado += "<td class='tdFechaAcc'>";  
+                        resultado += acces;
+                        resultado += "</td>";
+                    }
+                }else if(acces == null) {  
+                    resultado += "<tr style='text-align:center;'> <td>" + delegado.getUsuario().getNombre() + "</td>";  
+                    resultado += "<td class='tdFechaAcc'>";
                     resultado += "(No hay registros de accesos)";
-                 else 
-                    resultado += acces;
-                
-                resultado += "</td>";
-
+                     resultado += "</td>";
+                 }
                 resultado += "<td>" + delegado.getIndicador().getNombre() + "</td>";
 
                 resultado += "<td>" + delegado.getUsuario().getCorreo() + "</td>";
