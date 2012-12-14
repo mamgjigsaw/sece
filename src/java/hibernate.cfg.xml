@@ -5,8 +5,8 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sece</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">dorado</property>
+    <property name="hibernate.connection.username">cpml</property>
+    <property name="hibernate.connection.password">kmd/*cpml*/</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="mapping/Zone.hbm.xml"/>
@@ -33,5 +33,11 @@
     <mapping resource="mapping/EmailSent.hbm.xml"/>
     <mapping resource="mapping/Valoracion.hbm.xml"/>
     <mapping resource="mapping/EmailInactividad.hbm.xml"/>
+    <mapping resource="mapping/avanceVCE.hbm.xml"/>
+    <mapping resource="mapping/valoracionVCE.hbm.xml"/>
+    <mapping resource="mapping/Producto.hbm.xml"/>
+    <mapping resource="mapping/EmpresaCompleta.hbm.xml"/>
+    <mapping resource="mapping/AreasInter.hbm.xml"/>
+    <mapping resource="mapping/ResultadoInter.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

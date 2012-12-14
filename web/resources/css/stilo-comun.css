@@ -1,0 +1,25 @@
+/* 
+    Document   : stilo-comun
+    Created on : Nov 9, 2012, 9:39:27 AM
+    Author     : davidalmanza
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;    
+    
+}
+#top{
+   padding:0; margin:0;  background: url(../images/header_bg.gif) top  repeat-x; 
+}
+
+.tipo{
+    font-size: 14px;      
+    
+}
+
+#formInternacionalizacion table{
+    width: 100%;
+}
+

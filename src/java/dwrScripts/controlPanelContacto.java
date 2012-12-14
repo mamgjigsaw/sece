@@ -357,4 +357,21 @@ public class controlPanelContacto {
         del.setUsuario(usuario);
         delDao.update(del);
     }
+    
+    public int validarEmpresaCompleta(int id_contrato){
+        Contrato contrato = new Contrato();
+        ContratoDaoImpl contraDao = new ContratoDaoImpl();
+        contrato = contraDao.findById(id_contrato);
+        
+        EmpresaCompleta empCompleta = new EmpresaCompleta();
+        EmpresaCompletaDaoImpl empDao = new EmpresaCompletaDaoImpl();
+        empCompleta = empDao.findByIdContrato(contrato);
+        
+        if(empCompleta == null){
+            return 0;
+        }else{
+            return 1;
+        }
+       // return 1;
+    }
 }

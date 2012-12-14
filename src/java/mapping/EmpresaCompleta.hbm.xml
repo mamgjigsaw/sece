@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 14, 2012 4:01:38 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.EmpresaCompleta" table="empresa_completa">
+    <id name="idEmpresaCompleta" type="java.lang.Integer">
+      <column name="id_empresa_completa"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Contrato" fetch="select" name="contrato">
+      <column name="id_contrato"/>
+    </many-to-one>
+    <property name="razonSocial" type="string">
+      <column length="50" name="razon_social"/>
+    </property>
+    <property name="ruc" type="string">
+      <column length="50" name="ruc"/>
+    </property>
+    <property name="correo" type="string">
+      <column length="50" name="correo"/>
+    </property>
+    <property name="web" type="string">
+      <column length="50" name="web"/>
+    </property>
+    <property name="anioCreacion" type="java.lang.Integer">
+      <column name="anio_creacion"/>
+    </property>
+    <property name="sector" type="string">
+      <column length="200" name="sector"/>
+    </property>
+    <property name="nivelEmpresa" type="string">
+      <column length="100" name="nivel_empresa"/>
+    </property>
+    <property name="actividadPrimaria" type="string">
+      <column length="100" name="actividad_primaria"/>
+    </property>
+    <property name="actividadSecundaria" type="string">
+      <column length="100" name="actividad_secundaria"/>
+    </property>
+    <property name="numeroEmpleadosPermanente" type="java.lang.Integer">
+      <column name="num_empleados_permanente"/>
+    </property>
+    <property name="numeroEmpleadosTemp" type="java.lang.Integer">
+      <column name="num_empleados_temp"/>
+    </property>
+    <property name="facturacionAnual" type="java.lang.Integer">
+      <column name="facturacion_anual" precision="22" scale="0"/>
+    </property>
+    <property name="ofertaPrincipal" type="string">
+      <column length="100" name="oferta_principal"/>
+    </property>
+    <property name="empaqueProducto" type="string">
+      <column length="100" name="empaque_producto"/>
+    </property>
+    <property name="comentariosAnterior" type="string">
+      <column length="500" name="comentarios_anterior"/>
+    </property>
+    <property name="comentarios" type="string">
+      <column length="500" name="comentarios"/>
+    </property>
+  </class>
+</hibernate-mapping>

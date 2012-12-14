@@ -46,7 +46,8 @@
      <body>    
 <div class="main">
   <div class="header">
-    <div class="header_resize">      
+    <div class="header_resize">     
+         <a href="logger.jsp" class="buttonIniciarSesion">Iniciar Sesion!</a>
       <div class="menu">
          <ul>
           <li><a href="index.jsp"><span>Inicio</span></a></li>
@@ -87,14 +88,14 @@
                             </div>
                             <div class="right2" style="margin-top: 6%;">
                                 <div align="center"><h3>P&aacute;gina de Inicio del Sistema</h3></div>
-                                <p>Esta es la pantalla que le aparece cuando entre a <a href="#">http://www.sece.org.ni.com</a> es el index.jsp.<br/> Hay tres pestañas inicio, acerca de y contáctenos.<br/> <b>Inicio</b>, aquí se mostrara información de CPML, que es SECE y noticias o notas acerca de las actividades próximas que realizaran. </p>
+                                <p>Esta es la pantalla que le aparece cuando entre a <a href="#">http://www.sece.pml.org.ni</a> es el index.jsp.<br/> Hay tres pestañas inicio, acerca de y contáctenos.<br/> <b>Inicio</b>, aquí se mostrara información de CPML, que es SECE y noticias o notas acerca de las actividades próximas que realizaran. </p>
                                 <img src="ayuda/imagenes/imgC01.jpg"/>
                                 <p>En noticias y notas, muestra las actividades que se realizaron hace una semana y las de la próxima. El ingreso de estas notas la realizara el administrador del sistema, más adelante en subsistema el modulo del administrador se explicara y se mostrara el formulario de ingreso. Así como todas las notas hechas.</p> 
                                 <img src="ayuda/imagenes/imgC02.jpg"/>
                                 <p>Acerca de, muestra información sobre quienes desarrollaron el sistema, como un video explicativo de como registrarse.</p>
                                 <img src="ayuda/imagenes/imgC03.jpg"/>
                                 <p>Contáctenos, hay un formulario donde usuario puede enviar sugerencia, preguntas o consulta a CPLM sobre SECE. También muestra información de CPML como ubicación geográfica, dirección, teléfonos.</p>
-                                <p>También en el inicio hay una opción para iniciar sesión en el sistema. Que nos direcciona a <a href="#">http://sece.org.ni.com/logger.jsp.</a></p>
+                                <p>También en el inicio hay una opción para iniciar sesión en el sistema. Que nos direcciona a <a href="#">http://sece.pml.org.ni/logger.jsp.</a></p>
                             </div>
                              <div class="clr"></div>
                             

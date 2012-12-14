@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VCE_report" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c819dac-d4d6-4c28-bcfc-37f12f1bc989">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Mendieta\\Documents\\GitHub\\sece\\web\\WEB-INF\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="empresa" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="indicador" class="java.lang.String"/>
+	<field name="valoracionesDS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="d9e91192-d80c-4d6d-a3fa-1ce504851d49" mode="Opaque" x="-20" y="-20" width="842" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="9f55f474-3084-4d27-bc89-a43802c27328" x="116" y="3" width="580" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PROGRAMA DE COMPETITIVIDAD EMPRESARIAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="01263b44-eacc-48e5-b2ee-eade42264b5f" x="556" y="72" width="62" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Empresa:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a8d23eaf-15e7-4a0f-b1f0-3197badf2981" x="219" y="39" width="379" height="26" forecolor="#CCFFCC"/>
+					<textElement>
+						<font fontName="Bodoni MT" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VALORACION DE COMPETITIVIDAD EMPRESARIAL]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="66581149-34c6-4569-8e62-4a60b719ff66" x="619" y="72" width="170" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{empresa}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<detail>
+		<band height="99">
+			<rectangle>
+				<reportElement uuid="c9e81f44-6332-4fb8-b4a9-c3f14417b40b" x="0" y="0" width="802" height="20" forecolor="#FFFFFF" backcolor="#006699"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="8022ab84-a177-4fc2-86ae-e4e7a84c5409" x="11" y="0" width="52" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Area:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="afd5cd65-69e3-45e5-92d6-8d782ce71a55" x="63" y="0" width="148" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{indicador}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="32e76ccb-21e2-441a-9782-08f12401c596" x="0" y="20" width="802" height="79"/>
+				<dataSourceExpression><![CDATA[$F{valoracionesDS}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/home/reportes/VCE_report_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="514ecd7b-abea-44bf-8902-58fff39b781e" mode="Opaque" x="0" y="4" width="762" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="baf2ba63-04f3-4dec-8c26-af94084cbb2a" mode="Opaque" x="762" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="1c77b35d-48ed-4016-8f8a-822c82815441" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -38,7 +38,11 @@ public class verFormatoInstrumento extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("application/msword");
+        
+        // response.setContentType("application/msword");
+        //ServletOutputStream out = response.getOutputStream();
+        
+        response.setContentType("application/pdf");
         ServletOutputStream out = response.getOutputStream();
         
         IndicadorDaoImpl idi = new IndicadorDaoImpl();
@@ -51,7 +55,12 @@ public class verFormatoInstrumento extends HttpServlet {
       JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null , new JRBeanCollectionDataSource(list));
 
       //JRExporter exporter = new JRPdfExporter();
-      JRExporter exporter = new JRDocxExporter();
+      //JRExporter exporter = new JRDocxExporter();
+      //exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+      //exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+      //exporter.exportReport();
+      
+      JRExporter exporter = new JRPdfExporter();
       exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
       exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
       exporter.exportReport();

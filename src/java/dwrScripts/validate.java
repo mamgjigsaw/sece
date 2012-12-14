@@ -55,9 +55,9 @@ import pojo.*;
  * @author mamg
  */
 public class validate {
-    Cipher ecipher;
-    Cipher dcipher;
-    String phase ="dmkIAZfwCmKt$3$";
+    public Cipher ecipher;
+    public Cipher dcipher;
+    public String phase ="kmd";
   
     public validate() {
     }
@@ -81,7 +81,7 @@ public class validate {
                String pass = encriptar.md5(password);            
                  if(usuario.getPassword().equals(pass)){
                      respuesta = 1;//es la persona correcta
-                 }else{                   
+                  }else{                   
                      respuesta = 2;//digito mal el password                   
                 }   
             }                            

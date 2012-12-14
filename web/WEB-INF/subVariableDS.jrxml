@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subVariableDS" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subVariableDS" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="37c4c74f-085f-433f-b910-36312d104c8a">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -16,55 +16,55 @@
 	<detail>
 		<band height="66" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="23" backcolor="#CCCCCC"/>
+				<reportElement uuid="df8deed8-f228-4698-bc5d-0752dc9d0ac2" x="0" y="0" width="555" height="23" backcolor="#CCCCCC"/>
 				<graphicElement>
 					<pen lineWidth="0.0" lineStyle="Double"/>
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="441" y="4" width="100" height="20"/>
+				<reportElement uuid="7a059825-8d09-43c7-bcb6-d3761470584a" x="441" y="4" width="100" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ponderacion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="71" y="4" width="339" height="20"/>
+				<reportElement uuid="0dc3ac32-f39d-4ef0-a795-070bdaf95d4b" x="71" y="4" width="339" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="3" y="4" width="69" height="20"/>
+				<reportElement uuid="2aeb0e72-9ef4-4a8a-805e-4a09e29a24a5" x="3" y="4" width="69" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Variable:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="0" width="555" height="1"/>
+				<reportElement uuid="e8c7f378-8127-458e-b48f-3493e615a080" x="0" y="0" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="2.25"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="0" y="24" width="555" height="1"/>
+				<reportElement uuid="d6e4af9f-21c7-4a3c-9f67-723986fccec7" x="0" y="24" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="4.0" lineStyle="Double"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="367" y="4" width="75" height="20"/>
+				<reportElement uuid="1045deab-860a-4a45-a5d5-5545328ace85" x="367" y="4" width="75" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Ponderación:]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="0" y="26" width="555" height="40"/>
+				<reportElement uuid="0a3471d6-cbee-4ab5-9b32-77d71484fc45" x="0" y="26" width="555" height="40"/>
 				<dataSourceExpression><![CDATA[$F{itemDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["/home/reports/subItemDS.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["/home/reportes/subItemDS.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

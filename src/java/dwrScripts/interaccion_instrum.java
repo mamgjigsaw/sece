@@ -11,9 +11,12 @@ import daoImpl.IndicadorDaoImpl;
 import daoImpl.ItemDaoImpl;
 import daoImpl.RespItemDaoImpl;
 import daoImpl.UsuarioDaoImpl;
+import daoImpl.ValoracionDaoImpl;
 import daoImpl.VariableDaoImpl;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import pojo.Avance;
@@ -23,6 +26,7 @@ import pojo.Indicador;
 import pojo.Item;
 import pojo.RespItem;
 import pojo.Usuario;
+import pojo.Valoracion;
 import pojo.Variable;
 
 /**
@@ -243,6 +247,12 @@ public class interaccion_instrum {
              int ponderacion=0;
              double v=0;
              double vs=0.0;
+             
+             Valoracion valoracionPojo = new Valoracion();
+             ValoracionDaoImpl valDao = new ValoracionDaoImpl();
+             Usuario usuario = new Usuario();
+             UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
+             usuario = usuDao.findById(contrato.getUsuario().getIdUsuario());
 
              IndicadorDaoImpl daoIndi = new IndicadorDaoImpl();
              List<Indicador> listIndi = new ArrayList<Indicador>();
@@ -297,7 +307,22 @@ public class interaccion_instrum {
                      valoracion = valoracion + escala.getValoracion();
                      
                      ponderacion = ponderacion + variable.getPonderacion();
-                     //ponderacionTotal = ponderacionTotal + variable.getPonderacion();
+                     //ponderacionTotal = ponderacionTotal + variable.getPonderacion();                     
+                     
+                     //para guardar en la pojo valoracion
+                     
+                     Date fecha = new Date();        
+                     Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
+        
+                     valoracionPojo.setContrato(contrato);
+                     valoracionPojo.setUsuario(usuario);
+                     valoracionPojo.setVariable(variable);
+                     valoracionPojo.setEscalaObtenida(escala.getValoracion());
+                     valoracionPojo.setPonderacion(variable.getPonderacion());
+                     valoracionPojo.setContribucion(indicador.getContribucion());
+                     valoracionPojo.setFecha(momentoTimestamp);
+                     
+                     valDao.create(valoracionPojo);
                  }//fin ciclo variable
 
                  promedio = (double) valoracion / listVariable.size();

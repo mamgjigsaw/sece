@@ -79,9 +79,13 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                 DelegacionIndiUsuDaoImpl delimpl = new DelegacionIndiUsuDaoImpl();
                 DelegacionIndiUsu dele = new DelegacionIndiUsu(); 
                 dele = delimpl.getDelByContCurrentlyandUsu(usuario); 
-
-                //obtenemos el contrato          
-                idContrato = dele.getContrato().getIdContrato();
+                
+                if(dele==null){
+                   idContrato = 0;// no posee ningun contrato   
+                }else{
+                    //obtenemos el contrato          
+                   idContrato = dele.getContrato().getIdContrato();
+                }
 
              }else if(tipo==3){// si es tipo contacto
 
@@ -150,10 +154,11 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                 $( "#btnupdatContra" ).button(); 
                 $( "#btnupdatEmpresa" ).button();
                 $( "#btnVCUser" ).button();
+                $( "#gotSEI" ).button();
                 $( "#tabs" ).tabs();  
                 
                 //remueve video chat
-                $("#tabs").tabs( "remove" , 4 );
+                //$("#tabs").tabs( "remove" , 4 );
                                 
                 if(tipo==4){
                    $("#tabs").tabs( "remove" , 2 );
@@ -166,6 +171,14 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                     cargarComboIndicador();                      
                     $("#new").click();
                     //$("#grafico").hide();
+                }
+                
+                if(IdContrato==0){
+                    $("#toolbar1").hide();
+                    
+                    var palabra="<section role='principal' id='message_box'><div class='notification information'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Asignación</strong><p class='hola'>No posee ningun indicador a cargo!!.</p></div><!-- /Notification --></section>";  
+                    //$("#box_message").html(palabra);
+                    $("#tabs-1").html(palabra);
                 }
                 
                 //llamar los metodos que cargan las tablas
@@ -299,10 +312,10 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            var cadena="";
            
            if(tipo==4){
-               cadena="<tr><td>"+contrato+"</td><td><label for='responsable' id='resp' >"+fechaIni+"</label></td><td><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
+               cadena="<tr><td>"+contrato+"</td><td><label for='responsable' id='resp' >"+fechaIni+"</label></td><td><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE Condensado</strong></a></p></td><td><p><a href='#' onclick='goGrafico2("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
                
            }else{
-               cadena="<tr><td>"+contrato+"</td><td><label for='responsable' id='resp' >"+fechaIni+"</label></td><td><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
+               cadena="<tr><td>"+contrato+"</td><td><label for='responsable' id='resp' >"+fechaIni+"</label></td><td><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE Condesado</strong></a></p></td><td><p><a href='#' onclick='goGrafico2("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
            }
            
            $("#table_contratos").append(cadena); 
@@ -610,9 +623,16 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        
         function goGrafico1(var1){
            //location.href="resultado.jsp";   
-           window.open("InformeFinal?idContrato="+var1, "_blank");
+           window.open("InformeFinal?contra="+var1, "_blank");
            
        }
+       
+       function goGrafico2(var1){
+           //location.href="resultado.jsp";   
+           window.open("finalReport?contra="+var1, "_blank");
+           
+       }
+
        
        ////toolsbar
        $(function() {
@@ -660,6 +680,26 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                      }
                }
 	
+        
+        function dire(){
+        //http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa=2&&idcontrato=15
+        //window.open("http://localhost:8080/sece/faces/sei/instrumento.xhtml");
+        panel.validarEmpresaCompleta(IdContrato, respuestaEmpresa);
+        
+       
+        }
+        
+       function respuestaEmpresa(data){
+           if(data ==0 ){
+               //window.open("http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato, "_blank");
+               location.href = "http://sece.pml.org.ni/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
+           }else{
+              //window.open("http://localhost:8080/sece/faces/sei/instrumento.xhtml", "_blank");
+              location.href ="http://sece.pml.org.ni/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
+           }
+       }
+       
+        
         </script>
         <style>
 	#toolbar {
@@ -688,8 +728,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                   <li id="mnuBtnSalir" onclick="location.href='ayuda/ayudaContacto.jsp'" > <img src="images/question_mark.png"/> Ayuda  </li>                   
                   <li id="mnuBtnSalir" onclick="goout();" ><img src="images/salir.gif"/> Salir  </li>  
               </ul>              
-          </div>
-       
+          </div>       
 
        </div>
        
@@ -733,7 +772,8 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                <style>                
                 #table_indicador td, table_delegado td,table_contratos td {
                     border-bottom: 1px solid #999; height: 35px;}                                                        
-               </style>               
+               </style> 
+               <input type="button" id="gotSEI" value="Internacionalizacion" onclick="dire()"/>
                <div id="contenidoIndicadores" style=" padding-top:2%; " >
                   <img src="resources/icons/ajax_loading_blue.gif" width="24" height="24" border="0" style=" margin-left: 20%; margin-top: 5%;" />
               </div>

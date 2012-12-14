@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.avanceVCE" table="avancevce">
+    <id name="idavance" type="java.lang.Integer">
+      <column name="idAvance"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idContrato" type="java.lang.Integer">
+      <column name="idContrato"/>
+    </property>
+     <property name="idindicador" type="java.lang.Integer">
+      <column name="idIndicador"/>
+    </property>
+    <property name="indicador" type="string">
+      <column length="200" name="Indicador"/>
+    </property>
+    <property name="contribucion" type="java.lang.Double">
+      <column name="contribucion" precision="22" scale="0"/>
+    </property>
+    <property name="v" type="java.lang.Integer">
+      <column name="V"/>
+    </property>
+    <property name="vs" type="java.lang.Double">
+      <column name="VS" precision="22" scale="0"/>
+    </property>
+    <property name="res" type="java.lang.Double">
+      <column name="Result" precision="22" scale="0"/>
+    </property>    
+  </class>
+</hibernate-mapping>

@@ -16,7 +16,7 @@ import pojo.*;
  */
 public class initCapacitadores {
 
-    validate validar;
+    public validate validar;
 
     public initCapacitadores() {
     }

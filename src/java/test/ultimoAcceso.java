@@ -4,9 +4,10 @@
  */
 package test;
 
-import daoImpl.AccesoDaoImpl;
-import daoImpl.UsuarioDaoImpl;
-import java.util.Date;
+import daoImpl.AsignacionCapaContraDaoImpl;
+import daoImpl.ContratoDaoImpl;
+import pojo.AsignacionCapaContra;
+import pojo.Contrato;
 import pojo.Usuario;
 
 /**
@@ -19,14 +20,17 @@ public class ultimoAcceso {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Usuario user = new Usuario();
-        UsuarioDaoImpl udi = new UsuarioDaoImpl();
-        Date acces;
-        AccesoDaoImpl adi = new AccesoDaoImpl();
+        Contrato con = new Contrato();
+        ContratoDaoImpl cdi = new ContratoDaoImpl(); 
+        con = cdi.findById(41);
         
-        user = udi.findById(63);
-         acces = adi.fechaUltimoAcceso(user);
-         System.out.println(acces);
+       
+        AsignacionCapaContraDaoImpl asi = new AsignacionCapaContraDaoImpl();
+        
+        Usuario user = asi.findUsByContra(con);
+        
+        System.out.print("Nombre: " + user.getNombre() + "Correo: " + user.getCorreo() + "Direccion: " + user.getDireccion() + "Cargo: " + user.getCargo() + "Telefono: " + user.getTelefono());
+        
         
     }
 }
