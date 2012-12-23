@@ -17,10 +17,10 @@ public class Valoracion implements java.io.Serializable{
     private Variable variable;
     private int escalaObtenida;
     private int ponderacion;
-    private float contribucion;
+    private Double contribucion;
     private Date fecha;
 
-    public Valoracion(Contrato contrato, Usuario usuario, Variable variable, int escalaObtenida, int ponderacion, float contribucion, Date fecha) {
+    public Valoracion(Contrato contrato, Usuario usuario, Variable variable, int escalaObtenida, int ponderacion, Double contribucion, Date fecha) {
         this.contrato = contrato;
         this.usuario = usuario;
         this.variable = variable;
@@ -49,11 +49,11 @@ public class Valoracion implements java.io.Serializable{
         this.contrato = contrato;
     }
 
-    public float getContribucion() {
+    public Double getContribucion() {
         return contribucion;
     }
 
-    public void setContribucion(float contribucion) {
+    public void setContribucion(Double contribucion) {
         this.contribucion = contribucion;
     }
 

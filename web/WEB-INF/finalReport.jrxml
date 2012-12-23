@@ -1,50 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="finalReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="finalReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62f02a55-0d90-4525-bf37-8b92c4fce032">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="idContrato" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Kenny\\sece\\web\\WEB-INF\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\Users\\Mendieta\\Documents\\GitHub\\sece\\web\\WEB-INF\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from indicador where estado = true]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="id_indicador" class="java.lang.Integer"/>
-	<field name="nombre" class="java.lang.String"/>
+	<field name="indicador" class="java.lang.String"/>
+	<field name="v" class="java.lang.Integer"/>
+	<field name="vs" class="java.lang.Double"/>
+	<field name="res" class="java.lang.Double"/>
 	<field name="contribucion" class="java.lang.Double"/>
-	<field name="estado" class="java.lang.Boolean"/>
+	<field name="valoracionesDS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<variable name="ponderacion" class="java.lang.Integer">
+		<variableExpression><![CDATA[1000]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="sc" class="java.lang.Double">
+		<variableExpression><![CDATA[0.25]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="s" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{vs}/($F{v}*$V{sc})]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band/>
 	</background>
 	<title>
 		<band height="66">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="842" height="86" backcolor="#006699"/>
+				<reportElement uuid="fdd77fd6-8ed3-49ff-a5fd-60a1e756a575" mode="Opaque" x="-20" y="-20" width="842" height="86" backcolor="#006699"/>
 				<staticText>
-					<reportElement x="461" y="60" width="360" height="26" forecolor="#FFFFFF"/>
-					<textElement textAlignment="Right">
-						<font size="18" isBold="false"/>
+					<reportElement uuid="a0e25199-7022-4edc-9435-32b25969f589" x="162" y="34" width="518" height="26" forecolor="#CCFFCC"/>
+					<textElement textAlignment="Center">
+						<font fontName="Bodoni MT" size="16" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Valoracion de competitividad Empresarial]]></text>
+					<text><![CDATA[VALORACION DE COMPETITIVIDAD EMPRESARIAL(CONDENSADO)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7ea4d97c-f044-4132-8591-0bb0adfadd21" x="126" y="1" width="580" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PROGRAMA DE COMPETITIVIDAD EMPRESARIAL]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="25">
+		<band height="2">
 			<staticText>
-				<reportElement x="550" y="5" width="67" height="20" forecolor="#000000"/>
+				<reportElement uuid="adb64836-0781-40d9-b034-441f99fcc19f" x="550" y="-20" width="67" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Empresa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="621" y="5" width="180" height="20"/>
+				<reportElement uuid="0a1e16dd-63fa-4d2a-ad1b-d43b8c3dd047" x="621" y="-20" width="180" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -52,41 +70,137 @@
 			</textField>
 		</band>
 	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement uuid="daf2f838-4050-498f-bfe0-85b2b89e5c2b" x="71" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VARIABLES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eaeb66ff-365a-4398-824e-269f430a10cd" x="221" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PONDERACION(P)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="908a27de-1ad8-4fab-aff9-162882381dec" x="335" y="0" width="114" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRIBUCION(©)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0158b222-1454-4ea9-aead-0732ffaf25fc" x="463" y="0" width="87" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(P)*(©) = (V)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5d67ed88-485a-4b89-a61e-fd52412044ec" x="552" y="0" width="104" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SELECCION(S)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="78d0ae94-9e5e-4132-b498-14b63ff43629" x="662" y="0" width="41" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(S)/4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9cabe088-cbf4-45ce-b4c9-13c01bfe4bed" x="707" y="0" width="42" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(V)*(S)/']]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c37a644c-998a-489b-9af6-506ce4222ae5" x="761" y="0" width="31" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
 	<detail>
 		<band height="88">
 			<rectangle>
-				<reportElement x="0" y="2" width="802" height="20" forecolor="#FFFFFF" backcolor="#006699"/>
+				<reportElement uuid="b1f0d2ea-fae7-4285-a970-7c3791bf645f" x="0" y="2" width="802" height="20" forecolor="#FFFFFF" backcolor="#006699"/>
 			</rectangle>
-			<staticText>
-				<reportElement x="4" y="2" width="35" height="20" forecolor="#FFFFFF"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Area:]]></text>
-			</staticText>
 			<line>
-				<reportElement x="0" y="1" width="801" height="1"/>
+				<reportElement uuid="62de82a2-d902-4237-863e-e9679ff94b5c" x="0" y="1" width="801" height="1"/>
 				<graphicElement>
 					<pen lineWidth="3.0"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="40" y="2" width="166" height="20" forecolor="#FFFFFF"/>
+				<reportElement uuid="81b677e6-8e9c-4a33-b5e7-3fab402544aa" x="6" y="2" width="100" height="20" forecolor="#FFFFFF"/>
 				<textElement>
-					<font size="13"/>
+					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{indicador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="28d3d87c-244d-4ff4-9261-66fd2381415c" x="351" y="2" width="89" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contribucion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e79f5223-ddd2-4444-bb55-65c701bd0bdb" x="481" y="1" width="47" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{v}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5ed08431-b561-4c12-ac88-61166cd9b142" x="709" y="2" width="42" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9fac1048-d6ad-48f9-acad-6783166ffd95" x="758" y="2" width="38" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{res}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d24762ea-b2d8-4206-b7fb-a84cdf804dad" x="221" y="2" width="100" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ponderacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="783a111e-9b6b-4dae-9331-c80ec9263edd" x="662" y="0" width="32" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b7a284c-5aac-4238-8a1a-38743f25bb90" x="573" y="2" width="28" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{s}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="1" y="22" width="801" height="63"/>
-				<subreportParameter name="id_indicador">
-					<subreportParameterExpression><![CDATA[$F{id_indicador}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="idContrato">
-					<subreportParameterExpression><![CDATA[$P{idContrato}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["/home/reports/finalReport_subreport1.jasper"]]></subreportExpression>
+				<reportElement uuid="5c241855-14cc-4125-918d-3d3cbf4eaca7" x="0" y="22" width="822" height="66"/>
+				<dataSourceExpression><![CDATA[$F{valoracionesDS}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/home/reportes/finalReport_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -96,17 +210,17 @@
 	<pageFooter>
 		<band height="21">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="4" width="761" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="85b08474-98c4-4ace-8ecb-1ab799d6ccfa" mode="Opaque" x="0" y="4" width="761" height="13" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="761" y="5" width="40" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="faf3ac0a-77e8-46bc-adc2-514a37e08107" mode="Opaque" x="761" y="5" width="40" height="13" backcolor="#E6E6E6"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="4" width="100" height="13"/>
+				<reportElement uuid="08c9cb04-419b-494c-96fd-d5215d75d3a1" x="0" y="4" width="100" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>

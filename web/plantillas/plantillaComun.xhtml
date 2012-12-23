@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <ui:insert name="title"><title>Internacionalizacion</title></ui:insert>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--<link href="./../resources/css/default.css" rel="stylesheet" type="text/css" />-->
+        <link href="./../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+
+        <h:outputStylesheet name="stilo-comun.css" library="css"/>
+        <script>
+            
+             function nextTab() {
+                    tabempresa.select(tabempresa.getActiveIndex() + 1);
+                }
+             function prevTab(){
+                 tabempresa.select(tabempresa.getActiveIndex() - 1);
+             }   
+            function validate() { 
+                
+                  //de2
+                  
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:0')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto1')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto1')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:1')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:text2')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto2')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:2')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto3')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto3')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:3')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto4')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto4')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:4')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto5')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto5')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:5')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto6')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto6')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:6')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto7')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto7')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:7')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto8')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto8')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:8')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto9')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto9')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:9')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto10')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto10')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:10')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto11')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto11')).val("0");
+                }
+                
+                //d3
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:0')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod31')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod31')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:1')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textd32')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod32')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:2')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod33')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod33')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:3')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod34')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod34')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:4')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod35')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod35')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:5')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod36')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod36')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:6')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod37')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod37')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:7')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod38')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod38')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:8')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod39')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod39')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:9')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod310')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod310')).val("0");
+                }
+                
+                if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:10')).is(':checked') == true){ 
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod311')).val("1");
+                }else{
+                    $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod311')).val("0");
+                }
+                
+                location.href ="resultadoGraficoMedia.xhtml";
+            }  
+        </script>
+    </h:head>
+
+
+
+
+    <div id="top" class="top">
+        <ui:insert name="header">
+            <ui:include src="/plantillas/comun/comunHeader.xhtml"/>
+        </ui:insert>
+    </div>
+    <div>
+        
+        <div id="content" class="left_content">
+            <ui:insert name="content">Content</ui:insert>            
+        </div>
+    </div>
+
+
+</html>

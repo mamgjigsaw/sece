@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+        <script>
+            function exportChart() {  
+                //export image  
+                $('#output').empty().append(chart.exportAsImage());  
+  
+                //show the dialog  
+                dlg.show(); 
+            }  
+        </script>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="./../plantillas/plantillaComun.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:outputPanel >
+                        <p:panelGrid columns="2">
+
+                            <p:graphicImage value="../images/ex.png"/>
+
+                            <p:barChart id="stacked" value="#{graficoPE.modeloCategoria}" legendPosition="ne" style="width:500px;height:200px"  
+                                        title="Posicion Exportadora: #{graficoPE.posicion}" stacked="true" barMargin="50" min="0" max="10"/>  
+
+                        </p:panelGrid>
+                    </p:outputPanel>
+
+                    <p:barChart legendPosition="se" value="#{graficoRM.modeloCategoria}"
+                                title="Areas de la Empresa" orientation="horizontal" min="0" max="10" style="height:1200px" widgetVar="chart"/>
+
+                    <p:commandButton type="button" value="Export" icon="ui-icon-extlink" onclick="exportChart()"/>  
+
+                    <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Reporte como Imagen">  
+                        <p:outputPanel id="output" layout="block" style="width:800px;height:1200px"/>  
+                    </p:dialog>   
+
+
+                </h:form>
+            </ui:define>
+
+
+        </ui:composition>
+    </h:body>
+</html>

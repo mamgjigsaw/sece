@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bitacoraReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bitacoraReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7490e13-6c1b-4cc4-b177-a484221b2986">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="68"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Kenny\\sece\\web\\WEB-INF\\"]]></defaultValueExpression>
 	</parameter>
@@ -14,18 +14,7 @@
 		<band/>
 	</background>
 	<title>
-		<band height="72">
-			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
-				<staticText>
-					<reportElement x="20" y="20" width="301" height="43" forecolor="#FFFFFF"/>
-					<textElement>
-						<font size="34" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Bitacora de SECE]]></text>
-				</staticText>
-			</frame>
-		</band>
+		<band height="72"/>
 	</title>
 	<pageHeader>
 		<band height="13"/>
@@ -33,61 +22,71 @@
 	<detail>
 		<band height="59">
 			<rectangle>
-				<reportElement x="-1" y="-1" width="556" height="23" forecolor="#FFFFFF" backcolor="#006699"/>
+				<reportElement uuid="aef84854-c818-4fd0-b3b9-f83cf8ad62b7" x="-1" y="-1" width="556" height="23" forecolor="#FFFFFF" backcolor="#006699"/>
 			</rectangle>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="-2" width="555" height="1"/>
+				<reportElement uuid="db4441eb-a6d9-4620-804f-92b4cf7b8753" positionType="FixRelativeToBottom" x="0" y="-2" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="3.0"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="57" y="3" width="188" height="20" forecolor="#FFFFFF"/>
+				<reportElement uuid="a629c3ac-f740-40c3-8808-ba9022c28830" x="57" y="3" width="188" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="291" y="3" width="125" height="20" forecolor="#FFFFFF"/>
+				<reportElement uuid="f6dc3d57-e50b-4b7f-9e57-a511ac0db613" x="291" y="3" width="125" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="7" y="3" width="50" height="20" forecolor="#FFFFFF"/>
+				<reportElement uuid="ea241081-3f65-4859-9bbf-32fabda3f0c8" x="7" y="3" width="50" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>
 				<text><![CDATA[Usuario:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="435" y="3" width="31" height="20" forecolor="#FFFFFF"/>
+				<reportElement uuid="8259675f-38b2-4716-8f12-a9b69eef4935" x="435" y="3" width="31" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>
 				<text><![CDATA[Tipo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="246" y="3" width="44" height="20" forecolor="#FFFFFF"/>
+				<reportElement uuid="34cbb4fc-d6ed-452d-8d6f-aeed45d9e4b7" x="246" y="3" width="44" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>
 				<text><![CDATA[Cargo:]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="-1" y="23" width="555" height="36"/>
+				<reportElement uuid="73e2357d-85c1-4394-bdd0-d0b04f9e7e19" x="-1" y="23" width="555" height="36"/>
 				<dataSourceExpression><![CDATA[$F{accesoDS}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["C:\\Users\\Dave\\Documents\\NetBeansProjects\\dave\\sece\\web\\WEB-INF\\subAccesoDS.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["/home/reportes/subAccesoDS.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
-				<reportElement x="467" y="4" width="61" height="20" forecolor="#FFFFFF"/>
+				<reportElement uuid="11d56f68-a267-4e6e-98f6-64d384aa6ae5" x="467" y="4" width="61" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipoUsuario}]]></textFieldExpression>
 			</textField>
+			<frame>
+				<reportElement uuid="26447f23-22e6-4450-813c-c207d85a731c" mode="Opaque" x="-1" y="-105" width="556" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="8f240f9b-dce9-4a42-a8b0-3df8d7d515a4" x="20" y="20" width="301" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Bitacora de SECE]]></text>
+				</staticText>
+			</frame>
 		</band>
 	</detail>
 	<columnFooter>
@@ -96,17 +95,17 @@
 	<pageFooter>
 		<band height="17">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="ef841d4e-a8e2-47e9-b75e-e71f4f3d9749" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="efd1b738-18e3-4040-89e5-8badd760a290" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="4" width="100" height="13"/>
+				<reportElement uuid="cd664cba-ef49-4af6-ab76-ba1b0d19e61c" x="0" y="4" width="100" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>

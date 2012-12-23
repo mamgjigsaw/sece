@@ -164,15 +164,26 @@
         <p>De esta forma, al terminar de llenar los formularios presentados en SECE, el mismo sistema
             arrojar&aacute un informe en donde se presentar&aacute la situaci&oacuten actual de la empresa
          y sugerencias para mejorar la Competitividad Empresarial de la misma.</p>
+        
       </div>
         <div id="msnNoticia" title="Noticias de CPML" >
+            
+            
+            
             <h4><p><span id="lbltitulo"></span></p></h4>
             <p><span id="lbldescripcion"> </span></p>
             <h5> <p>Fecha: <span id="lblfecha"></span></p></h5>
         </div>
         <div class="right1">
+            
+               <h2>¿Que es Internacionalizacion?</h2>
+        <p>Es la necesidad de buscar nuevos mercados como respuesta a la fuerte competencia dentro de nuestro mercado local o nacional, el cual debe abordarse como una actividad estratégica dentro de la PYMES. </p>
+        
+        <p>Para ello, es necesario utilizar metodologías que sean claras, precisas y fácilmente adaptables a la operación estratégica que involucra todas las áreas funcionales de la empresa. El cual requiere dedicación, entusiasmo y preparación para llegar a ser un exportador exitoso.</p>
+     
         <h2>Noticias y Notas</h2>
       <%            
+      try{
            SimpleDateFormat dateConverter = new SimpleDateFormat("dd/MM/yyyy");
           NoticiasDaoImpl ndi = new NoticiasDaoImpl();
               List<Noticias> list = ndi.findLastest();    
@@ -180,6 +191,7 @@
              int nlist = list.size();
                  Noticias n = new Noticias();           
               String fecha;
+              if(nlist != 0){
               if(nlist <= 5){
                   while(it.hasNext()){
                   
@@ -202,6 +214,10 @@
         <div class="line"></div>
         <%       }//fin del for
                 }//fin del else
+                           }
+                           }catch(Exception e){
+                               System.out.println(e.getMessage());
+                           }
                                   
  %>   
       

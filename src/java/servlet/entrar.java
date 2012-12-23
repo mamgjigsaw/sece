@@ -36,36 +36,44 @@ public class entrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       
-       // Set to expire far in the past.
-  response.setHeader("Expires", "0");
-
-  // Set standard HTTP/1.1 no-cache headers.
-  response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-
-  // Set IE extended HTTP/1.1 no-cache headers (use addHeader).
-  response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-
-  // Set standard HTTP/1.0 no-cache header.
-  response.setHeader("Pragma", "no-cache");
+       try{
+        // Set to expire far in the past.
+        //response.setHeader("Expires", "0");
+        // Set standard HTTP/1.1 no-cache headers.
+        //response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        // Set IE extended HTTP/1.1 no-cache headers (use addHeader).
+        //response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+        // Set standard HTTP/1.0 no-cache header.
+        //response.setHeader("Pragma", "no-cache");
+        
         String email, pass;
         initCapacitadores capacitador = new initCapacitadores();
 
         email = request.getParameter("cV5VDde7H0l");
         pass = request.getParameter("K3JR5YpwQ8");
         
-        //email = (String) request.getAttribute("cV5VDde7H0l");
-        //pass = (String) request.getAttribute("K3JR5YpwQ8");
+        if (email==null || email==""){
+            response.sendRedirect("index.jsp");
+        }
         
-        validate valid = new validate();       
+        if (pass==null || pass==""){
+            response.sendRedirect("index.jsp");
+        }
+        
+        //validate valid = new validate();       
 
-        String password = encriptar.md5(valid.decrypt(pass));
+        String password = "";
+        //password = encriptar.md5(valid.decrypt(pass));
+        password = encriptar.md5(pass);
         
+        //System.out.println(password + " el pass " + pass);
         Date fecha = new Date();        
         Timestamp momentoTimestamp = new Timestamp(fecha.getTime());
 
         UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
-        Usuario usuario =usuDao.findByEmail(email);
+        Usuario usuario = new Usuario();
+        
+        usuario = usuDao.findByEmail(email);
         usuario.setEstado(1);
         usuDao.update(usuario);        
 
@@ -84,27 +92,26 @@ public class entrar extends HttpServlet {
                 HttpSession sesion=request.getSession();
                 sesion.setAttribute("idAcc", acc.getIdAcceso().toString() );
                 response.sendRedirect("initCapacitador.jsp");
-            }    
-            else if(usuario.getTipoUsuario()==4){//delegado
+            } else if(usuario.getTipoUsuario()==4){//delegado
                 HttpSession sesion=request.getSession();
                 sesion.setAttribute("idAcc", acc.getIdAcceso().toString());        
-               // response.sendRedirect("instrument.jsp");
                 response.sendRedirect("controlPanel.jsp");
                 //actualizar intentos a 0
                 capacitador.reiniciarConteoEmails(usuario);
-            }
-            else if(usuario.getTipoUsuario()==1 && usuario.getEstado() == 1){
+            } else if(usuario.getTipoUsuario()==1 && usuario.getEstado() == 1){
                 usuario.setEstado(2);
                 usuDao.update(usuario);
                 HttpSession sesion=request.getSession();
                 sesion.setAttribute("idAcc", acc.getIdAcceso().toString());        
                 response.sendRedirect("main_admin.jsp");
-                
             }
             
         }else{
             response.sendRedirect("index.jsp");
-        }    
+        } 
+        
+       }catch(Exception e){System.out.print("ja " + e.getMessage().getClass());
+       }   
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

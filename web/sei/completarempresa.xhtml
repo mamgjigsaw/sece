@@ -1,0 +1,350 @@
+<ui:composition template="./../plantillas/plantillaComun.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"     
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    
+        <ui:define name="title"><title>Datos de Empresa</title></ui:define>
+   
+       
+        <ui:define name="left">
+            <p:button value="Atras" outcome="../controlPanel.jsp" />
+        </ui:define>
+
+        <ui:define name="content">
+            
+            <h:form id="form_completar_empresa">
+                <p:messages id="mensajes" showDetail="true" autoUpdate="true" closable="true" />  
+                <p:tabView id="vistaTab">  
+
+                    <p:tab id="pesta1" title="Datos de Empresa"> 
+                        <p:panelGrid style="border:none;">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="2">Rellenar Datos</p:column>
+                                </p:row>
+                            </f:facet>  
+
+                            <p:row> 
+                                <p:column><h:outputText value="Nombre Comercial"/></p:column>
+                                <p:column><h:outputText value="#{mbcompletado.emp.nombre}"/></p:column> 
+                            </p:row>
+                            <p:row>  
+                                <p:column><h:outputLabel value="Razon Social"/></p:column>
+                                <p:column><p:inputText value="#{mbcompletado.ec.razonSocial}"/></p:column>
+                            </p:row>
+                            <p:row>  
+                                <p:column><h:outputLabel value="RUC"/></p:column>
+                                <p:column><p:inputText value="#{mbcompletado.ec.ruc}"/></p:column>
+                            </p:row> 
+                            <p:row>  
+                                <p:column><h:outputLabel value="Direccion"/></p:column>
+                                <p:column><h:outputText value="#{mbcompletado.emp.direccion}"/></p:column>
+                            </p:row>
+                            <p:row> 
+                                <p:column><h:outputLabel value="Telefono"/></p:column>
+                                <p:column><h:outputText value="#{mbcompletado.emp.telefono}"/></p:column>
+                            </p:row>
+                            <p:row>    
+                                <p:column><h:outputLabel  value="Web"/></p:column>
+                                <p:column><p:inputText id="textWeb" value="#{mbcompletado.ec.web}" style="width: 300px;" /></p:column>
+                            </p:row>                                
+                            <p:row>    
+                                <p:column colspan="2">
+
+                                    <p:panelGrid style="width: 100%;">
+                                        <f:facet name="header">
+                                            <p:row>
+                                                <p:column colspan="2">Datos del interlocutor</p:column>
+                                            </p:row>
+                                        </f:facet>
+
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Nombre"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuarioCapacitador.nombre}" /></p:column>
+                                        </p:row>                                            
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Puesto"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuarioCapacitador.cargo}"/></p:column>
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Correo"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuarioCapacitador.correo}" /></p:column>
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Telefono"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuarioCapacitador.telefono}" /></p:column>
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Direccion"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuarioCapacitador.direccion}" /></p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2" styleClass="ui-widget-header">  
+                                                Datos del Contacto<p:spacer height="0"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Nombre Contacto"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuario.nombre}" /></p:column>    
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Cargo"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuario.cargo}"/></p:column>
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Correo"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuario.correo}" /></p:column>
+                                        </p:row> 
+                                        <p:row>
+                                            <p:column><h:outputLabel value="Telefono"/></p:column>
+                                            <p:column><h:outputText value="#{mbcompletado.usuario.telefono}"/></p:column>
+                                        </p:row> 
+                                    </p:panelGrid>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+
+                    </p:tab>   
+
+                    <p:tab id="pesta2" title="Datos de Actividad"> 
+
+                        <p:panelGrid id="panelEmpresa">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column>Datos de la Empresa</p:column>
+                                </p:row>
+                            </f:facet>  
+                            <p:row>    
+                                <p:column><h:outputLabel  value="Año de Creacion"/></p:column>
+                                <p:column>
+                                    <h:selectOneMenu value="#{mbcompletado.ec.anioCreacion}">
+                                        <f:selectItems value="#{mbcompletado.years}" />                                            
+                                    </h:selectOneMenu>
+                                </p:column>                                    
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputLabel  value="Tipo"/></p:column>
+                                <p:column>
+                                    <p:panelGrid columns="1" style="border-style: hidden;">
+                                        <p:selectOneMenu id="selectSector" value="#{mbcompletado.ec.sector}">
+                                            <f:selectItems value="#{mbcompletado.sectores}"/>
+                                        </p:selectOneMenu>
+                                        <p:selectOneMenu id="selectTipo" value="#{mbcompletado.ec.nivelEmpresa}">
+                                            <f:selectItem itemLabel="Productor/Fabricante " itemValue="Productor/Fabricante " />  
+                                            <f:selectItem itemLabel="Distribuidor/Importador" itemValue="Distribuidor/Importador"/>
+                                            <f:selectItem itemLabel="Servicios" itemValue="Servicios"/>
+                                        </p:selectOneMenu>     
+                                    </p:panelGrid>
+                                </p:column>    
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Actividad Principal"/></p:column>
+                                <p:column><p:inputText value="#{mbcompletado.ec.actividadPrimaria}"/></p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Actividad Secundaria"/></p:column>
+                                <p:column><p:inputText value="#{mbcompletado.ec.actividadSecundaria}"/></p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Numero de Empleados Permanentes"/></p:column>
+                                <p:column>
+                                    <p:selectOneMenu value="#{mbcompletado.ec.numeroEmpleadosPermanente}" style="width: 40%;">
+                                        <f:selectItem itemValue="1" itemLabel="Solo Socios"/>
+                                        <f:selectItem itemValue="2" itemLabel="Menos de 5"/>
+                                        <f:selectItem itemValue="3" itemLabel="Entre 5 y 20"/>
+                                        <f:selectItem itemValue="4" itemLabel="Entre 20 y 50"/>
+                                        <f:selectItem itemValue="5" itemLabel="Entre 50 y 250"/>
+                                        <f:selectItem itemValue="6" itemLabel="Mas de 250"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Numero de Empleados Temporales"/></p:column>
+                                <p:column>
+                                    <p:selectOneMenu value="#{mbcompletado.ec.numeroEmpleadosTemp}" style="width: 40%;">
+                                        <f:selectItem itemValue="1" itemLabel="Menos de 5"/>
+                                        <f:selectItem itemValue="2" itemLabel="Entre 5 y 20"/>
+                                        <f:selectItem itemValue="3" itemLabel="Entre 20 y 50"/>
+                                        <f:selectItem itemValue="4" itemLabel="Entre 50 y 250"/>
+                                        <f:selectItem itemValue="5" itemLabel="Mas de 250"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Facturacion anual"/></p:column>
+                                <p:column>
+                                    <p:selectOneMenu value="#{mbcompletado.ec.facturacionAnual}" style="width:70%;">
+                                        <f:selectItem itemValue="1" itemLabel="Menos de 50,000"/>
+                                        <f:selectItem itemValue="2" itemLabel="Entre 50,000 y 100,000"/>
+                                        <f:selectItem itemValue="3" itemLabel="Entre 100,000 y 250,000"/>
+                                        <f:selectItem itemValue="5" itemLabel="Entre 250,000 y 500,000"/>
+                                        <f:selectItem itemValue="7" itemLabel="Entre 500,000 y 1,000,000"/>
+                                        <f:selectItem itemValue="9" itemLabel="Entre 1,000,000 y 3,000,000"/>
+                                        <f:selectItem itemValue="10" itemLabel="Mas de 3,000,000"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Empaques"/></p:column>
+                                <p:column>
+                                    <p:selectBooleanCheckbox value="#{mbcompletado.empaque}">
+                                        <p:ajax update="panelEmpresa"/>
+                                    </p:selectBooleanCheckbox>                                        
+                                    <p:panel id="colEmp"  rendered="#{mbcompletado.empaque}">
+                                        <p:selectOneRadio value="#{mbcompletado.ec.empaqueProducto}" layout="custom" id="radio1">
+                                            <f:selectItem itemValue="Empaques para el producto y embalajes para el transporte"/>
+                                            <f:selectItem itemValue="Sólo embalajes para el transporte"/>
+                                        </p:selectOneRadio>
+                                        <p:panelGrid columns="2">
+                                            <p:radioButton for="radio1" itemIndex="0"/>
+                                            <h:outputLabel value="Empaques para el producto y embalajes para el transporte"/>
+
+                                            <p:radioButton for="radio1" itemIndex="1"/>
+                                            <h:outputLabel value="Sólo embalajes para el transporte"/>
+
+                                        </p:panelGrid>
+                                    </p:panel>
+                                </p:column>
+
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Comentarios sobre lo anterior"/></p:column>
+                                <p:column><p:inputTextarea value="#{mbcompletado.ec.comentariosAnterior}" style="width: 100%;"/></p:column>
+                            </p:row>
+
+
+                            <p:row>
+                                <p:column colspan="2" >
+
+                                    <p:panelGrid columns="2" id="gridProductos">
+                                        <f:facet name="header">
+                                            <p:row>
+                                                <p:column colspan="2">Datos del Producto</p:column>
+                                            </p:row>    
+                                        </f:facet>
+
+                                        <h:outputLabel value="Descripcion"/>
+                                        <p:column><p:inputText id="txtDesc" value="#{mbcompletado.producto.descripcion}"/>
+                                            <p:message id="mensajeDesc" for="txtDesc"/></p:column>
+
+                                        <h:outputLabel value="Año de Introduccion"/>
+                                        <p:inputText value="#{mbcompletado.producto.anioIntroduccion}"/>
+
+                                        <p:column><h:outputLabel value="% facturacion"/></p:column>
+                                        <p:column><p:inputText id="txtfacturacion" value="#{mbcompletado.producto.porcentajeFacturacion}"/>
+
+                                            <p:message for="txtfacturacion"/></p:column>
+
+                                        <h:outputLabel value="% de exportacion"/>
+                                        <p:inputText value="#{mbcompletado.producto.porcentajeExportacion}"/>
+
+                                        <h:outputLabel value="Inicio de Exportacion"/>
+                                        <p:inputText  value="#{mbcompletado.producto.anioExportacion}"/>
+
+                                        <p:column colspan="3">
+                                            <p:commandButton action="#{mbcompletado.reiniciar}"
+                                                             update="productos gridProductos" icon="ui-icon-plus">
+                                                <p:collector value="#{mbcompletado.producto}"
+                                                             addTo="#{mbcompletado.productos}"/>
+                                            </p:commandButton>
+                                        </p:column>
+
+                                    </p:panelGrid>
+
+
+                                </p:column>  
+                            </p:row>
+
+                            <p:row>
+                                <p:column colspan="3">
+                                    <p:outputPanel id="productos">
+                                        <p:dataTable id="tblProductos" value="#{mbcompletado.productos}" var="prod">
+                                            <p:column>
+                                                <f:facet name="header">  
+                                                    <h:outputText value="Descripcion" />  
+                                                </f:facet>  
+                                                <h:outputText value="#{prod.descripcion}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">  
+                                                    <h:outputText value="Año de Introduccion" />  
+                                                </f:facet>  
+                                                <h:outputText value="#{prod.anioIntroduccion}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">  
+                                                    <h:outputText value="% facturacion" />  
+                                                </f:facet>  
+                                                <h:outputText value="#{prod.porcentajeFacturacion}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">  
+                                                    <h:outputText value="% de exportacion" />  
+                                                </f:facet>  
+                                                <h:outputText value="#{prod.porcentajeExportacion}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">  
+                                                    <h:outputText value="Inicio de Exportacion" />  
+                                                </f:facet>  
+                                                <h:outputText value="#{prod.anioExportacion}" />
+                                            </p:column>
+
+                                            <p:column>  
+                                                <f:facet name="header">  
+                                                    <h:outputText value="Operaciones"/>  
+                                                </f:facet>  
+                                                <p:commandLink value="Quitar" process="tblProductos" update="tblProductos">  
+                                                    <p:collector value="#{prod}"  
+                                                                 removeFrom="#{mbcompletado.productos}" />  
+                                                </p:commandLink>  
+                                            </p:column>  
+
+                                        </p:dataTable>
+                                    </p:outputPanel>
+
+                                </p:column>
+                            </p:row>
+
+
+                            <p:row>
+                                <p:column><h:outputLabel value="Comentario sobre empresa y Exportacion"/></p:column>
+                                <p:column><p:inputTextarea value="#{mbcompletado.ec.comentarios}" style="width: 100%;" /></p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column colspan="2">
+                                    <p:commandButton id="btn_salvar" actionListener="#{mbcompletado.guardarEC}" 
+                                                     update="form_completar_empresa" ajax="false"
+                                                     value="Guardar" icon="ui-icon-disk" action="instrumento.xhtml"/>
+                                </p:column>
+                            </p:row>
+
+                        </p:panelGrid>
+
+                    </p:tab> 
+                </p:tabView>
+
+            </h:form>
+
+
+        </ui:define>
+
+
+</ui:composition>
+
+

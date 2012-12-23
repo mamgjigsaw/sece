@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 14, 2012 4:01:38 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.Producto" table="producto">
+    <id name="idProductos" type="java.lang.Integer">
+      <column name="id_productos"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Empresa" fetch="select" name="empresa">
+      <column name="id_empresa"/>
+    </many-to-one>
+    <property name="descripcion" type="string">
+      <column length="100" name="descripcion"/>
+    </property>
+    <property name="anioIntroduccion" type="java.lang.Integer">
+      <column name="anio_introduccion"/>
+    </property>
+    <property name="porcentajeFacturacion" type="java.lang.Double">
+      <column name="porcentaje_facturacion" precision="22" scale="0"/>
+    </property>
+    <property name="porcentajeExportacion" type="java.lang.Double">
+      <column name="porcentaje_exportacion" precision="22" scale="0"/>
+    </property>
+    <property name="anioExportacion" type="java.lang.Integer">
+      <column name="anio_exportacion"/>
+    </property>
+  </class>
+</hibernate-mapping>

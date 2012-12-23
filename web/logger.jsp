@@ -52,8 +52,8 @@
                     var palabra="<section role='principal' id='message_box'><!-- Notification --><div class='notification error'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Error Correo</strong><p class='hola'>Digite correctamente el email y si no <a href='register.jsp?rodaticapacdi=mJH83fas2{}4'><strong>registrese</strong></a>, porfavor!!</p></div><!-- /Notification --></section>";                    
                 }else if(resp==1){                    
                     $("#hola").html("");
-                    validacion.encrypt(dwr.util.getValue("txtpass"),passEncript);
-                    //$( "#dialog-message" ).dialog( "open" );                                        
+                    //validacion.encrypt(dwr.util.getValue("txtpass"),passEncript); 
+                    location.href = "entrar?cV5VDde7H0l="+ dwr.util.getValue("txtemail") +"&&K3JR5YpwQ8="+ dwr.util.getValue("txtpass");
                 }else if(resp==2){
                     if(countError==2){
                        var palabra="<section role='principal' id='message_box'><div class='notification error'><a onclick='$(this).parent().hide()' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Cuenta bloqueada</strong><p class='hola'>Su cuenta ha sido bloqueada, dirijase al administrador para activarla, gracias!!</p></div><!-- /Notification --></section>"; 
@@ -208,8 +208,8 @@
             <p>Es gratis, facil y sencillo. Asi como lo lees podras evaluar la competitividad de tu empresa y posteriormente tomar desiciones con fundamento.</p>
             <table style=" padding-left: 18px; padding-top: 5px;" >
                     <form id="form_s" method="post">                             
-                           <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input id ="email" name="txtemail" type="text" value="" onblur="clearText(this);" onfocus="clearText(this);"  /></td></tr>
-                           <tr><td><label class="tlabel" for="contra">Contraseña:</label></td><td><input id ="pass" name="txtpass" type="password" value="" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
+                           <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input id ="email" name="txtemail" type="text" onblur="clearText(this);" onfocus="clearText(this);"  /></td></tr>
+                           <tr><td><label class="tlabel" for="contra">Contraseña:</label></td><td><input id ="pass" name="txtpass" type="password" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
                            <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Entrar" /></td><td><input type="button" id="create-user" onclick="go_register();" value="Registrarse"/></td></tr>
                     </form>
                   </table> 

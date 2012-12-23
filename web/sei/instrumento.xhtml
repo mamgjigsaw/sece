@@ -1,0 +1,2681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"  
+      xmlns:h="http://java.sun.com/jsf/html"   
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template="./../plantillas/plantillaComun.xhtml">
+
+            <script>
+               
+            </script>    
+            <ui:define name="content">
+                <h:form id="formInternacionalizacion">
+                    <p:tabView id="tabPreg_Inter" orientation="left" widgetVar="tabempresa">
+
+                        <p:tab title="Empresa II">
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob1" value="#{cuestionarioController.pi.b1}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Capacidad Productiva: ante un incremento repentino e importante de la demanda (un 50% por ejemplo):"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt1" for="radiob1" itemIndex="0"/>
+                                    <h:outputLabel for="opt1" value="#{cuestionarioController.nombreComercial} podría atender el incremento con la capacidad productiva actual, no serían necesarios cambios en personal o maquinaria."/>
+
+                                    <p:radioButton id="opt2" for="radiob1" itemIndex="1"/>
+                                    <h:outputLabel for="opt2" value="Sería suficiente con las instalaciones actuales pero habría que incorporar nuevo personal, la adaptación sería mayor a 3 meses."/>
+
+                                    <p:radioButton id="opt3" for="radiob1" itemIndex="2"/>
+                                    <h:outputLabel for="opt3" value="Sería suficiente con las instalaciones actuales pero habría que incorporar nuevo personal, la adaptación sería menor a 3 meses."/>
+
+                                    <p:radioButton id="opt4" for="radiob1" itemIndex="3"/>
+                                    <h:outputLabel for="opt4" value="Sería necesario ampliar o ajustar instalaciones y/o maquinaria, la adaptación sería mayor a 6 meses."/>
+
+                                    <p:radioButton id="opt5" for="radiob1" itemIndex="4"/>
+                                    <h:outputLabel for="opt5" value=" Sería necesario ampliar o ajustar instalaciones y/o maquinaria, la adaptación sería menor a 6 meses."/>
+
+                                    <p:radioButton id="opt6" for="radiob1" itemIndex="5"/>
+                                    <h:outputLabel for="opt6" value="#{cuestionarioController.nombreComercial} no tendría capacidad en este momento para realizar las inversiones necesarias para cubrir esa demanda, al menos en el próximo "/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob2" value="#{cuestionarioController.pi.b2}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="La tecnología de producción (maquinaria, instalaciones, herramienta, hardware, software…) existente en #{cuestionarioController.nombreComercial} es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt7" for="radiob2" itemIndex="0"/>
+                                    <h:outputLabel for="opt7" value="Similar a los mejores competidores a nivel mundial."/>
+
+                                    <p:radioButton id="opt8" for="radiob2" itemIndex="1"/>
+                                    <h:outputLabel for="opt8" value="Similar a los mejores competidores nacionales pero inferior a los internacionales."/>
+
+                                    <p:radioButton id="opt9" for="radiob2" itemIndex="2"/>
+                                    <h:outputLabel for="opt9" value="Ligeramente por debajo de los mejores competidores nacionales."/>
+
+                                    <p:radioButton id="opt10" for="radiob2" itemIndex="3"/>
+                                    <h:outputLabel for="opt10" value="Necesita de muchas mejoras para llegar al nivel de los mejores competidores nacionales."/>
+
+                                </p:panelGrid>
+
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob3" value="#{cuestionarioController.pi.b3}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Inversión anual en innovación, tecnología y capacitación del personal:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt11" for="radiob3" itemIndex="0"/>
+                                    <h:outputLabel for="opt11" value="No se destino ninguna cantidad a estos fines durante el último año."/>
+
+                                    <p:radioButton id="opt12" for="radiob3" itemIndex="1"/>
+                                    <h:outputLabel for="opt12" value="Las cantidades destinadas a estos fines en el último año equivalen a menos de un 5% de las ventas totales de la empresa."/>
+
+                                    <p:radioButton id="opt13" for="radiob3" itemIndex="2"/>
+                                    <h:outputLabel for="opt13" value="Las cantidades destinadas a estos fines en el último año corresponden a una cantidad entre el 5% y el 10% de las ventas anuales totales de la empresa."/>
+
+                                    <p:radioButton id="opt14" for="radiob3" itemIndex="3"/>
+                                    <h:outputLabel for="opt14" value="Las cantidades destinadas a estos fines en el último año corresponden a una cantidad entre el 10% y el 20% de las ventas anuales totales de la empresa."/>
+
+                                    <p:radioButton id="opt15" for="radiob3" itemIndex="4"/>
+                                    <h:outputLabel for="opt15" value=" Las cantidades destinadas a estos fines en el último año corresponden a una cantidad mayor al 20% de las ventas anuales totales de la empresa."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob4" value="#{cuestionarioController.pi.b4}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="9"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Las ventas anuales a su principal cliente, corresponden a:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt16" for="radiob4" itemIndex="0"/>
+                                    <h:outputLabel for="opt11" value="Más del 80% de las ventas totales del año."/>
+
+                                    <p:radioButton id="opt17" for="radiob4" itemIndex="1"/>
+                                    <h:outputLabel for="opt17" value="Entre un 50% y un 80% de las ventas totales del año."/>
+
+                                    <p:radioButton id="opt18" for="radiob4" itemIndex="2"/>
+                                    <h:outputLabel for="opt18" value="Entre un 30% y un 50% de las ventas totales del año."/>
+
+                                    <p:radioButton id="opt19" for="radiob4" itemIndex="3"/>
+                                    <h:outputLabel for="opt19" value="Entre un 15% y un 30% de las ventas totales del año."/>
+
+                                    <p:radioButton id="opt20" for="radiob4" itemIndex="4"/>
+                                    <h:outputLabel for="opt20" value="Menos de un 15% de las ventas totales del año."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob5" value="#{cuestionarioController.pi.b5}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Respecto a la previsión de la producción futura, la frase que se ajusta más a la realidad de #{cuestionarioController.nombreComercial} es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt21" for="radiob5" itemIndex="0"/>
+                                    <h:outputLabel for="opt21" value="Las previsiones son de un incremento en la producción de más del 20% el próximo año."/>
+
+                                    <p:radioButton id="opt22" for="radiob5" itemIndex="1"/>
+                                    <h:outputLabel for="opt22" value="Las previsiones son de un incremento en la producción menor al 20% el próximo año."/>
+
+                                    <p:radioButton id="opt23" for="radiob5" itemIndex="2"/>
+                                    <h:outputLabel for="opt23" value="Las previsiones son de continuar con una producción similar a la del año actual."/>
+
+                                    <p:radioButton id="opt24" for="radiob5" itemIndex="3"/>
+                                    <h:outputLabel for="opt24" value="Las previsiones son de producir menos el próximo año."/>
+
+                                    <p:radioButton id="opt25" for="radiob5" itemIndex="4"/>
+                                    <h:outputLabel for="opt25" value="Es imprevisible depende mucho de la demanda."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob6" value="#{cuestionarioController.pi.b6}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="1"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Respecto a la previsión de la demanda futura, la frase que se ajusta más a la realidad de #{cuestionarioController.nombreComercial} es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt26" for="radiob6" itemIndex="0"/>
+                                    <h:outputLabel for="opt26" value="Las previsiones son de un incremento en la demanda de más del 20% el próximo año."/>
+
+                                    <p:radioButton id="opt27" for="radiob6" itemIndex="1"/>
+                                    <h:outputLabel for="opt27" value="Las previsiones son de un incremento en la demanda, aunque menor al 20% el próximo año."/>
+
+                                    <p:radioButton id="opt28" for="radiob6" itemIndex="2"/>
+                                    <h:outputLabel for="opt28" value="Las previsiones son de una demanda similar a la del año actual."/>
+
+                                    <p:radioButton id="opt29" for="radiob6" itemIndex="3"/>
+                                    <h:outputLabel for="opt29" value="Las previsiones son de una demanda menor el próximo año."/>
+
+                                    <p:radioButton id="opt30" for="radiob6" itemIndex="4"/>
+                                    <h:outputLabel for="opt30" value="Es totalmente imprevisible"/>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob7" value="#{cuestionarioController.pi.b7}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="1"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="La evolución de las ventas de la empresa en los últimos 3 años ha sido:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt31" for="radiob7" itemIndex="0"/>
+                                    <h:outputLabel for="opt31" value="Las ventas han aumentado a un ritmo superior al 15% anual."/>
+
+                                    <p:radioButton id="opt32" for="radiob7" itemIndex="1"/>
+                                    <h:outputLabel for="opt32" value="Las ventas han aumentado, aunque a un ritmo menor al 15% anual."/>
+
+                                    <p:radioButton id="opt33" for="radiob7" itemIndex="2"/>
+                                    <h:outputLabel for="opt33" value="Las ventas son similares a las de hace tres años."/>
+
+                                    <p:radioButton id="opt34" for="radiob7" itemIndex="3"/>
+                                    <h:outputLabel for="opt34" value="Las ventas han disminuido en los últimos tres años."/>
+
+                                    <p:radioButton id="opt35" for="radiob7" itemIndex="4"/>
+                                    <h:outputLabel for="opt35" value="Las empresa es de reciente creación y todavía no se conocen estas cifras."/>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob8" value="#{cuestionarioController.pi.b8}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="1"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto al control financiero-contable:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt36" for="radiob8" itemIndex="0"/>
+                                    <h:outputLabel for="opt36" value="La empresa no lleva ningún tipo de control financiero-contable."/>
+
+                                    <p:radioButton id="opt37" for="radiob8" itemIndex="1"/>
+                                    <h:outputLabel for="opt37" value="La empresa lleva la contabilidad básica exigida por ley."/>
+
+                                    <p:radioButton id="opt38" for="radiob8" itemIndex="2"/>
+                                    <h:outputLabel for="opt38" value="La empresa lleva una contabilidad básica y hace uso de ella para las decisiones empresariales."/>
+
+                                    <p:radioButton id="opt39" for="radiob8" itemIndex="3"/>
+                                    <h:outputLabel for="opt39" value="La empresa, además de la contabilidad básica exigida por la ley, realiza un análisis contable con el que se toman decisiones estratégicas."/>
+
+                                    <p:radioButton id="opt40" for="radiob8" itemIndex="4"/>
+                                    <h:outputLabel for="opt40" value="La empresa cuenta con un análisis financiero-contable avanzado sobre el que se basa toda la estrategia empresarial."/>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radio91" value="#{cuestionarioController.pi.b91}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Su empresa cuenta con certificación ISO 9000 o de otro tipo que afecte a toda la empresa (no sólo a un producto determinado)?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt41" for="radio91" itemIndex="0"/>
+                                    <h:outputLabel for="opt41" value="Sí, ISO 9000"/>
+
+                                    <p:radioButton id="opt42" for="radio91" itemIndex="1"/>
+                                    <h:outputLabel for="opt42" value="No ISO pero sí otras certificaciónes (relacionadas con Responsabilidad Social, Ambiental u otras, indicar en Comentarios)."/>
+
+                                    <p:radioButton id="opt43" for="radio91" itemIndex="2"/>
+                                    <h:outputLabel for="opt43" value="Todavía no pero pensamos implantar ciertas certificaciones."/>
+
+                                    <p:radioButton id="opt44" for="radio91" itemIndex="3"/>
+                                    <h:outputLabel for="opt44" value="No es una prioridad para la empresa en este momento."/>
+
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radio92" value="#{cuestionarioController.pi.b92}" layout="custom">
+                                    <f:selectItem itemValue="1"/>
+                                    <f:selectItem itemValue="2"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Conoce otras certificaciones que se aplican en su sector?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt45" for="radio92" itemIndex="0"/>
+                                    <h:outputLabel for="opt45" value="No"/>
+
+                                    <p:radioButton id="opt46" for="radio92" itemIndex="1"/>
+                                    <h:outputLabel for="opt46" value="Sí. Indicar"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob10" value="#{cuestionarioController.pi.b10}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Su empresa está dividida en departamentos con funciones claramente definidas?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt47" for="radiob10" itemIndex="0"/>
+                                    <h:outputLabel for="opt47" value="La empresa tienes los procesos claramente definidos por departamentos y dichos procesos están documentados."/>
+
+                                    <p:radioButton id="opt48" for="radiob10" itemIndex="1"/>
+                                    <h:outputLabel for="opt48" value="La empresa tienes los procesos claramente definidos por departamentos, aunque dichos procesos no están plasmados en un documento."/>
+
+                                    <p:radioButton id="opt49" for="radiob10" itemIndex="2"/>
+                                    <h:outputLabel for="opt49" value="Si hay cierta departamentalización de la empresa, aunque no muy claramenta marcada."/>
+
+                                    <p:radioButton id="opt50" for="radiob10" itemIndex="3"/>
+                                    <h:outputLabel for="opt50" value="Se trata de una empresa pequeña en la que todo el personal se divide las diferentes tareas en función de las prioridades del momento."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob11" value="#{cuestionarioController.pi.b11}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Las decisiones en su empresa se toman:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt51" for="radiob11" itemIndex="0"/>
+                                    <h:outputLabel for="opt51" value="Tanto las decisiones estratégicas como las operativas, se toman por parte de la gerencia."/>
+
+                                    <p:radioButton id="opt52" for="radiob11" itemIndex="1"/>
+                                    <h:outputLabel for="opt52" value="Las decisiones estratégicas se toman por parte de la gerencia, en la decisiones operativas se delega en otras personas de la empresa."/>
+
+                                    <p:radioButton id="opt53" for="radiob11" itemIndex="2"/>
+                                    <h:outputLabel for="opt53" value="Tanto las decisiones estratégicas como las operativas, se toman por parte de toda la empresa en conjunto."/>
+
+                                    <p:radioButton id="opt54" for="radiob11" itemIndex="3"/>
+                                    <h:outputLabel for="opt54" value="El procedimiento de toma de decisiones no está definido, varía según la situación."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob12" value="#{cuestionarioController.pi.b12}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Marca Registrada:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt55" for="radiob12" itemIndex="0"/>
+                                    <h:outputLabel for="opt55" value="La empresa tiene registradas una o varias marcas legalmente a nivel internacional."/>
+
+                                    <p:radioButton id="opt56" for="radiob12" itemIndex="1"/>
+                                    <h:outputLabel for="opt56" value=" La empresa tiene registradas una o varias marcas legalmente a nivel nacional."/>
+
+                                    <p:radioButton id="opt57" for="radiob12" itemIndex="2"/>
+                                    <h:outputLabel for="opt57" value="La empresa tiene pensado registrar una o varias marcas legalmente."/>
+
+                                    <p:radioButton id="opt58" for="radiob12" itemIndex="3"/>
+                                    <h:outputLabel for="opt58" value="La empresa utiliza una marca comercial pero no está registrada."/>
+
+                                    <p:radioButton id="opt59" for="radiob12" itemIndex="4"/>
+                                    <h:outputLabel for="opt59" value="Dentro del sector, la comercialización no necesita marcas."/>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob13" value="#{cuestionarioController.pi.b13}" layout="custom">
+                                    <f:selectItem itemValue="9"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Dominio de Internet (.com, .com.ni, .net, etc.)"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt60" for="radiob13" itemIndex="0"/>
+                                    <h:outputLabel for="opt60" value="La empresa tiene dominio propio de Internet que corresponde con el nombre de la empresa."/>
+
+                                    <p:radioButton id="opt61" for="radiob13" itemIndex="1"/>
+                                    <h:outputLabel for="opt61" value="La empresa tiene uno o varios dominios propios de Internet que corresponden a las marcas comerciales."/>
+
+                                    <p:radioButton id="opt62" for="radiob13" itemIndex="2"/>
+                                    <h:outputLabel for="opt62" value="La empresa tiene presencia en Internet pero no con dominio propio."/>
+
+                                    <p:radioButton id="opt63" for="radiob13" itemIndex="3"/>
+                                    <h:outputLabel for="opt63" value="La empresa no tiene presencia en Internet. "/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob14" value="#{cuestionarioController.pi.b14}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Esfuerzo Producto-Marca"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt64" for="radiob14" itemIndex="0"/>
+                                    <h:outputLabel for="opt64" value="En el último año no hubo mejoras significativas en los Productos ni acciones especiales de promoción de marca."/>
+
+                                    <p:radioButton id="opt65" for="radiob14" itemIndex="1"/>
+                                    <h:outputLabel for="opt65" value="En el último año, la empresa invirtió más esfuerzo en mejorar los Productos que en promocionar la marca."/>
+
+                                    <p:radioButton id="opt66" for="radiob14" itemIndex="2"/>
+                                    <h:outputLabel for="opt66" value="En el último año, la empresa invirtió esfuerzos similares en mejorar  los Productos y en promocionar la marca."/>
+
+                                    <p:radioButton id="opt67" for="radiob14" itemIndex="3"/>
+                                    <h:outputLabel for="opt67" value="En el último año, la empresa invirtió más esfuerzo en promocionar la marca que en mejorar los Productos"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="selectb15" columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Intervienen en su cadena de comercialización"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.p15Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Importadores." itemValue="1" />  
+                                        <f:selectItem itemLabel="Distribuidores nacionales o regionales." itemValue="1" />  
+                                        <f:selectItem itemLabel="Cadenas de Supermercados." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Otros minoristas de venta a cliente final." itemValue="1" />  
+                                        <f:selectItem itemLabel="Hoteles, restaurantes, cafeterías o similares." itemValue="1" />  
+                                        <f:selectItem itemLabel="Cliente final particular." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Cliente final empresas." itemValue="2" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcion15}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob16" value="#{cuestionarioController.pi.b16}" layout="custom">
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="La mayor parte de la comunicación de la empresa va dirigida o se tiene con:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt68" for="radiob16" itemIndex="0"/>
+                                    <h:outputLabel for="opt68" value="Importadores"/>
+
+                                    <p:radioButton id="opt69" for="radiob16" itemIndex="1"/>
+                                    <h:outputLabel for="opt69" value="Distribuidores nacionales o regionales."/>
+
+                                    <p:radioButton id="opt70" for="radiob16" itemIndex="2"/>
+                                    <h:outputLabel for="opt70" value="Mayoristas."/>
+
+                                    <p:radioButton id="opt72" for="radiob16" itemIndex="3"/>
+                                    <h:outputLabel for="opt72" value="Cadenas de Supermercados."/>
+
+                                    <p:radioButton id="opt73" for="radiob16" itemIndex="3"/>
+                                    <h:outputLabel for="opt73" value="Otros minoristas de venta a cliente final."/>
+
+                                    <p:radioButton id="opt74" for="radiob16" itemIndex="2"/>
+                                    <h:outputLabel for="opt74" value="Hoteles, restaurantes, cafeterías o similares."/>
+
+                                    <p:radioButton id="opt75" for="radiob16" itemIndex="3"/>
+                                    <h:outputLabel for="opt75" value="Cliente final particular."/>
+
+                                    <p:radioButton id="opt76" for="radiob16" itemIndex="3"/>
+                                    <h:outputLabel for="opt76" value="Cliente final empresas."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob17" value="#{cuestionarioController.pi.b17}" layout="custom">
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="A la hora de elegir entre las diferentes opciones de Productos existentes en el mercado, el actor que tiene más peso en la elección es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt76b" for="radiob17" itemIndex="0"/>
+                                    <h:outputLabel for="opt76b" value="Importadores"/>
+
+                                    <p:radioButton id="opt77" for="radiob17" itemIndex="1"/>
+                                    <h:outputLabel for="opt77" value="Distribuidores nacionales o regionales."/>
+
+                                    <p:radioButton id="opt78" for="radiob17" itemIndex="2"/>
+                                    <h:outputLabel for="opt78" value="Mayoristas."/>
+
+                                    <p:radioButton id="opt79" for="radiob17" itemIndex="3"/>
+                                    <h:outputLabel for="opt79" value="Cadenas de Supermercados."/>
+
+                                    <p:radioButton id="opt80" for="radiob17" itemIndex="3"/>
+                                    <h:outputLabel for="opt80" value="Otros minoristas de venta a cliente final."/>
+
+                                    <p:radioButton id="opt81" for="radiob17" itemIndex="2"/>
+                                    <h:outputLabel for="opt81" value="Hoteles, restaurantes, cafeterías o similares."/>
+
+                                    <p:radioButton id="opt82" for="radiob17" itemIndex="3"/>
+                                    <h:outputLabel for="opt82" value="Cliente final particular."/>
+
+                                    <p:radioButton id="opt83" for="radiob17" itemIndex="3"/>
+                                    <h:outputLabel for="opt83" value="Cliente final empresas."/>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="select18" columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Pertenece su empresa a asociaciones empresariales, consorcios, clusters o encadenamientos productivos?"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.p18Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Sí, asociación de defensa y apoyo al sector." itemValue="2" />  
+                                        <f:selectItem itemLabel="Sí, encadenamiento productivo vertical/horizontal para la provisión a los mercados." itemValue="3" />  
+                                        <f:selectItem itemLabel="Sí, asociación o consorcio de exportación conjunta de producto." itemValue="4" /> 
+                                        <f:selectItem itemLabel="Sí, asociación o consorcio de exportación conjunta de producto." itemValue="3" />  
+                                        <f:selectItem itemLabel="Sí, asociación o consorcio de exportación conjunta de producto." itemValue="0" />  
+                                        <f:selectItem itemLabel="No." itemValue="2" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcion18}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiob19" value="#{cuestionarioController.pi.b19}" layout="custom">
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Estarían dispuestos a que su empresa formara parte de algún consorcio o asociación para la exportación conjunta del producto?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt97" for="radiob19" itemIndex="0"/>
+                                    <h:outputLabel for="opt97" value=" Sí, aunque sólo si no conllevara costos por nuestra parte."/>
+
+                                    <p:radioButton id="opt98" for="radiob19" itemIndex="1"/>
+                                    <h:outputLabel for="opt98" value="Sí, aunque conllevara costos monetarios y en tiempo por nuestra parte."/>
+
+                                    <p:radioButton id="opt99" for="radiob19" itemIndex="2"/>
+                                    <h:outputLabel for="opt99" value="No creemos que sea una forma adecuada de exportar para nuestra empresa."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="select20" columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Marque aquellas respuestas que se ajusten a la realidad de su empresa con respecto a la ética empresarial:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.p20Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="La empresa prohíbe y sanciona la utilización de toda práctica ilegal (corrupción, soborno, doble contabilidad, etc.) para obtener ventajas competitivas." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa promueve la transparencia entre colaboradores, clientes y proveedores." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa expone públicamente sus compromisos éticos." itemValue="2" /> 
+                                        <f:selectItem itemLabel="La empresa promueve la coherencia entre sus valores y principios éticos y la actitud individual de sus empleados." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa ha redactado un código ético." itemValue="4" />  
+                                        <f:selectItem itemLabel="Se da a conocer el código de ética, a todos los niveles de la empresa." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Ninguna de las anteriores." itemValue="0" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcion20}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="select21" columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Marque aquellas respuestas que se ajusten a la realidad de su empresa con respecto al trabajo social y con la comunidad:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.p21Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="La empresa actúa con sensibilidad a las necesidades y requerimientos de la comunidad en la que se encuentra." itemValue="1" />  
+                                        <f:selectItem itemLabel="Dentro de la planificación, la empresa establece una política de apoyo a la comunidad." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa genera y/o participa de alianzas con otras empresas u organizaciones para desarrollar acciones de apoyo a la comunidad." itemValue="3" /> 
+                                        <f:selectItem itemLabel="La empresa prevé de espacios para desarrollar pasantías en la empresa destinadas a jóvenes como apoyo a la formación laboral de los mismos." itemValue="1" />  
+                                        <f:selectItem itemLabel="La empresa induce y entrena a sus empleados para que respeten los valores y tradiciones de la zona donde actúa." itemValue="2" />  
+                                        <f:selectItem itemLabel="Los trabajadores y directivos de la empresa tienen los mismos niveles de responsabilidad y salario independientemente de si son hombres o mujeres." itemValue="1" /> 
+                                        <f:selectItem itemLabel="La empresa lleva a cabo políticas activas de igualdad de género." itemValue="2" />
+                                        <f:selectItem itemLabel="La empresa cuenta con un plan escrito de apoyo a la comunidad y/o responsabilidad con la sociedad." itemValue="3" /> 
+                                        <f:selectItem itemLabel="Ninguna de las anteriores." itemValue="0" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcion21}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="select22" columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Marque aquellas respuestas que se ajusten a la realidad de su empresa con respecto a su política medioambiental."/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.p22Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="La empresa cumple a día de hoy con el 100% de las normativas legales nacionales sobre medioambiente." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa realiza acciones específicas para reducir el impacto medioambiental." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa induce y entrena a sus empleados para que actuen con respecto a las buenas prácticas medioambientales." itemValue="2" /> 
+                                        <f:selectItem itemLabel="La empresa cuenta con un plan escrito de responsabilidad medioambiental." itemValue="3" />  
+                                        <f:selectItem itemLabel="La empresa realiza mediciones de impacto medioambiental." itemValue="3" />  
+                                        <f:selectItem itemLabel="La empresa hace públicos informes de impacto medioambiental." itemValue="3" /> 
+                                        <f:selectItem itemLabel="La empresa lleva a cabo políticas activas de igualdad de género." itemValue="0" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcion22}"/>
+                                    </p:selectManyCheckbox>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Siguiente" icon="ui-icon-arrowthick-1-e" onclick="nextTab();"/>
+                                    </f:facet>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+                        </p:tab>
+
+                        <p:tab id="tab2" title="Productos y Servicios">
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc1" value="#{cuestionarioController.pi.c1}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Cuánto tiempo pasa (o pasaría) normalmente entre la aparición de un nuevo Distribuidor internacional y Producto?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt124" for="radioc1" itemIndex="0"/>
+                                    <h:outputLabel for="opt124" value="De forma instantánea, los clientes acuden a las instalaciones o puntos de venta de la empresa."/>
+
+                                    <p:radioButton id="opt125" for="radioc1" itemIndex="1"/>
+                                    <h:outputLabel for="opt125" value="Hay un lapso de tiempo breve entre la preparación de los servicios y la prestación de los mismos."/>
+
+                                    <p:radioButton id="opt126" for="radioc1" itemIndex="2"/>
+                                    <h:outputLabel for="opt126" value="Se trabaja bajo pedido, el mercado admite demoras importantes de tiempo."/>
+
+                                    <p:radioButton id="opt127" for="radioc1" itemIndex="3"/>
+                                    <h:outputLabel for="opt127" value="Se requiere de un intercambio previo de especificaciones, ofertas, etc."/>
+
+                                    <p:radioButton id="opt128" for="radioc1" itemIndex="4"/>
+                                    <h:outputLabel for="opt128" value="Se trabaja con acuerdos estables y duraderos en el tiempo."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc2" value="#{cuestionarioController.pi.c2}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" El precio de venta a Importador directo es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt129" for="radioc2" itemIndex="0"/>
+                                    <h:outputLabel for="opt129" value="Mayor al doble del costo de producción unitario (laboral e insumos, sin contar amortizaciones).."/>
+
+                                    <p:radioButton id="opt130" for="radioc2" itemIndex="1"/>
+                                    <h:outputLabel for="opt130" value="Entre un 50% y un 100% mayor al costo de producción unitario (laboral e insumos, sin contar amortizaciones)."/>
+
+                                    <p:radioButton id="opt131" for="radioc2" itemIndex="2"/>
+                                    <h:outputLabel for="opt131" value="Entre un 20% y un 50% mayor al costo de producción unitario (laboral e insumos, sin contar amortizaciones)."/>
+
+                                    <p:radioButton id="opt132" for="radioc2" itemIndex="3"/>
+                                    <h:outputLabel for="opt132" value="Hasta un 20% mayor al costo de producción unitario (laboral e insumos, sin contar amortizaciones), no más."/>
+
+                                    <p:radioButton id="opt133" for="radioc2" itemIndex="4"/>
+                                    <h:outputLabel for="opt133" value="No se conoce con precisión el margen resultante de las operaciones."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc3" value="#{cuestionarioController.pi.c3}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="1"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Si tuviera que elegir la principal razón por la que sus clientes se deciden por los Productos de su empresa, sería:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt134" for="radioc3" itemIndex="0"/>
+                                    <h:outputLabel for="opt134" value=" El precio es mejor que la de otros competidores similares."/>
+
+                                    <p:radioButton id="opt134b" for="radioc3" itemIndex="1"/>
+                                    <h:outputLabel for="opt134b" value="Nuestros Productos tienen características especiales que los diferencian de la competencia."/>
+
+                                    <p:radioButton id="opt135" for="radioc3" itemIndex="2"/>
+                                    <h:outputLabel for="opt135" value="Nuestros Productos se enfocan en unos nichos de mercado muy específicos donde no existen productos o servicios sustitutivos."/>
+
+                                    <p:radioButton id="opt136" for="radioc3" itemIndex="3"/>
+                                    <h:outputLabel for="opt136" value="Nuestros clientes nos eligen por cercanía y/o la relación permanente establecida en los años de existencia de la empresa."/>
+
+                                    <p:radioButton id="opt137" for="radioc3" itemIndex="4"/>
+                                    <h:outputLabel for="opt137" value="La gran demanda del producto hace que todas las empresas del sector puedan generar ventas."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="selectc4" columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Indique si su empresa posee alguna de estas certificaciones."/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pc4Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Fitosanitaria." itemValue="3" />  
+                                        <f:selectItem itemLabel="De Origen." itemValue="3" />  
+                                        <f:selectItem itemLabel="BPA." itemValue="5" /> 
+                                        <f:selectItem itemLabel="BPM." itemValue="5" />  
+                                        <f:selectItem itemLabel="HACCP." itemValue="5" />  
+                                        <f:selectItem itemLabel="Certificado de Producción Orgánica." itemValue="6" /> 
+                                        <f:selectItem itemLabel="Trazabilidad." itemValue="5" />
+                                        <f:selectItem itemLabel="ISO 22000 (Inocuidad Alimentaria)." itemValue="7" />  
+                                        <f:selectItem itemLabel="Certificado de proceso para productos maderables." itemValue="8" /> 
+                                        <f:selectItem itemLabel="Las certificaciones anteriores son validas para nuestros Productos pero todavía no tenemos ninguna." itemValue="0" />
+                                        <f:selectItem itemLabel="Las certificaciones anteriores no aplican para nuestros Productos." itemValue="5" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcionc4}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc5" value="#{cuestionarioController.pi.c5}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="5"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Los clientes de los Productos de su empresa, los consideran principalmente como:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt150" for="radioc5" itemIndex="0"/>
+                                    <h:outputLabel for="opt150" value="De lujo."/>
+
+                                    <p:radioButton id="opt151" for="radioc5" itemIndex="1"/>
+                                    <h:outputLabel for="opt151" value="De ocasiones especiales."/>
+
+                                    <p:radioButton id="opt152" for="radioc5" itemIndex="2"/>
+                                    <h:outputLabel for="opt152" value="De consumo habitual."/>
+
+                                    <p:radioButton id="opt154" for="radioc5" itemIndex="3"/>
+                                    <h:outputLabel for="opt154" value="Insumo industrial."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="selectc6" columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Principales características que valora el cliente."/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pc6Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Experiencia de la empresa o relación del cliente con la misma." itemValue="1" />  
+                                        <f:selectItem itemLabel="Disponibilidad de producto en el tiempo requerido." itemValue="2" />  
+                                        <f:selectItem itemLabel="Diversidad en la gama de productos ofrecida." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Diseño." itemValue="7" />  
+                                        <f:selectItem itemLabel="Marca." itemValue="5" />  
+                                        <f:selectItem itemLabel="Funcionalidad." itemValue="8" /> 
+                                        <f:selectItem itemLabel="Origen." itemValue="4" />
+                                        <f:selectItem itemLabel="Resistencia y duración." itemValue="10" />  
+                                        <f:selectItem itemLabel="Calidad del producto o cualidades sensoriales (tacto en caso del textil, sabor en caso de alimentos, olor en caso de perfumes…)." itemValue="10" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcionc6}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc7" value="#{cuestionarioController.pi.c7}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Sus clientes consideran que el diseño asociado a sus Productos es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt164" for="radioc7" itemIndex="0"/>
+                                    <h:outputLabel for="opt164" value="El mejor de todo el sector (nacional e internacional)"/>
+
+                                    <p:radioButton id="opt165" for="radioc7" itemIndex="1"/>
+                                    <h:outputLabel for="opt165" value="El mejor del mercado nacional."/>
+
+                                    <p:radioButton id="opt166" for="radioc7" itemIndex="2"/>
+                                    <h:outputLabel for="opt166" value="Comparable con el diseño de otras buenas empresas nacionales del sector."/>
+
+                                    <p:radioButton id="opt167" for="radioc7" itemIndex="3"/>
+                                    <h:outputLabel for="opt167" value="El diseño no es una variable influyente en la percepción de los Productos por parte del cliente / no es requerido en el sector"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc8" value="#{cuestionarioController.pi.c8}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con respecto a los Productos de la competencia:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt168" for="radioc8" itemIndex="0"/>
+                                    <h:outputLabel for="opt168" value="Su cliente identifica sus Productos con claridad entre el resto porque tiene características muy diferentes a los demás"/>
+
+                                    <p:radioButton id="opt169" for="radioc8" itemIndex="1"/>
+                                    <h:outputLabel for="opt169" value="Los Productos van dirigidos a segmentos muy específicos."/>
+
+                                    <p:radioButton id="opt170" for="radioc8" itemIndex="2"/>
+                                    <h:outputLabel for="opt170" value="Todos los Productos dentro del mercado son similares aunque hay algunas diferencias."/>
+
+                                    <p:radioButton id="opt171" for="radioc8" itemIndex="3"/>
+                                    <h:outputLabel for="opt171" value="Todos los Productos dentro del mercado son practicamente iguales."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc9" value="#{cuestionarioController.pi.c9}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" La principal diferencia que identifican los clientes con respecto a los Productos de la competencia nacional es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt172" for="radioc9" itemIndex="0"/>
+                                    <h:outputLabel for="opt172" value="Diseño"/>
+
+                                    <p:radioButton id="opt173" for="radioc9" itemIndex="1"/>
+                                    <h:outputLabel for="opt173" value="Funcionalidad"/>
+
+                                    <p:radioButton id="opt174" for="radioc9" itemIndex="2"/>
+                                    <h:outputLabel for="opt174" value="Marca"/>
+
+                                    <p:radioButton id="opt175" for="radioc9" itemIndex="3"/>
+                                    <h:outputLabel for="opt175" value="Origen"/>
+
+                                    <p:radioButton id="opt176" for="radioc9" itemIndex="4"/>
+                                    <h:outputLabel for="opt176" value="Resistencia y Duración"/>
+
+                                    <p:radioButton id="opt177" for="radioc9" itemIndex="5"/>
+                                    <h:outputLabel for="opt17" value="Cualidades Sensoriales(tacto,sabor,olor)"/>
+
+                                    <p:radioButton id="opt178" for="radioc9" itemIndex="6"/>
+                                    <h:outputLabel for="opt178" value="Productos de la empresa son similares a los del Mercado"/>
+
+                                    <p:radioButton id="opt179" for="radioc9" itemIndex="7"/>
+                                    <h:outputLabel for="opt179" value="Otros"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc10" value="#{cuestionarioController.pi.c10}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En el mercado internacional sus Producto resultan (o resultarían) diferentes al resto principalmente por:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt180" for="radioc10" itemIndex="0"/>
+                                    <h:outputLabel for="opt180" value="Diseño"/>
+
+                                    <p:radioButton id="opt182" for="radioc10" itemIndex="1"/>
+                                    <h:outputLabel for="opt182" value="Funcionalidad"/>
+
+                                    <p:radioButton id="opt183" for="radioc10" itemIndex="2"/>
+                                    <h:outputLabel for="opt183" value="Marca"/>
+
+                                    <p:radioButton id="opt184" for="radioc10" itemIndex="3"/>
+                                    <h:outputLabel for="opt184" value="Origen"/>
+
+                                    <p:radioButton id="opt185" for="radioc10" itemIndex="4"/>
+                                    <h:outputLabel for="opt185" value="Resistencia y Duración"/>
+
+                                    <p:radioButton id="opt186" for="radioc10" itemIndex="5"/>
+                                    <h:outputLabel for="opt186" value="Cualidades Sensoriales(tacto,sabor,olor)"/>
+
+                                    <p:radioButton id="opt187" for="radioc10" itemIndex="6"/>
+                                    <h:outputLabel for="opt187" value="Productos de la empresa son similares a los del Mercado"/>
+
+                                    <p:radioButton id="opt188" for="radioc10" itemIndex="7"/>
+                                    <h:outputLabel for="opt188" value="Otros"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="selectc11" columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Otras razones por las que sus clientes corporativos (empresas) eligen sus Productos:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pc11Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Precio." itemValue="0" />  
+                                        <f:selectItem itemLabel="Marca." itemValue="1" />  
+                                        <f:selectItem itemLabel="Imagen de empresa." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Plazo de Entrega." itemValue="3" />  
+                                        <f:selectItem itemLabel="Servicio Postventa." itemValue="3" />  
+                                        <f:selectItem itemLabel="Facilidad de pago." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Atencion Comercial." itemValue="2" />
+                                        <f:selectItem itemLabel="Apoyo Promocional." itemValue="2" />  
+                                        <f:selectItem itemLabel="Acuerdos a largo plazo." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Variedad en la gama." itemValue="3" /> 
+                                        <f:selectItem itemLabel="Proximidad física." itemValue="0" /> 
+                                        <f:selectItem itemLabel="Puntualidad en las entregas." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Certificación de producto o empresa." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Confianza en la calidad del producto." itemValue="1" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcionc11}"/>
+                                    </p:selectManyCheckbox>
+
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc12" value="#{cuestionarioController.pi.c12}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con respecto a las adaptaciones de los Productos necesarias para los próximos mercados objetivo en el exterior:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt202" for="radioc12" itemIndex="0"/>
+                                    <h:outputLabel for="opt202" value="Se conocen por experiencia."/>
+
+                                    <p:radioButton id="opt203" for="radioc12" itemIndex="1"/>
+                                    <h:outputLabel for="opt203" value="Se ha realizado un estudio profundo de las mismas."/>
+
+                                    <p:radioButton id="opt204" for="radioc12" itemIndex="2"/>
+                                    <h:outputLabel for="opt204" value="Se conocen por referencias."/>
+
+                                    <p:radioButton id="opt205" for="radioc12" itemIndex="3"/>
+                                    <h:outputLabel for="opt205" value="No se conocen todavía"/>
+
+                                    <p:radioButton id="opt206" for="radioc12" itemIndex="4"/>
+                                    <h:outputLabel for="opt206" value="Los Productos de este sector no requieren de adaptación para los mercados exteriores."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="selectc13" columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Estas adaptaciones deberían realizarse sobre:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pc13Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Las características propias de los Productos." itemValue="0" />  
+                                        <f:selectItem itemLabel="El diseño o presentación." itemValue="0" />  
+                                        <f:selectItem itemLabel="Certificación o asuntos legales." itemValue="0" /> 
+                                        <f:selectItem itemLabel="Los empaques o material asociado." itemValue="0" />  
+                                        <f:selectItem itemLabel="La marca o promoción." itemValue="0" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcionc13}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc14" value="#{cuestionarioController.pi.c14}" layout="custom">
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="9"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Anteriormente #{cuestionarioController.nombreComercial} ya ha realizado acciones de adaptación de los"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt212" for="radioc14" itemIndex="0"/>
+                                    <h:outputLabel for="opt212" value="En general (que servían tanto para el mercado nacional como para el exterior)"/>
+
+                                    <p:radioButton id="opt213" for="radioc14" itemIndex="1"/>
+                                    <h:outputLabel for="opt213" value="Para la exportación."/>
+
+                                    <p:radioButton id="opt214" for="radioc14" itemIndex="2"/>
+                                    <h:outputLabel for="opt214" value="Diferenciándolos para cada país de destino."/>
+
+                                    <p:radioButton id="opt215" for="radioc14" itemIndex="3"/>
+                                    <h:outputLabel for="opt215" value="No se han realizado adaptaciones puesto que los Productos son apreciados en el exterior por su origen."/>
+
+                                    <p:radioButton id="opt216" for="radioc14" itemIndex="4"/>
+                                    <h:outputLabel for="opt216" value=" No se han realizado adaptaciones por el momento."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Estas adaptaciones de los Productos se han realizado en:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pc15Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Las características propias de los productos." itemValue="4" />  
+                                        <f:selectItem itemLabel="Diseñó o presentación." itemValue="3" />  
+                                        <f:selectItem itemLabel="Certificación o asuntos legales." itemValue="3" /> 
+                                        <f:selectItem itemLabel="Los empaques o material asociado." itemValue="2" />  
+                                        <f:selectItem itemLabel="La marca o promoción." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Métodos de trabajos con los distribuidores." itemValue="3" /> 
+                                        <f:selectItem itemLabel="Otros." itemValue="0" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcionc15}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc16" value="#{cuestionarioController.pi.c16}" layout="custom">
+                                    <f:selectItem itemValue="9"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" En cuanto a la agrupación en marcas de los diferentes Productos o líneas de la empresa:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt223" for="radioc16" itemIndex="0"/>
+                                    <h:outputLabel for="opt223" value="Se comercializan en su totalidad bajo una misma marca que se dirige a un segmento concreto y con unos atributos comunes"/>
+
+                                    <p:radioButton id="opt224" for="radioc16" itemIndex="1"/>
+                                    <h:outputLabel for="opt224" value="Se comercializan en su totalidad bajo una misma marca pero cada producto o línea se dirige a diferentes segmentos o tiene atributos diferentes."/>
+
+                                    <p:radioButton id="opt225" for="radioc16" itemIndex="2"/>
+                                    <h:outputLabel for="opt225" value="Se comercializan bajo diferentes marcas en función del segmento al que se dirigen o los atributos diferentes."/>
+
+                                    <p:radioButton id="opt226" for="radioc16" itemIndex="3"/>
+                                    <h:outputLabel for="opt226" value="Se comercializa bajo la marca de los clientes o distribuidores (marca blanca)."/>
+
+                                    <p:radioButton id="opt227" for="radioc16" itemIndex="4"/>
+                                    <h:outputLabel for="opt227" value="No se utiliza un nombre de marca, sólo el nombre de la empresa."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc17" value="#{cuestionarioController.pi.c17}" layout="custom">
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="1"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Sus clientes reconocen sus Productos:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt228" for="radioc17" itemIndex="0"/>
+                                    <h:outputLabel for="opt228" value=" El nombre de su empresa."/>
+
+                                    <p:radioButton id="opt229" for="radioc17" itemIndex="1"/>
+                                    <h:outputLabel for="opt229" value="El nombre de sus directivos, profesionales o comerciales."/>
+
+                                    <p:radioButton id="opt230" for="radioc17" itemIndex="2"/>
+                                    <h:outputLabel for="opt230" value="El nombre de sus clientes o distribuidores."/>
+
+                                    <p:radioButton id="opt232" for="radioc17" itemIndex="3"/>
+                                    <h:outputLabel for="opt232" value="La marca del producto."/>
+
+                                    <p:radioButton id="opt233" for="radioc17" itemIndex="4"/>
+                                    <h:outputLabel for="opt233" value="No reconocen el producto, simplemente lo compran por conveniencia (cercanía, precio, etc.)."/>
+
+                                    <p:radioButton id="opt234" for="radioc17" itemIndex="5"/>
+                                    <h:outputLabel for="opt234" value="No reconocen el producto, simplemente lo compran debido a acuerdos a largo plazo."/>
+
+                                    <p:radioButton id="opt235" for="radioc17" itemIndex="6"/>
+                                    <h:outputLabel for="opt235" value="Únicamente por sus características, se negocian en un mercado abierto."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc18" value="#{cuestionarioController.pi.c18}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Tienen una imagen y una política de comunicación definida?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt236" for="radioc18" itemIndex="0"/>
+                                    <h:outputLabel for="opt236" value="No"/>
+
+                                    <p:radioButton id="opt237" for="radioc18" itemIndex="1"/>
+                                    <h:outputLabel for="opt237" value="Sí, tenemos un logo de empresa."/>
+
+                                    <p:radioButton id="opt238" for="radioc18" itemIndex="2"/>
+                                    <h:outputLabel for="opt238" value="Sí, tenemos logo de empresa y unos colores corporativos que utilizamos en los documentos."/>
+
+                                    <p:radioButton id="opt239" for="radioc18" itemIndex="3"/>
+                                    <h:outputLabel for="opt239" value="Además de logo y línea gráfica definida, contamos con catálogos y otros materiales de promoción."/>
+
+                                    <p:radioButton id="opt240" for="radioc18" itemIndex="4"/>
+                                    <h:outputLabel for="opt240" value="Tenemos una política de comunicación totalmente definida incluyendo cuadernos de estilo, comunicaciones internas, etc."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc19" value="#{cuestionarioController.pi.c19}" layout="custom">
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" Necesidad de servicio técnico o formación técnica para la venta de los Productos"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt241" for="radioc19" itemIndex="0"/>
+                                    <h:outputLabel for="opt241" value="El producto no requiere de ningún servicio técnico o atención postventa."/>
+
+                                    <p:radioButton id="opt242" for="radioc19" itemIndex="1"/>
+                                    <h:outputLabel for="opt242" value="La venta del producto o la atención postventa, requieren de conocimientos técnicos específicos por lo que tiene que realizarse por personal de la propia empresa."/>
+
+                                    <p:radioButton id="opt243" for="radioc19" itemIndex="2"/>
+                                    <h:outputLabel for="opt243" value="La venta del producto o la atención postventa, requieren de conocimientos técnicos específicos que pueden ser adquiridos por el canal de distribución tras la capacitación por parte de la empresa"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc20" value="#{cuestionarioController.pi.c20}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="3"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Los precios de la empresa (sin contar otras características como marca o calidad) están:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt244" for="radioc20" itemIndex="0"/>
+                                    <h:outputLabel for="opt244" value="En el segmento alto del sector."/>
+
+                                    <p:radioButton id="opt245" for="radioc20" itemIndex="1"/>
+                                    <h:outputLabel for="opt245" value="En el segmento medio del sector / según lo marcado en el mercado."/>
+
+                                    <p:radioButton id="opt246" for="radioc20" itemIndex="2"/>
+                                    <h:outputLabel for="opt246" value="Entre los más bajos del sector."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc21" value="#{cuestionarioController.pi.c21}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="1"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto al mecanismo de fijación de precios:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt247" for="radioc21" itemIndex="0"/>
+                                    <h:outputLabel for="opt247" value="Los precios son marcados de forma explícita y pública por el mercado y no hay margen para establecer descuentos u ofertas."/>
+
+                                    <p:radioButton id="opt248" for="radioc21" itemIndex="1"/>
+                                    <h:outputLabel for="opt248" value="Los precios son marcados por el mercado pero se pueden establecer descuentos u ofertas a algunos clientes especiales."/>
+
+                                    <p:radioButton id="opt249" for="radioc21" itemIndex="2"/>
+                                    <h:outputLabel for="opt249" value="Los distribuidores o clientes imponen los precios."/>
+
+                                    <p:radioButton id="opt250" for="radioc21" itemIndex="3"/>
+                                    <h:outputLabel for="opt250" value=" Los precios son negociados con cada cliente."/>
+
+                                    <p:radioButton id="opt251" for="radioc21" itemIndex="4"/>
+                                    <h:outputLabel for="opt251" value="La empresa marca unos precios generales para todos los clientes o distribuidores que no pueden ser modificados por descuentos u ofertas."/>
+
+                                    <p:radioButton id="opt252" for="radioc21" itemIndex="5"/>
+                                    <h:outputLabel for="opt252" value="La empresa marca unos precios generales para todos los clientes o distribuidores pero pueden ser modificados por descuentos u ofertas."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc22" value="#{cuestionarioController.pi.c22}" layout="custom">
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Para calcular precios y descuentos dentro de la empresa, se tiene en cuenta:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt253" for="radioc22" itemIndex="0"/>
+                                    <h:outputLabel for="opt253" value="Los precios se fijan principalmente en función de los costos"/>
+
+                                    <p:radioButton id="opt254" for="radioc22" itemIndex="1"/>
+                                    <h:outputLabel for="opt254" value="Los precios se marcan principalmente en fución de la demanda"/>
+
+                                    <p:radioButton id="opt255" for="radioc22" itemIndex="2"/>
+                                    <h:outputLabel for="opt255" value="Los precios se marcan en función de una combinación de los costos y la demanda"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc23" value="#{cuestionarioController.pi.c23}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="El diseño de sus empaques y etiquetas:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt256" for="radioc23" itemIndex="0"/>
+                                    <h:outputLabel for="opt256" value="Es siempre el mismo y modificarlos resultaría costoso"/>
+
+                                    <p:radioButton id="opt257" for="radioc23" itemIndex="1"/>
+                                    <h:outputLabel for="opt257" value="Actualmente se modifica para atender las necesidades de diferentes distribuidores o cliente"/>
+
+                                    <p:radioButton id="opt258" for="radioc23" itemIndex="2"/>
+                                    <h:outputLabel for="opt258" value="Se podría modificar facilmente para atendera las necesidades de diferentes distribuidores o clientes, nacionales o extranjero, aunque ahora es siempre el mismo"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc24" value="#{cuestionarioController.pi.c24}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Sus clientes consideran el diseño de sus empaques y etiquetas:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt259" for="radioc24" itemIndex="0"/>
+                                    <h:outputLabel for="opt259" value="Los de mejor diseño en el mercado internacional de todo el sector"/>
+
+                                    <p:radioButton id="opt260" for="radioc24" itemIndex="1"/>
+                                    <h:outputLabel for="opt260" value="Los de mejor diseño  en el mercado nacional de todo el sector"/>
+
+                                    <p:radioButton id="opt261" for="radioc24" itemIndex="2"/>
+                                    <h:outputLabel for="opt261" value="Comparables con el diseño de otras empresas nacionales del sector"/>
+
+                                    <p:radioButton id="opt262" for="radioc24" itemIndex="3"/>
+                                    <h:outputLabel for="opt262" value="El diseño de empaques y etiquetas no es una variable influyente en la del producto por parte del cliente"/>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radioc25" value="#{cuestionarioController.pi.c25}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto a la capacidad de almacenaje de los productos:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt263" for="radioc25" itemIndex="0"/>
+                                    <h:outputLabel for="opt263" value="Los productos de la empresa se pueden almacenar indefinidamente"/>
+
+                                    <p:radioButton id="opt264" for="radioc25" itemIndex="1"/>
+                                    <h:outputLabel for="opt264" value="Los productos de la empresa se pueden almacenar por un máximo de entre seis meses y dos años"/>
+
+                                    <p:radioButton id="opt265" for="radioc25" itemIndex="2"/>
+                                    <h:outputLabel for="opt265" value="Los productos de la empresa se pueden almacenar por un máximo de entre uno y seis meses"/>
+
+                                    <p:radioButton id="opt266" for="radioc25" itemIndex="3"/>
+                                    <h:outputLabel for="opt266" value="Los productos de la empresa se pueden almacenar por un tiempo inferior al mes"/>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Anterior" icon="ui-icon-arrowthick-1-w" onclick="prevTab();"/>
+                                        <p:commandButton value="Siguiente" icon="ui-icon-arrowthick-1-e" onclick="nextTab();"/>
+                                    </f:facet>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+                        </p:tab>
+
+                        <!-- tab !-->
+                        <p:tab title="Datos de experiencia y Motivacion">
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod1" value="#{cuestionarioController.pi.d1}" layout="custom">
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Indique la opción que más se ajusta a su experiencia exportadora:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt267" for="radiod1" itemIndex="0"/>
+                                    <h:outputLabel for="opt267" value="La empresa exporta de forma regular a través de compradores que acuden a Nicaragua."/>
+
+                                    <p:radioButton id="opt268" for="radiod1" itemIndex="1"/>
+                                    <h:outputLabel for="opt268" value="La empresa exporta de forma regular vendiendo a clientes que están en mercados exteriores"/>
+
+                                    <p:radioButton id="opt269" for="radiod1" itemIndex="2"/>
+                                    <h:outputLabel for="opt269" value="La empresa tiene experiencia en exportación por haber realizado ventas en el exterior ocasionalmente."/>
+
+                                    <p:radioButton id="opt270" for="radiod1" itemIndex="3"/>
+                                    <h:outputLabel for="opt270" value="La empresa tiene experiencia en ventas hacia el exterior por haber realizado ventas en Nicaragua a compradores extranjeros."/>
+
+                                    <p:radioButton id="opt271" for="radiod1" itemIndex="4"/>
+                                    <h:outputLabel for="opt271" value="La empresa no tiene experiencia en exportación ni ventas hacia exterior pero cuenta con personal interno que sí ha tenido experiencia en la gestión de exportación en otras empresas."/>
+
+                                    <p:radioButton id="opt272" for="radiod1" itemIndex="5"/>
+                                    <h:outputLabel for="opt272" value="La empresa no tiene experiencia en exportación, ventas hacia el exterior ni personal interno con dicha experiencia. "/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+                                    <h:outputLabel value="¿Desde qué año exporta?"/>
+                                    <p:inputText value="2004"/>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid id="selectd2" columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Lugares donde la empresa exporta de forma regular:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox  id="many1" value="#{cuestionarioController.pd2Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Centroamerica." itemValue="3" />  
+                                        <f:selectItem itemLabel="Mexico." itemValue="4" />  
+                                        <f:selectItem itemLabel="Estados Unidos/Canada." itemValue="5" /> 
+                                        <f:selectItem itemLabel="Brasil." itemValue="5" />  
+                                        <f:selectItem itemLabel="Sudamérica." itemValue="4" /> 
+                                        <f:selectItem itemLabel="Caribe." itemValue="5" /> 
+                                        <f:selectItem itemLabel="España." itemValue="5" /> 
+                                        <f:selectItem itemLabel="Otros países europeos." itemValue="6" />
+                                        <f:selectItem itemLabel="China." itemValue="6" />
+                                        <f:selectItem itemLabel="Otros." itemValue="2" />
+                                        <f:selectItem itemLabel="La empresa no ha comenzado a exportar de forma regular." itemValue="0" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond2}"/>
+                                    </p:selectManyCheckbox>
+                                </p:panelGrid>
+
+                                <p:inputText id="texto1" type="hidden" value="#{cuestionarioController.pi.vali1D2}" /> 
+                                <p:inputText id="texto2" type="hidden" value="#{cuestionarioController.pi.vali2D2}" />  
+                                <p:inputText id="texto3" type="hidden" value="#{cuestionarioController.pi.vali3D2}" />  
+                                <p:inputText id="texto4" type="hidden" value="#{cuestionarioController.pi.vali4D2}" />  
+                                <p:inputText id="texto5" type="hidden" value="#{cuestionarioController.pi.vali5D2}" />  
+                                <p:inputText id="texto6" type="hidden" value="#{cuestionarioController.pi.vali6D2}" />  
+                                <p:inputText id="texto7" type="hidden" value="#{cuestionarioController.pi.vali7D2}" />  
+                                <p:inputText id="texto8" type="hidden" value="#{cuestionarioController.pi.vali8D2}" />  
+                                <p:inputText id="texto9" type="hidden" value="#{cuestionarioController.pi.vali9D2}" />  
+                                <p:inputText id="texto10" type="hidden" value="#{cuestionarioController.pi.vali10D2}" />  
+                                <p:inputText id="texto11" type="hidden" value="#{cuestionarioController.pi.vali11D2}" />  
+
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Lugares donde los productos de la empresa han llegado alguna vez (aunque no de forma regular):"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox id="many2" value="#{cuestionarioController.pd3Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Centroamerica." itemValue="3" />  
+                                        <f:selectItem itemLabel="Mexico." itemValue="404" />  
+                                        <f:selectItem itemLabel="Estados Unidos/Canada." itemValue="5" /> 
+                                        <f:selectItem itemLabel="Brasil." itemValue="5" />  
+                                        <f:selectItem itemLabel="Sudamérica." itemValue="4" /> 
+                                        <f:selectItem itemLabel="Caribe." itemValue="5" /> 
+                                        <f:selectItem itemLabel="España." itemValue="5" /> 
+                                        <f:selectItem itemLabel="Otros países europeos." itemValue="6" />
+                                        <f:selectItem itemLabel="China." itemValue="6" />
+                                        <f:selectItem itemLabel="Otros." itemValue="2" />
+                                        <f:selectItem itemLabel="La empresa no ha comenzado a exportar de forma regular." itemValue="0" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond3}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+
+                                <p:inputText id="textod31" type="hidden" value="#{cuestionarioController.pi.vali1D3}" /> 
+                                <p:inputText id="textod32" type="hidden" value="#{cuestionarioController.pi.vali2D3}" />  
+                                <p:inputText id="textod33" type="hidden" value="#{cuestionarioController.pi.vali3D3}" />  
+                                <p:inputText id="textod34" type="hidden" value="#{cuestionarioController.pi.vali4D3}" />  
+                                <p:inputText id="textod35" type="hidden" value="#{cuestionarioController.pi.vali5D3}" />  
+                                <p:inputText id="textod36" type="hidden" value="#{cuestionarioController.pi.vali6D3}" />  
+                                <p:inputText id="textod37" type="hidden" value="#{cuestionarioController.pi.vali7D3}" />  
+                                <p:inputText id="textod38" type="hidden" value="#{cuestionarioController.pi.vali8D3}" />  
+                                <p:inputText id="textod39" type="hidden" value="#{cuestionarioController.pi.vali9D3}" />  
+                                <p:inputText id="textod310" type="hidden" value="#{cuestionarioController.pi.vali10D3}" />  
+                                <p:inputText id="textod311" type="hidden" value="#{cuestionarioController.pi.vali11D3}" />  
+                            </p:outputPanel> <br/>
+
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod4" value="#{cuestionarioController.pi.d4}" layout="custom">
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Porcentaje actual de ventas provenientes del exterior, sobre el total:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt295" for="radiod4" itemIndex="0"/>
+                                    <h:outputLabel for="opt295" value="Menos de un 5%"/>
+
+                                    <p:radioButton id="opt296" for="radiod4" itemIndex="1"/>
+                                    <h:outputLabel for="opt296" value="Entre un 5% y un 10%"/>
+
+                                    <p:radioButton id="opt297" for="radiod4" itemIndex="2"/>
+                                    <h:outputLabel for="opt297" value="Entre un 10% y un 20%"/>
+
+                                    <p:radioButton id="opt298" for="radiod4" itemIndex="3"/>
+                                    <h:outputLabel for="opt298" value="Entre un 20% y un 40%"/>
+
+                                    <p:radioButton id="opt299" for="radiod4" itemIndex="4"/>
+                                    <h:outputLabel for="opt299" value="Mas de un 40%"/>
+
+                                    <p:radioButton id="opt300" for="radiod4" itemIndex="5"/>
+                                    <h:outputLabel for="opt300" value="No hay ningún objetivo marcado ni cálculo aproximado"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod5" value="#{cuestionarioController.pi.d5}" layout="custom">
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Porcentaje actual de ventas provenientes del exterior, sobre el total:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt301" for="radiod5" itemIndex="0"/>
+                                    <h:outputLabel for="opt301" value="Menos de un 5%"/>
+
+                                    <p:radioButton id="opt302" for="radiod5" itemIndex="1"/>
+                                    <h:outputLabel for="opt302" value="Entre un 5% y un 10%"/>
+
+                                    <p:radioButton id="opt303" for="radiod5" itemIndex="2"/>
+                                    <h:outputLabel for="opt303" value="Entre un 10% y un 20%"/>
+
+                                    <p:radioButton id="opt304" for="radiod5" itemIndex="3"/>
+                                    <h:outputLabel for="opt304" value="Entre un 20% y un 40%"/>
+
+                                    <p:radioButton id="opt305" for="radiod5" itemIndex="4"/>
+                                    <h:outputLabel for="opt305" value="Mas de un 40%"/>
+
+                                    <p:radioButton id="opt306" for="radiod5" itemIndex="5"/>
+                                    <h:outputLabel for="opt306" value="No hay ningún objetivo marcado ni cálculo aproximado"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod6" value="#{cuestionarioController.pi.d6}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="9"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Cantidad (en dólares americanos) que estarían dispuestos a destinar en los próximos dos años en conseguir nuevos mercados exteriores"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt307" for="radiod6" itemIndex="0"/>
+                                    <h:outputLabel for="opt307" value="Menos de 10,000"/>
+
+                                    <p:radioButton id="opt308" for="radiod6" itemIndex="1"/>
+                                    <h:outputLabel for="opt308" value="Entre 10,000 y 20,000"/>
+
+                                    <p:radioButton id="opt309" for="radiod6" itemIndex="2"/>
+                                    <h:outputLabel for="opt309" value="Entre 20,000 y un 50,000"/>
+
+                                    <p:radioButton id="opt310" for="radiod6" itemIndex="3"/>
+                                    <h:outputLabel for="opt310" value="Entre un 50,000 y un 100,000"/>
+
+                                    <p:radioButton id="opt311" for="radiod6" itemIndex="4"/>
+                                    <h:outputLabel for="opt311" value="Entre 100,000 y 200,000"/>
+
+                                    <p:radioButton id="opt312a" for="radiod6" itemIndex="5"/>
+                                    <h:outputLabel for="opt312a" value="Entre 200,000 y 400,000"/>
+
+                                    <p:radioButton id="opt312b" for="radiod6" itemIndex="6"/>
+                                    <h:outputLabel for="opt312b" value="Más de 400,000"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Marque los conceptos en los que se invertirá la cantidad indicada anteriormente"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd7Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Contratación de expertos." itemValue="0.3" />  
+                                        <f:selectItem itemLabel="Adaptación de producto." itemValue="0.3" />  
+                                        <f:selectItem itemLabel="Investigación comercial." itemValue="0.3" /> 
+                                        <f:selectItem itemLabel="Viajes de prospección o promocionales." itemValue="0.2" />  
+                                        <f:selectItem itemLabel="Material promocional." itemValue="0.1" /> 
+                                        <f:selectItem itemLabel="Promoción en Internet." itemValue="0.1" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond7}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod8" value="#{cuestionarioController.pi.d8}" layout="custom">
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="2"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con qué recursos principalmente:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt318" for="radiod8" itemIndex="0"/>
+                                    <h:outputLabel for="opt318" value="Recursos Propios"/>
+
+                                    <p:radioButton id="opt319" for="radiod8" itemIndex="1"/>
+                                    <h:outputLabel for="opt319" value="Recursos Propios"/>
+
+                                    <p:radioButton id="opt321" for="radiod8" itemIndex="2"/>
+                                    <h:outputLabel for="opt321" value="Ayuda o subvenciones"/>
+
+                                    <p:radioButton id="opt322" for="radiod8" itemIndex="3"/>
+                                    <h:outputLabel for="opt322" value="Préstamos"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" Las amenazas con las que se encuentra #{cuestionarioController.nombreComercial} y que impulsan a buscar nuevos mercados son:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd9Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Declive de los canales de distribución tradicionales." itemValue="-3" />  
+                                        <f:selectItem itemLabel="Pérdida de fidelidad de la clientela ante la entrada de nuevos actores al mercado." itemValue="-3" />  
+                                        <f:selectItem itemLabel="Dificultad para contar con proveedores." itemValue="-2" /> 
+                                        <f:selectItem itemLabel="La demanda actual está en declive." itemValue="-2" />  
+                                        <f:selectItem itemLabel="Equilibrar la estacionalidad del mercado interior." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Proceso de concentración en las empresas del sector." itemValue="-2" /> 
+                                        <f:selectItem itemLabel="Aumento de las importaciones en el sector." itemValue="-5" /> 
+                                        <f:selectItem itemLabel="Los competidores están saliendo al exterior." itemValue="0" /> 
+                                        <f:selectItem itemLabel="Auge de productos sustitutivos en el mercado." itemValue="-3" /> 
+                                        <f:selectItem itemLabel="Incremento de las barreras en el mercado nacional (Endurecimiento de normas, certificaciones, leyes…)." itemValue="-1" /> 
+                                        <f:selectItem itemLabel="No hay amenazas concretas la decisión se toma por la existencia de oportunidades." itemValue="5" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond9}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Las oportunidades con las que se encuentra #{cuestionarioController.nombreComercial} y que impulsan a buscar nuevos mercados son:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd10Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Experiencia exitosa de exportación en otros mercados exteriores." itemValue="3" />  
+                                        <f:selectItem itemLabel="Aparición de ocasiones puntuales de negocio en estos nuevos mercados." itemValue="3" />  
+                                        <f:selectItem itemLabel="Desaparición de barreras para la salida de los productos debido a acuerdos comerciales." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Aumento de la demanda de productos similares en esos nuevos mercados." itemValue="2" />  
+                                        <f:selectItem itemLabel="Precios exteriores dejan un margen comercial más amplio." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Cambios en las preferencias de la demanda internacional." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Nuevos mercados emergentes en el exterior." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Ventajas competitivas con respecto a la producción en esos mercados." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Estrategia de crecimiento tras concluir la expansión nacional." itemValue="1" />                             
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond10}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" Otras motivaciones estratégicas de #{cuestionarioController.nombreComercial} para exportar, son:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd11Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Estrategia básica de crecimiento y expansión de la empresa." itemValue="2" />  
+                                        <f:selectItem itemLabel="Explotar todo el potencial de los productos y tecnologías de la empresa." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa es joven y con interés por nuevos mercados." itemValue="3" /> 
+                                        <f:selectItem itemLabel="Estrategia de diversificación de riesgo." itemValue="2" />  
+                                        <f:selectItem itemLabel="Necesidad de supervivencia ante las amenazas del mercado." itemValue="-3" /> 
+                                        <f:selectItem itemLabel="Estrategia de aprovechamiento de los recursos ociosos." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Estrategia de reducción de costes unitarios por ampliación del mercado." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Recientemente se ha incorporado personal con experiencia." itemValue="3" /> 
+                                        <f:selectItem itemLabel="La empresa tiene experiencia y quiere seguir explotándola." itemValue="3" /> 
+                                        <f:selectItem itemLabel="Ha habido un cambio o nuevas incorporaciones en la dirección de la empresa que están impulsando cambios estratégicos." itemValue="4" /> 
+                                        <f:selectItem itemLabel="Otras motivaciones." itemValue="0" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond11}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+
+                                <p:panelGrid columns="2">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Las barreras internas que han impedido a #{cuestionarioController.nombreComercial} exportar mayor volumen y a más mercados, son:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd12Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Falta de información de los mercados exteriores." itemValue="-2" />  
+                                        <f:selectItem itemLabel="Ausencia de demanda exterior." itemValue="-4" />  
+                                        <f:selectItem itemLabel="Desconocimiento de apoyos institucionales." itemValue="-1" /> 
+                                        <f:selectItem itemLabel="Nuestros precios no son competitivos." itemValue="-4" />  
+                                        <f:selectItem itemLabel="Falta de tamaño de la empresa." itemValue="-3" /> 
+                                        <f:selectItem itemLabel="Falta de homologaciones necesarias." itemValue="-2" /> 
+                                        <f:selectItem itemLabel="Obstáculo de Los idiomas." itemValue="-2" /> 
+                                        <f:selectItem itemLabel="Desconocimiento de los trámites internacionales." itemValue="-2" /> 
+                                        <f:selectItem itemLabel="Falta de financiación." itemValue="-3" /> 
+                                        <f:selectItem itemLabel="No existe ningún obstáculo de los anteriores." itemValue="0" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond12}"/>
+                                    </p:selectManyCheckbox>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod13" value="#{cuestionarioController.pi.d13}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto a personal encargado de los trámites de exportación:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt364" for="radiod13" itemIndex="0"/>
+                                    <h:outputLabel for="opt364" value="La empresa cuenta con personal interno que realiza de forma habitual trámites de exportación."/>
+
+                                    <p:radioButton id="opt365" for="radiod13" itemIndex="1"/>
+                                    <h:outputLabel for="opt365" value="La empresa acude a personal externo o empresas de gestión que realizan de forma habitual trámites de exportación."/>
+
+                                    <p:radioButton id="opt366" for="radiod13" itemIndex="2"/>
+                                    <h:outputLabel for="opt366" value="Los compradores se encargan de la mayor parte de los trámites de exportación."/>
+
+                                    <p:radioButton id="opt367" for="radiod13" itemIndex="3"/>
+                                    <h:outputLabel for="opt367" value="La empresa ha contratado, o piensa contratar en breve, personal experto en trámites."/>
+
+                                    <p:radioButton id="opt368" for="radiod13" itemIndex="4"/>
+                                    <h:outputLabel for="opt368" value="La empresa no cuenta por el momento con quien resuelva los trámites de exportación."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod14" value="#{cuestionarioController.pi.d14}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto a personal encargado de los trámites y coordinación logística para la entrega de producto en mercados internacionales:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt369" for="radiod14" itemIndex="0"/>
+                                    <h:outputLabel for="opt369" value="La empresa cuenta con personal interno que realiza de forma habitual trámites logísticos y la contratación del transporte."/>
+
+                                    <p:radioButton id="opt370" for="radiod14" itemIndex="1"/>
+                                    <h:outputLabel for="opt370" value="La empresa acude a personal externo o empresas especializadas que realizan todos los trámites logísticos."/>
+
+                                    <p:radioButton id="opt371" for="radiod14" itemIndex="2"/>
+                                    <h:outputLabel for="opt371" value="Los clientes se encargan del transporte y los trámites logísticos."/>
+
+                                    <p:radioButton id="opt372" for="radiod14" itemIndex="3"/>
+                                    <h:outputLabel for="opt372" value="La empresa no cuenta por el momento con quien resuelva las cuestiones relacionadas con transporte y trámites logísticos."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod15" value="#{cuestionarioController.pi.d25}" layout="custom">
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="15"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Modo de distribución adecuada para alcanzar los mercados"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt373" for="radiod15" itemIndex="0"/>
+                                    <h:outputLabel for="opt373" value="Por la naturaleza del producto, el transporte más adecuado es el envío a través de agencias de mensajería o couriers."/>
+
+                                    <p:radioButton id="opt374" for="radiod15" itemIndex="1"/>
+                                    <h:outputLabel for="opt374" value="Por la naturaleza del producto, el transporte más adecuado es el aéreo."/>
+
+                                    <p:radioButton id="opt375" for="radiod15" itemIndex="2"/>
+                                    <h:outputLabel for="opt375" value="Por la naturaleza del producto, el transporte más adecuado maritimo"/>
+
+                                    <p:radioButton id="opt376" for="radiod15" itemIndex="3"/>
+                                    <h:outputLabel for="opt376" value="El producto puede ser transmitido por medios electrónicos (software, música, libros electrónicos, vídeos, etc.)."/>
+
+                                    <p:radioButton id="opt377" for="radiod15" itemIndex="4"/>
+                                    <h:outputLabel for="opt377" value="Es un servicio que se consume en Nicaragua."/>
+
+                                    <p:radioButton id="opt379" for="radiod15" itemIndex="5"/>
+                                    <h:outputLabel for="opt379" value="Es un servicio que se debe prestar en el mercado de destino."/>
+
+                                    <p:radioButton id="opt380" for="radiod15" itemIndex="6"/>
+                                    <h:outputLabel for="opt380" value="No se tiene total seguridad sobre la respuesta."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod16" value="#{cuestionarioController.pi.d16}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con respecto a la distribución seleccionada en la pregunta anterior, el conocimiento de los costos es:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt381" for="radiod16" itemIndex="0"/>
+                                    <h:outputLabel for="opt381" value="La empresa utiliza estos medios habitualmente por lo que conoce prefectamente los costos"/>
+
+                                    <p:radioButton id="opt382" for="radiod16" itemIndex="1"/>
+                                    <h:outputLabel for="opt382" value="La empresa ha utilizado estos medios en alguna ocasión por lo que conoce perfectamente los costos"/>
+
+                                    <p:radioButton id="opt383" for="radiod16" itemIndex="2"/>
+                                    <h:outputLabel for="opt383" value="La empresa no ha utilizado nunca esos medios para envíos al extranjero pero conoce los costos"/>
+
+                                    <p:radioButton id="opt384" for="radiod16" itemIndex="3"/>
+                                    <h:outputLabel for="opt384" value="La empresa no ha utilizado nunca esos medios para envíos al extranjero y no conoce los costos"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto a acciones de promoción tradicional:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd17Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="La empresa cuenta con material promocional y/o catálogos para Nicaragua." itemValue="1" />  
+                                        <f:selectItem itemLabel="La empresa cuenta con material promocional y/o catálogos traducidos y enfocados a los mercados internacionales." itemValue="3" />  
+                                        <f:selectItem itemLabel="La empresa realiza publicaciones o publicidad en prensa, radio o televisión en Nicaragua." itemValue="1" /> 
+                                        <f:selectItem itemLabel="La empresa realiza publicaciones o publicidad en prensa, radio o televisión en mercados extranjeros." itemValue="3" />  
+                                        <f:selectItem itemLabel="La empresa cuenta con agentes comerciales que realizan visitas a clientes en Nicaragua." itemValue="1" /> 
+                                        <f:selectItem itemLabel="La empresa cuenta con agentes comerciales que realizan visitas a clientes en el exterior." itemValue="3" />                                   
+                                        <f:selectItem itemLabel="La empresa no realiza ninguna de las acciones anteriores." itemValue="0" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond17}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con lo que respecta a la asistencia a ferias:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd18Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="La empresa participa principalmente como visitante en ferias nacionales." itemValue="1" />  
+                                        <f:selectItem itemLabel="La empresa participa principalmente como expositor en ferias nacionales." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa participa como visitante en ferias internacionales." itemValue="3" />  
+                                        <f:selectItem itemLabel="La empresa participa como expositor en ferias internacionales." itemValue="5" /> 
+                                        <f:selectItem itemLabel="La empresa no participa como visitante ni como expositor en ferias." itemValue="0" />                                   
+                                        <f:selectItem itemLabel="El sector no se mueve a través de ferias o exposiciones." itemValue="0" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond18}"/>
+                                    </p:selectManyCheckbox>
+
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod19" value="#{cuestionarioController.pi.d19}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="El presupuesto anual para promoción tradicional, valorado en dólares, es de:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt398" for="radiod19" itemIndex="0"/>
+                                    <h:outputLabel for="opt398" value="Menos de 2,000"/>
+
+                                    <p:radioButton id="opt399" for="radiod19" itemIndex="1"/>
+                                    <h:outputLabel for="opt399" value="Entre 2,000 y 4,000"/>
+
+                                    <p:radioButton id="opt400" for="radiod19" itemIndex="2"/>
+                                    <h:outputLabel for="opt400" value="Entre 4,000 y 10,000"/>
+
+                                    <p:radioButton id="opt401" for="radiod19" itemIndex="3"/>
+                                    <h:outputLabel for="opt401" value="Entre 10,000 y 30,000"/>
+
+                                    <p:radioButton id="opt402" for="radiod19" itemIndex="4"/>
+                                    <h:outputLabel for="opt402" value="Entre 30,000 y 80,000"/>
+
+                                    <p:radioButton id="opt403" for="radiod19" itemIndex="5"/>
+                                    <h:outputLabel for="opt403" value="Más de 80,000"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod20" value="#{cuestionarioController.pi.d20}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con respecto a la presencia de la empresa en internet:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt404" for="radiod20" itemIndex="0"/>
+                                    <h:outputLabel for="opt404" value="La empresa cuenta con una web que es actualizada al menos una vez cada tres meses directamente por personal de la empresa."/>
+
+                                    <p:radioButton id="opt405" for="radiod20" itemIndex="1"/>
+                                    <h:outputLabel for="opt405" value="La empresa cuenta con una web que es actualizada al menos una vez cada tres meses por personal externo."/>
+
+                                    <p:radioButton id="opt406" for="radiod20" itemIndex="2"/>
+                                    <h:outputLabel for="opt406" value="La empresa cuenta con una web cuyos contenidos o catálogo de productos no se actualizan habitualmente."/>
+
+                                    <p:radioButton id="opt407" for="radiod20" itemIndex="3"/>
+                                    <h:outputLabel for="opt407" value="La empresa no cuenta con una web propia."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En relación a la publicidad o promoción de la empresa en la red:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pd21Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="La empresa realiza publicidad de pago en Internet a través de Google, Facebook u otros." itemValue="4" />  
+                                        <f:selectItem itemLabel="La empresa realiza envíos publicitarios a través de correos electrónicos." itemValue="2" />  
+                                        <f:selectItem itemLabel="La empresa mantiene presencia activa en redes sociales (Facebook, Hi5, LinkedIn, Twitter…)." itemValue="3" />  
+                                        <f:selectItem itemLabel="Es posible realizar pedidos de productos a la empresa a través de mercados en Internet (Alibaba, Quiminet, Solostocks, Mercadolibre…)." itemValue="3" /> 
+                                        <f:selectItem itemLabel="Es posible realizar pedidos de productos a la empresa a través de un catálogo a través de la propia web." itemValue="2" />                                   
+                                        <f:selectItem itemLabel="La empresa actualiza uno o varios blogs u otro tipo de publicaciones en Internet como vía de promoción y contacto con el cliente." itemValue="3" /> 
+                                        <f:selectItem itemLabel="La empresa no realiza ningún tipo de promoción o venta directa a través de Internet." itemValue="0" /> 
+                                        <p:ajax listener="#{cuestionarioController.sumarOpciond21}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiod22" value="#{cuestionarioController.pi.d22}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="4"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="9"/>
+                                    <f:selectItem itemValue="10"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" El presupuesto anual para promoción a través de internet, valorado en dólares, es de:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt415" for="radiod22" itemIndex="0"/>
+                                    <h:outputLabel for="opt415" value="Menos de 2,000"/>
+
+                                    <p:radioButton id="opt416" for="radiod22" itemIndex="1"/>
+                                    <h:outputLabel for="opt416" value="Entre 2,000 y 4,000"/>
+
+                                    <p:radioButton id="opt416b" for="radiod22" itemIndex="2"/>
+                                    <h:outputLabel for="opt416b" value="Entre 4,000 y 10,000"/>
+
+                                    <p:radioButton id="opt417" for="radiod22" itemIndex="3"/>
+                                    <h:outputLabel for="opt417" value="Entre 10,000 y 30,000"/>
+
+                                    <p:radioButton id="opt418" for="radiod22" itemIndex="4"/>
+                                    <h:outputLabel for="opt418" value="Entre 30,000 y 80,000"/>
+
+                                    <p:radioButton id="opt419" for="radiod22" itemIndex="5"/>
+                                    <h:outputLabel for="opt419" value="Más de 80,000"/>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Anterior" icon="ui-icon-arrowthick-1-w" onclick="prevTab();"/>
+                                        <p:commandButton value="Siguiente" icon="ui-icon-arrowthick-1-e"  onclick="nextTab();"/>
+                                    </f:facet>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+
+                        </p:tab>
+
+                        <p:tab title="Datos de preparacion y conocimiento">
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con lo que respecta a la asistencia a ferias:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pe1Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Centroamerica." itemValue="3" />  
+                                        <f:selectItem itemLabel="Mexico." itemValue="4" />  
+                                        <f:selectItem itemLabel="Estados Unidos/Canada." itemValue="5" /> 
+                                        <f:selectItem itemLabel="Brasil." itemValue="5" />  
+                                        <f:selectItem itemLabel="Sudamérica." itemValue="4" /> 
+                                        <f:selectItem itemLabel="Caribe." itemValue="5" /> 
+                                        <f:selectItem itemLabel="España." itemValue="5" /> 
+                                        <f:selectItem itemLabel="Otros países europeos." itemValue="6" />
+                                        <f:selectItem itemLabel="China." itemValue="6" />
+                                        <f:selectItem itemLabel="Otros." itemValue="2" />
+                                        <f:selectItem itemLabel="No hay una prioridad definid." itemValue="0" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcione1}"/>
+                                    </p:selectManyCheckbox>
+
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode2" value="#{cuestionarioController.pi.e2}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value=" ¿Podría decir con seguridad cuántos habitantes tiene Alemania"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt431" for="radiode2" itemIndex="0"/>
+                                    <h:outputLabel for="opt431" value="48 millones"/>
+
+                                    <p:radioButton id="opt432" for="radiode2" itemIndex="1"/>
+                                    <h:outputLabel for="opt432" value="82 millones"/>
+
+                                    <p:radioButton id="opt433" for="radiode2" itemIndex="2"/>
+                                    <h:outputLabel for="opt433" value="118 millones"/>
+
+                                    <p:radioButton id="opt434" for="radiode2" itemIndex="3"/>
+                                    <h:outputLabel for="opt434" value="No sabria decirlo con claridad"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Viajes al extranjero por parte de la dirección de la empresa en los últimos 3 años:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pe3Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Centroamerica." itemValue="1" />  
+                                        <f:selectItem itemLabel="Mexico." itemValue="1" />  
+                                        <f:selectItem itemLabel="Estados Unidos/Canada." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Brasil." itemValue="1" />  
+                                        <f:selectItem itemLabel="Sudamérica." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Caribe." itemValue="1" /> 
+                                        <f:selectItem itemLabel="España." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Otros países europeos." itemValue="3" />
+                                        <f:selectItem itemLabel="China." itemValue="1" />
+                                        <f:selectItem itemLabel="Otros." itemValue="1" />
+                                        <f:selectItem itemLabel="Ninguno." itemValue="0" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcione3}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode4" value="#{cuestionarioController.pi.e4}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Ha participado o piensa participar en ferias o misiones comerciales en el extrajero?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt447" for="radiode4" itemIndex="0"/>
+                                    <h:outputLabel for="opt447" value="Sí, la empresa participa en este tipo de actividades habitualmente."/>
+
+                                    <p:radioButton id="opt448" for="radiode4" itemIndex="1"/>
+                                    <h:outputLabel for="opt448" value="Sí, la empresa ha participado en este tipo de actividades en alguna ocasión."/>
+
+                                    <p:radioButton id="opt449" for="radiode4" itemIndex="2"/>
+                                    <h:outputLabel for="opt449" value="No pero hemos viajado a los países objetivo como turistas o en otras actividades."/>
+
+                                    <p:radioButton id="opt450" for="radiode4" itemIndex="3"/>
+                                    <h:outputLabel for="opt450" value="Todavía no pero está previsto en un futuro."/>
+
+                                    <p:radioButton id="opt451" for="radiode4" itemIndex="4"/>
+                                    <h:outputLabel for="opt451" value="No creemos que sea una prioridad para la empresa en este momento."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Nivel de inglés y otros idiomas"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pe5Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Sin conocimiento de idiomas extranjeros." itemValue="0" />  
+                                        <f:selectItem itemLabel="Leer y escribir inglés a nivel básico pero no hablar" itemValue="1" />  
+                                        <f:selectItem itemLabel="Leer y escribir inglés a nivel avanzado pero no hablar" itemValue="2" /> 
+                                        <f:selectItem itemLabel="Leer y escribir inglés a nivel básico y además hablar a nivel básico." itemValue="2" />  
+                                        <f:selectItem itemLabel="Leer y escribir inglés a nivel avanzado y además hablar a nivel básico" itemValue="3" />  
+                                        <f:selectItem itemLabel="Leer y escribir inglés a nivel avanzado y además hablar como para llevar una negociación hablada en inglés." itemValue="5" /> 
+                                        <f:selectItem itemLabel="Nivel avanzado de francés." itemValue="4" />
+                                        <f:selectItem itemLabel="Nivel avanzado de portugués." itemValue="1" />
+                                        <f:selectItem itemLabel="Nivel avanzado de alemán." itemValue="4" />
+                                        <f:selectItem itemLabel="Nivel avanzado de italiano." itemValue="4" />
+                                        <f:selectItem itemLabel="Nivel avanzado de chino." itemValue="1" />
+                                        <f:selectItem itemLabel="Otros." itemValue="3" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcione5}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode6" value="#{cuestionarioController.pi.e6}" layout="custom">
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Están familiarizados con los Incoterms? ¿Podría indicar la diferencia entre EXW y CIP?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt464" for="radiode6" itemIndex="0"/>
+                                    <h:outputLabel for="opt464" value="No, no estamos familiarizados con estos términos."/>
+
+                                    <p:radioButton id="opt465" for="radiode6" itemIndex="1"/>
+                                    <h:outputLabel for="opt465" value="Sí, la diferencia es que EXW es exclusivo del transporte marítimo."/>
+
+                                    <p:radioButton id="opt466" for="radiode6" itemIndex="2"/>
+                                    <h:outputLabel for="opt466" value="Sí, la diferencia es que con CIP el vendedor se hace cargo de portes y seguros hasta un determinado punto."/>
+
+                                    <p:radioButton id="opt467" for="radiode6" itemIndex="3"/>
+                                    <h:outputLabel for="opt467" value="Sí, la diferencia es que EXW marca que el vendedor asume todos los costos de transporte, flete y seguro."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode7" value="#{cuestionarioController.pi.e7}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto al conocimiento de los aranceles u otro tipo de impuestos que tienen sus Servicios en sus próximos mercados de destino"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt468" for="radiode7" itemIndex="0"/>
+                                    <h:outputLabel for="opt468" value="Sí, tenemos un estudio de mercado completo."/>
+
+                                    <p:radioButton id="opt469" for="radiode7" itemIndex="1"/>
+                                    <h:outputLabel for="opt469" value="Sí, tenemos conocimiento del mercado de destino."/>
+
+                                    <p:radioButton id="opt470" for="radiode7" itemIndex="2"/>
+                                    <h:outputLabel for="opt470" value="Conocemos el mercado de destino pero no manejamos esa información en este momento."/>
+
+                                    <p:radioButton id="opt471" for="radiode7" itemIndex="3"/>
+                                    <h:outputLabel for="opt471" value="En este momento no conocemos el mercado de destino lo suficiente."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode8" value="#{cuestionarioController.pi.e8}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Existe en la empresa un plan de marketing o de exportación por escrito?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt472" for="radiode8" itemIndex="0"/>
+                                    <h:outputLabel for="opt472" value="La empresa cuenta con un plan de marketing y/o de exportación por escrito."/>
+
+                                    <p:radioButton id="opt473" for="radiode8" itemIndex="1"/>
+                                    <h:outputLabel for="opt473" value="La empresa está en estos momentos elaborando un plan de marketing y/o de exportación por escrito."/>
+
+                                    <p:radioButton id="opt474" for="radiode8" itemIndex="2"/>
+                                    <h:outputLabel for="opt474" value="La empresa piensa elaborar  un plan de marketing y/o de exportación por escrito."/>
+
+                                    <p:radioButton id="opt475" for="radiode8" itemIndex="3"/>
+                                    <h:outputLabel for="opt475" value="La empresa no cuenta ni con plan de marketing ni con plan de exportación por escrito."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode9" value="#{cuestionarioController.pi.e9}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Personal dedicado a diseño:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt476" for="radiode9" itemIndex="0"/>
+                                    <h:outputLabel for="opt476" value="Personal interno en exclusiva."/>
+
+                                    <p:radioButton id="opt477" for="radiode9" itemIndex="1"/>
+                                    <h:outputLabel for="opt477" value="Personal externo."/>
+
+                                    <p:radioButton id="opt478" for="radiode9" itemIndex="2"/>
+                                    <h:outputLabel for="opt478" value="Personal interno, claramente asignado pero compatibilizando con otras tareas."/>
+
+                                    <p:radioButton id="opt479" for="radiode9" itemIndex="3"/>
+                                    <h:outputLabel for="opt479" value="No hay personal específico asignado a estas tareas. "/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Seguimiento tendencias de diseño en el sector:"/>
+                                    </f:facet>
+
+                                    <p:selectManyCheckbox value="#{cuestionarioController.pe10Opciones}" layout="pageDirection">  
+                                        <f:selectItem itemLabel="Visitas a ferias." itemValue="3" />  
+                                        <f:selectItem itemLabel="Internet." itemValue="2" />  
+                                        <f:selectItem itemLabel="Revistas sectoriales." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Contacto con clientes nacionales." itemValue="1" />  
+                                        <f:selectItem itemLabel="Contacto con clientes internacionales." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Contacto con distribuidores nacionales." itemValue="1" /> 
+                                        <f:selectItem itemLabel="Contacto con distribuidores internacionales." itemValue="2" /> 
+                                        <f:selectItem itemLabel="Contacto con proveedores." itemValue="1" />
+                                        <p:ajax listener="#{cuestionarioController.sumarOpcione10}"/>
+                                    </p:selectManyCheckbox>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode11" value="#{cuestionarioController.pi.e11}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Conoce las 3 empresas de su sector que más venden en Europa?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt488" for="radiode11" itemIndex="0"/>
+                                    <h:outputLabel for="opt488" value="Sí, tenemos un estudio de mercado completo."/>
+
+                                    <p:radioButton id="opt489" for="radiode11" itemIndex="1"/>
+                                    <h:outputLabel for="opt489" value="Sí, tenemos conocimiento del mercado de destino."/>
+
+                                    <p:radioButton id="opt490" for="radiode11" itemIndex="2"/>
+                                    <h:outputLabel for="opt490" value="Conocemos el mercado de destino pero no manejamos esa información en este momento."/>
+
+                                    <p:radioButton id="opt491" for="radiode11" itemIndex="3"/>
+                                    <h:outputLabel for="opt491" value="En este momento no conocemos el mercado de destino lo suficiente."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode12" value="#{cuestionarioController.pi.e12}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Conoce claramente los gustos de sus potenciales clientes en Europa?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt492" for="radiode12" itemIndex="0"/>
+                                    <h:outputLabel for="opt492" value="Sí, tenemos un estudio de mercado completo."/>
+
+                                    <p:radioButton id="opt493" for="radiode12" itemIndex="1"/>
+                                    <h:outputLabel for="opt493" value="Sí, tenemos conocimiento del mercado de destino."/>
+
+                                    <p:radioButton id="opt494" for="radiode12" itemIndex="2"/>
+                                    <h:outputLabel for="opt494" value="Conocemos el mercado de destino pero no manejamos esa información en este momento."/>
+
+                                    <p:radioButton id="opt495" for="radiode12" itemIndex="3"/>
+                                    <h:outputLabel for="opt495" value="En este momento no conocemos el mercado de destino lo suficiente."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode13" value="#{cuestionarioController.pi.e13}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Conoce claramente los medios de promoción (ferias, nombres de revistas, sitios web de referencia) en Europa?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt496" for="radiode13" itemIndex="0"/>
+                                    <h:outputLabel for="opt496" value="Sí, tenemos un estudio de mercado completo."/>
+
+                                    <p:radioButton id="opt497" for="radiode13" itemIndex="1"/>
+                                    <h:outputLabel for="opt497" value="Sí, tenemos conocimiento del mercado de destino."/>
+
+                                    <p:radioButton id="opt498" for="radiode13" itemIndex="2"/>
+                                    <h:outputLabel for="opt498" value="Conocemos el mercado de destino pero no manejamos esa información en este momento."/>
+
+                                    <p:radioButton id="opt499" for="radiode13" itemIndex="3"/>
+                                    <h:outputLabel for="opt499" value="En este momento no conocemos el mercado de destino lo suficiente."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode14" value="#{cuestionarioController.pi.e14}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="3"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="En cuanto al conocimiento y la comunicación con el cliente final:"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt500" for="radiode14" itemIndex="0"/>
+                                    <h:outputLabel for="opt500" value="La empresa realiza, de forma interna, estudios de mercado para conocer las preferencias de los clientes finales de los productos."/>
+
+                                    <p:radioButton id="opt501" for="radiode14" itemIndex="1"/>
+                                    <h:outputLabel for="opt501" value="La empresa encarga, de forma externa, estudios de mercado para conocer las preferencias de los clientes finales de los productos."/>
+
+                                    <p:radioButton id="opt502" for="radiode14" itemIndex="2"/>
+                                    <h:outputLabel for="opt502" value="La empresa conoce los gustos y preferencias del cliente final por el contacto directo."/>
+
+                                    <p:radioButton id="opt503" for="radiode14" itemIndex="3"/>
+                                    <h:outputLabel for="opt503" value="La empresa conoce los gustos y preferencias del cliente final a través de las conversaciones con distribuidores."/>
+
+                                    <p:radioButton id="opt504" for="radiode14" itemIndex="4"/>
+                                    <h:outputLabel for="opt504" value=" La empresa no tiene, en este momento, mucha información sobre gustos y preferencias del cliente final. "/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode15" value="#{cuestionarioController.pi.e15}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Está al tanto de los tratados comerciales? ¿Cúal es el nombre del tratado negociado con la Unión Europea?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt505" for="radiode15" itemIndex="0"/>
+                                    <h:outputLabel for="opt505" value="Acuerdo de Asociación entre Centroamérica y la Unión Europea."/>
+
+                                    <p:radioButton id="opt506" for="radiode15" itemIndex="1"/>
+                                    <h:outputLabel for="opt506" value="Acuerdo de libre comercio Nicaragua - Comunidad Europea."/>
+
+                                    <p:radioButton id="opt507" for="radiode15" itemIndex="2"/>
+                                    <h:outputLabel for="opt507" value="TLC Europe."/>
+
+                                    <p:radioButton id="opt508" for="radiode15" itemIndex="3"/>
+                                    <h:outputLabel for="opt508" value="Unión Aduanera Centroamérica - Europa."/>
+
+                                    <p:radioButton id="opt509" for="radiode15" itemIndex="4"/>
+                                    <h:outputLabel for="opt509" value="No se ha negociado ningún acuerdo."/>
+
+                                    <p:radioButton id="opt510" for="radiode15" itemIndex="5"/>
+                                    <h:outputLabel for="opt510" value="La empresa no está al tanto de la negociación de tratados comerciales."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode16" value="#{cuestionarioController.pi.e16}" layout="custom">
+                                    <f:selectItem itemValue="5"/>
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="8"/>
+                                    <f:selectItem itemValue="7"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Con respecto al conocimiento de la cadena de distribución o comercialización en Europa"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt511" for="radiode16" itemIndex="0"/>
+                                    <h:outputLabel for="opt511" value="La empresa no tiene todavía contacto pero conoce la estructura de distribución en los mercados objetivo."/>
+
+                                    <p:radioButton id="opt512" for="radiode16" itemIndex="1"/>
+                                    <h:outputLabel for="opt512" value="La empresa tiene contactos establecidos dentro de la estructura de distribución en los mercados objetivo."/>
+
+                                    <p:radioButton id="opt513" for="radiode16" itemIndex="2"/>
+                                    <h:outputLabel for="opt513" value="La empresa está negociando actualmente con distribuidores en los mercados objetivo."/>
+
+                                    <p:radioButton id="opt514" for="radiode16" itemIndex="3"/>
+                                    <h:outputLabel for="opt514" value=" La empresa va realizar las ventas directamente a los clientes finales en los mercados objetivo, por lo que no va a necesitar importadores, distribuidores u otras figuras."/>
+
+                                    <p:radioButton id="opt515" for="radiode16" itemIndex="4"/>
+                                    <h:outputLabel for="opt515" value=" La empresa va realizar las operaciones en los mercados objetivos a través de un agente o representante que manejará toda la relación."/>
+
+                                    <p:radioButton id="opt516" for="radiode16" itemIndex="5"/>
+                                    <h:outputLabel for="opt516" value="Todavía no hay una idea clara de la aproximación a los mercados objetivo."/>
+
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                            <p:outputPanel>
+                                <p:selectOneRadio id="radiode17" value="#{cuestionarioController.pi.e17}" layout="custom">
+                                    <f:selectItem itemValue="10"/>
+                                    <f:selectItem itemValue="6"/>
+                                    <f:selectItem itemValue="2"/>
+                                    <f:selectItem itemValue="0"/>
+                                </p:selectOneRadio>
+
+                                <p:panelGrid columns="2">
+
+                                    <f:facet name="header">
+                                        <h:outputLabel value="¿Conoce las normas técnicas que rigen los etiquetados en Europa?"/>
+                                    </f:facet>
+
+                                    <p:radioButton id="opt517" for="radiode17" itemIndex="0"/>
+                                    <h:outputLabel for="opt517" value="Si, tenemos un estudio de mercado completo"/>
+
+                                    <p:radioButton id="opt518" for="radiode17" itemIndex="1"/>
+                                    <h:outputLabel for="opt518" value="Si, tenemos conocimientos del mercado destino."/>
+
+                                    <p:radioButton id="opt519" for="radiode17" itemIndex="2"/>
+                                    <h:outputLabel for="opt519" value="Conocemos el mercado de destino pero no majenamos esa información en este momento"/>
+
+                                    <p:radioButton id="opt520" for="radiode17" itemIndex="3"/>
+                                    <h:outputLabel for="opt520" value="En este momento no conocemos el mercado destino lo suficiente"/>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Anterior" icon="ui-icon-arrowthick-1-w" onclick="prevTab();"/>
+                                    </f:facet>
+                                </p:panelGrid>
+                            </p:outputPanel> <br/>
+
+                        </p:tab>
+
+                    </p:tabView>
+                    <p:commandButton type="button" value="Resultado" onclick="validate()"/>
+
+                </h:form> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

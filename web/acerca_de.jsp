@@ -61,17 +61,7 @@
         </div>   <%-- end div body rezise --%>  
         <div class="right1">
             
-        <h2>Desarrollo</h2>
-        <p>SECE fue desarrollado como un proyecto monogr&aacutefico
-            para obtener el t&iacutetulo de Ingenier&iacutea en Sistemas ofrecido por la Univeridad Nacional de Ingenier&iacutea
-          (UNI) en Nicaragua.</p>
-        <p>Fue desarrollado por:</p>
-        <ul>
-            <li>Miguel Mart&iacutenez Gal&aacuten</li>
-          <li>David A. Almanza</li>
-          <li>Kenny Mendieta Alem&aacuten</li>
-          
-        </ul>
+        
        
        
        

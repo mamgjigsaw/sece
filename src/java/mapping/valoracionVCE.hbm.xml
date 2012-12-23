@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.valoracionVCE" table="valoracionvce">
+    <id name="idValoracion" type="java.lang.Integer">
+      <column name="id_valoracion"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idContrato" type="java.lang.Integer">
+      <column name="id_contrato"/>
+    </property>
+    <property name="idIndicador" type="java.lang.Integer">
+      <column name="id_indicador"/>
+    </property>  
+    <property name="nombre" type="string">
+      <column length="200" name="nombre"/>
+    </property>
+    <property name="ponderacion" type="java.lang.Integer">
+      <column name="ponderacion"/>
+    </property>
+    <property name="contribucion" type="java.lang.Double">
+      <column name="contribucion" precision="22" scale="0"/>
+    </property>
+    <property name="escalaObtenida" type="java.lang.Integer">
+      <column name="escalaObtenida"/>
+    </property>
+    <property name="esc0" type="string">
+      <column length="300" name="esc0"/>
+    </property>
+    <property name="esc1" type="string">
+      <column length="300" name="esc1"/>
+    </property>
+    <property name="esc2" type="string">
+      <column length="300" name="esc2"/>
+    </property>
+    <property name="esc3" type="string">
+      <column length="300" name="esc3"/>
+    </property>
+    <property name="esc4" type="string">
+      <column length="300" name="esc4"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 26, 2012 10:28:49 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="sece" name="pojo.AreasInter" table="areas_inter">
+    <id name="idArea" type="java.lang.Integer">
+      <column name="id_area"/>
+      <generator class="identity"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="50" name="nombre"/>
+    </property>
+    <property name="estado" type="java.lang.Byte">
+      <column name="estado"/>
+    </property>
+    <set inverse="true" name="resultadoInters">
+      <key>
+        <column name="id_area"/>
+      </key>
+      <one-to-many class="pojo.ResultadoInter"/>
+    </set>
+  </class>
+</hibernate-mapping>
