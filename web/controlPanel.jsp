@@ -624,8 +624,14 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
         function goGrafico1(var1){
            //location.href="resultado.jsp";   
            window.open("InformeFinal?contra="+var1, "_blank");
-           
+          
        }
+       
+       function goGrafico2(var1){
+           //location.href="resultado.jsp";   
+           window.open("finalReport?contra="+var1, "_blank");           
+       }
+
        
        function goGrafico2(var1){
            //location.href="resultado.jsp";   
@@ -694,6 +700,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                document.location.href = "/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
            }else{              
               document.location.href = "/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
+
            }
        }
        

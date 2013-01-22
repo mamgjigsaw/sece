@@ -20,6 +20,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import pojo.AsignacionCapaContra;
 import pojo.Contrato;
 import pojo.Empresa;
 import pojo.EmpresaCompleta;
@@ -109,7 +110,6 @@ public class MBcompletadoInter implements java.io.Serializable{
         //Cargar Capacitador del Contrato        
         AsignacionCapaContraDaoImpl daoAsignacion = new AsignacionCapaContraDaoImpl();
         usuarioCapacitador = daoAsignacion.findUsByContra(contra);
-
     }
      
     public void reiniciar(){
