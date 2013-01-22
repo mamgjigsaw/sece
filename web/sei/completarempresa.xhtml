@@ -330,7 +330,9 @@
                                 <p:column colspan="2">
                                     <p:commandButton id="btn_salvar" actionListener="#{mbcompletado.guardarEC}" 
                                                      update="form_completar_empresa" ajax="false"
-                                                     value="Guardar" icon="ui-icon-disk" action="instrumento.xhtml"/>
+                                                     value="Guardar" icon="ui-icon-disk" action="instrumento.xhtml">
+                                        <f:param value="#{mbcompletado.idcontrato}" name="idcontrato"/>
+                                    </p:commandButton>
                                 </p:column>
                             </p:row>
 

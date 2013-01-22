@@ -121,6 +121,8 @@ public class CuestionarioController implements Serializable {
 
         //Para cambiar el texto en la pregunta d19 segun lo elegido en A 12
         int fa = 5;
+        //int fa = completoInternac.getEc().getFacturacionAnual();
+                
         if (fa < 5) {
             d19i1 = "Menos de 200";
              d19i2 = "Entre 200 y 400";
@@ -753,10 +755,6 @@ public class CuestionarioController implements Serializable {
 
     public String getD19i6() {
         return d19i6;
-    }
-
-    public MBcompletadoInter getCompletoInternac() {
-        return completoInternac;
     }
 
     public void setCompletoInternac(MBcompletadoInter completoInternac) {
