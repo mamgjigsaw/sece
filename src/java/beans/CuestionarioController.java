@@ -13,7 +13,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-//import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -120,11 +119,11 @@ public class CuestionarioController implements Serializable {
         }
 
         //Para cambiar el texto en la pregunta d19 segun lo elegido en A 12
-        int fa = 5;
-        //int fa = completoInternac.getEc().getFacturacionAnual();
+        //int fa = 5;
+        int fa = completoInternac.getEc().getFacturacionAnual();
                 
         if (fa < 5) {
-            d19i1 = "Menos de 200";
+             d19i1 = "Menos de 200";
              d19i2 = "Entre 200 y 400";
              d19i3 = "Entre 400 y 1000";
              d19i4 = "Entre 1000 y 3,000";
@@ -759,6 +758,10 @@ public class CuestionarioController implements Serializable {
 
     public void setCompletoInternac(MBcompletadoInter completoInternac) {
         this.completoInternac = completoInternac;
+    }
+
+    public MBcompletadoInter getCompletoInternac() {
+        return completoInternac;
     }
 
 }
