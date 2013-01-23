@@ -16,11 +16,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
-import pojo.AsignacionCapaContra;
 import pojo.Contrato;
 import pojo.Empresa;
 import pojo.EmpresaCompleta;
@@ -32,7 +32,7 @@ import pojo.Usuario;
  * @author Dave
  */
 @ManagedBean(name = "mbcompletado")
-@ViewScoped
+@SessionScoped
 public class MBcompletadoInter implements java.io.Serializable{
     
     //datos pasados por url
@@ -110,18 +110,11 @@ public class MBcompletadoInter implements java.io.Serializable{
         //Cargar Capacitador del Contrato        
         AsignacionCapaContraDaoImpl daoAsignacion = new AsignacionCapaContraDaoImpl();
         usuarioCapacitador = daoAsignacion.findUsByContra(contra);
-        
-        
     }
      
     public void reiniciar(){
         producto = new Producto();
         System.out.println("producto agregado");
-    }
-    
-    public String irA(){
-        prueba = "45";
-        return "prueba.xhtml?faces-redirect=true&IncludeViewParams=true";
     }
 
     public String guardarEC(){
@@ -266,16 +259,10 @@ public class MBcompletadoInter implements java.io.Serializable{
         this.prueba = prueba;
     }
 
-    /**
-     * @return the usuarioCapacitador
-     */
     public Usuario getUsuarioCapacitador() {
         return usuarioCapacitador;
     }
 
-    /**
-     * @param usuarioCapacitador the usuarioCapacitador to set
-     */
     public void setUsuarioCapacitador(Usuario usuarioCapacitador) {
         this.usuarioCapacitador = usuarioCapacitador;
     }

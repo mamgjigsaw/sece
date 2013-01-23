@@ -624,8 +624,14 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
         function goGrafico1(var1){
            //location.href="resultado.jsp";   
            window.open("InformeFinal?contra="+var1, "_blank");
-           
+          
        }
+       
+       function goGrafico2(var1){
+           //location.href="resultado.jsp";   
+           window.open("finalReport?contra="+var1, "_blank");           
+       }
+
        
        function goGrafico2(var1){
            //location.href="resultado.jsp";   
@@ -691,12 +697,19 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
         
        function respuestaEmpresa(data){
            if(data ==0 ){
+<<<<<<< HEAD
                //window.open("http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato, "_blank");
                location.href = "http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
            }else{
               //window.open("http://localhost:8080/sece/faces/sei/instrumento.xhtml", "_blank");
               //alert("hola " + contraActivos);
               location.href ="http://localhost:8080/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
+=======
+               document.location.href = "/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
+           }else{              
+              document.location.href = "/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
+
+>>>>>>> b5470e8e6a4520c1f5eee660049628a2f289ca7b
            }
        }
        

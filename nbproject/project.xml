@@ -23,15 +23,24 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.JMail.classpath}</file>
+                    <file>${libs.JavaMail.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
                     <file>${libs.PrimeFaces 3.4.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${libs.PoolConeHibernate.classpath}</file>
+=======
+                    <file>${libs.PrimeFaces.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${libs.C3P0.classpath}</file>
+
+>>>>>>> b5470e8e6a4520c1f5eee660049628a2f289ca7b
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
