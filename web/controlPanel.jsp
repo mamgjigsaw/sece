@@ -310,7 +310,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        
        function addRowContratos(contrato, fechaIni,fechaFin,idContra){
            var cadena="";
-           
+           IdContrato = idContra;
            if(tipo==4){
                cadena="<tr><td>"+contrato+"</td><td><label for='responsable' id='resp' >"+fechaIni+"</label></td><td><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE Condensado</strong></a></p></td><td><p><a href='#' onclick='goGrafico2("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
                
@@ -692,10 +692,11 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        function respuestaEmpresa(data){
            if(data ==0 ){
                //window.open("http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato, "_blank");
-               location.href = "http://sece.pml.org.ni/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
+               location.href = "http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
            }else{
               //window.open("http://localhost:8080/sece/faces/sei/instrumento.xhtml", "_blank");
-              location.href ="http://sece.pml.org.ni/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
+              //alert("hola " + contraActivos);
+              location.href ="http://localhost:8080/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
            }
        }
        

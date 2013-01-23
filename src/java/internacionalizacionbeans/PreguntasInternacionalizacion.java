@@ -221,16 +221,13 @@ public class PreguntasInternacionalizacion {
         double a = 0.0, b = 0.0, c = 0.0, d = 0.0, posicion, indirecta, intensidad, exportando, expansion = 0.0;
         double prom, prom2;
 
-        boolean logica = false;
+        //boolean logica = false;
 
         /* //// ------------------------------------------ calcular a -------////*/
         //discreta o continua
         if (this.getD1() == 5 || this.getD1() == 6 || this.getD1() == 3) {
-            logica = true;
-        }
-        if (logica == true) {
             indirecta = -2;
-        } else {
+        }else{
             indirecta = 0;
         }
         //Baja intensidad (menos del 10%) o sólo un territorio
@@ -258,15 +255,17 @@ public class PreguntasInternacionalizacion {
             expansion = 0;
         }
 
-        prom = (this.preparacion_motivacion_directiva() + this.gestion_tramites_exportacion() + this.logistica() + this.inteligencia_comercial()) / 4;
+        //prom es c130, prom2 es c136
+        prom = ((this.preparacion_motivacion_directiva() + this.gestion_tramites_exportacion() + this.logistica() + this.inteligencia_comercial()) / 4)/5;
         prom2 = ((this.adaptacion() * 2) + this.empaques() + this.dis_asociado() + this.politica_marca() + this.diferenciacion()) / 30;
 
         if ((exportando + intensidad + indirecta) == 4) {
 
-            a = 4 + (prom + prom2 / 2);
+            //a = 4 + (prom + prom2 / 2);
+            a = 4 + ((prom + prom2)/2);
         } else {
             if ((exportando + intensidad + indirecta) > 5) {
-                a = exportando + intensidad + indirecta;
+                a = expansion + exportando + intensidad + indirecta;
             } else {
                 a = 0;
             }
@@ -277,10 +276,12 @@ public class PreguntasInternacionalizacion {
         if (a == 0) {
             if (c143 > 1) {
                 if (this.adaptacion() > 6) {
-                    b = 3.5 + ((prom + prom2) / 2);
+                    b = 3.5 + ((prom + prom2)/2);
                 } else {
                     b = 0;
                 }
+            }else{
+                b = 0;
             }
         } else {
             b = 0;
@@ -541,9 +542,11 @@ public class PreguntasInternacionalizacion {
 
         if (empresa != null) {
             this.a12 = empresa.getFacturacionAnual();
+            facturacion= empresa.getFacturacionAnual();
 
         } else {
             this.a12 = 0;
+            facturacion = 0;
         }
     }
 
