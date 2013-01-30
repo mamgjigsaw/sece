@@ -24,11 +24,9 @@
       <bullet>round</bullet>      
     </graph>
     <graph gid="1">
-<<<<<<< HEAD
+
       <title>Gestión excelente</title>
-=======
-      <title>Gestión Excelente</title>
->>>>>>> 976392b5b03f86ad4b89746e9522b0719b7fc25a
+
       <color>0000FF</color>
       <line_width>2</line_width>
       <fill_alpha>0</fill_alpha>

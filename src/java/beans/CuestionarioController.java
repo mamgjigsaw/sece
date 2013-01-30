@@ -4,6 +4,8 @@
  */
 package beans;
 
+import daoImpl.ContratoDaoImpl;
+import daoImpl.EmpresaCompletaDaoImpl;
 import internacionalizacionbeans.PreguntasInternacionalizacion;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,11 +14,12 @@ import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import pojo.Contrato;
+import pojo.EmpresaCompleta;
 
 
 /**
@@ -39,8 +42,8 @@ public class CuestionarioController implements Serializable {
     final int initialYear = 1900;
     final int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     private int[] preguntas = new int[2];
-    @ManagedProperty(value = "#{mbcompletado}")
-    private MBcompletadoInter completoInternac;
+    //@ManagedProperty(value = "#{mbcompletado}")
+    //private MBcompletadoInter completoInternac;
 
     public CuestionarioController() {
         pi.setB1(10);
@@ -120,7 +123,16 @@ public class CuestionarioController implements Serializable {
 
         //Para cambiar el texto en la pregunta d19 segun lo elegido en A 12
         //int fa = 5;
-        int fa = completoInternac.getEc().getFacturacionAnual();
+        EmpresaCompleta empresa = new EmpresaCompleta();
+        EmpresaCompletaDaoImpl empDao = new EmpresaCompletaDaoImpl();
+
+        Contrato contrato = new Contrato();
+        ContratoDaoImpl contraDao = new ContratoDaoImpl();
+        contrato = contraDao.findById(pi.getId_contrato());
+
+        empresa = empDao.findByIdContrato(contrato);
+        
+        int fa = empresa.getFacturacionAnual();//completoInternac.getEc().getFacturacionAnual();
                 
         if (fa < 5) {
              d19i1 = "Menos de 200";
@@ -756,12 +768,12 @@ public class CuestionarioController implements Serializable {
         return d19i6;
     }
 
-    public void setCompletoInternac(MBcompletadoInter completoInternac) {
+    /*public void setCompletoInternac(MBcompletadoInter completoInternac) {
         this.completoInternac = completoInternac;
     }
 
     public MBcompletadoInter getCompletoInternac() {
         return completoInternac;
-    }
+    }*/
 
 }

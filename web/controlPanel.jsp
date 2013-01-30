@@ -37,6 +37,9 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
 <html>
     <head>
         <%
+        try{
+            
+        
        HttpSession sesion=request.getSession();
        sesion.setMaxInactiveInterval(3600);
        String acc = (String) sesion.getAttribute("idAcc");
@@ -697,19 +700,9 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
         
        function respuestaEmpresa(data){
            if(data ==0 ){
-<<<<<<< HEAD
-               //window.open("http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato, "_blank");
-               location.href = "http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
+               location.href = "/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
            }else{
-              //window.open("http://localhost:8080/sece/faces/sei/instrumento.xhtml", "_blank");
-              //alert("hola " + contraActivos);
-              location.href ="http://localhost:8080/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
-=======
-               document.location.href = "/sece/faces/sei/completarempresa.xhtml?idempresa="+ IdEmpresa +"&&idcontrato="+IdContrato;
-           }else{              
-              document.location.href = "/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
-
->>>>>>> b5470e8e6a4520c1f5eee660049628a2f289ca7b
+              location.href ="/sece/faces/sei/instrumento.xhtml?idcontrato="+IdContrato;
            }
        }
        
@@ -983,4 +976,8 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
 </div>  
     </body>
 </html>
-<% } %>
+<% }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+%>

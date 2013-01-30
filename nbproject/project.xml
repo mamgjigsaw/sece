@@ -23,24 +23,19 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.JavaMail.classpath}</file>
+                    <file>${libs.JMail.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-<<<<<<< HEAD
-                    <file>${libs.PrimeFaces 3.4.classpath}</file>
+                    <file>${libs.poolHibernate.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.PoolConeHibernate.classpath}</file>
-=======
-                    <file>${libs.PrimeFaces.classpath}</file>
+                    <file>${file.reference.primefaces-3.4.2.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.C3P0.classpath}</file>
-
->>>>>>> b5470e8e6a4520c1f5eee660049628a2f289ca7b
+                    <file>${file.reference.redmond-1.0.8.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

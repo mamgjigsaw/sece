@@ -543,7 +543,6 @@ public class PreguntasInternacionalizacion {
         if (empresa != null) {
             this.a12 = empresa.getFacturacionAnual();
             facturacion= empresa.getFacturacionAnual();
-
         } else {
             this.a12 = 0;
             facturacion = 0;
