@@ -34,7 +34,7 @@ public class CuestionarioController implements Serializable {
     private List<String> p15Opciones, p18Opciones, p20Opciones, p21Opciones, p22Opciones, pc4Opciones, pc6Opciones, pc11Opciones,
             pc13Opciones, pc15Opciones, pd2Opciones, pd3Opciones, pd7Opciones, pd9Opciones, pd10Opciones, pd11Opciones, pd12Opciones,
             pd17Opciones, pd18Opciones, pd21Opciones, pe1Opciones, pe3Opciones, pe5Opciones, pe10Opciones = new ArrayList<String>();
-    private String nombreComercial = "La Comercial";
+    private String nombreComercial = "";
     private String d19i1, d19i2, d19i3, d19i4, d19i5, d19i6;
     private int anioExport;
     //para años del combobox
@@ -44,6 +44,8 @@ public class CuestionarioController implements Serializable {
     private int[] preguntas = new int[2];
     //@ManagedProperty(value = "#{mbcompletado}")
     //private MBcompletadoInter completoInternac;
+    
+    private Boolean mostrarD8;
 
     public CuestionarioController() {
         pi.setB1(10);
@@ -131,7 +133,7 @@ public class CuestionarioController implements Serializable {
         contrato = contraDao.findById(pi.getId_contrato());
 
         empresa = empDao.findByIdContrato(contrato);
-        
+        nombreComercial = empresa.getRazonSocial();
         int fa = empresa.getFacturacionAnual();//completoInternac.getEc().getFacturacionAnual();
                 
         if (fa < 5) {
@@ -141,7 +143,7 @@ public class CuestionarioController implements Serializable {
              d19i4 = "Entre 1000 y 3,000";
              d19i5 = "Entre 3,000 y 8,000";
              d19i6 = "Más de 8000";
-        } else if (fa < 8) {
+        } else if (fa >5 && fa < 8) {
             d19i1 = "Menos de 400";
              d19i2 = "Entre 400 y 1000";
              d19i3 = "Entre 1000 y 2,500";
@@ -766,6 +768,22 @@ public class CuestionarioController implements Serializable {
 
     public String getD19i6() {
         return d19i6;
+    }
+    
+    public Boolean getMostrarD8() {
+        return mostrarD8;
+    }
+
+    public void setMostrarD8(Boolean mostrarD8) {
+        this.mostrarD8 = mostrarD8;
+    }
+    
+    public void renderizarD8(){
+        if ( pi.getD6() <=  0 ){
+            mostrarD8 = false;
+        }else { 
+            mostrarD8 = true;}
+        System.out.print(mostrarD8);
     }
 
     /*public void setCompletoInternac(MBcompletadoInter completoInternac) {
