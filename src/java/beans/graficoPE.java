@@ -5,6 +5,7 @@
 package beans;
 
 import internacionalizacionbeans.PreguntasInternacionalizacion;
+import java.text.DecimalFormat;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.primefaces.model.chart.CartesianChartModel;
@@ -39,10 +40,15 @@ public class graficoPE {
          ChartSeries resultado = new ChartSeries();
         resultado.setLabel("Posicion Exportacion");
         
-        resultado.set("",pi.getPosicionExportadora());
+        resultado.set("",roundTwoDecimals(pi.getPosicionExportadora()));
         
         modeloCategoria.addSeries(resultado);
       
+    }
+    
+    public double roundTwoDecimals(double d) {
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        return Double.valueOf(twoDForm.format(d));
     }
 
     public double getPosicion() {
