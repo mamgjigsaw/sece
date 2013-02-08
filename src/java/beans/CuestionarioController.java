@@ -45,7 +45,7 @@ public class CuestionarioController implements Serializable {
     //@ManagedProperty(value = "#{mbcompletado}")
     //private MBcompletadoInter completoInternac;
     
-    private Boolean mostrarD8;
+    private Boolean mostrarD8 = true;
 
     public CuestionarioController() {
         pi.setB1(10);
