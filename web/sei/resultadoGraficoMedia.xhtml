@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        
+
         <script>
             function exportChart() {  
                 //export image  
@@ -28,13 +28,94 @@
                             <p:graphicImage value="../images/ex.png"/>
 
                             <p:barChart id="stacked" value="#{graficoPE.modeloCategoria}" legendPosition="ne" style="width:500px;height:200px"  
-                                        title="Posicion Exportadora: #{graficoPE.posicion}" stacked="true" barMargin="50" min="0" max="10"/>  
+                                        title="Posicion Exportadora: #{graficoPE.roundTwoDecimals(graficoPE.posicion)}" stacked="true" barMargin="50" min="0" max="10"/>  
 
                         </p:panelGrid>
                     </p:outputPanel>
 
                     <p:barChart legendPosition="se" value="#{graficoRM.modeloCategoria}"
                                 title="Areas de la Empresa" orientation="horizontal" min="0" max="10" style="height:1200px" widgetVar="chart"/>
+
+                    <p:panelGrid>
+                        <f:facet name="header">
+                            <p:row>
+                                <p:column>1. Situación productiva</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.situacion_productiva())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>2. Estructura empresarial</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.estructura_empresarial())}</p:column>
+                            </p:row>    
+                            <p:row>
+                                <p:column>3. Situación financiera</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.situacion_financiear())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>4. Preparación y motivación de la directiva </p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.preparacion_motivacion_directiva())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>5. Política de Calidad</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.politica_calidad())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>6. Diseño asociado al producto</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.dis_asociado())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>7. Diferenciación del producto</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.diferenciacion())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>8. Adaptación del producto a mercados externos</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.adaptacion())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>9. Empaques y etiquetados</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.empaques())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>10. Política de Marca</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.politica_marca())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>11. Desarrollo de la inteligencia comercial</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.inteligencia_comercial())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>12. Gestión de trámites de exportación</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.gestion_tramites_exportacion())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>13. Logística internacional</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.logistica())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>14. Distribución comercial internacional</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.distribucion_comercial())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>15. Asociatividad</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.asociatividad())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>16. Política de precios</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.politica_precios())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>17. Promoción tradicional</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.promocion_tradicional())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>18. Promoción en Internet</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.promocion_internet())}</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>19. Responsabilidad social</p:column>
+                                <p:column>#{graficoRM.roundTwoDecimals(graficoRM.pi.responsabilidad_social())}</p:column>
+                            </p:row>
+                        </f:facet>  
+                    </p:panelGrid>   
 
                     <p:commandButton type="button" value="Export" icon="ui-icon-extlink" onclick="exportChart()"/>  
 

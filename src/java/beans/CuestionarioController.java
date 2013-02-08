@@ -784,14 +784,5 @@ public class CuestionarioController implements Serializable {
         }else { 
             mostrarD8 = true;}
         System.out.print(mostrarD8);
-    }
-
-    /*public void setCompletoInternac(MBcompletadoInter completoInternac) {
-        this.completoInternac = completoInternac;
-    }
-
-    public MBcompletadoInter getCompletoInternac() {
-        return completoInternac;
-    }*/
-
+    }   
 }

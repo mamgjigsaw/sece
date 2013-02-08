@@ -221,7 +221,17 @@
                                 <p:column><h:outputLabel value="Comentarios sobre lo anterior"/></p:column>
                                 <p:column><p:inputTextarea value="#{mbcompletado.ec.comentariosAnterior}" style="width: 100%;"/></p:column>
                             </p:row>
-
+                            
+                            <p:row>
+                                <p:column><h:outputText value="La oferta exportable de la empresa está compuesta principalmente por:" /> </p:column>
+                                <p:column>
+                                    <p:selectOneMenu>
+                                        <f:selectItem itemLabel="Productos" itemValue="productos" />
+                                        <f:selectItem itemLabel="Servicios" itemValue="servicios" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                                
 
                             <p:row>
                                 <p:column colspan="2" >
