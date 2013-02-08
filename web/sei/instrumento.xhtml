@@ -1056,7 +1056,7 @@
                                     </f:facet>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectManyCheckbox value="#{cuestionarioController.pc4Opciones}" layout="pageDirection">  
+                                            <p:selectManyCheckbox id="manyc4" value="#{cuestionarioController.pc4Opciones}" layout="pageDirection">  
                                                 <f:selectItem itemLabel="Fitosanitaria." itemValue="3" />  
                                                 <f:selectItem itemLabel="De Origen." itemValue="3" />  
                                                 <f:selectItem itemLabel="BPA." itemValue="5" /> 
@@ -1068,7 +1068,7 @@
                                                 <f:selectItem itemLabel="Certificado de proceso para productos maderables." itemValue="8" /> 
                                                 <f:selectItem itemLabel="Las certificaciones anteriores son validas para nuestros Productos pero todavía no tenemos ninguna." itemValue="0" />
                                                 <f:selectItem itemLabel="Las certificaciones anteriores no aplican para nuestros Productos." itemValue="5" />
-                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc4}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc4}" oncomplete="validateC4();"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -1082,6 +1082,7 @@
                                     </p:row>
 
                                 </p:panelGrid>
+                                <p:inputText id="textoc410" type="hidden" value="#{cuestionarioController.pi.validC410}" />
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -1133,7 +1134,7 @@
                                     </f:facet>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectManyCheckbox value="#{cuestionarioController.pc6Opciones}" layout="pageDirection">  
+                                            <p:selectManyCheckbox id="manyc6" value="#{cuestionarioController.pc6Opciones}" layout="pageDirection">  
                                                 <f:selectItem itemLabel="Experiencia de la empresa o relación del cliente con la misma." itemValue="1" />  
                                                 <f:selectItem itemLabel="Disponibilidad de producto en el tiempo requerido." itemValue="2" />  
                                                 <f:selectItem itemLabel="Diversidad en la gama de productos ofrecida." itemValue="2" /> 
@@ -1143,7 +1144,7 @@
                                                 <f:selectItem itemLabel="Origen." itemValue="4" />
                                                 <f:selectItem itemLabel="Resistencia y duración." itemValue="10" />  
                                                 <f:selectItem itemLabel="Calidad del producto o cualidades sensoriales (tacto en caso del textil, sabor en caso de alimentos, olor en caso de perfumes…)." itemValue="10" /> 
-                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc6}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc6}" oncomplete="validateC6();"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -1156,6 +1157,8 @@
                                         </p:column>    
                                     </p:row>
                                 </p:panelGrid>
+                                <p:inputText id="textoc63" type="hidden" value="#{cuestionarioController.pi.validC63}" />  
+                                <p:inputText id="textoc64" type="hidden" value="#{cuestionarioController.pi.validC64}" />  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -1244,6 +1247,7 @@
                                     <f:selectItem itemValue="0"/>
                                     <f:selectItem itemValue="0"/>
                                     <f:selectItem itemValue="0"/>
+                                    <p:ajax  oncomplete="validateC9();"/>
                                 </p:selectOneRadio>
 
                                 <p:panelGrid columns="2">
@@ -1282,6 +1286,13 @@
                                     <h:outputLabel value="Comentarios"/>
                                     <p:inputTextarea style="width:80%;"/>
                                 </p:panelGrid>
+                                
+                                <p:inputText id="textoc90" type="hidden" value="#{cuestionarioController.pi.validC90}" />  
+                                <p:inputText id="textoc91" type="hidden" value="#{cuestionarioController.pi.validC91}" /> 
+                                <p:inputText id="textoc92" type="hidden" value="#{cuestionarioController.pi.validC92}" />                                  
+                                <p:inputText id="textoc93" type="hidden" value="#{cuestionarioController.pi.validC93}" />                                  
+                                <p:inputText id="textoc94" type="hidden" value="#{cuestionarioController.pi.validC94}" />                                  
+                                <p:inputText id="textoc95" type="hidden" value="#{cuestionarioController.pi.validC95}" />                                                                  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -1295,6 +1306,7 @@
                                     <f:selectItem itemValue="0"/>
                                     <f:selectItem itemValue="0"/>
                                     <f:selectItem itemValue="0"/>
+                                    <p:ajax  oncomplete="validateC10();"/>
 
                                 </p:selectOneRadio>
 
@@ -1323,7 +1335,7 @@
                                     <h:outputLabel for="opt186" value="Cualidades Sensoriales(tacto,sabor,olor)"/>
 
                                     <p:radioButton id="opt187" for="radioc10" itemIndex="6"/>
-                                    <h:outputLabel for="opt187" value="Productos de la empresa son similares a los del Mercado"/>
+                                    <h:outputLabel for="opt187" value="Los Productos de la empresa son similares a los del Mercado Internacional"/>
 
                                     <p:radioButton id="opt188" for="radioc10" itemIndex="7"/>
                                     <h:outputLabel for="opt188" value="Otros"/>
@@ -1335,6 +1347,13 @@
                                     <p:inputTextarea style="width:80%;"/>
 
                                 </p:panelGrid>
+                                
+                                <p:inputText id="textoc100" type="hidden" value="#{cuestionarioController.pi.validC100}" />  
+                                <p:inputText id="textoc101" type="hidden" value="#{cuestionarioController.pi.validC101}" /> 
+                                <p:inputText id="textoc102" type="hidden" value="#{cuestionarioController.pi.validC102}" />                                  
+                                <p:inputText id="textoc103" type="hidden" value="#{cuestionarioController.pi.validC103}" />                                  
+                                <p:inputText id="textoc104" type="hidden" value="#{cuestionarioController.pi.validC104}" />                                  
+                                <p:inputText id="textoc105" type="hidden" value="#{cuestionarioController.pi.validC105}" />  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -1349,7 +1368,7 @@
                                     </f:facet>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectManyCheckbox value="#{cuestionarioController.pc11Opciones}" layout="pageDirection">  
+                                            <p:selectManyCheckbox id="manyc11" value="#{cuestionarioController.pc11Opciones}" layout="pageDirection">  
                                                 <f:selectItem itemLabel="Precio." itemValue="0" />  
                                                 <f:selectItem itemLabel="Marca." itemValue="1" />  
                                                 <f:selectItem itemLabel="Imagen de empresa." itemValue="1" /> 
@@ -1364,7 +1383,7 @@
                                                 <f:selectItem itemLabel="Puntualidad en las entregas." itemValue="1" /> 
                                                 <f:selectItem itemLabel="Certificación de producto o empresa." itemValue="2" /> 
                                                 <f:selectItem itemLabel="Confianza en la calidad del producto." itemValue="1" /> 
-                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc11}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc11}" oncomplete="validateC11();"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -1377,6 +1396,21 @@
                                         </p:column>    
                                     </p:row>
                                 </p:panelGrid>
+                                
+                                <p:inputText id="textoc110" type="hidden" value="#{cuestionarioController.pi.validC110}" />  
+                                <p:inputText id="textoc111" type="hidden" value="#{cuestionarioController.pi.validC111}" />  
+                                <p:inputText id="textoc112" type="hidden" value="#{cuestionarioController.pi.validC112}" />  
+                                <p:inputText id="textoc113" type="hidden" value="#{cuestionarioController.pi.validC113}" />  
+                                <p:inputText id="textoc114" type="hidden" value="#{cuestionarioController.pi.validC114}" />  
+                                <p:inputText id="textoc115" type="hidden" value="#{cuestionarioController.pi.validC115}" />  
+                                <p:inputText id="textoc116" type="hidden" value="#{cuestionarioController.pi.validC116}" />  
+                                <p:inputText id="textoc117" type="hidden" value="#{cuestionarioController.pi.validC117}" />  
+                                <p:inputText id="textoc118" type="hidden" value="#{cuestionarioController.pi.validC118}" />  
+                                <p:inputText id="textoc119" type="hidden" value="#{cuestionarioController.pi.validC119}" />  
+                                <p:inputText id="textoc1110" type="hidden" value="#{cuestionarioController.pi.validC1110}" />  
+                                <p:inputText id="textoc1111" type="hidden" value="#{cuestionarioController.pi.validC1111}" />  
+                                <p:inputText id="textoc1112" type="hidden" value="#{cuestionarioController.pi.validC1112}" />  
+                                <p:inputText id="textoc1113" type="hidden" value="#{cuestionarioController.pi.validC1113}" />  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -1432,13 +1466,13 @@
                                     </f:facet>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectManyCheckbox value="#{cuestionarioController.pc13Opciones}" layout="pageDirection">  
+                                            <p:selectManyCheckbox id="manyc13" value="#{cuestionarioController.pc13Opciones}" layout="pageDirection">  
                                                 <f:selectItem itemLabel="Las características propias de los Productos." itemValue="0" />  
                                                 <f:selectItem itemLabel="El diseño o presentación." itemValue="0" />  
                                                 <f:selectItem itemLabel="Certificación o asuntos legales." itemValue="0" /> 
                                                 <f:selectItem itemLabel="Los empaques o material asociado." itemValue="0" />  
                                                 <f:selectItem itemLabel="La marca o promoción." itemValue="0" /> 
-                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc13}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc13}" oncomplete="validateC13();"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -1451,6 +1485,11 @@
                                         </p:column>    
                                     </p:row>
                                 </p:panelGrid>
+                                <p:inputText id="textoc130" type="hidden" value="#{cuestionarioController.pi.validC130}" />  
+                                <p:inputText id="textoc131" type="hidden" value="#{cuestionarioController.pi.validC131}" />  
+                                <p:inputText id="textoc132" type="hidden" value="#{cuestionarioController.pi.validC132}" />  
+                                <p:inputText id="textoc133" type="hidden" value="#{cuestionarioController.pi.validC133}" />  
+                                <p:inputText id="textoc134" type="hidden" value="#{cuestionarioController.pi.validC134}" />  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -1506,7 +1545,7 @@
                                     </f:facet>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectManyCheckbox value="#{cuestionarioController.pc15Opciones}" layout="pageDirection">  
+                                            <p:selectManyCheckbox id="manyc15" value="#{cuestionarioController.pc15Opciones}" layout="pageDirection">  
                                                 <f:selectItem itemLabel="Las características propias de los productos." itemValue="4" />  
                                                 <f:selectItem itemLabel="Diseñó o presentación." itemValue="3" />  
                                                 <f:selectItem itemLabel="Certificación o asuntos legales." itemValue="3" /> 
@@ -1514,7 +1553,7 @@
                                                 <f:selectItem itemLabel="La marca o promoción." itemValue="2" /> 
                                                 <f:selectItem itemLabel="Métodos de trabajos con los distribuidores." itemValue="3" /> 
                                                 <f:selectItem itemLabel="Otros." itemValue="0" /> 
-                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc15}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpcionc15}" oncomplete="validateC15();"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -1527,6 +1566,11 @@
                                         </p:column>    
                                     </p:row>
                                 </p:panelGrid>
+                                <p:inputText id="textoc150" type="hidden" value="#{cuestionarioController.pi.validC150}" />  
+                                <p:inputText id="textoc151" type="hidden" value="#{cuestionarioController.pi.validC151}" />  
+                                <p:inputText id="textoc152" type="hidden" value="#{cuestionarioController.pi.validC152}" />  
+                                <p:inputText id="textoc153" type="hidden" value="#{cuestionarioController.pi.validC153}" />  
+                                <p:inputText id="textoc154" type="hidden" value="#{cuestionarioController.pi.validC154}" />  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -1963,9 +2007,9 @@
                                 <p:panelGrid columns="2">
                                     <h:outputLabel value="¿Desde qué año exporta?"/>
 
-                                    <h:selectOneMenu value="#{cuestionarioController.anioExport}">
+                                    <p:selectOneMenu value="#{cuestionarioController.anioExport}" style="width:35%;">
                                         <f:selectItems value="#{cuestionarioController.years}" />                                            
-                                    </h:selectOneMenu>
+                                    </p:selectOneMenu>
 
                                 </p:panelGrid>
                             </p:outputPanel> <br/>
@@ -1994,7 +2038,7 @@
                                                 <f:selectItem itemLabel="China." itemValue="6" />
                                                 <f:selectItem itemLabel="Otros." itemValue="2" />
                                                 <f:selectItem itemLabel="La empresa no ha comenzado a exportar de forma regular." itemValue="0" />
-                                                <p:ajax listener="#{cuestionarioController.sumarOpciond2}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpciond2}"  oncomplete="validateD2();"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -2046,7 +2090,7 @@
                                                 <f:selectItem itemLabel="China." itemValue="6" />
                                                 <f:selectItem itemLabel="Otros." itemValue="2" />
                                                 <f:selectItem itemLabel="La empresa no ha comenzado a exportar de forma regular." itemValue="0" />
-                                                <p:ajax listener="#{cuestionarioController.sumarOpciond3}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpciond3}" oncomplete="validateD3();" />
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -2225,15 +2269,15 @@
 
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectManyCheckbox value="#{cuestionarioController.pd7Opciones}" layout="pageDirection">  
+                                            <p:selectManyCheckbox id="manyd7" value="#{cuestionarioController.pd7Opciones}" layout="pageDirection">  
                                                 <f:selectItem itemLabel="Contratación de expertos." itemValue="0.3" />  
                                                 <f:selectItem itemLabel="Adaptación de producto." itemValue="0.3" />  
                                                 <f:selectItem itemLabel="Investigación comercial." itemValue="0.3" /> 
                                                 <f:selectItem itemLabel="Viajes de prospección o promocionales." itemValue="0.2" />  
                                                 <f:selectItem itemLabel="Material promocional." itemValue="0.1" /> 
                                                 <f:selectItem itemLabel="Promoción en Internet." itemValue="0.1" /> 
-                                                <p:ajax listener="#{cuestionarioController.sumarOpciond7}"/>
-                                            </p:selectManyCheckbox>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpciond7}" oncomplete="validateD7();"/>
+                                            </p:selectManyCheckbox>                                            
                                         </p:column>
                                     </p:row>
                                     <p:row>
@@ -2246,6 +2290,7 @@
                                     </p:row>
 
                                 </p:panelGrid>
+                                <p:inputText id="textod71" type="hidden" value="#{cuestionarioController.pi.validD71}" />  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel id="pnl_d8" autoUpdate="true">
@@ -2416,7 +2461,7 @@
                                     </f:facet>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectManyCheckbox value="#{cuestionarioController.pd12Opciones}" layout="pageDirection">  
+                                            <p:selectManyCheckbox id="manyd12" value="#{cuestionarioController.pd12Opciones}" layout="pageDirection">  
                                                 <f:selectItem itemLabel="Falta de información de los mercados exteriores." itemValue="-2" />  
                                                 <f:selectItem itemLabel="Ausencia de demanda exterior." itemValue="-4" />  
                                                 <f:selectItem itemLabel="Desconocimiento de apoyos institucionales." itemValue="-1" /> 
@@ -2427,7 +2472,7 @@
                                                 <f:selectItem itemLabel="Desconocimiento de los trámites internacionales." itemValue="-2" /> 
                                                 <f:selectItem itemLabel="Falta de financiación." itemValue="-3" /> 
                                                 <f:selectItem itemLabel="No existe ningún obstáculo de los anteriores." itemValue="0" /> 
-                                                <p:ajax listener="#{cuestionarioController.sumarOpciond12}"/>
+                                                <p:ajax listener="#{cuestionarioController.sumarOpciond12}" oncomplete="validateD12();"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
                                     </p:row>
@@ -2440,6 +2485,9 @@
                                         </p:column>
                                     </p:row>
                                 </p:panelGrid>
+                                <p:inputText id="textod124" type="hidden" value="#{cuestionarioController.pi.validD124}" />  
+                                <p:inputText id="textod126" type="hidden" value="#{cuestionarioController.pi.validD126}" /> 
+                                <p:inputText id="textod128" type="hidden" value="#{cuestionarioController.pi.validD128}" />                                  
                             </p:outputPanel> <br/>
 
                             <p:outputPanel>
@@ -2646,19 +2694,33 @@
                                 <p:panelGrid>
 
                                     <f:facet name="header">
-                                        <h:outputLabel value="Con lo que respecta a la asistencia a ferias:"/>
+                                        <p:row>
+                                            <p:column colspan="2">
+                                                <h:outputLabel value="Con lo que respecta a la asistencia a ferias:"/>
+                                            </p:column>
+                                        </p:row>
                                     </f:facet>
-
-                                    <p:selectManyCheckbox value="#{cuestionarioController.pd18Opciones}" layout="pageDirection">  
-                                        <f:selectItem itemLabel="La empresa participa principalmente como visitante en ferias nacionales." itemValue="1" />  
-                                        <f:selectItem itemLabel="La empresa participa principalmente como expositor en ferias nacionales." itemValue="2" />  
-                                        <f:selectItem itemLabel="La empresa participa como visitante en ferias internacionales." itemValue="3" />  
-                                        <f:selectItem itemLabel="La empresa participa como expositor en ferias internacionales." itemValue="5" /> 
-                                        <f:selectItem itemLabel="La empresa no participa como visitante ni como expositor en ferias." itemValue="0" />                                   
-                                        <f:selectItem itemLabel="El sector no se mueve a través de ferias o exposiciones." itemValue="0" /> 
-                                        <p:ajax listener="#{cuestionarioController.sumarOpciond18}"/>
-                                    </p:selectManyCheckbox>
-
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:selectManyCheckbox value="#{cuestionarioController.pd18Opciones}" layout="pageDirection">  
+                                                <f:selectItem itemLabel="La empresa participa principalmente como visitante en ferias nacionales." itemValue="1" />  
+                                                <f:selectItem itemLabel="La empresa participa principalmente como expositor en ferias nacionales." itemValue="2" />  
+                                                <f:selectItem itemLabel="La empresa participa como visitante en ferias internacionales." itemValue="3" />  
+                                                <f:selectItem itemLabel="La empresa participa como expositor en ferias internacionales." itemValue="5" /> 
+                                                <f:selectItem itemLabel="La empresa no participa como visitante ni como expositor en ferias." itemValue="0" />                                   
+                                                <f:selectItem itemLabel="El sector no se mueve a través de ferias o exposiciones." itemValue="0" /> 
+                                                <p:ajax listener="#{cuestionarioController.sumarOpciond18}"/>
+                                            </p:selectManyCheckbox>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="No aplica"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputTextarea style="width:80%;"/>
+                                        </p:column>
+                                    </p:row>
 
                                 </p:panelGrid>
                             </p:outputPanel> <br/>
@@ -3501,7 +3563,7 @@
                         </p:tab>
 
                     </p:tabView>
-                    <p:commandButton type="button" value="Resultado" onclick="validate()"/>
+                    <p:button value="Resultado"  outcome="resultadoGraficoMedia.xhtml"/>
 
                 </h:form> 
             </ui:define>

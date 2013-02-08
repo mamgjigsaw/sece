@@ -159,6 +159,7 @@ public class CuestionarioController implements Serializable {
             d19i6 = "Más de 80,000";
         }
     }
+    
 
     public void sumarOpcion15() {
         Iterator<String> it = p15Opciones.iterator();
@@ -193,8 +194,7 @@ public class CuestionarioController implements Serializable {
             pi.setB20(10);
         }else{
             pi.setB20(suma);
-        }
-            
+        }           
         
     }
     

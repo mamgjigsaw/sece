@@ -25,50 +25,55 @@ public class PreguntasInternacionalizacion {
             vali1D3, vali2D3, vali3D3, vali4D3, vali5D3, vali6D3, vali7D3, vali8D3, vali9D3, vali10D3, vali11D3;
     private int sumD2, sumD3;
     //para rentabilidad
-    private int AA79, AA80;
+    private int AA79, AA80, para_calidad = 0, para_precios = 0, para_marca = 0;
     private double x66, v66, x55, v55, mBruto_infer, mBrutoSup, incDemandSup, incDemandInf, benExpSup, benExpInf, invExpoSup, invExpInf, BFactAnualSup, BFactAnualInf, BInversionSup, BInversionInf, BNetoSup, BNetoInf;
     private int fact_superior, fact_infer;// superior e inferior, la primera con d5 y despues d4
     /*Ponderacion de cada area*/
-    final int situacion_productiva = 77;
-    final int estructura_empresarial = 98;
-    final int situacion_financiear = 121;
-    final int preparacion_motivacion_directiva = 130;
-    final int politica_calidad = 108;
-    final int dis_asociado = 107;
-    final int diferenciacion = 68;
-    final int adaptacion = 83;
-    final int empaques = 62;
-    final int politica_marca = 136;
-    final int inteligencia_comercial = 143;
-    final int gestion_tramites_exportacion = 99;
-    final int logistica = 88;
-    final int distribucion_comercial = 51;
-    final int asociatividad = 20;
-    final int politica_precios = 97;
-    final int promocion_tradicional = 105;
-    final int promocion_internet = 87;
-    final int responsabilidad_social = 30;
+    final int SITUACION_PRODUCTIVA = 77;
+    final int ESTRUCTURA_EMPRESARIAL = 98;
+    final int SITUACION_FINANCIERA = 121;
+    final int PREPARACION_MOTIVACION_DIRECTIVA = 130;
+    final int POLITICA_CALIDAD = 108;
+    final int DIS_ASOCIADO = 107;
+    final int DIFERENCIACION = 68;
+    final int ADAPTACION = 83;
+    final int EMPAQUES = 62;
+    final int POLITICA_MARCA = 136;
+    final int INTELIGENCIA_COMERCIAL = 143;
+    final int GESTION_TRAMITES_EXPORTACION = 99;
+    final int LOGISTICA = 88;
+    final int DISTRIBUCION_COMERCIAL = 51;
+    final int ASOCIATIVIDAD = 20;
+    final int POLITICA_PRECIOS = 97;
+    final int PROMOCION_TRADICIONAL = 105;
+    final int PROMOCION_INTERNET = 87;
+    final int RESPONSABILIDAD_SOCIAL = 30;
     /*Ponderacion de cada area*/
     /*variables procedentes de Empresa*/
     //a12 es la facturacion
     //a11_1 son los numero de empleado
-    private int  a12 = 9,a11_1 = 2, id_contrato;
+    private int a12 = 9, a11_1 = 2, id_contrato, b14PCalidad = 0, AC168 = 0, AC167 = 0, AC169 = 0, AC170 = 0, AC171 = 0;
     private double facturacion = 9;
     /*---variables procedentes de Empresa*/
     /*Asignacion dura*/
     int transporte = 4;//d15 en la hoja de apoyo, en pregunta del instrumento es la d25
     Double rentabilidad_inversiones_exterior = 3.0;
-    /*Asignacion dura*/
+    private int validD71, validD124, validD126, validD128, validC410, validC90, validC91, validC92, validC93, validC94, validC95,
+            validC100, validC101, validC102, validC103, validC104, validC105,
+            validC110, validC111, validC112, validC113, validC114, validC115, validC116, validC117, validC118, validC119, validC1110, validC1111, validC1112,
+            validC1113, validC63, validC131, validC151, validC130, validC150, validC132, validC152, validC153, validC154, validC133, validC134,
+            validC64;
+    private double resultado_Politica_calidad = 0.0, resultado_diferenciacion_producto = 0.0, resultado_adaptacion_producto = 0.0;
 
     public PreguntasInternacionalizacion() {
     }
-    public static PreguntasInternacionalizacion kilo;
+    public static PreguntasInternacionalizacion PREGUNTAS;
 
     public static PreguntasInternacionalizacion getinstancia() {
-        if (kilo == null) {
-            kilo = new PreguntasInternacionalizacion();
+        if (PREGUNTAS == null) {
+            PREGUNTAS = new PreguntasInternacionalizacion();
         }
-        return kilo;
+        return PREGUNTAS;
     }
 
     public double situacion_productiva() {
@@ -79,133 +84,441 @@ public class PreguntasInternacionalizacion {
         empleadoPermanente(id_contrato);
         facturacionAnual(id_contrato);
         //int a = (a11_1 * 10) + (a12 * 9) + (b1 * 5) + (b2 * 5) + (b3 * 10) + (b4 * 10) + (b5 * 5) + (b8 * 2) + (b91 * 2) + (b10 * 3) + (b24 * 5) + (c1 * 5) + (c4 * 2) + (c5 * 2) + (d9 * 5);
-        resultado = ((a11_1 * 10) + (a12 * 9) + (b1 * 5) + (b2 * 5) + (b3 * 10) + (b4 * 10) + (b5 * 5) + (b8 * 2) + (b91 * 2) + (b10 * 3) + (b24 * 5) + (c1 * 5) + (c4 * 2) + (c5 * 2) + (d9 * 5)) / situacion_productiva;
+        resultado = ((a11_1 * 10) + (a12 * 5) + (b1 * 5) + (b2 * 5) + (b3 * 10) + (b4 * 10) + (b5 * 5) + (b8 * 2) + (b91 * 3) + (b10 * 3) + (b24 * 5) + (c1 * 5) + (c4 * 2) + (c5 * 2) + (d9 * 5)) / SITUACION_PRODUCTIVA;
         return resultado;
     }
 
     public double estructura_empresarial() {
         double resultado;
         //int a = (a11_1 * 10) + (a12 * 10) + (b3 * 5) + (b4 * 10) + (b8 * 10) + (b91 * 5) + (b10 * 15) + (b11 * 10) + (b12 * 3) + (b18 * 3) + b19 + b20 + b21 + b22 + (c4 * 5) + (d2 * 5) + (d3 * 3);
-        resultado = ((a11_1 * 10) + (a12 * 10) + (b3 * 5) + (b4 * 10) + (b8 * 10) + (b91 * 5) + (b10 * 15) + (b11 * 10) + (b12 * 3) + (b18 * 3) + b19 + b20 + b21 + b22 + (c4 * 5) + (d2 * 5) + (d3 * 3)) / estructura_empresarial;
+        resultado = ((a11_1 * 10) + (a12 * 10) + (b3 * 5) + (b4 * 10) + (b8 * 10) + (b91 * 5) + (b10 * 15) + (b11 * 10) + (b12 * 3) + (b18 * 3) + b19 + b20 + b21 + b22 + (c4 * 5) + (d2 * 5) + (d3 * 3)) / ESTRUCTURA_EMPRESARIAL;
         return resultado;
     }
 
     public double situacion_financiear() {
         double resultado;
-        double a = (a11_1 * 10) + (a12 * 15) + b2 + (b4 * 10) + (b6 * 5) + (b7 * 5) + (b8 * 10) + (b91 * 2) + (b23 * 10) + (c2 * 2) + (c3 * 2) + (c5 * 3) + (d6 * 12) + (d8 * 6) + (d9 * 4) + (d12 * 4) + (rentabilidad_inversiones_exterior * 10);
-        resultado = a / situacion_financiear;
+        int d12Situacion;
+
+        if (this.getValidD124() == 0 && this.getValidD128() == 0) {
+            d12Situacion = 10;
+        } else {
+            d12Situacion = 0;
+        }
+
+        double a = (a11_1 * 10) + (a12 * 15) + b2 + (b4 * 10) + (b6 * 5) + (b7 * 5) + (b8 * 10) + (b91 * 2) + (b23 * 10) + ((10 - c1) * 2) + (c2 * 10) + (c3 * 2) + (c5 * 3) + (d6 * 12) + (d8 * 6) + (d9 * 4) + (4 * d12Situacion) + (rentabilidad_inversiones_exterior * 10);
+        resultado = a / SITUACION_FINANCIERA;
         return resultado;
     }
 
     public double preparacion_motivacion_directiva() {
-        double resultado;
-        double a = (b2 * 2) + (b4 * 2) + (b7 * 3) + (b8 * 5) + (b91 * 3) + (b10 * 5) + (b11 * 2) + b13 + b12 + (b18 * 3) + b19 + b20 + b21 + b22 + (b23 * 2) + (c4 * 2) + (d1 * 10) + (d2 * 2) + (d3 * 2) + (d4 * 2) + (d5 * 5) + (d9 * 10) + (d10 * 10) + (d11 * 8) + (d12 * 5) + (rentabilidad_inversiones_exterior * 4) + (e2 * 4) + (e3 * 8) + (e5 * 8) + (e6 * 5) + (e7 * 2) + (e8 * 10);
-        resultado = a / preparacion_motivacion_directiva;
+        double resultado, c4Preparacion, d12Preparacion;
+
+        if (this.getValidC410() == 1) {
+            c4Preparacion = estructura_empresarial() * 2;
+        } else {
+            c4Preparacion = c4 * 2;
+        }
+
+        if (this.getValidD126() == 0) {
+            d12Preparacion = 5 * this.getD12();
+        } else {
+            d12Preparacion = -25; // 5 * (-5)
+        }
+
+        double a = (b2 * 2) + (b4 * 2) + (b7 * 3) + (b8 * 5) + (b91 * 3) + (b10 * 5) + (b11 * 2) + b13 + b12 + (b18 * 3) + b19 + b20 + b21 + b22 + (b23 * 2) + (c4Preparacion) + (d1 * 10) + (d2 * 2) + (d3 * 2) + (d4 * 2) + (d5 * 5) + (d9 * 10) + (d10 * 10) + (d11 * 8) + (d12Preparacion) + (rentabilidad_inversiones_exterior * 4) + (e2 * 4) + (e3 * 8) + (e5 * 8) + (e6 * 5) + (e7 * 2) + (e8 * 10);
+        resultado = a / PREPARACION_MOTIVACION_DIRECTIVA;
         return resultado;
     }
 
     public double politica_calidad() {
-        double resultado;
-        double a = (b2 * 5) + (b6 * 10) + (b8 * 3) + (b91 * 10) + (b10 * 3) + (b12 * 2) + (b14 * 3) + (b17 * 2) + (b20 * 2) + (b21 * 2) + (b22 * 2) + (c2 * 3) + (c3 * 8) + (c4 * 10) + (c8 * 3) + (c6 * 7) + (c7 * 2) + (c8 * 2) + (c9 * 10) + (c10 * 12) + (c11 * 7);
-        resultado = a / politica_calidad;
-        return resultado;
+        double calculo_calidad;
+        int c9PCalidad1, c9PCalidad2, c10PCalidad1, c10PCalidad2;
+
+        //calculo de c9
+        if (this.getValidC91() == 0 && this.getValidC95() == 0 && this.getValidC94() == 0) {
+            c9PCalidad1 = 0;
+        } else {
+            c9PCalidad1 = 10;
+        }
+
+        if (this.getValidC90() == 0 && this.getValidC93() == 0 && this.getValidC92() == 0) {
+            c9PCalidad2 = 0;
+        } else {
+            c9PCalidad2 = 7;
+        }
+
+        //calculo de c10
+        if (this.getValidC101() == 0 && this.getValidC105() == 0 && this.getValidC104() == 0) {
+            c10PCalidad1 = 0;
+        } else {
+            c10PCalidad1 = 10;
+        }
+
+        if (this.getValidC100() == 0 && this.getValidC103() == 0 && this.getValidC102() == 0) {
+            c10PCalidad2 = 0;
+        } else {
+            c10PCalidad2 = 7;
+        }
+
+        //para calidad, para marca, y para precios
+        if (this.getValidC110() == 1) {
+            this.para_precios = this.para_precios + 5;
+        } else if (this.getValidC111() == 1) {
+            this.para_calidad = this.para_calidad + 2;
+            this.para_marca = this.para_marca + 5;
+            this.para_precios = this.para_precios + 1;
+        } else if (this.getValidC112() == 1) {
+            this.para_calidad = this.para_calidad + 1;
+            this.para_marca = this.para_marca + 2;
+            this.para_precios = this.para_precios + 3;
+        } else if (this.getValidC113() == 1) {
+            this.para_calidad = this.para_calidad + 1;
+            this.para_marca = this.para_marca + 1;
+            this.para_precios = this.para_precios + 1;
+        } else if (this.getValidC114() == 1) {
+            this.para_calidad = this.para_calidad + 1;
+            this.para_marca = this.para_marca + 1;
+            this.para_precios = this.para_precios + 1;
+        } else if (this.getValidC115() == 1) {
+            this.para_precios = this.para_precios + 5;
+        } else if (this.getValidC116() == 1) {
+            this.para_calidad = this.para_calidad + 2;
+            this.para_marca = this.para_marca + 1;
+            this.para_precios = this.para_precios + 1;
+        } else if (this.getValidC117() == 1) {
+            this.para_calidad = this.para_calidad + 2;
+            this.para_marca = this.para_marca + 2;
+            this.para_precios = this.para_precios + 1;
+        } else if (this.getValidC118() == 1) {
+            this.para_precios = this.para_precios + 2;
+        } else if (this.getValidC119() == 1) {
+            this.para_calidad = this.para_calidad + 2;
+            this.para_marca = this.para_marca + 1;
+            this.para_precios = this.para_precios + 1;
+        } else if (this.getValidC1111() == 1) {
+            this.para_calidad = this.para_calidad + 1;
+        } else if (this.getValidC1112() == 1) {
+            this.para_calidad = this.para_calidad + 2;
+            this.para_marca = this.para_marca + 1;
+        } else if (this.getValidC1113() == 1) {
+            this.para_calidad = this.para_calidad + 5;
+            this.para_marca = this.para_marca + 2;
+            this.para_precios = this.para_precios + 1;
+        }
+
+        if (((this.para_calidad / 2) + (this.para_calidad / 14 * (1.5))) > 10) {
+            calculo_calidad = 10.0;
+        } else {
+            calculo_calidad = ((this.para_calidad / 2) + (this.para_calidad / 14 * (1.5)));
+        }
+
+        double a = (b2 * 5) + (b3 * 10) + (b8 * 3) + (b91 * 10) + (b10 * 3) + (b14PCalidad * 2) + (b14 * 3) + (b17 * 2) + (b20 * 2) + (b21 * 2) + (b22 * 2) + (c2 * 3) + (c3 * 8) + (c4 * 10) + (c5 * 3) + (c6 * 7) + (c7 * 2) + (c8 * 2) + ((c9PCalidad1 + c9PCalidad2) * 10) + ((c10PCalidad1 + c10PCalidad2) * 12) + (calculo_calidad * 7);
+        resultado_Politica_calidad = a / POLITICA_CALIDAD;
+        return resultado_Politica_calidad;
     }
 
     public double dis_asociado() {
-        double resultado;
-        double a = (b2 * 2) + (b3 * 2) + (b91 * 2) + (b12 * 2) + b13 + (b14 * 2) + (b17 * 3) + (c2 * 3) + (c3 * 2) + (c4 * 5) + (c5 * 3) + (c6 * 12) + (c7 * 10) + (c9 * 5) + (c10 * 8) + (c13 * 5) + (c15 * 10) + (e9 * 15) + (e10 * 15);
-        resultado = a / dis_asociado;
+        double resultado, c6Asociado = 0.0, c9Asociado = 0.0, c10Asociado = 0.0, c13Asociado = 0.0;
+        int b14Operacion = 0, AA168 = 0, AB168 = 0;
+
+        //evaluacion b14
+        if (this.getB14() == 6) {
+            b14Operacion = 10;
+        } else if (this.getB14() == 10) {
+            b14Operacion = 6;
+        } else {
+            b14Operacion = this.getB14();
+        }
+
+        //validacion c6
+        if (this.getValidC63() == 1) {
+            c6Asociado = 10.0;
+        } else {
+            c6Asociado = ((resultado_Politica_calidad + resultado_diferenciacion_producto + resultado_adaptacion_producto) / 3) * 0.8;
+        }
+
+        //validacion c9
+        if (this.getValidC90() == 0) {
+            c9Asociado = ((resultado_Politica_calidad + resultado_diferenciacion_producto + resultado_adaptacion_producto) / 3) * 0.8;
+        } else {
+            c9Asociado = 10.0;
+        }
+
+        //validacion c10
+        if (this.getValidC100() == 0) {
+            c10Asociado = ((resultado_Politica_calidad + resultado_diferenciacion_producto + resultado_adaptacion_producto) / 3) * 0.8;
+        } else {
+            c10Asociado = 10.0;
+        }
+
+        //validacion c13
+        if (this.getValidC131() == 0) {
+            c13Asociado = 10.0;
+        } else {
+            c13Asociado = this.getC14();
+        }
+
+        //validacion c15
+        if (this.getValidC131() == 0) {
+            AA168 = 0;
+        } else {
+            AA168 = 2;
+        }
+
+        if (this.getValidC151() == 0) {
+            AB168 = -1;
+        } else {
+            AB168 = 1;
+        }
+
+        AC168 = (AA168 * AB168) + 1 + AB168;
+
+        double a = (b2 * 2) + (b3 * 2) + (b91 * 2) + (b12 * 2) + b13 + (b14Operacion * 2) + (b17 * 3) + (c2 * 3) + (c3 * 2) + (c4 * 5) + (c5 * 3) + (c6Asociado * 12) + (c7 * 10) + (c9Asociado * 5) + (c10Asociado * 8) + (c13Asociado * 5) + (AC168 * 2.5 * 10) + (e9 * 15) + (e10 * 15);
+        resultado = a / DIS_ASOCIADO;
         return resultado;
     }
 
     public double diferenciacion() {
-        double resultado;
+
         double a = (b2 * 3) + (b3 * 2) + (b91 * 3) + (b12 * 5) + (b13 * 3) + (b17 * 3) + (c2 * 5) + (c3 * 10) + (c4 * 5) + (c5 * 3) + (c6 * 5) + (c7 * 3) + (c8 * 10) + (c9 * 3) + (c10 * 5);
-        resultado = a / diferenciacion;
-        return resultado;
+        resultado_diferenciacion_producto = a / DIFERENCIACION;
+        return resultado_diferenciacion_producto;
     }
 
     public double adaptacion() {
-        double resultado;
-        double a = (b2 * 3) + (b91 * 3) + (b12 * 2) + (b14 * 2) + (c1 * 4) + (c4 * 10) + (c12 * 10) + (c13 * 15) + (c14 * 10) + (c15 * 10) + (c23 * 4) + (getD7() * 10);
-        resultado = a / adaptacion;
-        return resultado;
+
+        int c13Adaptacion = 0, AA167 = 0, AB167 = 0, AA169 = 0, AB169 = 0, AA170 = 0, AB170 = 0, AA171 = 0, AB171 = 0, AC174, c15Adaptacion,
+                d7Adaptacion;
+        //validacion b14, este lo utiliza tambien politica de calidad
+        if (this.getB14() == 0) {
+            b14PCalidad = 0;
+        } else if (this.getB14() == 6) {
+            b14PCalidad = 10;
+        } else if (this.getB14() == 10) {
+            b14PCalidad = 6;
+        } else if (this.getB14() == 8) {
+            b14PCalidad = 8;
+        }
+
+        //validacion c13
+        if (this.getValidC131() == 0) {
+            c13Adaptacion = 10;
+        } else {
+            c13Adaptacion = this.getC14();
+        }
+
+        //AC174
+        if (this.getValidC130() == 0) {
+            AA167 = 0;
+        } else {
+            AA167 = 2;
+        }
+
+        if (this.getValidC150() == 0) {
+            AB167 = -1;
+        } else {
+            AB167 = 1;
+        }
+
+        AC167 = (AA167 * AB167) + 1 + AB167;
+
+        // AC169
+        if (this.getValidC132() == 0) {
+            AA169 = 0;
+        } else {
+            AA169 = 2;
+        }
+
+        if (this.getValidC152() == 0) {
+            AB169 = -1;
+        } else {
+            AB169 = 1;
+        }
+
+        AC169 = (AA169 * AB169) + 1 + AB169;
+
+        // AC170
+        if (this.getValidC133() == 0) {
+            AA170 = 0;
+        } else {
+            AA170 = 2;
+        }
+
+        if (this.getValidC153() == 0) {
+            AB170 = -1;
+        } else {
+            AB170 = 1;
+        }
+
+        AC170 = (AA170 * AB170) + 1 + AB170;
+
+        // AC171
+        if (this.getValidC134() == 0) {
+            AA171 = 0;
+        } else {
+            AA171 = 2;
+        }
+
+        if (this.getValidC154() == 0) {
+            AB171 = -1;
+        } else {
+            AB171 = 1;
+        }
+
+        AC171 = (AA171 * AB171) + 1 + AB171;
+
+        AC174 = AC167 + AC168 + AC169 + AC170 + AC171;
+
+        if (AC174 > 10) {
+            c15Adaptacion = 10;
+        } else {
+            c15Adaptacion = AC174;
+        }
+
+        //d7
+        if (this.validD71 == 0) {
+            d7Adaptacion = 0;
+        } else {
+            d7Adaptacion = this.getD6();
+        }
+
+        double a = (b2 * 3) + (b91 * 3) + (b12 * 2) + (b14PCalidad * 2) + (c1 * 4) + (c4 * 10) + (c12 * 10) + (c13Adaptacion * 15) + (c14 * 10) + (c15Adaptacion * 10) + (c23 * 4) + (d7Adaptacion * 10);
+        resultado_adaptacion_producto = a / ADAPTACION;
+        return resultado_adaptacion_producto;
     }
 
     public double empaques() {
         double resultado;
-        double a = (b2 * 2) + (b12 * 3) + b13 + (c4 * 2) + (c7 * 2) + (c13 * 10) + (c15 * 10) + (c23 * 10) + (c24 * 10) + (e17 * 10);
-        resultado = a / empaques;
+        int c13Empaques;
+
+        //c13
+        if (this.getValidC133() == 0) {
+            c13Empaques = 10;
+        } else {
+            c13Empaques = this.getC14();
+        }
+
+        double a = (b2 * 2) + (b12 * 3) + b13 + (c1 * 2) + (c4 * 2) + (c7 * 2) + (c13Empaques * 10) + (AC170 * 5 * 10) + (c23 * 10) + (c24 * 10) + (e17 * 10);
+        resultado = a / EMPAQUES;
         return resultado;
     }
 
     public double politica_marca() {
         double resultado;
-        double a = (b4 * 10) + b91 + (b12 * 15) + (b13 * 8) + (b14 * 10) + (b17 * 3) + (b20 * 3) + (b21 * 3) + (b22 * 3) + (c2 * 3) + c3 + (c4 * 5) + (c5 * 2) + (c6 * 10) + (c9 * 7) + (c10 * 10) + (c11 * 7) + (c13 * 5) + (c15 * 5) + (c16 * 10) + (c17 * 12) + (c18 * 3);
-        resultado = a / politica_marca;
+        int c6Politica_marca, c9Politica_marca1, c9Politica_marca2, c9Politica_marca3, c9Politica_marca, c10Politica_marca = 0;
+
+        //c6
+        if (this.getValidC64() == 0) {
+            c6Politica_marca = 0;
+        } else {
+            c6Politica_marca = 10;
+        }
+
+        //c9
+        if (this.getValidC92() == 0) {
+            c9Politica_marca1 = 0;
+        } else {
+            c9Politica_marca1 = 10;
+        }
+
+        if (this.getValidC93() == 0 && this.getValidC90() == 0) {
+            c9Politica_marca2 = 0;
+        } else {
+            c9Politica_marca2 = 5;
+        }
+
+        if (this.getValidC91() == 0 && this.getValidC94() == 0 && this.getValidC95() == 0) {
+            c9Politica_marca3 = 0;
+        } else {
+            c9Politica_marca3 = 3;
+        }
+        
+        //c10
+        if (this.getValidC102() == 0) {
+            c10Politica_marca +=  0;
+        } else {
+            c10Politica_marca += 10;
+        }
+
+        if (this.getValidC103() == 0 && this.getValidC100() == 0) {
+            c10Politica_marca += 0;
+        } else {
+            c10Politica_marca += 5;
+        }
+
+        if (this.getValidC101() == 0 && this.getValidC104() == 0 && this.getValidC105() == 0) {
+            c10Politica_marca += 0;
+        } else {
+            c10Politica_marca += 3;
+        }        
+
+        c9Politica_marca = c9Politica_marca1 + c9Politica_marca2 + c9Politica_marca3;
+
+        double a = (b4 * 10) + b91 + (b12 * 15) + (b13 * 8) + (b14 * 10) + (b17 * 3) + (b20 * 3) + (b21 * 3) + (b22 * 3) + (c2 * 3) + c3 + (c4 * 5) + (c5 * 2) + (c6Politica_marca * 10) + (c9Politica_marca * 7) + (c10Politica_marca * 10) + (this.para_marca * 7) + (c13 * 5) + (c15 * 5) + (c16 * 10) + (c17 * 12) + (c18 * 3);
+        resultado = a / POLITICA_MARCA;
         return resultado;
     }
 
     public double inteligencia_comercial() {
         double resultado;
         double a = (b4 * 5) + (b8 * 3) + b91 + (b17 * 2) + (b18 * 3) + b19 + (c12 * 5) + (d7 * 10) + (d12 * 10) + (d18 * 10) + (e2 * 5) + (e3 * 8) + (e4 * 5) + (e6 * 5) + (e7 * 10) + (e11 * 10) + (e12 * 10) + (e13 * 10) + (e14 * 10) + (e15 * 10) + (e16 * 5) + (e17 * 5);
-        resultado = a / inteligencia_comercial;
+        resultado = a / INTELIGENCIA_COMERCIAL;
         return resultado;
     }
 
     public double gestion_tramites_exportacion() {
         double resultado;
-        double a = (b8 * 10) + (b91 * 3) + (b11 * 2) + (b18 * 3) + b19 + (c1 * 2) + (c4 * 5) + (c13 * 10) + (c15 * 5) + (d1 * 10) + (d2 * 4) + (d3 * 2) + (d4 * 2) + (d7 * 5) + (d12 * 10) + (d11 * 15) + (e7 * 10);
-        resultado = a / gestion_tramites_exportacion;
+        double a = (b8 * 10) + (b91 * 3) + (b11 * 2) + (b18 * 3) + b19 + (c1 * 2) + (c4 * 5) + (c13 * 10) + (c15 * 5) + (d1 * 10) + (d2 * 4) + (d3 * 2) + (d4 * 2) + (d7 * 5) + (d12 * 10) + (d13 * 15) + (e7 * 10);
+        resultado = a / GESTION_TRAMITES_EXPORTACION;
         return resultado;
     }
 
     public double logistica() {
         double resultado;
         double a = b91 + (b18 * 3) + b19 + (c1 * 5) + (c11 * 8) + (c25 * 10) + (c1 * 10) + (d2 * 5) + (d3 * 2) + (d4 * 2) + (d7 * 3) + (d14 * 15) + (transporte * 10) + (d16 * 8) + (e7 * 5);
-        resultado = a / logistica;
+        resultado = a / LOGISTICA;
         return resultado;
     }
 
     public double distribucion_comercial() {
         double resultado;
         double a = (b15 * 2) + (b16 * 4) + b23 + b24 + (c1 * 3) + (c11 * 5) + (c19 * 8) + (d1 * 10) + (d2 * 5) + (d3 * 2) + (e16 * 10);
-        resultado = a / distribucion_comercial;
+        resultado = a / DISTRIBUCION_COMERCIAL;
         return resultado;
     }
 
     public double asociatividad() {
         double resultado;
         double a = (b18 * 15) + (b19 * 5);
-        resultado = a / asociatividad;
+        resultado = a / ASOCIATIVIDAD;
         return resultado;
     }
 
     public double politica_precios() {
         double resultado;
-        double a = (b4 * 5) + (b8 * 8) + (b23 * 5) + (c2 * 10) + (c3 * 2) + (c4 * 2) + (c5 * 5) + (c9) + (c10 * 2) + (c11 * 10) + (c20 * 5) + (c21 * 10) + (c22 * 10) + (d1 * 5) + (d12 * 10) + (rentabilidad_inversiones_exterior * 5) + (e7 * 5);
-        resultado = a / politica_precios;
+        double a = (b4 * 5) + (b8 * 5) + (b23 * 5) + (c2 * 10) + (c3 * 2) + (c4 * 2) + (c5 * 5) + (c9) + (c10 * 2) + (c11 * 10) + (c20 * 5) + (c21 * 10) + (c22 * 10) + (d1 * 5) + (d12 * 10) + (rentabilidad_inversiones_exterior * 5) + (e7 * 5);
+        resultado = a / POLITICA_PRECIOS;
         return resultado;
     }
 
     public double promocion_tradicional() {
         double resultado;
-        double a = (b4 * 5) + (b13 * 5) + (b14 * 2) + (b16) + (b17 * 3) + (b20) + b21 + b22 + c2 + (c4 * 2) + c7 + (c8 * 2) + c10 + (c11 * 3) + c18 * 7 + d1 * 5 + (d7 * 10) + (d17 * 15) + (d18 * 10) + (d19 * 15) + (e4 * 5) + (e5 * 5) + (e13 * 4);
-        resultado = a / promocion_tradicional;
+        double a = (b4 * 5) + (b12 * 5) + (b14 * 2) + (b16) + (b17 * 3) + (b20) + b21 + b22 + c2 + (c4 * 2) + c7 + (c8 * 2) + c10 + (c11 * 3) + (c18 * 7) + (d1 * 5) + (d7 * 10) + (d17 * 15) + (d18 * 10) + (d19 * 15) + (e4 * 5) + (e5 * 5) + (e13 * 4);
+        resultado = a / PROMOCION_TRADICIONAL;
         return resultado;
     }
 
     public double promocion_internet() {
         double resultado;
-        double a = b2 + b3 + b12 + (b13 * 10) + b14 + b16 + (b17 * 3) + c2 + c8 + c10 + c18 * 5 + (d1 * 5) + (d7 * 10) + (d20 * 20) + (d21 * 10) + (d22 * 10) + (e5 * 5);
-        resultado = a / promocion_internet;
+        double a = b2 + b3 + b12 + (b13 * 10) + b14 + b16 + (b17 * 3) + c2 + c8 + c10 + (c18 * 5) + (d1 * 5) + (d7 * 10) + (d20 * 20) + (d21 * 10) + (d22 * 10) + (e5 * 5);
+        resultado = a / PROMOCION_INTERNET;
         return resultado;
     }
 
     public double responsabilidad_social() {
         double resultado;
         double a = (b20 * 10) + (b21 * 10) + (b22 * 10);
-        resultado = a / responsabilidad_social;
+        resultado = a / RESPONSABILIDAD_SOCIAL;
         return resultado;
     }
 
@@ -215,9 +528,9 @@ public class PreguntasInternacionalizacion {
 
     //////<><><><><><><><><><<><><><><><><><><><><><><>posicion exportadora
     public double getPosicionExportadora() {
-        /* a es Ha exportado alguna vez, b ha exportado nunca pero adaptacion de producto > 6
+        /* a es Ha exportado alguna vez, b ha exportado nunca pero ADAPTACION de producto > 6
          y capacidad adaptada, c no ha exportado poco adaptaddo pero situacion productiva ok y 
-         d es sin adaptacion produtiva*/
+         d es sin ADAPTACION produtiva*/
         double a = 0.0, b = 0.0, c = 0.0, d = 0.0, posicion, indirecta, intensidad, exportando, expansion = 0.0;
         double prom, prom2;
 
@@ -227,7 +540,7 @@ public class PreguntasInternacionalizacion {
         //discreta o continua
         if (this.getD1() == 5 || this.getD1() == 6 || this.getD1() == 3) {
             indirecta = -2;
-        }else{
+        } else {
             indirecta = 0;
         }
         //Baja intensidad (menos del 10%) o sólo un territorio
@@ -256,13 +569,13 @@ public class PreguntasInternacionalizacion {
         }
 
         //prom es c130, prom2 es c136
-        prom = ((this.preparacion_motivacion_directiva() + this.gestion_tramites_exportacion() + this.logistica() + this.inteligencia_comercial()) / 4)/5;
+        prom = ((this.preparacion_motivacion_directiva() + this.gestion_tramites_exportacion() + this.logistica() + this.inteligencia_comercial()) / 4) / 5;
         prom2 = ((this.adaptacion() * 2) + this.empaques() + this.dis_asociado() + this.politica_marca() + this.diferenciacion()) / 30;
 
         if ((exportando + intensidad + indirecta) == 4) {
 
             //a = 4 + (prom + prom2 / 2);
-            a = 4 + ((prom + prom2)/2);
+            a = 4 + ((prom + prom2) / 2);
         } else {
             if ((exportando + intensidad + indirecta) > 5) {
                 a = expansion + exportando + intensidad + indirecta;
@@ -276,11 +589,11 @@ public class PreguntasInternacionalizacion {
         if (a == 0) {
             if (c143 > 1) {
                 if (this.adaptacion() > 6) {
-                    b = 3.5 + ((prom + prom2)/2);
+                    b = 3.5 + ((prom + prom2) / 2);
                 } else {
                     b = 0;
                 }
-            }else{
+            } else {
                 b = 0;
             }
         } else {
@@ -542,7 +855,7 @@ public class PreguntasInternacionalizacion {
 
         if (empresa != null) {
             this.a12 = empresa.getFacturacionAnual();
-            facturacion= empresa.getFacturacionAnual();
+            facturacion = empresa.getFacturacionAnual();
         } else {
             this.a12 = 0;
             facturacion = 0;
@@ -1723,5 +2036,349 @@ public class PreguntasInternacionalizacion {
 
     public void setId_contrato(int id_contrato) {
         this.id_contrato = id_contrato;
+    }
+
+    public int getValidD7() {
+        return validD71;
+    }
+
+    public void setValidD7(int validD7) {
+        this.validD71 = validD7;
+    }
+
+    public int getValidD124() {
+        return validD124;
+    }
+
+    public void setValidD124(int validD124) {
+        this.validD124 = validD124;
+    }
+
+    public int getValidD128() {
+        return validD128;
+    }
+
+    public void setValidD128(int validD128) {
+        this.validD128 = validD128;
+    }
+
+    public int getValidC410() {
+        return validC410;
+    }
+
+    public void setValidC410(int validC410) {
+        this.validC410 = validC410;
+    }
+
+    public int getValidD126() {
+        return validD126;
+    }
+
+    public void setValidD126(int validD126) {
+        this.validD126 = validD126;
+    }
+
+    public int getValidC90() {
+        return validC90;
+    }
+
+    public void setValidC90(int validC90) {
+        this.validC90 = validC90;
+    }
+
+    public int getValidC91() {
+        return validC91;
+    }
+
+    public void setValidC91(int validC91) {
+        this.validC91 = validC91;
+    }
+
+    public int getValidC92() {
+        return validC92;
+    }
+
+    public void setValidC92(int validC92) {
+        this.validC92 = validC92;
+    }
+
+    public int getValidC93() {
+        return validC93;
+    }
+
+    public void setValidC93(int validC93) {
+        this.validC93 = validC93;
+    }
+
+    public int getValidC94() {
+        return validC94;
+    }
+
+    public void setValidC94(int validC94) {
+        this.validC94 = validC94;
+    }
+
+    public int getValidC95() {
+        return validC95;
+    }
+
+    public void setValidC95(int validC95) {
+        this.validC95 = validC95;
+    }
+
+    public int getValidC100() {
+        return validC100;
+    }
+
+    public void setValidC100(int validC100) {
+        this.validC100 = validC100;
+    }
+
+    public int getValidC101() {
+        return validC101;
+    }
+
+    public void setValidC101(int validC101) {
+        this.validC101 = validC101;
+    }
+
+    public int getValidC102() {
+        return validC102;
+    }
+
+    public void setValidC102(int validC102) {
+        this.validC102 = validC102;
+    }
+
+    public int getValidC103() {
+        return validC103;
+    }
+
+    public void setValidC103(int validC103) {
+        this.validC103 = validC103;
+    }
+
+    public int getValidC104() {
+        return validC104;
+    }
+
+    public void setValidC104(int validC104) {
+        this.validC104 = validC104;
+    }
+
+    public int getValidC105() {
+        return validC105;
+    }
+
+    public void setValidC105(int validC105) {
+        this.validC105 = validC105;
+    }
+
+    public int getValidC110() {
+        return validC110;
+    }
+
+    public void setValidC110(int validC110) {
+        this.validC110 = validC110;
+    }
+
+    public int getValidC111() {
+        return validC111;
+    }
+
+    public void setValidC111(int validC111) {
+        this.validC111 = validC111;
+    }
+
+    public int getValidC112() {
+        return validC112;
+    }
+
+    public void setValidC112(int validC112) {
+        this.validC112 = validC112;
+    }
+
+    public int getValidC113() {
+        return validC113;
+    }
+
+    public void setValidC113(int validC113) {
+        this.validC113 = validC113;
+    }
+
+    public int getValidC114() {
+        return validC114;
+    }
+
+    public void setValidC114(int validC114) {
+        this.validC114 = validC114;
+    }
+
+    public int getValidC115() {
+        return validC115;
+    }
+
+    public void setValidC115(int validC115) {
+        this.validC115 = validC115;
+    }
+
+    public int getValidC116() {
+        return validC116;
+    }
+
+    public void setValidC116(int validC116) {
+        this.validC116 = validC116;
+    }
+
+    public int getValidC117() {
+        return validC117;
+    }
+
+    public void setValidC117(int validC117) {
+        this.validC117 = validC117;
+    }
+
+    public int getValidC118() {
+        return validC118;
+    }
+
+    public void setValidC118(int validC118) {
+        this.validC118 = validC118;
+    }
+
+    public int getValidC119() {
+        return validC119;
+    }
+
+    public void setValidC119(int validC119) {
+        this.validC119 = validC119;
+    }
+
+    public int getValidC1110() {
+        return validC1110;
+    }
+
+    public void setValidC1110(int validC1110) {
+        this.validC1110 = validC1110;
+    }
+
+    public int getValidC1111() {
+        return validC1111;
+    }
+
+    public void setValidC1111(int validC1111) {
+        this.validC1111 = validC1111;
+    }
+
+    public int getValidC1112() {
+        return validC1112;
+    }
+
+    public void setValidC1112(int validC1112) {
+        this.validC1112 = validC1112;
+    }
+
+    public int getValidC1113() {
+        return validC1113;
+    }
+
+    public void setValidC1113(int validC1113) {
+        this.validC1113 = validC1113;
+    }
+
+    public int getValidC63() {
+        return validC63;
+    }
+
+    public void setValidC63(int validC63) {
+        this.validC63 = validC63;
+    }
+
+    public int getValidC131() {
+        return validC131;
+    }
+
+    public void setValidC131(int validC131) {
+        this.validC131 = validC131;
+    }
+
+    public int getValidC151() {
+        return validC151;
+    }
+
+    public void setValidC151(int validC151) {
+        this.validC151 = validC151;
+    }
+
+    public int getValidC130() {
+        return validC130;
+    }
+
+    public void setValidC130(int validC130) {
+        this.validC130 = validC130;
+    }
+
+    public int getValidC150() {
+        return validC150;
+    }
+
+    public void setValidC150(int validC150) {
+        this.validC150 = validC150;
+    }
+
+    public int getValidC132() {
+        return validC132;
+    }
+
+    public void setValidC132(int validC132) {
+        this.validC132 = validC132;
+    }
+
+    public int getValidC152() {
+        return validC152;
+    }
+
+    public void setValidC152(int validC152) {
+        this.validC152 = validC152;
+    }
+
+    public int getValidC153() {
+        return validC153;
+    }
+
+    public void setValidC153(int validC153) {
+        this.validC153 = validC153;
+    }
+
+    public int getValidC154() {
+        return validC154;
+    }
+
+    public void setValidC154(int validC154) {
+        this.validC154 = validC154;
+    }
+
+    public int getValidC133() {
+        return validC133;
+    }
+
+    public void setValidC133(int validC133) {
+        this.validC133 = validC133;
+    }
+
+    public int getValidC134() {
+        return validC134;
+    }
+
+    public void setValidC134(int validC134) {
+        this.validC134 = validC134;
+    }
+
+    public int getValidC64() {
+        return validC64;
+    }
+
+    public void setValidC64(int validC64) {
+        this.validC64 = validC64;
     }
 }
