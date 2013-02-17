@@ -35,7 +35,7 @@ public class graficoRM {
 
     private void crearModelo() {
         modeloCategoria = new CartesianChartModel();
-
+        
         double media = roundTwoDecimals( getPi().media_inter());
 
         ChartSeries resultado = new ChartSeries();
@@ -45,7 +45,7 @@ public class graficoRM {
         resultado.set("Promoción de internet", roundTwoDecimals( pi.promocion_internet()));
         resultado.set("Promoción tradicional", roundTwoDecimals(pi.promocion_tradicional()));
         resultado.set("Políticas de precio",roundTwoDecimals( pi.politica_precios()));
-        resultado.set("Asociatividad", roundTwoDecimals(pi.asociatividad()));
+        resultado.set("Asociatividad", roundTwoDecimals(pi.distribucion_comercial()));
         resultado.set("Distriución comercial e internacional", roundTwoDecimals(pi.distribucion_comercial()));
         resultado.set("Logística internacional",roundTwoDecimals(pi.logistica()));
         resultado.set("Gestión de trámites de exportación",roundTwoDecimals(pi.gestion_tramites_exportacion()));
