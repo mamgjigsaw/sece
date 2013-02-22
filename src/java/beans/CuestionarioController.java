@@ -308,10 +308,13 @@ public class CuestionarioController implements Serializable {
 
     public void sumarOpcionc6() {
         Iterator<String> it = pc6Opciones.iterator();
-        int suma = 0, num = 0;
+        int suma = 0, num = 0,resc6;
         while (it.hasNext()) {
-            suma += Integer.parseInt(it.next());
-            num++;
+            resc6 = Integer.parseInt(it.next());
+            if(resc6 != 2){
+                suma += resc6;
+                num++;
+            }
         }
         System.out.println(suma);
 
@@ -325,6 +328,7 @@ public class CuestionarioController implements Serializable {
     public void sumarOpcionc11() {
         Iterator<String> it = pc11Opciones.iterator();
         int suma = 0, num = 0;
+        double resc11;
         while (it.hasNext()) {
             suma += Integer.parseInt(it.next());
             num++;
@@ -334,10 +338,16 @@ public class CuestionarioController implements Serializable {
         if (num == 0) {
             pi.setC11(0);
         } else {
-            if (((suma / 2) + ((suma / num) * 1.5)) > 10) {
-                pi.setC11(10);
+            double r1=0.0,r2 = 0.0,r3 = 0.0;
+            r1 = (suma / 2);
+            r2 = (double) suma / num;
+            r3 =  r2 * 1.5;
+            
+            resc11 = r1 + r3;
+            if ( resc11 > 10) {
+                pi.setC11(10.0);
             } else {
-                pi.setC11(((suma / 2) + ((suma / num) * 1.5)));
+                pi.setC11(resc11);
             }
         }
     }
@@ -375,7 +385,6 @@ public class CuestionarioController implements Serializable {
         }
         System.out.println(suma);
 
-
         if (suma > 10) {
             pi.setD2(10);
         } else {
@@ -391,11 +400,16 @@ public class CuestionarioController implements Serializable {
             suma += Integer.parseInt(it.next());
         }
         System.out.println(suma);
+        
+        double  respd3=0.0, respd2=0.0;
+        
+        respd2 = (double) pi.getD2();
+        respd3 = (double) suma + ( respd2 / 2);
 
-        if ((suma + (pi.getD2() / 2)) > 10) {
-            pi.setD3(10);
+        if ( respd3 > 10.0) {
+            pi.setD3(10.0);
         } else {
-            pi.setD3(suma);
+            pi.setD3(respd3);
         }
 
     }
@@ -407,21 +421,24 @@ public class CuestionarioController implements Serializable {
             suma += Double.parseDouble(it.next());
         }
         System.out.println(suma);
-        pi.setD7(suma);
+        double respd6=0.0;
+        respd6 = (double) pi.getD6();
+        pi.setD7(suma * respd6);
     }
 
     public void sumarOpciond9() {
         Iterator<String> it = pd9Opciones.iterator();
-        int suma = 0;
+        int suma = 0, respd9;
         while (it.hasNext()) {
             suma += Integer.parseInt(it.next());
         }
         System.out.println(suma);
-
-        if ((5 + suma) < 0) {
+        
+        respd9 = 5 + suma;
+        if ( respd9 < 0) {
             pi.setD9(0);
         } else {
-            pi.setD9(suma);
+            pi.setD9(respd9);
         }
     }
 
@@ -467,13 +484,16 @@ public class CuestionarioController implements Serializable {
         if (num == 0) {
             pi.setD12(0);
         } else {
-            if ((10 + ((suma + (suma / num)) / 2)) < 0) {
-                pi.setD12(0);
+            double respd12,respd12ev;
+            respd12 = (double) (suma + ( suma / num)) / 2;
+            respd12ev = 10.0 + respd12;
+            if (respd12ev < 0.0) {
+                pi.setD12(0.0);
             } else {
-                pi.setD12((10 + ((suma + (suma / num)) / 2)));
+                pi.setD12(respd12ev);
             }
         }
-        pi.setD12(suma);
+       // pi.setD12(suma);
     }
 
     public void sumarOpciond17() {
@@ -559,13 +579,68 @@ public class CuestionarioController implements Serializable {
             num++;
         }
         System.out.println(suma);
+        double rp1=0.0, rp2=0.0, respe10=0.0;
 
+        rp1 = (double) suma /2;
+        rp2 = (double) suma / num * 1.5;
+        
+        respe10 = (double) (rp1 + rp2);
         if (num == 0) {
-            pi.setE10(0);
+            pi.setE10(0.0);
         } else {
-            pi.setE10((suma / 2) + ((suma / num) * 1.5));
+            pi.setE10(respe10);
         }
-        pi.setE10(suma);
+        //pi.setE10(suma);
+    }
+    
+    public void cal11() {
+        int hola = pi.getE11();
+
+        System.out.println(hola);
+       
+    }
+    
+    public void cal12() {
+        int hola = pi.getE12();
+
+        System.out.println(hola);
+       
+    }
+    
+    public void cal13() {
+        int hola = pi.getE13();
+
+        System.out.println(hola);
+       
+    }
+    
+    public void cal14() {
+        int hola = pi.getE14();
+
+        System.out.println(hola);
+       
+    }
+    
+    public void cal15() {
+        int hola = pi.getE15();
+
+        System.out.println(hola);
+       
+    }
+    
+    public void cal6() {
+        int hola = pi.getE16();
+
+        System.out.println(hola);
+       
+    }
+    
+    public void cal17() {
+        int hola = pi.getE17();
+        pi.calcularB23();
+
+        System.out.println(hola);
+       
     }
 
     public String getNombreComercial() {

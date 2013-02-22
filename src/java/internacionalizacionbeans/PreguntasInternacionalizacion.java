@@ -17,9 +17,9 @@ public class PreguntasInternacionalizacion {
 
     private int b1, b2, b3, b4, b5, b6, b7, b8, b91, b92, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b24,
             c1, c2, c3, c4, c5, c7, c8, c9, c10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25,
-            d1, d2, d3, d4, d5, d6, d8, d9, d10, d11, d13, d14, d15, d25, d16, d17, d18, d19, d20, d21, d22,
+            d1, d2, d4, d5, d6, d8, d9, d10, d11, d13, d14, d15, d25, d16, d17, d18, d19, d20, d21, d22,
             e1, e2, e3, e4, e5, e6, e7, e8, e9, e11, e12, e13, e14, e15, e16, e17;
-    private Double d7, d23, c6, c11, d12, e10;
+    private Double d7, d23, c6, c11, d12, e10, d3;
     private String nameD15;
     private int vali1D2, vali2D2, vali3D2, vali4D2, vali5D2, vali6D2, vali7D2, vali8D2, vali9D2, vali10D2, vali11D2,
             vali1D3, vali2D3, vali3D3, vali4D3, vali5D3, vali6D3, vali7D3, vali8D3, vali9D3, vali10D3, vali11D3;
@@ -52,8 +52,8 @@ public class PreguntasInternacionalizacion {
     /*variables procedentes de Empresa*/
     //a12 es la facturacion
     //a11_1 son los numero de empleado
-    private int a12 = 9, a11_1 = 1, id_contrato, b14PCalidad = 0, AC168 = 0, AC167 = 0, AC169 = 0, AC170 = 0, AC171 = 0;
-    private double facturacion = 9,a11_1D = 0.0, b23;
+    private int a12 , a11_1 = 1, id_contrato, b14PCalidad = 0, AC168 = 0, AC167 = 0, AC169 = 0, AC170 = 0, AC171 = 0;
+    private double facturacion,a11_1D, b23;
     /*---variables procedentes de Empresa*/
     /*Asignacion dura*/
     int transporte = 4;//d15 en la hoja de apoyo, en pregunta del instrumento es la d25
@@ -96,27 +96,25 @@ public class PreguntasInternacionalizacion {
         rentabilidad();
         empleadoPermanente(id_contrato);
         facturacionAnual(id_contrato);
-        calcularB24();
-        //int a = (a11_1 * 10) + (a12 * 9) + (b1 * 5) + (b2 * 5) + (b3 * 10) + (b4 * 10) + (b5 * 5) + (b8 * 2) + (b91 * 2) + (b10 * 3) + (b24 * 5) + (c1 * 5) + (c4 * 2) + (c5 * 2) + (d9 * 5);
-        if(a11_1 == 1){
-            a11_1D  = 1.5;
-        }else{
-            a11_1D = this.a11_1;
-        }
+        calcularB24();        
         
-        resultado = ((a11_1D * 10) + (a12 * 5) + (b1 * 5) + (b2 * 5) + (b3 * 10) + (b4 * 10) + (b5 * 5) + (b8 * 2) + (b91 * 3) + (b10 * 3) + (b24 * 5) + (c1 * 5) + (c4 * 2) + (c5 * 2) + (d9 * 5)) / SITUACION_PRODUCTIVA;
+        resultado = ((getA11_1D() * 10) + (a12 * 5) + (b1 * 5) + (b2 * 5) + (b3 * 10) + (b4 * 10) + (b5 * 5) + (b8 * 2) + (b91 * 3) + (b10 * 3) + (b24 * 5) + (c1 * 5) + (c4 * 2) + (c5 * 2) + (d9 * 5)) / SITUACION_PRODUCTIVA;
         return resultado;
     }
 
     public void calcularB23() {
-        this.setB23(6 + this.getA12() - a11_1D);
+        empleadoPermanente(id_contrato);
+        facturacionAnual(id_contrato);
+        
+        this.setB23((double) (6.0 + ((double) this.getA12()) - getA11_1D()));
+        System.out.println("B23: "+ this.getB23() + ",= A12: "+this.getA12() +"y A11D: "+ getA11_1D());
     }
     
     public double estructura_empresarial() {
         double resultado;
          calcularB23();
         //int a = (a11_1 * 10) + (a12 * 10) + (b3 * 5) + (b4 * 10) + (b8 * 10) + (b91 * 5) + (b10 * 15) + (b11 * 10) + (b12 * 3) + (b18 * 3) + b19 + b20 + b21 + b22 + (c4 * 5) + (d2 * 5) + (d3 * 3);
-        resultado = ((a11_1D * 10) + (a12 * 10) + (b3 * 5) + (b4 * 10) + (b8 * 10) + (b91 * 5) + (b10 * 15) + (b11 * 10) + (b12 * 3) + (b18 * 3) + b19 + b20 + b21 + b22 + (c4 * 5) + (d2 * 5) + (d3 * 3)) / ESTRUCTURA_EMPRESARIAL;
+        resultado = ((getA11_1D() * 10) + (a12 * 10) + (b3 * 5) + (b4 * 10) + (b8 * 10) + (b91 * 5) + (b10 * 15) + (b11 * 10) + (b12 * 3) + (b18 * 3) + b19 + b20 + b21 + b22 + (c4 * 5) + (d2 * 5) + (d3 * 3.0)) / ESTRUCTURA_EMPRESARIAL;
         return resultado;
     }
 
@@ -130,7 +128,7 @@ public class PreguntasInternacionalizacion {
             d12Situacion = 0;
         }
 
-        double a = (a11_1D * 10) + (a12 * 15) + b2 + (b4 * 10) + (b6 * 5) + (b7 * 5) + (b8 * 10) + (b91 * 2) + (b23 * 10) + ((10 - c1) * 2) + (c2 * 10) + (c3 * 2) + (c5 * 3) + (d6 * 12) + (d8 * 6) + (d9 * 4) + (4 * d12Situacion) + (rentabilidad_inversiones_exterior * 10);
+        double a = (getA11_1D() * 10) + (a12 * 15) + b2 + (b4 * 10) + (b6 * 5) + (b7 * 5) + (b8 * 10) + (b91 * 2) + (b23 * 10) + ((10 - c1) * 2) + (c2 * 10) + (c3 * 2) + (c5 * 3) + (d6 * 12) + (d8 * 6) + (d9 * 4) + (4 * d12Situacion) + (rentabilidad_inversiones_exterior * 10);
         resultado = a / SITUACION_FINANCIERA;
         return resultado;
     }
@@ -150,7 +148,7 @@ public class PreguntasInternacionalizacion {
             d12Preparacion = -25; // 5 * (-5)
         }
 
-        double a = (b2 * 2) + (b4 * 2) + (b7 * 3) + (b8 * 5) + (b91 * 3) + (b10 * 5) + (b11 * 2) + b13 + b12 + (b18 * 3) + b19 + b20 + b21 + b22 + (b23 * 2) + (c4Preparacion) + (d1 * 10) + (d2 * 2) + (d3 * 2) + (d4 * 2) + (d5 * 5) + (d9 * 10) + (d10 * 10) + (d11 * 8) + (d12Preparacion) + (rentabilidad_inversiones_exterior * 4) + (e2 * 4) + (e3 * 8) + (e5 * 8) + (e6 * 5) + (e7 * 2) + (e8 * 10);
+        double a = (b2 * 2) + (b4 * 2) + (b7 * 3) + (b8 * 5) + (b91 * 3) + (b10 * 5) + (b11 * 2) + b13 + b12 + (b18 * 3) + b19 + b20 + b21 + b22 + (b23 * 2) + (c4Preparacion) + (d1 * 10) + (d2 * 2) + (d3 * 2.0) + (d4 * 2) + (d5 * 5) + (d9 * 10) + (d10 * 10) + (d11 * 8) + (d12Preparacion) + (rentabilidad_inversiones_exterior * 4) + (e2 * 4) + (e3 * 8) + (e5 * 8) + (e6 * 5) + (e7 * 2) + (e8 * 10);
         resultado = a / PREPARACION_MOTIVACION_DIRECTIVA;
         return resultado;
     }
@@ -557,7 +555,7 @@ public class PreguntasInternacionalizacion {
             gestionD12 = -10;
         }
 
-        double a = (b8 * 10) + (b91 * 3) + (b11 * 2) + (b18 * 3) + b19 + (c1 * 2) + (c4 * 5) + (gestionC13 * 10) + (c15 * 5) + (d1 * 10) + (d2 * 4) + (d3 * 2) + (d4 * 2) + (gestionD7 * 5) + (gestionD12 * 10) + (d13 * 15) + (e7 * 10);
+        double a = (b8 * 10) + (b91 * 3) + (b11 * 2) + (b18 * 3) + b19 + (c1 * 2) + (c4 * 5) + (gestionC13 * 10) + (c15 * 5) + (d1 * 10) + (d2 * 4) + (d3 * 2.0) + (d4 * 2) + (gestionD7 * 5) + (gestionD12 * 10) + (d13 * 15) + (e7 * 10);
         resultado = a / this.GESTION_TRAMITES_EXPORTACION;
         return resultado;
     }
@@ -572,7 +570,7 @@ public class PreguntasInternacionalizacion {
             logisD7 = this.getD6();
         }
 
-        double a = b91 + (b18 * 3) + b19 + (c1 * 5) + (c11 * 8) + (c25 * 10) + (c1 * 10) + (d2 * 5) + (d3 * 2) + (d4 * 2) + (logisD7 * 3) + (d14 * 15) + (transporte * 10) + (d16 * 8) + (e7 * 5);
+        double a = b91 + (b18 * 3) + b19 + (c1 * 5) + (c11 * 8) + (c25 * 10) + (c1 * 10) + (d2 * 5) + (d3 * 2.0) + (d4 * 2) + (logisD7 * 3) + (d14 * 15) + (transporte * 10) + (d16 * 8) + (e7 * 5);
         resultado = a / this.LOGISTICA;
         return resultado;
     }
@@ -583,7 +581,7 @@ public class PreguntasInternacionalizacion {
         //c19
         distComec19 = this.getD4() * this.getC19() / 5;
         
-        double a = (b15 * 2) + (b16 * 4) + b23 + b24 + (c1 * 3) + (c11 * 5) + (distComec19 * 8) + (d1 * 10) + (d2 * 5) + (d3 * 2) + (e16 * 10);
+        double a = (b15 * 2) + (b16 * 4) + b23 + b24 + (c1 * 3) + (c11 * 5) + (distComec19 * 8) + (d1 * 10) + (d2 * 5) + (d3 * 2.0) + (e16 * 10);
         resultado = a / this.DISTRIBUCION_COMERCIAL;
         return resultado;
     }
@@ -1002,18 +1000,18 @@ public class PreguntasInternacionalizacion {
             int emp_permanente = empresa.getNumeroEmpleadosPermanente();
             if (emp_permanente == 1) {
                 //this.a11_1 = 1.5; este es el valor verdadero, no se porque se quiebra cuando paso esta variable a double
-                this.a11_1 = 1;
+                this.setA11_1D(1.5);
             } else if (emp_permanente == 2) {
-                this.a11_1 = 2;
+                this.setA11_1D(2.0);
             } else if (emp_permanente == 3 || emp_permanente == 4) {
-                this.a11_1 = 0;
+                this.setA11_1D(0.0);
             } else if (emp_permanente == 5) {
-                this.a11_1 = 4;
+                this.setA11_1D(4.4);
             } else if (emp_permanente == 6) {
-                this.a11_1 = 7;
+                this.setA11_1D(7.0);
             }
         } else {
-            this.a11_1 = 0;
+            this.setA11_1D(0.0);
         }
     }
 
@@ -1476,11 +1474,11 @@ public class PreguntasInternacionalizacion {
         this.d2 = d2;
     }
 
-    public int getD3() {
+    public double getD3() {
         return d3;
     }
 
-    public void setD3(int d3) {
+    public void setD3(double d3) {
         this.d3 = d3;
     }
 
@@ -2658,5 +2656,19 @@ public class PreguntasInternacionalizacion {
 
     public void setSeleccionb17(int seleccionb17) {
         this.seleccionb17 = seleccionb17;
+    }
+
+    /**
+     * @return the a11_1D
+     */
+    public double getA11_1D() {
+        return a11_1D;
+    }
+
+    /**
+     * @param a11_1D the a11_1D to set
+     */
+    public void setA11_1D(double a11_1D) {
+        this.a11_1D = a11_1D;
     }
 }
