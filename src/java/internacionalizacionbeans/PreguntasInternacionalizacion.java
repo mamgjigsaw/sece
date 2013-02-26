@@ -14,7 +14,10 @@ import pojo.EmpresaCompleta;
  * @author Dave
  */
 public class PreguntasInternacionalizacion {
-
+/*
+ b18 nombre item 4
+c4 item 9
+ */
     private int b1, b2, b3, b4, b5, b6, b7, b8, b91, b92, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b24,
             c1, c2, c3, c4, c5, c7, c8, c9, c10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25,
             d1, d2, d4, d5, d6, d8, d9, d10, d11, d13, d14, d15, d25, d16, d17, d18, d19, d20, d21, d22,
@@ -891,6 +894,7 @@ public class PreguntasInternacionalizacion {
         this.getRentabilidadSuperInfer();
         this.rangoFacturacion();
         this.getMargenBruto();
+        this.getIncrementoDemanda();
 
         //beneficion exportacion
         this.setBenExpInf((this.getFact_infer() * this.getV66() * this.getmBruto_infer() * this.getIncDemandInf()) - (this.getFact_infer() * this.getV55() * this.getmBruto_infer()));
@@ -983,7 +987,14 @@ public class PreguntasInternacionalizacion {
         } else if (this.getA12() == 7) {
             this.setFact_infer(500000);
             this.setFact_superior(1000000);
+        }else if (this.getA12() == 9) {
+            this.setFact_infer(1000000);
+            this.setFact_superior(3000000);
+        }else if (this.getA12() == 10) {
+            this.setFact_infer(3000000);
+            this.setFact_superior(5000000);
         }
+
     }
 
     public void empleadoPermanente(int idcontrato) {
@@ -1006,7 +1017,7 @@ public class PreguntasInternacionalizacion {
             } else if (emp_permanente == 3 || emp_permanente == 4) {
                 this.setA11_1D(0.0);
             } else if (emp_permanente == 5) {
-                this.setA11_1D(4.4);
+                this.setA11_1D(4.0);
             } else if (emp_permanente == 6) {
                 this.setA11_1D(7.0);
             }

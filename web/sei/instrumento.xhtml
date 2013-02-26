@@ -745,8 +745,7 @@
                                                 <f:selectItem itemLabel="Sí, encadenamiento productivo vertical/horizontal para la provisión a los mercados." itemValue="3" />  
                                                 <f:selectItem itemLabel="Sí, asociación o consorcio de exportación conjunta de producto." itemValue="4" /> 
                                                 <f:selectItem itemLabel="Sí, asociación o consorcio de exportación conjunta de producto." itemValue="3" />  
-                                                <f:selectItem itemLabel="Sí, asociación o consorcio de exportación conjunta de producto." itemValue="0" />  
-                                                <f:selectItem itemLabel="No." itemValue="2" /> 
+                                                <f:selectItem itemLabel="No." itemValue="0" /> 
                                                 <p:ajax listener="#{cuestionarioController.sumarOpcion18}"/>
                                             </p:selectManyCheckbox>
                                         </p:column>
@@ -2103,6 +2102,7 @@
                                     <f:selectItem itemValue="10"/>
                                     <f:selectItem itemValue="0"/>
                                     <f:selectItem itemValue="0"/>
+                                    <p:ajax listener="#{cuestionarioController.testd4}"/>
                                 </p:selectOneRadio>
 
                                 <p:panelGrid columns="2">

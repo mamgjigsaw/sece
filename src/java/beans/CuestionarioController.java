@@ -152,10 +152,10 @@ public class CuestionarioController implements Serializable {
         pi.setC24(10);
         pi.setC25(10);
         pi.setD1(5);
-        pi.setD4(2);
+        pi.setD4(2);//revisar si no pone el valor
         pi.setD5(2);
         pi.setD6(3);
-        pi.setD8(2);
+        pi.setD8(0);
         pi.setD13(10);
         pi.setD14(10);
         pi.setD20(10);
@@ -906,5 +906,9 @@ public class CuestionarioController implements Serializable {
             mostrarD8 = true;
         }
         System.out.print(mostrarD8);
+    }
+    
+    public void testd4(){
+        System.out.println(this.pi.getD4());
     }
 }
