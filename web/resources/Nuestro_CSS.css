@@ -10,176 +10,176 @@
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
-    #toolbar {
-        padding: 10px 4px;
-    }
-
-    body{
-        background: #ffffff;
-           font-size: 11px;
+#toolbar {
+    padding: 10px 4px;
 }
-        #contenedor{
-            text-align: left;
-            width: 80%;
-            margin: auto;            
-        }
 
-        #banner{
-            background-color:#229ebd;
-            color: #333300;
-            font-size:12pt;
-            font-weight: bold;            
-        }
-        
-        #contenido{
-            margin: 10px 0px 10px 0px;
-            color: #222222;
-        }       
+body{
+    background: #ffffff;
+    font-size: 11px;
+}
+#contenedor{
+    text-align: left;
+    width: 80%;
+    margin: auto;            
+}
 
-        #lateral{
-            width: 29%;
-            background-color: #ffffff;
-            float:right;
-            padding: 0px 0px 0px 0px;
-        }
-                       
-        #principal{
-            background-color:#ebebeb;
-            padding: 4px 4px 4px 4px;
-            margin-right: 30%;
-            font-size: 14px;         
-        }
+#banner{
+    background-color:#229ebd;
+    color: #333300;
+    font-size:12pt;
+    font-weight: bold;            
+}
 
-        #footer{
-            font-family: Constantia;
-            background-color:#A6C5E1;
-            padding: 3px 10px 3px 10px;
-            text-align:right;
-            font-size: 14px;
-            font-style: italic;
-        }
+#contenido{
+    margin: 10px 0px 10px 0px;
+    color: #222222;
+}       
 
-        .tlabel{
-            font-size: 15px;
-        }
-        #divHeader{
-            background-color: #229ebd;
-            text-align: center;
-            font-size: 16px;
-        }
+#lateral{
+    width: 29%;
+    background-color: #ffffff;
+    float:right;
+    padding: 0px 0px 0px 0px;
+}
 
-        /* begin: slideshow */
-        .slideshow {
-            position:relative;
-            padding:0;
-            margin:0;
-        }
-        .slideshow a img {
-            border:none;
-        }
-        .slideshow li.slide {
-            list-style-type:none;
-        }
-        .slideshow .slides {
-            height:260px;
-            margin:0;
-        }
-        .slideshow .slides li.slide {
-            visibility:hidden;
-            position:absolute;
-            left:0px;
-            top:0;
-        }
-        .slideshow .buttons {
-            display:none;
-        }
-        .slideshow .buttons {
-            display:block;
-            position:absolute;
-            z-index:100;
-            left:0px;
-            bottom:20px;
-            margin:0;
-        }
-        .slideshow .buttons li {
-            float:left;
-            display:inline;
-            width:30px;
-            height:30px;
-            margin:0;
-            padding-left:11px;
-            line-height:30px;
-            background-image:url('buttonBg.png');
-            background-repeat:no-repeat;
-        }
-        .slideshow .buttons li a {
-            float:left;
-            text-decoration:none;
-            width:30px;
-            height:30px;
-            color:#fff;
-            outline:0;
-        }
-        .slideshow ul.buttons li a:hover {
-            text-decoration:none;
-            color:#0a0a0a;
-        }
-        .slideshow ul.buttons li.active a:hover,
-        .slideshow ul.buttons li.active a {
-            color:#666666;
-        }
-        /* end: slideshow */
-        /*Agregado por David*/        
-        /* -------------------------------- Prgoress Bars  */
-        .progress-bar {
-                background:#f2f2f2;
-                
-                border:1px solid #d9d9d9;
-                border-radius:5px;
-                display:block;
-                height:25px;
-                margin:0.67em 0;
-        }
-        .progress-bar div {
-                border-radius:5px;
-                display:block;
-                height:25px;
-                text-align:center;
-                position:relative;
-                top:0px;
-                -webkit-box-shadow:0 0 5px #a6a6a6;
-                -moz-box-shadow:0 0 5px #a6a6a6;
-                box-shadow:0 0 5px #a6a6a6;
-        }
-        .progress-bar div span {
-                color:black;
-                font-family:'PTSansBold', Arial, sans-serif;
-                text-align:center;
-                position:relative;
-                top:0px;
-                text-shadow:0 1px 1px #a6a6a6;
-        }
+#principal{
+    background-color:#ebebeb;
+    padding: 4px 4px 4px 4px;
+    margin-right: 30%;
+    font-size: 14px;         
+}
 
-        .progress-bar.red div { background-color:#ae432e; }
-        .progress-bar.blue div { background-color:#058dc7; }
-        .progress-bar.green div { background-color:#77ab13; }
-        .progress-bar.yellow div { background-color:#E9E105;}
+#footer{
+    font-family: Constantia;
+    background-color:#A6C5E1;
+    padding: 3px 10px 3px 10px;
+    text-align:right;
+    font-size: 14px;
+    font-style: italic;
+}
 
-        /* -------------------------------- Prgoress Bars  */
-        
-        .divPanel {            
-            border:1px solid gray;
-            background-color:white;
-            border-radius: 20px;
-            box-shadow: rgba(0,0,0,0.4) 5px 5px;
-            padding-left: 2px;
-            padding-right: 2px;
-        }
-        
-        
-        
-        /*----------------Menu---------------------*/
-        
+.tlabel{
+    font-size: 15px;
+}
+#divHeader{
+    background-color: #229ebd;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* begin: slideshow */
+.slideshow {
+    position:relative;
+    padding:0;
+    margin:0;
+}
+.slideshow a img {
+    border:none;
+}
+.slideshow li.slide {
+    list-style-type:none;
+}
+.slideshow .slides {
+    height:260px;
+    margin:0;
+}
+.slideshow .slides li.slide {
+    visibility:hidden;
+    position:absolute;
+    left:0px;
+    top:0;
+}
+.slideshow .buttons {
+    display:none;
+}
+.slideshow .buttons {
+    display:block;
+    position:absolute;
+    z-index:100;
+    left:0px;
+    bottom:20px;
+    margin:0;
+}
+.slideshow .buttons li {
+    float:left;
+    display:inline;
+    width:30px;
+    height:30px;
+    margin:0;
+    padding-left:11px;
+    line-height:30px;
+    background-image:url('buttonBg.png');
+    background-repeat:no-repeat;
+}
+.slideshow .buttons li a {
+    float:left;
+    text-decoration:none;
+    width:30px;
+    height:30px;
+    color:#fff;
+    outline:0;
+}
+.slideshow ul.buttons li a:hover {
+    text-decoration:none;
+    color:#0a0a0a;
+}
+.slideshow ul.buttons li.active a:hover,
+.slideshow ul.buttons li.active a {
+    color:#666666;
+}
+/* end: slideshow */
+/*Agregado por David*/        
+/* -------------------------------- Prgoress Bars  */
+.progress-bar {
+    background:#f2f2f2;
+
+    border:1px solid #d9d9d9;
+    border-radius:5px;
+    display:block;
+    height:25px;
+    margin:0.67em 0;
+}
+.progress-bar div {
+    border-radius:5px;
+    display:block;
+    height:25px;
+    text-align:center;
+    position:relative;
+    top:0px;
+    -webkit-box-shadow:0 0 5px #a6a6a6;
+    -moz-box-shadow:0 0 5px #a6a6a6;
+    box-shadow:0 0 5px #a6a6a6;
+}
+.progress-bar div span {
+    color:black;
+    font-family:'PTSansBold', Arial, sans-serif;
+    text-align:center;
+    position:relative;
+    top:0px;
+    text-shadow:0 1px 1px #a6a6a6;
+}
+
+.progress-bar.red div { background-color:#ae432e; }
+.progress-bar.blue div { background-color:#058dc7; }
+.progress-bar.green div { background-color:#77ab13; }
+.progress-bar.yellow div { background-color:#E9E105;}
+
+/* -------------------------------- Prgoress Bars  */
+
+.divPanel {            
+    border:1px solid gray;
+    background-color:white;
+    border-radius: 20px;
+    box-shadow: rgba(0,0,0,0.4) 5px 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+
+
+/*----------------Menu---------------------*/
+
 .preload1 {background: url(../images/blank_over.gif);}
 .preload2 {background: url(../images/blank_overa.gif);}
 
@@ -231,33 +231,33 @@
 
 /* Button para enviar correo de inscripcion directo al usuario con idCapacitador */
 .btnEC {
-	-moz-box-shadow:inset 0px 1px 9px 0px #f29c93;
-	-webkit-box-shadow:inset 0px 1px 9px 0px #bbdaf7;
-	box-shadow:inset 0px 1px 9px 0px #bbdaf7;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #abd3fc), color-stop(1, #378de5) );
-	background:-moz-linear-gradient( center top, #abd3fc 5%, #378de5 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#abd3fc', endColorstr='#378de5');
-	background-color:#abd3fc;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:2px solid #84bbf3;
-	display:inline-block;
-	color:#ffffff;
-	font-family:arial;
-	font-size:19px;
-	font-weight:bold;
-	padding:12px 45px;
-	text-decoration:none;
-	text-shadow:1px 1px 14px #528ecc;
+    -moz-box-shadow:inset 0px 1px 9px 0px #f29c93;
+    -webkit-box-shadow:inset 0px 1px 9px 0px #bbdaf7;
+    box-shadow:inset 0px 1px 9px 0px #bbdaf7;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #abd3fc), color-stop(1, #378de5) );
+    background:-moz-linear-gradient( center top, #abd3fc 5%, #378de5 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#abd3fc', endColorstr='#378de5');
+    background-color:#abd3fc;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:2px solid #84bbf3;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:19px;
+    font-weight:bold;
+    padding:12px 45px;
+    text-decoration:none;
+    text-shadow:1px 1px 14px #528ecc;
 }.btnEC:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #abd3fc) );
-	background:-moz-linear-gradient( center top, #378de5 5%, #abd3fc 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#abd3fc');
-	background-color:#378de5;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #abd3fc) );
+    background:-moz-linear-gradient( center top, #378de5 5%, #abd3fc 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#abd3fc');
+    background-color:#378de5;
 }.btnEC:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
 }
 .cant_emailEnviados{
     font-size: x-small;
@@ -295,4 +295,38 @@
 
 .btnAprobar{
     height: 19px;
+}
+
+.buttonIniciarSesion {
+    -moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+    -webkit-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+    box-shadow:inset 0px 0px 12px 0px #97c4fe;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(50, #006092), color-stop(100, #006092) );
+    background:-moz-linear-gradient( center top, #006092 5%, #1e62d0 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006092', endColorstr='#006092');
+    background-color:#006092;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #006092;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    outline-style: none;
+
+    text-shadow:1px 1px 0px #1570cd;
+    float: right; margin:0; margin-top: 35px; 
+    text-decoration:none;
+}.buttonIniciarSesion:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #016aa1), color-stop(1, #016aa1) );
+    background:-moz-linear-gradient( center top, #016aa1 5%, #016aa1 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#016aa1', endColorstr='#016aa1');
+    background-color:#1e62d0;
+    text-decoration:none;
+}.buttonIniciarSesion:active {
+    position:relative;
+    top:1px;
 }

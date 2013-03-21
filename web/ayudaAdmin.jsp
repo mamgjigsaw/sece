@@ -22,7 +22,7 @@
        <div class="main">
   <div class="header">
     <div class="header_resize">  
-        
+         <a href="../main_admin.jsp" class="buttonVolver">&LT;&LT; Atras</a>
         
       <div class="menu">
         

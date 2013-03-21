@@ -573,7 +573,7 @@ response.setDateHeader("Expires", 0);
        <div class="inGo" style=" font-size: 11px;" > 
        <span id="toolbar" class="ui-widget-header ui-corner-all">
 	<button id="home">Inicio</button>
-	<button id="instrument">Instrumento</button>
+	<!--<button id="instrument">Instrumento</button> -->
         <button id="help">Ayuda</button>
         <button id="logoutbutton" onclick="mostrarSalir();" ><%= usu.getNombre() %></button>	
        </span> 
@@ -610,10 +610,10 @@ response.setDateHeader("Expires", 0);
                 </ul>
                 <div id="tabEmpresas" style=" width: 98%;">
        
-                    <div style=" width: 48%; float: left;" ><h3>Empresas Pendientes de Activaci&oacuten</h3><div class="line"></div>
+                    <div style=" width: 48%; float: left;" ><h3>Empresas Pendientes de Activaci&oacute;n</h3><div class="line"></div>
                   <iframe src="tableEmpresasNuevas.jsp" style="width: 100%; height: 40%" frameborder="0" scrolling="false"  id="eNueva"></iframe>   
                     </div> 
-                    <div style="width: 48%; float: right " > <h3>Empresas Activas Actualmente</h3><div class="line"></div>
+                    <div style="width: 48%; float: right " > <h3>Empresas en Progreso de Evaluaci&oacute;n</h3><div class="line"></div>
                    <iframe src="tableEmpresasActivas.jsp" style="width: 100%; height: 40%" frameborder="0" scrolling="false"  id="eActiva"></iframe>     
                     </div>
                     <div style=" width: 98%;"> <h3>&Uacuteltimas 5 Empresas que Finalizaron Intrumento</h3><div class="line"></div>
@@ -673,7 +673,7 @@ response.setDateHeader("Expires", 0);
                             </tr>
                             <tr>
                                 <td><input id="btnRepUsers" onclick="reporteUsers();" type="button" value="Usuarios de SECE"/></td>
-                                <td><input id="btnFormato" onclick="reporteFormato();" type="button" value="Ver Formato de Instrumento"/></td>
+                                <td><input id="btnFormato" onclick="reporteFormato();" type="button" value="Ver Formato para imprimir"/></td>
                                 <td><input id="btnBitacoraG" onclick="reporteBitacoraG();" type="button" value="Ver Bitacora General"/></td>
                                 <td></td>
                             </tr>

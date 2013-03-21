@@ -161,7 +161,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                 $( "#tabs" ).tabs();  
                 
                 //remueve video chat
-                //$("#tabs").tabs( "remove" , 4 );
+                $("#tabs").tabs( "remove" , 4 );
                                 
                 if(tipo==4){
                    $("#tabs").tabs( "remove" , 2 );

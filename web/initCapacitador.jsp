@@ -171,7 +171,7 @@ response.setDateHeader("Expires", 0);
             $("#tabs").tabs({selected:0});
             
              //remueve video chat
-            //$("#tabs").tabs( "remove" , 5 );
+            $("#tabs").tabs( "remove" , 5 );
             
             $( "#datepicker" ).datepicker();
             $( "#datepicker2" ).datepicker();                       
@@ -411,7 +411,7 @@ response.setDateHeader("Expires", 0);
                                 <tr>
                                     <td>
                                         <div align="center">
-                                            <h2>Empresas Pendientes de Asignaci&oacute;n</h2>
+                                            <h2>Empresas Pendientes de Activac&oacute;n</h2>
                                             <table border="0" id="tblEmpresasNoAsignadas" width ="100%">
                                                 <thead>
                                                     <tr style="background-color: #347488; color:#fff;">

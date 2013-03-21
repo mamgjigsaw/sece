@@ -94,7 +94,7 @@
                         <p>En noticias y notas, muestra las actividades que se realizaron hace una semana y las de la próxima. El ingreso de estas notas la realizara el administrador del sistema, más adelante en subsistema el modulo del administrador se explicara y se mostrara el formulario de ingreso. Así como todas las notas hechas.</p> 
                         <img src="ayuda/imagenes/imgC02.jpg"/>
                         <p>Acerca de, muestra información sobre quienes desarrollaron el sistema, como un video explicativo de como registrarse.</p>
-                        <img src="ayuda/imagenes/imgC03.jpg"/>
+                        <!--<img src="ayuda/imagenes/imgC03.jpg"/> -->
                         <p>Contáctenos, hay un formulario donde usuario puede enviar sugerencia, preguntas o consulta a CPLM sobre SECE. También muestra información de CPML como ubicación geográfica, dirección, teléfonos.</p>
                         <p>También en el inicio hay una opción para iniciar sesión en el sistema. Que nos direcciona a <a href="#">http://sece.pml.org.ni/logger.jsp.</a></p>
                     </div>
