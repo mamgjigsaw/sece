@@ -408,6 +408,42 @@ public class initCapacitadores {
             v += avance.getV();
         }//fin while
         vce = (vs / v) * 100;
-        return df.format(vce);
+        return df.format(vce);   
     }
+        
+    public String getLegendsRelativa(int idcontrato){
+        String result = "";
+        AvanceDaoImpl adi = new AvanceDaoImpl();
+        Avance avance ;
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
+        List<Avance> resultAvance ;  
+        Contrato contra = cdi.findById(idcontrato);
+        resultAvance = adi.Xcontrato(contra);
+        Iterator<Avance> it = resultAvance.iterator();
+        while (it.hasNext()){
+            avance = it.next();
+            result += "<span style=\"font-size: 20px; background-color: #e8e8e8; \">"+avance.getIndicador().getNombre()+":"+avance.getResultado()+"</span> &nbsp;";
+        }//fin while                <h3 style='float: left;'>" + avance.getIndicador().getNombre() + "</h3>
+     return result;   
+    }   
+    
+    public String getLegendsAbsolute(int idcontrato){
+        String result ="";
+        
+        AvanceDaoImpl adi = new AvanceDaoImpl();
+        Avance avance ;
+        ContratoDaoImpl cdi = new ContratoDaoImpl();
+        List<Avance> resultAvance ;    
+        
+        Contrato contra = cdi.findById(idcontrato);
+        resultAvance = adi.Xcontrato(contra);
+        Iterator<Avance> it = resultAvance.iterator();
+        while (it.hasNext()){
+                    avance = it.next();
+                    result += "<span style=\"font-size: 20px; background-color: #e8e8e8;\">"+avance.getIndicador().getNombre()+":"+avance.getVs()+"</span> &nbsp;";
+                     //avance.getIndicador().getNombre()+";"+avance.getVs()+";"+avance.getV() ;
+                }//fin while   
+        return result;
+    }
+     
 }

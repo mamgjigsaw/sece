@@ -24,7 +24,7 @@ import pojo.Contrato;
  */
 public class GraficoResultadoP extends HttpServlet {
 
-     AvanceDaoImpl adi = new AvanceDaoImpl();
+    AvanceDaoImpl adi = new AvanceDaoImpl();
     Avance avance = new Avance();
     ContratoDaoImpl cdi = new ContratoDaoImpl();
     List<Avance> resultAvance = new ArrayList<Avance>();    

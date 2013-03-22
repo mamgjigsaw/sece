@@ -57,4 +57,10 @@
   text-decoration : underline;
 }
 
+.info_noaplica{
+    font-size: 15px;color: red;
+}
 
+.column_noaplica{
+    width: 30%;
+}

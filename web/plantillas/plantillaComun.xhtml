@@ -13,7 +13,10 @@
 
         <h:outputStylesheet name="stilo-comun.css" library="css"/>
         <script> 
+            var many2Enabled = true;
             jQuery(document).ready(function() {
+                        //esta variable me permite pasar la accion de llenado a many 2 si many 1 no trab
+                        
 			$('#formInternacionalizacion\\:tabPreg_Inter\\:radiob16\\:0').parent().parent().parent().parent().hide();
 			$('#formInternacionalizacion\\:tabPreg_Inter\\:radiob16\\:1').parent().parent().parent().parent().hide();
                         $('#formInternacionalizacion\\:tabPreg_Inter\\:radiob16\\:2').parent().parent().parent().parent().hide();
@@ -32,7 +35,7 @@
                         $('#formInternacionalizacion\\:tabPreg_Inter\\:radiob17\\:6').parent().parent().parent().parent().hide();
 			$('#formInternacionalizacion\\:tabPreg_Inter\\:radiob17\\:7').parent().parent().parent().parent().hide();
 		});
-                
+            
             function nextTab() {
                 tabempresa.select(tabempresa.getActiveIndex() + 1);                 
             }
@@ -343,6 +346,8 @@
             
             function validateD2(){
                 //de2
+                var textd15 = "D15. Modo de distribución adecuada para alcanzar los mercados de ";
+                many2Enabled = false;
                    
                 if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:0')).is(':checked') == true){ 
                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto1')).val("1");
@@ -431,11 +436,27 @@
                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:texto11')).val("0");
                     $('#formInternacionalizacion\\:tabPreg_Inter\\:many2\\:10').parent().parent().parent().parent().hide();
                 }
+                
+                //validacion para poner texto d15 orden de superioridad china -> europa -> america -> centroamerica
+                 if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:8')).is(':checked') == true){ 
+                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "China");
+                 } else if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:6')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:7')).is(':checked') == true) { 
+                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "Europa");
+                 }else  if( $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:1')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:2')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:3')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:4')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:5')).is(':checked') == true ){ 
+                      $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "otros puntos de America");
+                 }else if ($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many1:0')).is(':checked') == true){
+                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "Centroamerica");
+                 } else {
+                     many2Enabled = true;
+                 }
+                 
             }
              
             function validateD3(){
                  
                 //d3
+                var textd15 = "D15. Modo de distribución adecuada para alcanzar los mercados de ";
+                 
                 if($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:0')).is(':checked') == true){ 
                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod31')).val("1");
                 }else{
@@ -500,6 +521,20 @@
                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod311')).val("1");
                 }else{
                     $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:textod311')).val("0");
+                }
+                
+                if (many2Enabled){
+                    if ($(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:8')).is(':checked') == true){
+                        $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "China");
+                    }else if ( $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:6')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:7')).is(':checked') == true){
+                        $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "Europa");
+                    } else if( $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:1')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:2')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:3')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:4')).is(':checked') == true || $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:5')).is(':checked') == true ){
+                        $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "otors paises de America");                    
+                    } else if ( $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:many2:0')).is(':checked') == true ){
+                        $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text(textd15 + "Centroamerica");                    
+                    } else {
+                        $(PrimeFaces.escapeClientId('formInternacionalizacion:tabPreg_Inter:lbl_d15')).text("D15. Modo de distribución adecuada para alcanzar sus mercados potenciales");                    
+                    }
                 }
                 
             }

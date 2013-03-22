@@ -42,7 +42,6 @@
 
             <div class="header">
                 <div class="header_resize">  
-                    <a href="" class="buttonVolver">&LT;&LT; Atras</a>
                     <div class="menu">
 
                     </div>

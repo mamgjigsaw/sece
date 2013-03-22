@@ -107,7 +107,7 @@
             $(document).ready(function(){ 
            
            
-                $( "#accordion" ).accordion( {active: 2 });               
+                $( "#accordion" ).accordion( {active: 0 });               
            
                 $.get("GraficoResultado?idcontrato="+id_contrato, function (data){
                     if (data == null || data== ""){                
@@ -251,11 +251,13 @@
                         <div id="accordion">
                             <h3><a>Nivel de Competitividad Relativa de <%= nomb_Empresa%></a></h3>
                             <div>
-                                <div id="chartdiv" style="width:700px; height:600px; background-color:#FFFFFF"></div>
+                                <div id="chartdiv" style="width:700px; height:600px; background-color:#FFFFFF"></div> <br/>
+                                <div id="legendRelativa"></div>
                             </div>
                             <h3><a>Nivel de Competitividad Absoluta de <%= nomb_Empresa%></a></h3>
                             <div>
                                 <div id="chartdiv2" style="width:700px; height:600px; background-color:#FFFFFF"></div>
+                                <div id="legendAbsolute"></div>
                             </div>
                             <h3><a>Rango de Nivel de Competitividad General de <%= nomb_Empresa%></a></h3>                            
                             <div>
@@ -270,7 +272,13 @@
                                         capacitadoresScripts.getVce(id_contrato,{callback:function(data){
                                                 $("#vce").html(data);                                                
                                             }
-                                        });   
+                                        });
+                                        capacitadoresScripts.getLegendsRelativa(id_contrato,{callback:function(data){
+                                                $("#legendRelativa").html(data);
+                                        }});
+                                        capacitadoresScripts.getLegendsAbsolute(id_contrato,{callback:function(data){
+                                                $("#legendAbsolute").html(data);
+                                        }});
                                     </script>
                                 </div>
                             </div>
