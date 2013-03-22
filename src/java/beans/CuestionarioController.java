@@ -195,9 +195,13 @@ public class CuestionarioController implements Serializable {
         Contrato contrato = new Contrato();
         ContratoDaoImpl contraDao = new ContratoDaoImpl();
         contrato = contraDao.findById(pi.getId_contrato());
-
         empresa = empDao.findByIdContrato(contrato);
-        nombreComercial = empresa.getRazonSocial();
+        
+        nombreComercial = contrato.getUsuario().getEmpresa().getNombre();
+        if (nombreComercial.equals("")){
+            nombreComercial = empresa.getRazonSocial(); 
+        }
+        
         int fa = empresa.getFacturacionAnual();//completoInternac.getEc().getFacturacionAnual();
 
         if (fa < 5) {
