@@ -97,6 +97,7 @@ response.setDateHeader("Expires", 0);
                 //Botones
               $("#tabs").tabs();              
                $("#btnClearCap").button();
+               $("#btnpassBloqueado").button();
                $("#btnNewCapacitador").button(); 
                $("#btnRepEPA").button();               
                $("#saveNota").button();
@@ -480,6 +481,11 @@ response.setDateHeader("Expires", 0);
              document.getElementById("nDirCap").value = "";
              document.getElementById("nConCap").value = "";
          }
+         
+         function passwordBloqueado(){
+             location.href = "activeAccount.jsp";
+         }
+         
          function guardarNota(){
             
              var titu = $("#titulo").val();
@@ -650,6 +656,7 @@ response.setDateHeader("Expires", 0);
                                 </table>
                                     <div align="center" ><input id="btnNewCapacitador" onclick="newCapacitador();" type="button" value="Guardar"/>
                                      <input id="btnClearCap" onclick="clearCapacitador();" type="button" value="Limpiar"/>                                     
+                                     <input id="btnpassBloqueado" onclick="passwordBloqueado();" type="button" value="Password Bloqueado"/> 
                                     </div>                   
 
                                  </form>

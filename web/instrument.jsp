@@ -222,31 +222,39 @@ response.setDateHeader("Expires", 0);
             }
             
             
-            function saveAndNext(){                
+            function saveAndNext(){  
                 
+                var resp_item_array = new Array(3);                 
+                resp_item_array[0] =  new Array(num_item);
+                resp_item_array[1] =  new Array(num_item);
+                resp_item_array[2] =  new Array(num_item);
+                      
                  if(actual_var < (total_vari -1)){
                      //num_item son el numero de pregunta por variable que hay para guardar
                      $("#buttonnnext").hide();
+                      
                       for(i=0;i<num_item;i++){
-                        
-                        // alert($("input:radio[name=group"+ (i+1) +"]:checked").val());
-                         interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),$("input:radio[name=group"+ (i+1) +"]:checked").val(),$("#textfield"+(i+1)).val());   
-                        
-                       }//fin del ciclo for para guardar las respuesta item.
+                          resp_item_array[0][i] = $("#pregunta"+(i+1)).val();
+                          resp_item_array[1][i] = $("input:radio[name=group"+ (i+1) +"]:checked").val();
+                          resp_item_array[2][i] = $("#textfield"+(i+1)).val(); 
                      
+                       }//fin del ciclo for para guardar las respuesta item.
+                       
+                       interaccion.saveAllItems(<%=contrato%>,<%=id_usuario%>,resp_item_array);   
                        $("#box").html("");
                      
-                       var palabra="<section role='principal' id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha guardado las respuestas correctamente!!!.</p></div><!-- /Notification --></section>";  
+                       var palabra="<section role=\"principal\" id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha guardado las respuestas correctamente!!!.</p></div><!-- /Notification --></section>";  
                        $("#box_message").html(palabra);
                        $( "#box_message" ).show("blind",callback);//en el metodo callbak mando a llamar a la funcion que aumenta en 1 var en avance
                       
                  }else if (actual_var == (total_vari -1)){
-                     for(i=0;i<num_item;i++){
-                        //if(jQuery("#checkbox"+(i+1)).attr('checked') == true)
-                          //{ //alert("Seleccionada");                             
-                             interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),$("input:radio[name=group"+ (i+1) +"]:checked").val(),$("#textfield"+(i+1)).val());                        
-                         
-                     }//fin del ciclo for para guardar las respuesta item.
+                     
+                     for(i=0;i<num_item;i++){            
+                       resp_item_array[0][i] = $("#pregunta"+(i+1)).val();
+                          resp_item_array[1][i] = $("input:radio[name=group"+ (i+1) +"]:checked").val();
+                          resp_item_array[2][i] = $("#textfield"+(i+1)).val(); 
+                      }//fin del ciclo for para guardar las respuesta item.
+                     interaccion.saveAllItems(<%=contrato%>,<%=id_usuario%>,resp_item_array);                       
                      
                      $( "#link_variable").html("");                     
                      $("#box").html("");
@@ -255,7 +263,7 @@ response.setDateHeader("Expires", 0);
                      var palabra="<section role='principal' id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha completado el cuestionario de <%=nombre_indicador%> satisfactoriamente!.</p></div><!-- /Notification --></section>";  
                      $("#box_message").html(palabra);
                      $( "#box_message" ).show("blind");
-                     interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta3);//aumenta en uno la variable var de la tabla avance                                                                                  
+                     interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta3);//aumenta en uno la variable var de la tabla avance            
                  }                 
                                   
             } 

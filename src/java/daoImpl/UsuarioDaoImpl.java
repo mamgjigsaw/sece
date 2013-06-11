@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package daoImpl;
 
 import dao.daoUsuario;
@@ -20,12 +19,13 @@ import util.HibernateUtil;
  *
  * @author mamg
  */
-public class UsuarioDaoImpl implements daoUsuario{
+public class UsuarioDaoImpl implements daoUsuario {
+
     public final SessionFactory sf;
     public Usuario usuario;
 
     public UsuarioDaoImpl() {
-        this.sf= HibernateUtil.getSessionFactory();
+        this.sf = HibernateUtil.getSessionFactory();
     }
 
     @Override
@@ -54,10 +54,10 @@ public class UsuarioDaoImpl implements daoUsuario{
 
     @Override
     public List<Usuario> findAll() {
-        List<Usuario> usu= new ArrayList<Usuario>();
-        Session se= sf.getCurrentSession();
+        List<Usuario> usu = new ArrayList<Usuario>();
+        Session se = sf.getCurrentSession();
         se.beginTransaction();
-        usu= se.createCriteria(Usuario.class).list();
+        usu = se.createCriteria(Usuario.class).list();
         se.getTransaction().commit();
         return usu;
     }
@@ -73,35 +73,35 @@ public class UsuarioDaoImpl implements daoUsuario{
 
     @Override
     public Usuario findById(int id) {
-        Session se=sf.getCurrentSession();
+        Session se = sf.getCurrentSession();
         se.beginTransaction();
-        usuario= (Usuario) se.get(Usuario.class, id);
+        usuario = (Usuario) se.get(Usuario.class, id);
         se.getTransaction().commit();
         return usuario;
     }
 
     @Override
     public List<Usuario> usuariosxEmpresa(Empresa empresa) {
-         List<Usuario> usuariosxEmpresa;
+        List<Usuario> usuariosxEmpresa;
         Session se = sf.getCurrentSession();
         se.beginTransaction();
         Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("empresa", empresa));
         usuariosxEmpresa = criterio.list();
         se.getTransaction().commit();
-        return usuariosxEmpresa; 
+        return usuariosxEmpresa;
     }
 
     @Override
     public List<Usuario> findDelegadosByIdEmpresa(Empresa empresa) {
         List<Usuario> listDelegados = new ArrayList<Usuario>();
-        Session se = sf.getCurrentSession();      
+        Session se = sf.getCurrentSession();
         se.beginTransaction();
         listDelegados = se.createCriteria(Usuario.class).add(Restrictions.eq("empresa", empresa)).add(Restrictions.eq("tipoUsuario", 4)).list();
         se.getTransaction().commit();
-        return listDelegados; 
+        return listDelegados;
     }
-    
-    public List<Usuario> uCapacitadores (){
+
+    public List<Usuario> uCapacitadores() {
         List<Usuario> capacitadores;
         Session se = sf.getCurrentSession();
         se.beginTransaction();
@@ -109,25 +109,33 @@ public class UsuarioDaoImpl implements daoUsuario{
         se.getTransaction().commit();
         return capacitadores;
     }
-    
+
     public List<Usuario> capacitadoresActivos() {
-         List<Usuario> cap;
+        List<Usuario> cap;
         Session se = sf.getCurrentSession();
         se.beginTransaction();
-        Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).add(Restrictions.or(Restrictions.eq("estado", 1 ), Restrictions.eq("estado", 2 )));
+        Criteria criterio = se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 2)).add(Restrictions.or(Restrictions.eq("estado", 1), Restrictions.eq("estado", 2)));
         cap = criterio.list();
         se.getTransaction().commit();
-        return cap; 
+        return cap;
     }
 
     @Override
     public Usuario findAdministrador() {
-        Session se=sf.getCurrentSession();
+        Session se = sf.getCurrentSession();
         se.beginTransaction();
-        usuario= (Usuario) se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 1)).add(Restrictions.eq("estado", 2)).uniqueResult();
+        usuario = (Usuario) se.createCriteria(Usuario.class).add(Restrictions.eq("tipoUsuario", 1)).add(Restrictions.eq("estado", 2)).uniqueResult();
         se.getTransaction().commit();
         return usuario;
     }
 
-
+    @Override
+    public List<Usuario> findByPassBloqueado() {
+        List<Usuario> cap = new ArrayList<Usuario>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();        
+        cap =  se.createCriteria(Usuario.class).add(Restrictions.eq("estado", 0)).list();
+        se.getTransaction().commit();
+        return cap;
+    }
 }
