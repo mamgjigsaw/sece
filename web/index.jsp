@@ -25,7 +25,7 @@
         <script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script type="text/javascript" src="resources/jquery/js/jquery.corner.js"></script>
         <script type="text/javascript" src="resources/jquery/js/easySlider1.5.js"></script>
-        <link href="resources/style.css" rel="stylesheet" type="text/css" />
+        <link href="resources/style.css" rel="stylesheet" type="text/css" />     
         <title>Sistema De Evaluacion De Competitividad</title>
         <script type="text/javascript">
             /*$(window).load(function() {
@@ -74,8 +74,8 @@
     <body>
         <div class="main">
             <div class="header">
-                <div class="header_resize">
-                    <a href="logger.jsp" class="buttonIniciarSesion">Iniciar Sesion!</a>                   
+                <div id="menuBarra" class="header_resize">
+                    <a href="logger.jsp" id="btnSession" >Iniciar Sesion / Registrarse</a>                   
                     <div class="menu">
                         <ul>
                             <li><a href="index.jsp" class="active"><span>Inicio</span></a></li>
@@ -109,24 +109,24 @@
                 <div class="body_resize">      
                     <div class="right1">
                         <h2>Cpml-N</h2>
-                        <p>El Centro de Producción más Limpia de Nicaragua (CPmL-N), promueve el Desarrollo Sostenible. Se establece en la Universidad Nacional de Ingeniería (UNI) en 1998, por iniciativa de las Naciones Unidas para el Desarrollo Industrial (ONUDI) como parte del Programa “Centro de Producción más Limpia”. Brindamos soluciones técnicas a las empresas para mejorar su competitividad a la vez que se reducen los impactos al ambiente.</p>
-                        <p><a target="_blank" href="http://pml.org.ni/" ><img src="images/cpml.jpg" alt="picture" width="293" /></a></p>
-                        <p><strong>¿Que es producción más limpia?</strong></p>
-                        <p>"La Producción más Limpia es una estrategia ambiental preventiva integrada que se aplica a los procesos, productos y servicios a fin de aumentar la eficiencia y reducir los riesgos para los seres humanos y el ambiente”</p>
+                        El Centro de Producción más Limpia de Nicaragua (CPmL-N), promueve el Desarrollo Sostenible. Se establece en la Universidad Nacional de Ingeniería (UNI) en 1998, por iniciativa de las Naciones Unidas para el Desarrollo Industrial (ONUDI) como parte del Programa “Centro de Producción más Limpia”. Brindamos soluciones técnicas a las empresas para mejorar su competitividad a la vez que se reducen los impactos al ambiente.
+                        <a target="_blank" href="http://pml.org.ni/" ><img src="images/cpml.jpg" alt="picture" width="293" /></a>
+                        <strong>¿Que es producción más limpia?</strong>
+                        "La Producción más Limpia es una estrategia ambiental preventiva integrada que se aplica a los procesos, productos y servicios a fin de aumentar la eficiencia y reducir los riesgos para los seres humanos y el ambiente"
                     </div>
                     <div class="right1">
                         <h2>¿Que es SECE?</h2>
-                        <p>Es una herramienta Web de evaluacion de competitividad empresarial, que tiene el proposito de 
-                            permitir a las empresas ser autoevaluadas en 4 ejes fundamentales:</p>
+                        Es una herramienta Web de evaluacion de competitividad empresarial, que tiene el proposito de 
+                            permitir a las empresas ser autoevaluadas en 4 ejes fundamentales:
                         <ul>
                             <li>Gerencia</li>
                             <li>Finanzas</li>
                             <li>Mercadeo</li>
                             <li>Produccion</li>          
                         </ul>
-                        <p>De esta forma, al terminar de llenar los formularios presentados en SECE, el mismo sistema
+                        De esta forma, al terminar de llenar los formularios presentados en SECE, el mismo sistema
                             arrojar&aacute un informe en donde se presentar&aacute la situaci&oacuten actual de la empresa
-                            y sugerencias para mejorar la Competitividad Empresarial de la misma.</p>
+                            y sugerencias para mejorar la Competitividad Empresarial de la misma.
 
                     </div>
                     <div id="msnNoticia" title="Noticias de CPML" >
@@ -140,9 +140,9 @@
                     <div class="right1">
 
                         <h2>¿Que es Internacionalizacion?</h2>
-                        <p>Es la necesidad de buscar nuevos mercados como respuesta a la fuerte competencia dentro de nuestro mercado local o nacional, el cual debe abordarse como una actividad estratégica dentro de la PYMES. </p>
+                        Es la necesidad de buscar nuevos mercados como respuesta a la fuerte competencia dentro de nuestro mercado local o nacional, el cual debe abordarse como una actividad estratégica dentro de la PYMES. 
 
-                        <p>Para ello, es necesario utilizar metodologías que sean claras, precisas y fácilmente adaptables a la operación estratégica que involucra todas las áreas funcionales de la empresa. El cual requiere dedicación, entusiasmo y preparación para llegar a ser un exportador exitoso.</p>
+                        Para ello, es necesario utilizar metodologías que sean claras, precisas y fácilmente adaptables a la operación estratégica que involucra todas las áreas funcionales de la empresa. El cual requiere dedicación, entusiasmo y preparación para llegar a ser un exportador exitoso.
 
                         <h2>Noticias y Notas</h2>
                         <%
@@ -162,8 +162,8 @@
                                             fecha = dateConverter.format(n.getFecha_evento());
 
                         %>
-                        <p><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" ><strong><%= fecha%></strong></a><br />
-                            <%= n.getTitulo()%><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" > &gt;&gt;</a></p>
+                        <a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" ><strong><%= fecha%></strong></a><br />
+                            <%= n.getTitulo()%><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" > &gt;&gt;</a>
                         <div class="line"></div>
                         <%    }//fin del while 
                         }// fin del if
@@ -172,8 +172,8 @@
                                 n = list.get(i);
                                 fecha = dateConverter.format(n.getFecha_evento());
                         %>
-                        <p><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" ><strong><%= fecha%></strong></a><br />
-                            <%= n.getTitulo()%><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" > &gt;&gt;</a></p>
+                        <a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" ><strong><%= fecha%></strong></a><br />
+                            <%= n.getTitulo()%><a style="cursor: pointer" onclick="openDialog('<%= n.getTitulo()%>', '<%= n.getDescripcion()%>', '<%= fecha%>');" > &gt;&gt;</a>
                         <div class="line"></div>
                         <%       }//fin del for
                                     }//fin del else

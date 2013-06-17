@@ -65,3 +65,65 @@ a:link { -webkit-tap-highlight-color: #FF5E99; }
 	border-color:#d1d1d1;
 }
 .notification.note strong { color:#737373; }
+
+/* estilo para la table que sale en el instrumeto 
+variableList muestra todas las variables en el instrumento
+table_indicador muestra el llenado de cada indicador
+*/
+
+.txtComentario{
+  height: 25px; 
+  width: 95%;  
+}
+
+#tableInstrumento, #variableList, #table_indicador, #table_contratos, 
+#tableModificacion{
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0; 
+    border: solid #ccc 1px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -o-border-radius: 6px;
+    -ms-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 2px 2px #ccc; 
+    -moz-box-shadow: 0 2px 2px #ccc; 
+    -o-box-shadow: 0 2px 2px #ccc;
+    -ms-box-shadow: 0 2px 2px #ccc;
+    box-shadow: 0 2px 2px #ccc;  
+    height: 30px;  
+    margin-bottom: 15px;    
+    width: 100%;
+}
+
+#tableInstrumento thead tr, #variableList thead tr, #table_indicador thead tr, #table_contratos thead tr, 
+#tableModificacion thead tr{    
+    background-color: lightblue;      
+    margin: 50px 10px ;    
+    height: 30px;
+    text-align: center;
+}
+
+#tableInstrumento tbody tr{        
+    margin: 50px 10px 70px 10px ;    
+    height: 35px;
+}
+
+#tableModificacion tbody tr{
+    margin: 50px 10px 70px 10px ;  
+    height: 35px;
+}
+
+#tableInstrumento tbody tr:hover, #variableList tbody tr:hover, #table_contratos tbody tr:hover, 
+#table_indicador tbody tr:hover, #tableModificacion tbody tr:hover{   
+    background: #fbf8e9;
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;   
+}
+
+.columanaTableFormat{
+    text-align: center;
+}

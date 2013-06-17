@@ -23,7 +23,8 @@
         <title>Grafico Resultado</title>
         <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
-        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />    
+        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />   
+        <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script language="javascript" type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>             
@@ -72,7 +73,7 @@
        <div class="main">         
     <div class="header">
         <div class="header_resize">     
-            <a href="javascript:history.back(1)" class="buttonVolver">&LT;&LT; Atras</a>
+            <a href="javascript:history.back(1)" id="btnRegresar">Regresar</a>
           <div class="menu">
 
           </div>

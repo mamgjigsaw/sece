@@ -115,7 +115,7 @@
 <div class="main">
   <div class="header">
     <div class="header_resize">  
-        <a href="index.jsp" class="buttonVolver">&LT;&LT; Atras</a>
+        <a href="index.jsp" id="btnRegresar">Regresar a Inicio</a>
       <style type="text/css">
 .buttonVolver {
 	-moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;

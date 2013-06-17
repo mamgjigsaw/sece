@@ -25,4 +25,5 @@ public interface daoContrato extends dao<Contrato> {
     Contrato findByUsuario(Usuario usuario);//muestra el contrato actual del contacto
     Contrato findByContrato_usuario(int contrato, Usuario usuario);    
     Contrato findByEstado(int estado,Usuario usuario);//by miguel
+    int cantidadContratosByUsuario(Usuario usuario);
 }

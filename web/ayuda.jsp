@@ -47,7 +47,7 @@
         <div class="main">
             <div class="header">
                 <div class="header_resize">     
-                    <a href="logger.jsp" class="buttonIniciarSesion">Iniciar Sesion!</a>
+                    <a href="logger.jsp" id="btnSession">Iniciar Sesion!</a>
 
                     <div class="menu">
                         <ul>

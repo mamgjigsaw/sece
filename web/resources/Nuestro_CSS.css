@@ -1,22 +1,11 @@
-/* 
-    Document   : Nuestro_CSS
-    Created on : Dec 11, 2010, 1:36:21 PM
-    Author     : mamg
-    Description:
-        Purpose of the stylesheet follows.
-*/
 
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
-*/
 #toolbar {
     padding: 10px 4px;
 }
 
 body{
     background: #ffffff;
-    font-size: 11px;
+    font-size: 12px;
 }
 #contenedor{
     text-align: left;
@@ -298,16 +287,16 @@ body{
 }
 
 .buttonIniciarSesion {
-    -moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;
+     -moz-box-shadow:inset 0px 0px 12px 0px #97c4fe;
     -webkit-box-shadow:inset 0px 0px 12px 0px #97c4fe;
     box-shadow:inset 0px 0px 12px 0px #97c4fe;
     background:-webkit-gradient( linear, left top, left bottom, color-stop(50, #006092), color-stop(100, #006092) );
     background:-moz-linear-gradient( center top, #006092 5%, #1e62d0 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006092', endColorstr='#006092');
     background-color:#006092;
-    -moz-border-radius:6px;
-    -webkit-border-radius:6px;
     border-radius:6px;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;    
     border:1px solid #006092;
     display:inline-block;
     color:#ffffff;
@@ -316,11 +305,42 @@ body{
     font-weight:bold;
     padding:6px 24px;
     outline-style: none;
-
     text-shadow:1px 1px 0px #1570cd;
-    float: right; margin:0; margin-top: 35px; 
+    float: right;    
+    margin: 0; 
     text-decoration:none;
-}.buttonIniciarSesion:hover {
+}
+
+    
+ #btnSession, #btnRegresar {    
+    background-color: #9ACD32;
+    border-radius: 5px; 
+    color: white;
+    font-family: Arial;
+    font-size: 1.4em;       
+    padding: 0.5em;
+    position: absolute;
+    left:70%;
+    top:3%;
+    text-decoration: none;
+    transition: all 0.5s ease;    
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    }
+
+    #btnSession:hover, #btnRegresar:hover { 
+	color: white;
+        font-family: Arial;   
+        border: #058dc7 double;
+	transform: scale(1.1) ;
+	-webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1) ;
+        -o-transform: scale(1.1) ;
+    }
+   
+
+.buttonIniciarSesion:hover {
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #016aa1), color-stop(1, #016aa1) );
     background:-moz-linear-gradient( center top, #016aa1 5%, #016aa1 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#016aa1', endColorstr='#016aa1');

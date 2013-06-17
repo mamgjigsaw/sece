@@ -157,4 +157,16 @@ public class ContratoDaoImpl implements daoContrato {
         return c;
     }
 
+    @Override
+    public int cantidadContratosByUsuario(Usuario usuario) {
+        int cantidad = 0;
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();
+        cantidad =  (Integer) se.createCriteria(Contrato.class)
+                    .add(Restrictions.eq("usuario", usuario))
+                    .setProjection(Projections.rowCount()).uniqueResult();
+        se.getTransaction().commit();
+        return cantidad;
+    }
+
 }
