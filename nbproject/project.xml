@@ -23,11 +23,15 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.JMail.classpath}</file>
+                    <file>${libs.JavaMail.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
                     <file>${libs.primefaces.classpath}</file>
+=======
+                    <file>${libs.C3P0.classpath}</file>
+>>>>>>> cc2daaa7e373ccf27069340336dd75d2019a214c
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
