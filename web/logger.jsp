@@ -209,7 +209,7 @@
                            <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Entrar" /></td><td><input type="button" id="create-user" onclick="go_register();" value="Registrarse"/></td></tr>                           
                     </form>
                   </table> 
-            <img style="margin: 3%;" src="images/lock.png" alt="picture" width="30%" height="10%" />
+            <img style="margin: 2% 5%;" src="images/lock.png" alt="picture" width="100px" height="100px" />
             <div><p style="padding-left: 18px;"><a id="link_register" href="forgetPassword.jsp?liame=odadivlo&&ogidoc=ssap"><strong>Olvide mi contraseña???</strong></a></p></div>
         
       </div>

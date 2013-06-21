@@ -778,14 +778,14 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                
            </div><%-- End div tabs 1 --%>
            <div id="tabs-2">
-               <table>
+               <table style="width: 100%">
                    <tr>
                        <td>
                            <div id="informacion_usuario" style=" font-size: 14px;">
-                               <div class="ri1">
-                                   <div class="clr"></div>
-                                   <div class="right_top">
-                                       <div class="right_bottom">
+                               <div >
+                                   <div ></div>
+                                   <div >
+                                       <div >
                                            <h4>Informacion de usuario</h4>
                                            <table style="padding:10px;">
                                                <tbody>
@@ -819,12 +819,12 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                                </div>                              
                            </div><%-- termina div de informacion_usuario --%>               
                        </td>
-                       <td>
-                           <div id="cambiar_contra" style=" padding-left: 10px; padding-top: 0px; font-size: 14px;">
-                               <div class="ri1">
-                                   <div class="clr"></div>
-                                   <div class="right_top">
-                                       <div class="right_bottom">
+                       <td style="margin-left: 15px;">
+                           <div id="cambiar_contra" style=" padding-left: 10px; font-size: 14px;">
+                               <div >
+                                   
+                                   <div >
+                                       <div >
                                            <h4>Cambiar contraseña</h4>                                            
                                            <table style="padding:10px;" >
                                                <tbody>
@@ -856,10 +856,10 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            </div><%-- End div tabs 2 --%>
            <div id="tabs-3">
                <div id="informacion_empresa" style=" font-size: 14px;">
-                   <div class="ri1">
-                       <div class="clr"></div>
-                       <div class="right_top">
-                           <div class="right_bottom">
+                   <div >
+                      
+                       <div >
+                           <div >
                                <h4>Informacion de la empresa</h4>
                                <table style="padding:10px;">
                                    <tbody>

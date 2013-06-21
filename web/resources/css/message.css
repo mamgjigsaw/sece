@@ -134,7 +134,7 @@ table_indicador muestra el llenado de cada indicador
   border:solid 2px rgba(147, 184, 189,0.8);
   margin:5% 25% 0 25%;
   height: 50%;
-  background: #faf6d4;
+  background: #ebf4fb;
   border-radius: 5px;
   width: 50%;
 
@@ -152,11 +152,62 @@ table_indicador muestra el llenado de cada indicador
    box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.2) inset;
    height: 25px;
    width: 100%;
-   
-     
 }
+
+#divLogin table
+{
+ margin-top: 5px;    
+}
+
+
 #divLogin table, #divLogin img
 {
     display: inline-block;
+    border-radius: 10px;
+
 }
 
+/* register*/
+#divFormRegister
+{
+  border:solid 2px rgba(147, 184, 189,0.8);
+  margin-top: 5%;
+  height: 50%;
+  background: #ebf4fb;
+  border-radius: 5px;
+  width: 70%; 
+}
+
+/* panel de control*/
+#informacion_usuario
+{
+  display: inline-block;
+  vertical-align: top;
+  border:solid 2px rgba(147, 184, 189,0.8);
+  margin-top: 5%;
+  
+  background: #ebf4fb;
+  border-radius: 5px;
+  width: 80%; 
+}
+
+#cambiar_contra
+{
+  display: inline-block;
+  vertical-align: top;
+  border:solid 2px rgba(147, 184, 189,0.8);  
+  height: 50%;
+  background: #ebf4fb;
+  border-radius: 5px;
+  width: 80%;
+}
+
+#informacion_empresa
+{
+   border:solid 2px rgba(147, 184, 189,0.8);
+  margin-top: 3%;
+  height: 50%;
+  background: #ebf4fb;
+  border-radius: 5px;
+  width: 40%;  
+}
