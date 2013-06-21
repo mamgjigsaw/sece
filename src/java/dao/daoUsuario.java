@@ -20,4 +20,5 @@ public interface daoUsuario extends dao<Usuario>{
     //--------agregado por david
     List<Usuario> usuariosxEmpresa (Empresa empresa);
     Usuario findAdministrador();
+    List<Usuario> findByPassBloqueado();
 }
