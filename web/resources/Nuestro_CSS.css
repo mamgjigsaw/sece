@@ -313,9 +313,10 @@ body{
 
     
  #btnSession, #btnRegresar {    
-    background-color: #9ACD32;
+    background: #dfeffc url(images/ui-bg_glass_85_dfeffc_1x400.png) 50% 50% repeat-x;
+    border: 1px solid #c5dbec;
     border-radius: 5px; 
-    color: white;
+    color: #2e6e9e;
     font-family: Arial;
     font-size: 1.4em;       
     padding: 0.5em;
@@ -330,9 +331,9 @@ body{
     }
 
     #btnSession:hover, #btnRegresar:hover { 
-	color: white;
+	color: #2e6e9e;
         font-family: Arial;   
-        border: #058dc7 double;
+        border: #79b7e7;
 	transform: scale(1.1) ;
 	-webkit-transform: scale(1.1);
         -moz-transform: scale(1.1) ;

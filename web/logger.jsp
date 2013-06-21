@@ -199,25 +199,19 @@
         <div class="clr"></div>
       </div>
         
-      <div class="right">
-        <div class="clr"></div>
-        <div class="right_top">
-          <div class="right_bottom">
-            <h4>Iniciar Sesion</h4>
-            <img src="images/lock.png" alt="picture" width="48" height="48" class="float" />
-            <p>Es gratis, facil y sencillo. Asi como lo lees podras evaluar la competitividad de tu empresa y posteriormente tomar desiciones con fundamento.</p>
-            <table style=" padding-left: 18px; padding-top: 5px;" >
+      <div id="divLogin" >
+            <h2 >Iniciar Sesion</h2>
+            
+            <table style=" padding-left: 18px; padding-top: 0px; padding-right: 5px;" >
                     <form id="form_s" method="post">                             
-                           <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input id ="email" name="txtemail" type="text" onblur="clearText(this);" onfocus="clearText(this);"  /></td></tr>
-                           <tr><td><label class="tlabel" for="contra">Contraseña:</label></td><td><input id ="pass" name="txtpass" type="password" onblur="clearText(this);" onfocus="clearText(this);" /></td></tr>
-                           <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Entrar" /></td><td><input type="button" id="create-user" onclick="go_register();" value="Registrarse"/></td></tr>
+                        <tr><td><label class="tlabel" for="correo">Correo:</label></td><td><input class="txtLogin" id ="email" name="txtemail" type="text"  /></td></tr>
+                           <tr><td><label class="tlabel" for="contra">Contraseña:</label></td><td><input class="txtLogin" id ="pass" name="txtpass" type="password"  /></td></tr>
+                           <tr><td><input type="button" onclick="enviar();" id="btnOk" value="Entrar" /></td><td><input type="button" id="create-user" onclick="go_register();" value="Registrarse"/></td></tr>                           
                     </form>
                   </table> 
-            <p><a id="link_register" href="forgetPassword.jsp?liame=odadivlo&&ogidoc=ssap"><strong>Olvide mi contraseña???</strong></a></p>
-            <div class="clr"></div>
-          </div>
-        </div>
-        <div class="clr"></div>
+            <img style="margin: 3%;" src="images/lock.png" alt="picture" width="30%" height="10%" />
+            <div><p style="padding-left: 18px;"><a id="link_register" href="forgetPassword.jsp?liame=odadivlo&&ogidoc=ssap"><strong>Olvide mi contraseña???</strong></a></p></div>
+        
       </div>
         
       <div class="right">
