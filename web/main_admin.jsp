@@ -617,13 +617,13 @@ response.setDateHeader("Expires", 0);
                 <div id="tabEmpresas" style=" width: 98%;">
        
                     <div style=" width: 48%; float: left;" ><h3>Empresas Pendientes de Activaci&oacute;n</h3><div class="line"></div>
-                  <iframe src="tableEmpresasNuevas.jsp" style="width: 100%; height: 40%" frameborder="0" scrolling="false"  id="eNueva"></iframe>   
+                  <iframe src="tableEmpresasNuevas.jsp" style="width: 100%; height: 300px" frameborder="0" scrolling="false"  id="eNueva"></iframe>   
                     </div> 
                     <div style="width: 48%; float: right " > <h3>Empresas en Progreso de Evaluaci&oacute;n</h3><div class="line"></div>
-                   <iframe src="tableEmpresasActivas.jsp" style="width: 100%; height: 40%" frameborder="0" scrolling="false"  id="eActiva"></iframe>     
+                   <iframe src="tableEmpresasActivas.jsp" style="width: 100%; height: 300px" frameborder="0" scrolling="false"  id="eActiva"></iframe>     
                     </div>
                     <div style=" width: 98%;"> <h3>&Uacuteltimas 5 Empresas que Finalizaron Intrumento</h3><div class="line"></div>
-                        <iframe src="tableEmpresasFinal.jsp" style="width: 100%; height: 38%" frameborder="0" scrolling="false"  id="eFinal"></iframe>     
+                        <iframe src="tableEmpresasFinal.jsp" style="width: 100%; height: 250px;" frameborder="0" scrolling="false"  id="eFinal"></iframe>     
                     
         </div>
                 </div>          

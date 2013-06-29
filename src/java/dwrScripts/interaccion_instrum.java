@@ -28,6 +28,7 @@ import pojo.RespItem;
 import pojo.Usuario;
 import pojo.Valoracion;
 import pojo.Variable;
+import util.SavedResult;
 
 /**
  *
@@ -73,6 +74,56 @@ public class interaccion_instrum {
         RespItemDaoImpl respDao = new RespItemDaoImpl();
         RespItem resp = new RespItem(usuario,item,contrato,respuesta,obser);
         respDao.create(resp);        
+        
+    }
+    
+    public void saveAllItems(int id_contrato, int id_usuario, String respuestas[][]){
+       /*                           respuesta.length                            
+        array Respuesta devuelta [[item_id_1],[resp_item_1,observacion 1],                      }
+        *                         [item_id_2],[resp_item2, observacion 2],.......               } respuesta[i].length
+        *                         [ultima_item_id],[ultima_resp_item, ultima_observacion ],]    }    
+        
+       System.out.println("Filas: "+ respuestas.length);
+       System.out.println("Columnas: "+respuestas[0].length);
+       System.out.println( respuestas[0][0] +":" + respuestas[1][0] + respuestas[2][0]);
+       System.out.println( respuestas[0][1] +":" + respuestas[1][1] + respuestas[2][1]);
+       System.out.println( respuestas[0][10] +":" + respuestas[1][10] + respuestas[2][10]);
+       * 
+       *  for (int j=0; j < respuestas[0].length; j++){
+             //Item item = itemD.findById(Integer.valueOf( respuestas[i][j]) );
+             System.out.println("Id: "+respuestas[0][j] + "resp_item: "+ respuestas[1][j] +" observacion: "+respuestas[2][j] );
+            //respuestasItems.add(new RespItem(usuario, item, contrato, Integer.valueOf( respuestas[i][j] ),respuestas[i][j] ));
+            
+        }
+       */
+        
+          
+ 
+        UsuarioDaoImpl usuDao = new UsuarioDaoImpl();
+        Usuario usuario = usuDao.findById(id_usuario);
+        
+        ContratoDaoImpl contraDao = new ContratoDaoImpl();
+        Contrato contrato = contraDao.findById(id_contrato);
+        
+        ItemDaoImpl itemD = new ItemDaoImpl();
+       
+        
+        RespItemDaoImpl respDao = new RespItemDaoImpl();
+        List<RespItem> respuestasItems = new ArrayList<RespItem>();
+             
+        for (int j=0; j < respuestas[0].length; j++){
+             System.out.println("Contrato: "+id_contrato + " Usuario :"+id_usuario + " Id: "+respuestas[0][j] + "resp_item: "+ respuestas[1][j] +" observacion: "+respuestas[2][j] );
+            Item item = itemD.findById(Integer.valueOf( respuestas[0][j]) );
+            respuestasItems.add(new RespItem(usuario, item, contrato, Integer.valueOf( respuestas[1][j] ),respuestas[2][j] ));       
+        }
+  
+        SavedResult result = respDao.SaveAllItems(respuestasItems);
+        
+        if(result.equals(SavedResult.SAVED_SUCCES)){
+            System.out.println("Guardado Satisfactorio");
+        } else if (result.equals(SavedResult.SAVED_FAIL)){
+            System.out.println("Guardado No Satisfactorio");
+        }
         
     }
     

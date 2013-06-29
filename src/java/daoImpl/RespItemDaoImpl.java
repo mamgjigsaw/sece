@@ -19,6 +19,7 @@ import pojo.Item;
 import pojo.RespItem;
 import pojo.Usuario;
 import pojo.Variable;
+import util.SavedResult;
 
 /**
  *
@@ -172,6 +173,21 @@ public class RespItemDaoImpl implements daoRespItem{
         
         
        return items;        
+    }
+
+    @Override
+    public SavedResult SaveAllItems(List<RespItem> itemsR) {
+        try{
+        s = sf.getCurrentSession();
+        s.beginTransaction();
+        for (RespItem respItem : itemsR) {
+            s.save(respItem);
+        }
+        s.getTransaction().commit();
+        } catch (Exception e){ return SavedResult.SAVED_FAIL;}
+
+        return SavedResult.SAVED_SUCCES;
+            
     }
  
 }

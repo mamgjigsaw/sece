@@ -208,10 +208,10 @@ response.setDateHeader("Expires", 0);
                 num_item= data.length;
                 
                 var i;
-                var strHtml="<table><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
+                var strHtml="<table id='tableInstrumento'><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
            
                 for(i=0;i<data.length;i++){
-                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' checked ></input></td><td><input type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
+                    strHtml += "<tr><td>"+ (i+1) + ". " + data[i].descripcion +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ data[i].idItem +"'/></td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' checked ></input></td><td><input class='txtComentario' type='text' id='textfield"+ (i+1)+"' /></input></td></tr>";                    
                     
                     
                 }
@@ -222,31 +222,39 @@ response.setDateHeader("Expires", 0);
             }
             
             
-            function saveAndNext(){                
+            function saveAndNext(){  
                 
+                var resp_item_array = new Array(3);                 
+                resp_item_array[0] =  new Array(num_item);
+                resp_item_array[1] =  new Array(num_item);
+                resp_item_array[2] =  new Array(num_item);
+                      
                  if(actual_var < (total_vari -1)){
                      //num_item son el numero de pregunta por variable que hay para guardar
                      $("#buttonnnext").hide();
+                      
                       for(i=0;i<num_item;i++){
-                        
-                        // alert($("input:radio[name=group"+ (i+1) +"]:checked").val());
-                         interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),$("input:radio[name=group"+ (i+1) +"]:checked").val(),$("#textfield"+(i+1)).val());   
-                        
-                       }//fin del ciclo for para guardar las respuesta item.
+                          resp_item_array[0][i] = $("#pregunta"+(i+1)).val();
+                          resp_item_array[1][i] = $("input:radio[name=group"+ (i+1) +"]:checked").val();
+                          resp_item_array[2][i] = $("#textfield"+(i+1)).val(); 
                      
+                       }//fin del ciclo for para guardar las respuesta item.
+                       
+                       interaccion.saveAllItems(<%=contrato%>,<%=id_usuario%>,resp_item_array);   
                        $("#box").html("");
                      
-                       var palabra="<section role='principal' id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha guardado las respuestas correctamente!!!.</p></div><!-- /Notification --></section>";  
+                       var palabra="<section role=\"principal\" id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha guardado las respuestas correctamente!!!.</p></div><!-- /Notification --></section>";  
                        $("#box_message").html(palabra);
                        $( "#box_message" ).show("blind",callback);//en el metodo callbak mando a llamar a la funcion que aumenta en 1 var en avance
                       
                  }else if (actual_var == (total_vari -1)){
-                     for(i=0;i<num_item;i++){
-                        //if(jQuery("#checkbox"+(i+1)).attr('checked') == true)
-                          //{ //alert("Seleccionada");                             
-                             interaccion.saveandnext(<%=id_usuario%>,<%=contrato%>,$("#pregunta"+(i+1)).val(),$("input:radio[name=group"+ (i+1) +"]:checked").val(),$("#textfield"+(i+1)).val());                        
-                         
-                     }//fin del ciclo for para guardar las respuesta item.
+                     
+                     for(i=0;i<num_item;i++){            
+                       resp_item_array[0][i] = $("#pregunta"+(i+1)).val();
+                          resp_item_array[1][i] = $("input:radio[name=group"+ (i+1) +"]:checked").val();
+                          resp_item_array[2][i] = $("#textfield"+(i+1)).val(); 
+                      }//fin del ciclo for para guardar las respuesta item.
+                     interaccion.saveAllItems(<%=contrato%>,<%=id_usuario%>,resp_item_array);                       
                      
                      $( "#link_variable").html("");                     
                      $("#box").html("");
@@ -255,7 +263,7 @@ response.setDateHeader("Expires", 0);
                      var palabra="<section role='principal' id='message_box'><div class='notification success'><a href='#' class='close-notification' title='Hide Notification' rel='tooltip'>x</a><p class='hola'><strong class='hola'>Sastifactorio</strong><p class='hola'>Se ha completado el cuestionario de <%=nombre_indicador%> satisfactoriamente!.</p></div><!-- /Notification --></section>";  
                      $("#box_message").html(palabra);
                      $( "#box_message" ).show("blind");
-                     interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta3);//aumenta en uno la variable var de la tabla avance                                                                                  
+                     interaccion.aunm(<%=indi%>,<%=contrato%>, respuesta3);//aumenta en uno la variable var de la tabla avance            
                  }                 
                                   
             } 
@@ -318,7 +326,7 @@ response.setDateHeader("Expires", 0);
             function respListVar(dato){
                                 
                 var j;
-                var stringBody="<table id='variableList' style=' font-size: 16px;'><thead><tr style='background-color: #347488;color: #fff;'><td>No.</td><td> Variable</td><td> Estado</td></tr></thead><tbody>";
+                var stringBody="<table id='variableList' style=' font-size: 16px;'><thead><tr ><td>No.</td><td> Variable</td><td> Estado</td></tr></thead><tbody>";
                                
                  for(j=0;j<dato.length;j++){
                     stringBody += "<tr><td>"+(j+1) + ".</td><td><a id='link_go_variable' href='#' onclick='ver_esta_variable("+ dato[j][0] +");' >" + dato[j][1] + "</a></td><td>  " + dato[j][2] + "<input type='hidden' id='txtvar"+ dato[j][0] +"' value='"+ dato[j][1] +"' /><input type='hidden' id='txtstatus"+ dato[j][0] +"' value='"+ dato[j][2] +"' /></td></tr>";
@@ -350,16 +358,16 @@ response.setDateHeader("Expires", 0);
                 
                 num_item = 0;
                 var i;
-                var strHtml="<table><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
+                var strHtml="<table id='tableModificacion'><thead><tr><td>Preguntas</td><td> &nbspSi</td><td> &nbspNo</td><td>&nbspObservacion</td></tr></thead><tbody>";
            
                 for(i=0;i<dato.length;i++){
                     if(dato[i][0] != null ){
                         strHtml += "<tr><td>"+ (i+1) + ". " + dato[i][0] +"<input type='hidden' id='pregunta"+ (i+1) +"' value='"+ dato[i][3] +"'/>";                    
 
                        if(dato[i][1] == 1){
-                           strHtml += "</td><td><input type='radio' name='group"+ (i+1) +"' value='1' checked ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0'></input></td><td><input type='text' id='textfield"+ (i+1)+"' value='"+ dato[i][2] +"' /></input></td></tr>";
+                           strHtml += "</td><td><input type='radio' name='group"+ (i+1) +"' value='1' checked ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0'></input></td><td><input class='txtComentario' type='text' id='textfield"+ (i+1)+"' value='"+ dato[i][2] +"' /></input></td></tr>";
                        }else{
-                           strHtml += "</td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' checked ></input></td><td><input type='text' id='textfield"+ (i+1)+"' value='"+ dato[i][2] +"' /></input></td></tr>";
+                           strHtml += "</td><td><input type='radio' name='group"+ (i+1) +"' value='1' ></input></td><td><input type='radio' name='group"+ (i+1) +"' value='0' checked ></input></td><td><input class='txtComentario' type='text' id='textfield"+ (i+1)+"' value='"+ dato[i][2] +"' /></input></td></tr>";
                        }   
                        
                        num_item = num_item + 1;//para incrementar cuantas preguntas hay
@@ -370,9 +378,7 @@ response.setDateHeader("Expires", 0);
                 strHtml += "</tbody></table><input type='button' style=' font-size: 14px; margin-left: 4%;margin-bottom: 2%; ' value='Modificar' id='buttonmodificar' onclick='update();' /><input type='button' style=' font-size: 14px; margin-left: 2%;margin-bottom: 2%; ' value='Cancelar' id='buttoncancel' onclick='cancel();' />";
                 $("#box").html(strHtml);
                 $("#buttonmodificar").button();
-                $("#buttoncancel").button();
-             
-            
+                $("#buttoncancel").button();           
             }
             
             function cancel(){
@@ -382,8 +388,7 @@ response.setDateHeader("Expires", 0);
                     $("#link_variable").html(nombre_var_actual);
                     $( "#link_actual").html((actual_var+1)+"/"+total_vari);//aqui pongo donde va por ejemplo 5/12
                     mostrarActual();
-                }
-                
+                }                
             }
             
             function update(){
@@ -415,8 +420,6 @@ response.setDateHeader("Expires", 0);
 	#toolbar {
 		padding: 10px 4px;
 	}
-        #variableList td{
-                    border-bottom: 1px solid #999; height: 35px;}
         </style>
     </head>    
     <body>
@@ -425,7 +428,7 @@ response.setDateHeader("Expires", 0);
     <div class="header_resize">      
       <div class="menu">
         
-        </ul>
+       
       </div>
       <div class="clr"></div>
       <div class="logo"><img src="images/logofull.png" width="250" height="70" border="0" alt="logo" /></div>      

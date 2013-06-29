@@ -47,7 +47,7 @@
                                  AccesoDaoImpl acDI = new AccesoDaoImpl();
                                  ac = acDI.findUltimoAcceso(usua);
                                      %>                                     
-                  <table style="width: 100%" id="empFinal" class="tablesorter" cellspacing="1" >
+                  <table style="width: 100%; " id="empFinal" class="tablesorter" cellspacing="1" >
                                                                  <thead>
                                                                      <tr>
                                                                          <th>Empresa</th>

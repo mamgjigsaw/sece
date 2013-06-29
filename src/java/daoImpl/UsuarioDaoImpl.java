@@ -138,4 +138,14 @@ public class UsuarioDaoImpl implements daoUsuario {
         se.getTransaction().commit();
         return cap;
     }
+
+    @Override
+    public List<Usuario> findByPassBloqueadoEmpresa() {
+        List<Usuario> cap = new ArrayList<Usuario>();
+        Session se = sf.getCurrentSession();
+        se.beginTransaction();        
+        cap =  se.createCriteria(Usuario.class).add(Restrictions.eq("estado", 4)).list();
+        se.getTransaction().commit();
+        return cap;
+    }
 }

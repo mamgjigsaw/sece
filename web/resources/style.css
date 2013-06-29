@@ -53,11 +53,10 @@ a:hover { text-decoration:underline;}
 .body em { font: normal 12px Arial, Helvetica, sans-serif; color:#6d6d6d;}
 .body p { font:normal 11px  Arial, Helvetica, sans-serif; color:#939393; line-height:1.8em; padding:5px 10px; margin:0;}
 .body p span { color:#cdcdcd;}
-.body ul { list-style:none; margin:5px 10px; padding:0;}
+.body ul {  margin:5px 25px; padding:0;}
 .body p.test { width:459px; height:109px; background:url(../images/bg_p_test.gif) top no-repeat; margin:20px auto; padding:20px 30px;}
 .body img { margin:0; padding:0;}
 .body img.float { float:left; margin:0; padding:10px;}
-.body li  { font: normal 12px Arial, Helvetica, sans-serif; color:#5c5c5c; background:url(../images/ul_li.gif) left no-repeat; margin:0; padding:5px 0 5px 20px;}
 
 .body .hola{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 
@@ -68,8 +67,9 @@ a:hover { text-decoration:underline;}
 .right_bottom { margin:0; background:url(../images/right_bottomght_img.gif) bottom no-repeat; padding:5px 0; width:319px;}
 .right_bottom_ri1 { margin:0; background:url(../images/right_bottomght_img.gif) bottom no-repeat ; padding:5px 0; width:319px;}
 .right ul { list-style:none; margin:10px 0 0 30px; padding:0;}
-.right2 { float:left; width:646px; margin:0; padding:10px;}
-.right1 { float:left; width:313px; margin:0; padding:10px;}
+.right2 {font:normal 16px  Arial, Helvetica, sans-serif;color:#939393; text-align: justify ; float:left; width:646px; margin:0; padding:10px;}
+.right1 { font:normal 16px  Arial, Helvetica, sans-serif;color:#939393; text-align: justify ; float:left; width:313px; margin:0; padding:10px; line-height:1.8em; }
+.right3 { font:normal 16px  Arial, Helvetica, sans-serif;color:#939393 ; float:left; width:313px; margin:0; padding:10px; line-height:1.8em; }
 .bottoms { width:150px; float:left; margin:10px 10px; padding:0;}
 .bottoms a { text-decoration:none; font: normal 11px Arial, Helvetica, sans-serif; color:#373737; background:#e1e1e1; padding:2px 5px; margin:1px 3px;}
 .bottoms a:hover { color:#fff; background:#00689f;}
@@ -172,3 +172,5 @@ font-size: 14px;
 /*tablas estilizadas por david*/
 table .tablaStilizada thead tr {background-color: #347488; color:#fff;}
 table .tablaStilizada tbody tr td {height: 35px;}
+
+#parrafo{font-size: 16px;}

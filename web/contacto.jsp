@@ -74,7 +74,7 @@
         <div class="main">
             <div class="header">
                 <div class="header_resize">  
-                    <a href="logger.jsp" class="buttonIniciarSesion">Iniciar Sesion!</a>
+                    <a href="logger.jsp" id="btnSession">Iniciar Sesion!</a>
                     <div class="menu">
                         <ul>
                             <li><a href="index.jsp" ><span>Inicio</span></a></li>
@@ -135,15 +135,15 @@
                             </ol>
                         </form>
                     </div>   <%-- end div body rezise --%> 
-                    <div class="right1">
+                    <div class="right3">
                         <h2>Detalle</h2>
-                        <p><strong>Centro de Producción más Limpia de Nicaragua</strong>
-                        <p><strong>Direccion</strong>:      Universidad Nacional de Ingeniería | Recinto Universitario "Simón Bolivar"
+                        <strong>Centro de Producción más Limpia de Nicaragua</strong>
+                        <strong>Direccion</strong>:      Universidad Nacional de Ingeniería | Recinto Universitario "Simón Bolivar"
                             Avenida Universitaria. Managua, Nicaragua<br />
                             <strong>Telefono</strong>:   (505) 2278-3136 | (505) 8887-9286 <br />          
-                            <strong>E-mail</strong>:            sece@pml.org.ni</p>
+                            <strong>E-mail</strong>:            sece@pml.org.ni
                         <div class="line"></div>
-                        <p><iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=d&amp;source=s_d&amp;saddr=12.130761,-86.268901&amp;daddr=&amp;hl=es-419&amp;geocode=&amp;sll=12.130949,-86.270506&amp;sspn=0.012482,0.013797&amp;dirflg=w&amp;doflg=ptk&amp;mra=mift&amp;mrsp=0&amp;sz=16&amp;ie=UTF8&amp;t=m&amp;ll=12.130949,-86.270506&amp;spn=0.012482,0.013797&amp;output=embed"></iframe><br /><small>Ver <a href="https://maps.google.com/maps?f=d&amp;source=embed&amp;saddr=12.130761,-86.268901&amp;daddr=&amp;hl=es-419&amp;geocode=&amp;sll=12.130949,-86.270506&amp;sspn=0.012482,0.013797&amp;dirflg=w&amp;doflg=ptk&amp;mra=mift&amp;mrsp=0&amp;sz=16&amp;ie=UTF8&amp;t=m&amp;ll=12.130949,-86.270506&amp;spn=0.012482,0.013797" style="color:#0000FF;text-align:left">CPML</a> en un mapa ampliado</small></p>
+                        <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=d&amp;source=s_d&amp;saddr=12.130761,-86.268901&amp;daddr=&amp;hl=es-419&amp;geocode=&amp;sll=12.130949,-86.270506&amp;sspn=0.012482,0.013797&amp;dirflg=w&amp;doflg=ptk&amp;mra=mift&amp;mrsp=0&amp;sz=16&amp;ie=UTF8&amp;t=m&amp;ll=12.130949,-86.270506&amp;spn=0.012482,0.013797&amp;output=embed"></iframe><br /><small>Ver <a href="https://maps.google.com/maps?f=d&amp;source=embed&amp;saddr=12.130761,-86.268901&amp;daddr=&amp;hl=es-419&amp;geocode=&amp;sll=12.130949,-86.270506&amp;sspn=0.012482,0.013797&amp;dirflg=w&amp;doflg=ptk&amp;mra=mift&amp;mrsp=0&amp;sz=16&amp;ie=UTF8&amp;t=m&amp;ll=12.130949,-86.270506&amp;spn=0.012482,0.013797" style="color:#0000FF;text-align:left">CPML</a> en un mapa ampliado</small>
                     </div>
                     <div class="clr"></div>
                     <br>

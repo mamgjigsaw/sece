@@ -12,17 +12,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ayuda</title>
-        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
+        <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>        
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
-        <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
+        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />        
+        <link href="resources/style.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" href="ayuda/estilosAyuda/ayudaprincipal.css" rel="stylesheet"/>
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
         <script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
         <script type="text/javascript" src="resources/jquery/js/jquery.corner.js"></script>
         <script type="text/javascript" src="resources/jquery/js/easySlider1.5.js"></script>
-        <link href="resources/style.css" rel="stylesheet" type="text/css" />
-        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
-
-        <link type="text/css" href="ayuda/estilosAyuda/ayudaprincipal.css" rel="stylesheet"/>
+        
         <script type="text/javascript" src="/sece/dwr/interface/soporteSece.js"></script>
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
         <script type="text/javascript" src="/sece/dwr/util.js"></script>
@@ -47,7 +47,7 @@
         <div class="main">
             <div class="header">
                 <div class="header_resize">     
-                    <a href="logger.jsp" class="buttonIniciarSesion">Iniciar Sesion!</a>
+                    <a href="logger.jsp" id="btnSession">Iniciar Sesion!</a>
 
                     <div class="menu">
                         <ul>

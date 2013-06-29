@@ -41,12 +41,14 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link REL="shortcut icon" type="image/x-icon" href="images/flavicon.png"/>
-        <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
+        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
+        <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>        
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="resources/jquery/js/jquery.validate.js"></script>
+                
         
         <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
         <script type="text/javascript" src="/sece/dwr/engine.js"></script>
@@ -266,7 +268,7 @@
              Se le ha enviado un correo con la informacion sobre la activacion de su cuenta, y asi aplicar el instrumento a tu empresa de una manera <b>facil y sencilla</b>.</p>
       </div>
     <div class="body_resize">
-      
+        <div id="divFormRegister">
            <h4>Crea tu cuenta con nosotros!!</h4>
             
             <p><strong>Hablanos acerca de ti!!! </strong><br />
@@ -376,6 +378,7 @@
             
       <div class="clr"></div>
     </div>
+      </div><%-- Termina div del cuerpo del formulario de registro-%>
   </div><%-- termina el div body --%>
   <div class="footer">
     <div class="footer_resize">

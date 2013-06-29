@@ -5,10 +5,12 @@
 
 package dao;
 
+import java.util.List;
 import pojo.Contrato;
 import pojo.Item;
 import pojo.RespItem;
 import pojo.Usuario;
+import util.SavedResult;
 
 /**
  *
@@ -21,5 +23,6 @@ public interface daoRespItem extends dao<RespItem>{
     int ItemRespondidosxUsuarioxContrato (Usuario usuario, Contrato contrato);
     int ItemRespondidosxContrato (Contrato contrato);
     int ItemRespondidosxContratoByIndicador (int idContrato, int idIndicador);
+    SavedResult SaveAllItems(List<RespItem> itemsR);
 
 }

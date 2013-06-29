@@ -56,7 +56,7 @@ public class controlPanelContacto {
     }
     
     public String[][] getRowIndicador (int id_contrato){
-        
+        System.out.println("Entro al metodo el contrato es: "+ id_contrato);
         Indicador indicador = new Indicador();
         IndicadorDaoImpl daoIndi = new IndicadorDaoImpl();
         int can = daoIndi.getCountIndicador();
@@ -81,8 +81,7 @@ public class controlPanelContacto {
             array[i][0] = indicador.getNombre();
             array[i][1] = usuario.getNombre();                        
             array[i][2] = String.valueOf(AvanceIndicador(id_contrato,indicador.getIdIndicador()));
-            array[i][3] = indicador.getIdIndicador().toString();
-            
+            array[i][3] = indicador.getIdIndicador().toString();            
         }       
         
         return array;

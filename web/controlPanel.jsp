@@ -127,12 +127,13 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
         
         <link type="text/css" href="resources/Nuestro_CSS.css" rel="stylesheet"/>
         <link type="text/css" href="resources/jquery/css/redmond/jquery-ui-1.8.7.custom.css" rel="stylesheet" />
+       
+        <link href="resources/style.css" rel="stylesheet" type="text/css" />
+        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />       
+        
         <script type="text/javascript" src="resources/jquery/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="resources/jquery/js/jquery-ui-1.8.7.custom.min.js"></script>
-        
-        <link href="resources/style.css" rel="stylesheet" type="text/css" />
-        <link href="resources/css/message.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="resources/jquery/js/jquery.validate.js"></script>            
+         <script type="text/javascript" src="resources/jquery/js/jquery.validate.js"></script>  
         
         <script type="text/javascript" src="/sece/dwr/interface/panel.js"></script>        
         <script type="text/javascript" src="/sece/dwr/interface/validacion.js"></script>
@@ -248,7 +249,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
             }
            
        function solicitar(){
-          panel.requestNewContra(IdUsuario, resp_solicitud);  
+          panel.requestNewContra(IdUsuario, resp_solicitud);                      
           
        }  
        
@@ -283,12 +284,13 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                $("#contenidoIndicadores").html("");
                panel.getContratos(IdUsuario, repContratos);
            }else if(respuestaDato == 1){
-               $("#toolbar1").hide();
-               //toolbar1
+               $("#grafico").hide();
+               $("#contenidoIndicadores").html("");               
                panel.getContratos(IdUsuario, repContratos);
            }else if(respuestaDato == 2){
-               $("#toolbar1").hide();
-               panel.getRowIndicador(IdContrato, repIndicador);               
+               $("#grafico").hide();                   
+                panel.getRowIndicador(IdContrato, repIndicador);    
+              
            }
            
        }
@@ -300,9 +302,9 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            
                 var cadenaTable="";
 
-                cadenaTable = "<table id='table_contratos' style=' font-size: 14px;'><tr style='background-color: #347488;color: #fff;'><td> Contrato </td><td> Fecha Inicio </td><td> Fecha Finalizo </td></tr></table>" ;
+                cadenaTable = "<table id='table_contratos' style=' font-size: 14px;'><thead><tr><td> Contrato </td><td> Fecha Inicio </td><td> Fecha Finalizo </td><td></td><td></td><td></td></tr></thead></table>" ;
 
-                $("#contenidoIndicadores").append("<br><h4>Contratos</h4>" + "<br>" +cadenaTable);
+                $("#contenidoIndicadores").append("<br><h3>Lista de Contratos realizados</h3>" + "<br>" +cadenaTable);
 
               for(i;i<data.length;i++){
                   addRowContratos(data[i][0],data[i][1],data[i][2],data[i][3]);             
@@ -315,21 +317,22 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            var cadena="";
            IdContrato = idContra;
            if(tipo==4){
-               cadena="<tr><td>"+contrato+"</td><td><label for='responsable' id='resp' >"+fechaIni+"</label></td><td><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE Condensado</strong></a></p></td><td><p><a href='#' onclick='goGrafico2("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
+               cadena="<tr><td class='columanaTableFormat'>"+contrato+"</td><td class='columanaTableFormat'><label for='responsable' id='resp' >"+fechaIni+"</label></td><td class='columanaTableFormat'><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE Condensado</strong></a></p></td><td><p><a href='#' onclick='goGrafico2("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
                
            }else{
-               cadena="<tr><td>"+contrato+"</td><td><label for='responsable' id='resp' >"+fechaIni+"</label></td><td><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE Condesado</strong></a></p></td><td><p><a href='#' onclick='goGrafico2("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
+               cadena="<tr><td class='columanaTableFormat'>"+contrato+"</td><td class='columanaTableFormat'><label for='responsable' id='resp' >"+fechaIni+"</label></td><td class='columanaTableFormat'><label for='responsable' id='resp' >"+fechaFin+"</label></td><td><p><a href='#' onclick='goGrafico("+ idContra +");'><strong>Grafico de Araña</strong></a></p></td><td><p><a href='#' onclick='goGrafico1("+ idContra +");;'><strong>VCE Condesado</strong></a></p></td><td><p><a href='#' onclick='goGrafico2("+ idContra +");;'><strong>VCE</strong></a></p></td></tr>";
            }
            
            $("#table_contratos").append(cadena); 
        }   
        
        function repIndicador(data){ 
+           
            var i=0;
            
            var cadenaTable="";
            
-           cadenaTable = "<table id='table_indicador' style=' font-size: 14px;'><tr style='background-color: #347488;color: #fff;'><td> Indicador </td><td> Responsable </td><td> Progreso </td><td></td><td></td></tr></table>" ;
+        cadenaTable = "<h3>Contrato Actual</h3><table id='table_indicador' style=' font-size: 14px;'><thead><tr ><td> Indicador </td><td> Responsable </td><td> Progreso </td><td></td><td></td></tr><thead></table>" ;
            
            $("#contenidoIndicadores").html(cadenaTable);
            
@@ -376,9 +379,9 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            var cadena="";
            
            if(tipo==4){
-               cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td><div class='progress-bar blue small' style='width:90%; float: left;'><div style='width:"+ avance +"%;'><span style='top:16%;'>"+ avance +"%</span></div> </div></td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td></td></tr>";
+               cadena="<tr><td class='columanaTableFormat'>"+indicador+"</td><td class='columanaTableFormat'><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td><div class='progress-bar green small' style='width:90%; float: left;'><div style='width:"+ avance +"%;'><span style='top:16%;'>"+ avance +"%</span></div> </div></td><td class='columanaTableFormat' ><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td></td></tr>";
            }else{
-               cadena="<tr><td>"+indicador+"</td><td><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td><div class='progress-bar blue small' style='width:90%; float: left;'><div style='width:"+ avance +"%;'><span style='top:16%;'>"+ avance +"%</span></div> </div></td><td><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td><p><a href='#' onclick='cambiarResponsable("+idIndicador+");'><strong>Delegar</strong></a></p></td></tr>";
+               cadena="<tr><td class='columanaTableFormat'>"+indicador+"</td><td class='columanaTableFormat'><label for='responsable' id='resp"+idIndicador+"' >"+responsable+"</label></td><td><div class='progress-bar green small' style='width:90%; float: left;'><div style='width:"+ avance +"%;'><span style='top:16%;'>"+ avance +"%</span></div> </div></td><td class='columanaTableFormat'><p><a href='instrument.jsp?indi="+idIndicador+"'><strong>Ir instrumento</strong></a></p></td><td><p><a href='#' onclick='cambiarResponsable("+idIndicador+");'><strong>Delegar</strong></a></p></td></tr>";
            }
            
            $("#table_indicador").append(cadena); 
@@ -634,14 +637,6 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            //location.href="resultado.jsp";   
            window.open("finalReport?contra="+var1, "_blank");           
        }
-
-       
-       function goGrafico2(var1){
-           //location.href="resultado.jsp";   
-           window.open("finalReport?contra="+var1, "_blank");
-           
-       }
-
        
        ////toolsbar
        $(function() {
@@ -657,8 +652,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
 				primary: "ui-icon ui-icon-search"
 			}
 		});						
-                $( "#grafico" ).button({
-			text: false,
+                $( "#grafico" ).button({			
 			icons: {
 				primary: "ui-icon ui-icon-mail-closed"
 			}
@@ -670,8 +664,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
 			}
 		});
 				
-	});
-        
+	});        
                 
                function test(){
                capacitadoresScripts.insertarVideoChat(<%=idContrato%>,<%=id_usuario%>,{
@@ -687,15 +680,12 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                      else {
                           $('#btnVCUser').val('Cerrar Video Chat');
                      }
-               }
-	
+               }	
         
         function dire(){
         //http://localhost:8080/sece/faces/sei/completarempresa.xhtml?idempresa=2&&idcontrato=15
         //window.open("http://localhost:8080/sece/faces/sei/instrumento.xhtml");
-        panel.validarEmpresaCompleta(IdContrato, respuestaEmpresa);
-        
-       
+           panel.validarEmpresaCompleta(IdContrato, respuestaEmpresa);       
         }
         
        function respuestaEmpresa(data){
@@ -775,26 +765,27 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                
                <span id="toolbar1" style="padding: 10px 4px; font-size: 14px;" class="ui-widget-header ui-corner-all">
                   <button id='grafico'  onclick='solicitar();'>Solicitar nuevo contrato</button>
+                  <input type="button" id="gotSEI" value="Internacionalizacion" onclick="dire()"/>
                </span>
                <style>                
-                #table_indicador td, table_delegado td,table_contratos td {
+                #table_delegado td {
                     border-bottom: 1px solid #999; height: 35px;}                                                        
                </style> 
-               <input type="button" id="gotSEI" value="Internacionalizacion" onclick="dire()"/>
+               
                <div id="contenidoIndicadores" style=" padding-top:2%; " >
                   <img src="resources/icons/ajax_loading_blue.gif" width="24" height="24" border="0" style=" margin-left: 20%; margin-top: 5%;" />
               </div>
                
            </div><%-- End div tabs 1 --%>
            <div id="tabs-2">
-               <table>
+               <table style="width: 100%">
                    <tr>
                        <td>
                            <div id="informacion_usuario" style=" font-size: 14px;">
-                               <div class="ri1">
-                                   <div class="clr"></div>
-                                   <div class="right_top">
-                                       <div class="right_bottom">
+                               <div >
+                                   <div ></div>
+                                   <div >
+                                       <div >
                                            <h4>Informacion de usuario</h4>
                                            <table style="padding:10px;">
                                                <tbody>
@@ -828,12 +819,9 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                                </div>                              
                            </div><%-- termina div de informacion_usuario --%>               
                        </td>
-                       <td>
-                           <div id="cambiar_contra" style=" padding-left: 10px; padding-top: 0px; font-size: 14px;">
-                               <div class="ri1">
-                                   <div class="clr"></div>
-                                   <div class="right_top">
-                                       <div class="right_bottom">
+                       <td style="margin-left: 15px;">
+                           <div id="cambiar_contra" style=" padding-left: 10px; font-size: 14px;">
+                                  
                                            <h4>Cambiar contraseña</h4>                                            
                                            <table style="padding:10px;" >
                                                <tbody>
@@ -851,12 +839,8 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                                                    </tr>                                                                                                      
                                                </tbody>
                                            </table>
-                                           <p><input type="button" value="Actualizar" id="btnupdatContra" onclick="updateContra();" ></input></p>  
-                                           <div class="clr"></div>
-                                       </div><%-- termina div de rigth_bottom --%> 
-                                   </div><%-- termina div de right_top --%> 
-                                   <div class="clr"></div>
-                               </div><%-- termina div de ri1 --%> 
+                                           <p><input type="button" value="Actualizar" id="btnupdatContra" onclick="updateContra();" /> </p>
+                                                                   
                            </div><%-- termina div de cambiar_contra --%> 
                        </td>                       
                    </tr>                   
@@ -865,10 +849,10 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
            </div><%-- End div tabs 2 --%>
            <div id="tabs-3">
                <div id="informacion_empresa" style=" font-size: 14px;">
-                   <div class="ri1">
-                       <div class="clr"></div>
-                       <div class="right_top">
-                           <div class="right_bottom">
+                   <div >
+                      
+                       <div >
+                           <div >
                                <h4>Informacion de la empresa</h4>
                                <table style="padding:10px;">
                                    <tbody>
@@ -886,7 +870,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
                                        </tr>
                                        <tr>
                                            <td>Direccion:</td>
-                                           <td><textarea rows="2" cols="20" id="txtdir_empresa" ><%=dir_empresa%></textarea></td>
+                                           <td><textarea rows="2" cols="24"  id="txtdir_empresa" ><%=dir_empresa%></textarea></td>
                                        </tr>                                      
                                    </tbody>
                                </table>
@@ -970,9 +954,28 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
        
       <div class="clr"></div>
     </div>
+       <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br> 
+      <br>
+      <br>     
   </div><%-- end div body rezise --%> 
   
-  <div class="clr"></div>
+
+ <div class="clr"></div>
+  <div class="footer">
+    <div class="footer_resize">
+      
+      
+      
+      <div class="clr"></div>
+    </div>
+  </div>
 </div>  
     </body>
 </html>
